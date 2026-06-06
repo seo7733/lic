@@ -457,12 +457,14 @@ body{
     <div class="ni" onclick="showQuiz('c-누전')">누전경보기 기출<span class="ni-cnt">(5)</span></div>
     <div class="ni" onclick="showQuiz('c-비상방송')">비상방송 기출<span class="ni-cnt">(2)</span></div>
     <div class="ni" onclick="showQuiz('c-유도등')">유도등·비상조명 기출<span class="ni-cnt">(4)</span></div>
+    <div class="ni" onclick="showQuiz('c-비상조명')">비상조명등 기출<span class="ni-cnt">(1)</span></div>
     <div class="ni" onclick="showQuiz('c-비상콘센트')">비상콘센트 기출<span class="ni-cnt">(2)</span></div>
     <div class="ni" onclick="showQuiz('c-무선통신')">무선통신 기출<span class="ni-cnt">(2)</span></div>
     <div class="ni" onclick="showQuiz('c-가스')">가스누설 기출<span class="ni-cnt">(3)</span></div>
     <div class="ni" onclick="showQuiz('c-축전지')">비상전원·축전지 기출<span class="ni-cnt">(4)</span></div>
     <div class="ni" onclick="showQuiz('c-계산')">전기 계산 기출<span class="ni-cnt">(8)</span></div>
     <div class="ni" onclick="showQuiz('c-가닥수')">가닥수 계산 기출<span class="ni-cnt">(3)</span></div>
+    <div class="ni" onclick="showQuiz('c-배선')">배선·결선 기출<span class="ni-cnt">(2)</span></div>
     <div class="ni" onclick="showQuiz('c-시퀀스')">시퀀스회로 기출<span class="ni-cnt">(10)</span></div>
     <div class="ni" onclick="showQuiz('c-타임차트')">타임차트 기출<span class="ni-cnt">(6)</span></div>
     <div class="ni" onclick="showQuiz('all')" style="margin-top:4px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px;font-weight:700;color:#ffd700;">🎯 전체 기출 모아보기<span class="ni-cnt" style="color:rgba(255,215,0,.6)">(73)</span></div>
@@ -1845,10 +1847,16 @@ const QUIZ={
     {k:'c-감지기',i:'🔴',t:'감지기'},
     {k:'c-수신기',i:'🖥',t:'자탐수신기'},
     {k:'c-발신기',i:'🔘',t:'발신기'},
+    {k:'c-중계기',i:'📡',t:'중계기'},
+    {k:'c-시각경보',i:'🔦',t:'시각경보'},
+    {k:'c-비상경보',i:'🔔',t:'비상경보'},
     {k:'c-누전',i:'⚡',t:'누전경보기'},
     {k:'c-비상방송',i:'📢',t:'비상방송'},
     {k:'c-유도등',i:'🚦',t:'유도등'},
+    {k:'c-비상조명',i:'💡',t:'비상조명'},
     {k:'c-비상콘센트',i:'🔌',t:'비상콘센트'},
+    {k:'c-무선통신',i:'📶',t:'무선통신'},
+    {k:'c-가스',i:'🛢',t:'가스누설'},
     {k:'c-축전지',i:'🔋',t:'축전지'},
     {k:'c-계산',i:'🧮',t:'전기계산'},
     {k:'c-가닥수',i:'📐',t:'가닥수계산'},
@@ -1868,13 +1876,20 @@ const QUIZ={
     {k:'c-감지기',i:'🔴',t:'감지기'},
     {k:'c-수신기',i:'🖥',t:'수신기'},
     {k:'c-발신기',i:'🔘',t:'발신기'},
+    {k:'c-중계기',i:'📡',t:'중계기'},
+    {k:'c-시각경보',i:'🔦',t:'시각경보'},
+    {k:'c-비상경보',i:'🔔',t:'비상경보'},
     {k:'c-누전',i:'⚡',t:'누전경보기'},
     {k:'c-비상방송',i:'📢',t:'비상방송'},
     {k:'c-유도등',i:'🚦',t:'유도등'},
+    {k:'c-비상조명',i:'💡',t:'비상조명'},
     {k:'c-비상콘센트',i:'🔌',t:'비상콘센트'},
+    {k:'c-무선통신',i:'📶',t:'무선통신'},
+    {k:'c-가스',i:'🛢',t:'가스누설'},
     {k:'c-축전지',i:'🔋',t:'축전지'},
     {k:'c-계산',i:'🧮',t:'전기계산'},
     {k:'c-가닥수',i:'📐',t:'가닥수'},
+    {k:'c-배선',i:'🔩',t:'배선·결선'},
     {k:'c-시퀀스',i:'⚙️',t:'시퀀스'},
     {k:'c-타임차트',i:'📊',t:'타임차트'},
     {k:'all',i:'🎯',t:'전체 모아보기'},
