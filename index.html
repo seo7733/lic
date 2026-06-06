@@ -448,26 +448,26 @@ body{
   </div>
   <div class="ns quiz-section">
     <div class="ns-t">📝 단원별 기출문제</div>
-    <div class="ni" onclick="showQuiz('c-감지기')">감지기 기출<span class="ni-cnt">(7)</span></div>
-    <div class="ni" onclick="showQuiz('c-수신기')">수신기 기출<span class="ni-cnt">(5)</span></div>
-    <div class="ni" onclick="showQuiz('c-발신기')">발신기 기출<span class="ni-cnt">(3)</span></div>
+    <div class="ni" onclick="showQuiz('c-감지기')">감지기 기출<span class="ni-cnt">(11)</span></div>
+    <div class="ni" onclick="showQuiz('c-수신기')">수신기 기출<span class="ni-cnt">(6)</span></div>
+    <div class="ni" onclick="showQuiz('c-발신기')">발신기 기출<span class="ni-cnt">(4)</span></div>
     <div class="ni" onclick="showQuiz('c-중계기')">중계기 기출<span class="ni-cnt">(2)</span></div>
     <div class="ni" onclick="showQuiz('c-시각경보')">시각경보 기출<span class="ni-cnt">(2)</span></div>
     <div class="ni" onclick="showQuiz('c-비상경보')">비상경보 기출<span class="ni-cnt">(2)</span></div>
     <div class="ni" onclick="showQuiz('c-누전')">누전경보기 기출<span class="ni-cnt">(5)</span></div>
     <div class="ni" onclick="showQuiz('c-비상방송')">비상방송 기출<span class="ni-cnt">(2)</span></div>
-    <div class="ni" onclick="showQuiz('c-유도등')">유도등·비상조명 기출<span class="ni-cnt">(4)</span></div>
-    <div class="ni" onclick="showQuiz('c-비상조명')">비상조명등 기출<span class="ni-cnt">(1)</span></div>
-    <div class="ni" onclick="showQuiz('c-비상콘센트')">비상콘센트 기출<span class="ni-cnt">(2)</span></div>
+    <div class="ni" onclick="showQuiz('c-유도등')">유도등·비상조명 기출<span class="ni-cnt">(6)</span></div>
+    <div class="ni" onclick="showQuiz('c-비상조명')">비상조명등 기출<span class="ni-cnt">(2)</span></div>
+    <div class="ni" onclick="showQuiz('c-비상콘센트')">비상콘센트 기출<span class="ni-cnt">(3)</span></div>
     <div class="ni" onclick="showQuiz('c-무선통신')">무선통신 기출<span class="ni-cnt">(2)</span></div>
     <div class="ni" onclick="showQuiz('c-가스')">가스누설 기출<span class="ni-cnt">(3)</span></div>
     <div class="ni" onclick="showQuiz('c-축전지')">비상전원·축전지 기출<span class="ni-cnt">(4)</span></div>
-    <div class="ni" onclick="showQuiz('c-계산')">전기 계산 기출<span class="ni-cnt">(8)</span></div>
+    <div class="ni" onclick="showQuiz('c-계산')">전기 계산 기출<span class="ni-cnt">(10)</span></div>
     <div class="ni" onclick="showQuiz('c-가닥수')">가닥수 계산 기출<span class="ni-cnt">(3)</span></div>
-    <div class="ni" onclick="showQuiz('c-배선')">배선·결선 기출<span class="ni-cnt">(2)</span></div>
+    <div class="ni" onclick="showQuiz('c-배선')">배선·결선 기출<span class="ni-cnt">(4)</span></div>
     <div class="ni" onclick="showQuiz('c-시퀀스')">시퀀스회로 기출<span class="ni-cnt">(10)</span></div>
     <div class="ni" onclick="showQuiz('c-타임차트')">타임차트 기출<span class="ni-cnt">(6)</span></div>
-    <div class="ni" onclick="showQuiz('all')" style="margin-top:4px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px;font-weight:700;color:#ffd700;">🎯 전체 기출 모아보기<span class="ni-cnt" style="color:rgba(255,215,0,.6)">(73)</span></div>
+    <div class="ni" onclick="showQuiz('all')" style="margin-top:4px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px;font-weight:700;color:#ffd700;">🎯 전체 기출 모아보기<span class="ni-cnt" style="color:rgba(255,215,0,.6)">(87)</span></div>
   </div>
   <div class="ns">
     <div class="ns-t">📚 연도별 기출풀이 (풀해설)</div>
@@ -727,7 +727,7 @@ function makeQiHtml(q, showThumb=true) {
        </div>` : '';
   return `<div class="qi">
     <div class="qi-meta">
-      <span class="badge" style="background:${rc}18;color:${rc};border:1px solid ${rc}40">${q.yr}년 ${q.r}회차</span>
+      <span class="badge" style="background:${rc}18;color:${rc};border:1px solid ${rc}40">${q.yr ? q.yr+'년 '+q.r+'회차' : '핵심이론'}</span>
       <span class="badge" style="background:#f0f4f8;color:#5d6d7e;border:1px solid var(--border)">${q.type}</span>
       <span style="margin-left:auto;font-size:11.5px;font-weight:700;color:#d35400;background:#fef5ec;padding:2px 9px;border-radius:10px;border:1px solid #f5cba7">핵심 ${q.key}</span>
     </div>
@@ -812,7 +812,7 @@ function showQuiz(key) {
     return `<div class="qi">
       <div class="qi-meta">
         ${catBadge}
-        <span class="badge" style="background:${rc}18;color:${rc};border:1px solid ${rc}40">${q.yr}년 ${q.r}회차</span>
+        <span class="badge" style="background:${rc}18;color:${rc};border:1px solid ${rc}40">${q.yr ? q.yr+'년 '+q.r+'회차' : '핵심이론'}</span>
         <span class="badge" style="background:#f0f4f8;color:#5d6d7e;border:1px solid var(--border)">${q.type}</span>
         <span style="margin-left:auto;font-size:11.5px;font-weight:700;color:#d35400;background:#fef5ec;padding:2px 9px;border-radius:10px;border:1px solid #f5cba7">핵심 ${q.key}</span>
       </div>
@@ -874,12 +874,29 @@ const THEORY={
 <ul><li>화재작동시험 / 작동계속시험</li><li>유통시험: 마노미터 <b>100mm→50mm</b></li><li>접점수고시험 / 리크시험</li></ul>
 <h4>정온식 감지선형 색상</h4>
 <table><tr><th>색</th><th>공칭작동온도</th></tr><tr><td>백색</td><td>80℃ 이하</td></tr><tr><td>청색</td><td>80~120℃</td></tr><tr><td>적색</td><td>120℃ 이상</td></tr></table>
+<h4>보상식 스포트형 감지기</h4>
+<ul><li>설치 최고온도보다 <b>20℃ 이상</b> 높은 것으로 선정</li><li>설치 경사: <b>45° 이하</b></li><li>주방·보일러실 등 다량의 화기 취급 장소 → <b>정온식</b> 감지기 설치</li></ul>
+<h4>스포트형 감지기 내부 구조 4가지</h4>
+<table><tr><th>구성요소</th><th>역할</th></tr>
+<tr><td><b>고정접점</b></td><td>화재신호 발신</td></tr>
+<tr><td><b>리크공</b></td><td>서서히 상승하는 열에 공기 배출 → 오작동 방지</td></tr>
+<tr><td><b>다이어프램</b></td><td>급격한 열 팽창으로 접점 압착</td></tr>
+<tr><td><b>감열실</b></td><td>외부 열을 수용·감지</td></tr></table>
 </div></div>
 <div id="g3" class="tc" style="display:none"><div class="card"><h3>연기·불꽃감지기</h3>
+<h4>광전식 스포트형 vs 분리형 구분</h4>
+<table><tr><th>종류</th><th>원리</th><th>별칭</th></tr>
+<tr><td>광전식 스포트형</td><td>연기 미립자에 의해 빛이 <b>산란</b>되어 수광부에 전달</td><td><b>산란광식</b></td></tr>
+<tr><td>광전식 분리형</td><td>연기에 의해 빛이 감소(수광부 <b>광량 감소</b>) 검출</td><td><b>감광식</b></td></tr></table>
 <h4>광전식 분리형 설치기준</h4>
 <ul><li>수광면: 햇빛 직접 받지 않도록</li><li>뒷벽으로부터: <b>1m 이내</b></li><li>광축~나란한 벽: <b>0.6m 이상</b></li><li>광축 높이: 천장의 <b>80% 이상</b></li><li>공칭감시거리: <b>5~100m, 5m 간격</b></li></ul>
 <h4>연기감지기 의무 장소</h4>
 <ul><li>계단·경사로·에스컬레이터</li><li>엘리베이터 승강로</li><li>특별피난계단 전실·부속실</li><li>복도 (30m 미만 제외)</li><li>천장 15m 이상 20m 미만</li></ul>
+<h4>연기감지기 이격 설치거리</h4>
+<table><tr><th>장소</th><th>1·2종</th><th>3종</th></tr>
+<tr><td>계단·경사로 (수직거리)</td><td><b>15m</b>마다 1개↑</td><td><b>10m</b>마다 1개↑</td></tr>
+<tr><td>복도·통로 (보행거리)</td><td><b>30m</b>마다 1개↑</td><td><b>20m</b>마다 1개↑</td></tr></table>
+<div class="tip">💡 감지기 이격: 벽·보 <b>0.6m 이상</b> / 실내 공기유입구 <b>1.5m 이상</b></div>
 </div></div>
 <div id="g4" class="tc" style="display:none"><div class="card"><h3>설치면적 기준표</h3>
 <table><tr><th>감지기</th><th>4m 미만</th><th>4~8m 미만</th></tr>
@@ -895,13 +912,26 @@ const THEORY={
 <ul><li>부식성 가스 체류</li><li>천장·반자 <b>20m 이상</b></li><li>목욕실·샤워실</li><li>프레스·주조공장</li><li>헛간 등 기류 통하는 곳</li><li>고온·저온 기능정지 우려</li></ul>
 <h4>교차회로 적용 설비 (분할이준일할)</h4>
 <ul><li>분말·할론·이산화탄소 소화설비</li><li>준비작동식·일제살수식 스프링클러</li><li>할로겐화합물·불활성기체 소화설비</li></ul>
+<h4>교차회로 미적용 감지기 (오작동 우려 장소에도 설치 가능)</h4>
+<div class="tip">💡 암기: <b>불정분복광아다축</b></div>
+<ul><li>불꽃감지기</li><li>정온식 감지선형</li><li>분포형 감지기</li><li>복합형 감지기</li><li>광전식 분리형</li><li>아날로그방식</li><li>다신호방식</li><li>축적방식</li></ul>
+<h4>단독경보형 감지기 설치기준</h4>
+<ul><li>각 실마다 설치</li><li>바닥면적 <b>150㎡</b> 초과 시: <b>150㎡마다 1개↑</b></li><li>이웃하는 실 각각 <b>30㎡ 미만</b> + 공기 상호유통 → <b>1개의 실</b>로 간주</li><li>주전원: 건전지(교환 가능), 상용전원: 2차전지</li></ul>
 </div></div>`,
 
-'c-수신기':`<div class="card"><h3>P형 수신기 기능시험</h3>
-<table><tr><th>시험명</th><th>판정기준</th></tr>
-<tr><td>회로저항시험</td><td>합성저항 <b>50Ω 이하</b></td></tr>
-<tr><td>공통선 시험</td><td>경계구역수 <b>7 이하</b></td></tr>
-<tr><td>동시작동시험</td><td><b>5회선</b> 동시 작동 이상 없을 것</td></tr></table>
+'c-수신기':`<div class="card"><h3>경계구역 설정기준</h3>
+<table><tr><th>구분</th><th>기준</th></tr>
+<tr><td>기본 1경계구역</td><td>면적 <b>600㎡ 이하</b>, 1변 <b>50m 이하</b></td></tr>
+<tr><td>주출입구 내부 전체 보이는 경우</td><td>1변 50m이하 시 <b>1,000㎡ 이하</b> 완화</td></tr>
+<tr><td>지하구 경계구역</td><td><b>700m 이하</b></td></tr>
+<tr><td>스프링클러·물분무·제연설비</td><td>소화설비 방사구역과 <b>동일</b>하게 설정 가능</td></tr></table>
+<div class="tip">💡 수신기 조작스위치 높이: 바닥 <b>0.8m 이상 1.5m 이하</b></div>
+</div>
+<div class="card"><h3>P형 수신기 기능시험</h3>
+<table><tr><th>시험명</th><th>판정기준</th><th>방법</th></tr>
+<tr><td>회로저항시험</td><td>합성저항 <b>50Ω 이하</b></td><td>-</td></tr>
+<tr><td>공통선 시험</td><td>경계구역수 <b>7 이하</b></td><td>공통선 제거→회로도통시험 버튼→스위치 회전→<b>단선 지시 회선수</b> 확인</td></tr>
+<tr><td>동시작동시험</td><td><b>5회선</b> 동시 작동 이상 없을 것</td><td>감지기 회로 수 회선 동시 작동 시 수신기 기능 이상 없는지 확인</td></tr></table>
 <h4>도통시험 정상신호 없는 원인 5가지</h4>
 <ul><li>감지기회로 단선·단락</li><li>감지기 고장</li><li>종단저항 접속불량·누락</li></ul>
 <h4>주의등 점멸: 지구경종정지·주경종정지·자동복구·도통시험·동작시험 조작 시</h4>
@@ -910,6 +940,11 @@ const THEORY={
 </div>`,
 
 'c-발신기':`<div class="card"><h3>P형 발신기</h3>
+<h4>발신기 구성요소 3가지</h4>
+<table><tr><th>구성요소</th><th>역할</th></tr>
+<tr><td><b>LED (발신확인 표시등)</b></td><td>화재신호 수신기 전달 여부 확인 (응답 확인)</td></tr>
+<tr><td><b>푸시버튼 (누름버튼)</b></td><td>화재신호 발신 (눌러서 수신기에 경보 전달)</td></tr>
+<tr><td><b>전화잭</b></td><td>수신기와 상호 연락 (통화)</td></tr></table>
 <h4>단자 용도 (전공지응)</h4>
 <table><tr><th>단자</th><th>용도</th></tr>
 <tr><td>전화</td><td>수신기↔발신기 전화연락</td></tr>
@@ -928,7 +963,11 @@ const THEORY={
 </div>`,
 
 'c-시각경보':`<div class="card"><h3>시각경보장치</h3>
-<ul><li>청각장애인용 객실 및 공용 <b>거실</b>에 설치</li><li>공연장: <b>무대부</b> 등에 설치</li><li>높이: 바닥 <b>2m 이상 2.5m 이하</b></li><li>광원: <b>축전지설비 또는 전기저장장치</b></li></ul>
+<h4>설치 장소</h4>
+<ul><li>복도·통로, 청각장애인용 객실 및 공용 <b>거실</b></li><li>공연장·집회장: <b>무대부</b> 등 시선 집중 부분</li></ul>
+<h4>설치 높이</h4>
+<ul><li>바닥 <b>2m 이상 2.5m 이하</b></li><li>천장 높이가 <b>2m 이하</b>인 경우: 천장으로부터 <b>0.15m 이내</b></li></ul>
+<ul><li>광원: <b>축전지설비 또는 전기저장장치</b> (형식승인 수신기 설치 시 예외)</li></ul>
 <p>절연저항: DC <b>250V</b> → <b>0.1MΩ 이상</b></p>
 </div>`,
 
@@ -948,7 +987,13 @@ const THEORY={
 </div>`,
 
 'c-누전':`<div class="card"><h3>누전경보기</h3>
-<div class="form">작동순서: 누전→자속→변류기 유도전압→수신기 증폭→릴레이→경보·차단</div>
+<h4>구성요소 4가지 및 역할</h4>
+<table><tr><th>구성요소</th><th>역할</th></tr>
+<tr><td><b>영상변류기 (ZCT)</b></td><td>누설전류 <b>검출</b></td></tr>
+<tr><td><b>수신기</b></td><td>누설전류 신호 <b>증폭</b></td></tr>
+<tr><td><b>음향장치</b></td><td>누전 시 <b>경보 발생</b></td></tr>
+<tr><td><b>차단기 (차단릴레이)</b></td><td>누설전류 발생 시 전원 <b>차단</b></td></tr></table>
+<div class="form">작동순서: 누전→자속→ZCT 유도전압→수신기 증폭→릴레이→경보·차단</div>
 <table><tr><th>항목</th><th>기준</th></tr>
 <tr><td>설치대상</td><td>계약전류 <b>100A 초과</b></td></tr>
 <tr><td>공칭작동전류</td><td><b>200mA 이하</b></td></tr>
@@ -966,7 +1011,16 @@ const THEORY={
 <ul><li>1회선: 감시 <b>20분</b> 후 10분 경보</li><li>2회선↑: 감시 <b>10분</b> 후 2회선 10분 경보</li></ul>
 </div>`,
 
-'c-유도등':`<div class="card"><h3>유도등 종류 및 설치기준</h3>
+'c-유도등':`<div class="card"><h3>유도등 설치 면제 조건</h3>
+<h4>통로유도등 면제</h4>
+<ul><li>길이 <b>30m 미만</b>으로 구부러지지 않은 복도·통로</li><li>보행거리 <b>20m 미만</b> + 출입구에 피난구유도등 있는 복도·통로</li></ul>
+<h4>객석유도등 면제</h4>
+<ul><li>채광이 충분한 객석 (주간에만 사용하는 장소)</li><li>통로유도등 설치 + 보행거리 <b>20m 이하</b>인 객석</li></ul>
+<h4>피난구유도등 설치 장소</h4>
+<ul><li>옥내에서 직접 지상으로 통하는 출입구</li><li>직통계단, 계단실 및 그 부속실 출입구</li><li>출입구에 이르는 복도·통로 출입구</li><li>안전구획된 거실 출입구</li></ul>
+<div class="warn">⚠️ <b>3선식 유도등 반드시 점등</b>해야 하는 경우 5가지<br>① 자동화재탐지설비 감지기·발신기 작동 시<br>② 비상경보설비 발신기 작동 시<br>③ 상용전원 차단, 화재 시 정전·단선 시<br>④ 방재실·전기실에서 수동 점등 시<br>⑤ 자동소화설비 작동 시</div>
+</div>
+<div class="card"><h3>유도등 종류 및 설치기준</h3>
 <table>
   <tr><th>종류</th><th>설치높이</th><th>바탕·그림 색</th><th>설치 간격</th></tr>
   <tr><td>피난구유도등</td><td>출입구 상단, <b>1.5m 이상</b></td><td>녹색 바탕·백색 그림</td><td>-</td></tr>
@@ -1005,13 +1059,20 @@ const THEORY={
 
 'c-비상조명':`<div class="card"><h3>비상조명등</h3>
 <ul><li>각 거실~지상 복도·계단·통로에 설치</li><li>조도: <b>1lx↑</b></li><li>비상전원: <b>20분↑</b> (11층↑·지하도매 등: 60분)</li></ul>
-<h4>휴대용 비상조명등</h4>
-<ul><li>지하상가·지하역사: <b>25m마다 3개↑</b></li><li>대규모점포·영화관: <b>50m마다 3개↑</b></li><li>높이: <b>0.8~1.5m</b></li></ul>
+<h4>휴대용 비상조명등 설치 대상 장소</h4>
+<ul><li><b>숙박시설</b></li><li>수용인원 <b>100명 이상</b>의 영화상영관</li><li><b>대규모 점포</b></li><li><b>지하역사</b> 또는 <b>지하상가</b></li></ul>
+<h4>휴대용 비상조명등 설치기준</h4>
+<table><tr><th>장소</th><th>설치간격</th></tr>
+<tr><td>지하상가·지하역사</td><td>보행거리 <b>25m 이내</b>마다 <b>3개↑</b></td></tr>
+<tr><td>대규모점포·영화상영관</td><td>보행거리 <b>50m 이내</b>마다 <b>3개↑</b></td></tr></table>
+<ul><li>출입문 손잡이로부터 <b>1m 이내</b> 부분에 1개 이상</li><li>설치 높이: 바닥 <b>0.8m 이상 1.5m 이하</b></li><li>배터리 용량: <b>20분 이상</b> 유효 사용 / 사용 시 <b>자동 점등</b></li></ul>
 </div>`,
 
 'c-비상콘센트':`<div class="card"><h3>비상콘센트설비</h3>
 <ul><li>전원: <b>단상 AC 220V</b> / 용량: <b>1.5kVA↑</b></li><li>각 층 회로: <b>2↑</b> / 1회로 콘센트: <b>10개↓</b></li><li>플러그: <b>접지형 2극</b> / 접지: <b>제3종 100Ω↓</b></li></ul>
+<div class="tip">💡 1전용회로 비상콘센트 <b>7개</b> 이상 설치 시 → 전선 용량은 <b>3개의 공급용량 이상</b>으로</div>
 <h4>보호함 3가지: 문·표지·적색표시등</h4>
+<p>옥내소화전함 등과 접속 설치 시 → 표시등 <b>겸용</b> 가능</p>
 </div>`,
 
 'c-무선통신':`<div class="card"><h3>무선통신보조설비</h3>
@@ -1061,8 +1122,18 @@ C (Ah) = (1 / 보수율) × K × I
 <tr><td>링 리듀서</td><td>박스 고정 보조</td></tr>
 <tr><td>부싱</td><td>절연피복 보호</td></tr>
 <tr><td>유니언 커플링</td><td>관 고정 시 접속</td></tr></table>
-<p>후강전선관 1본: <b>3.66m</b> / 호칭: 안지름 짝수</p>
+<p>후강전선관 1본: <b>3.66m</b> / 호칭: <b>안지름 짝수</b> (박강: <b>외경 홀수</b>)</p>
 <p>배선전용실 이격: <b>15cm↑</b> / 격벽: 굵기의 <b>1.5배↑</b></p>
+<h4>금속관 공사 규정</h4>
+<ul><li>금속관 구부릴 때: 안쪽 반지름 ≥ 관 안지름의 <b>6배</b></li><li>직각 또는 직각에 가까운 굴곡: <b>3개소 초과 금지</b></li><li>관 길이 <b>25m 초과</b> 또는 굴곡 많을 때: <b>풀박스</b> 설치</li><li>관 내 전선: <b>접속 금지</b>, 절연전선 사용</li></ul>
+</div>
+<div class="card"><h3>절연저항 기준표 (암기 필수)</h3>
+<table><tr><th>설비</th><th>측정전압</th><th>절연저항 기준</th></tr>
+<tr><td>감지기</td><td>DC 500V</td><td><b>50MΩ 이상</b></td></tr>
+<tr><td>비상콘센트 / 자동화재속보 교류입력측</td><td>DC 500V</td><td><b>20MΩ 이상</b></td></tr>
+<tr><td>자동화재속보설비 기본 / 누전차단기</td><td>DC 500V</td><td><b>5MΩ 이상</b></td></tr>
+<tr><td>시각경보장치 / 배선 상호간</td><td>DC 250V</td><td><b>0.1MΩ 이상</b></td></tr></table>
+<div class="tip">💡 암기: <b>감50 → 비상·속보20 → 속보기본·누전5 → 배선상호0.1</b></div>
 </div>`,
 
 'c-가닥수':`<div class="card"><h3>가닥수 계산</h3>
@@ -1077,12 +1148,13 @@ C (Ah) = (1 / 보수율) × K × I
 
 'c-계산':`
 <div class="tabs">
-  <div class="tab on" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6'],'ca1')">① 전압강하</div>
-  <div class="tab" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6'],'ca2')">② 감시·동작전류</div>
-  <div class="tab" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6'],'ca3')">③ 축전지 계산</div>
-  <div class="tab" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6'],'ca4')">④ 발전기·차단기</div>
-  <div class="tab" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6'],'ca5')">⑤ 콘덴서·동기속도</div>
-  <div class="tab" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6'],'ca6')">⑥ 설치개수 계산</div>
+  <div class="tab on" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6','ca7'],'ca1')">① 전압강하</div>
+  <div class="tab" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6','ca7'],'ca2')">② 감시·동작전류</div>
+  <div class="tab" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6','ca7'],'ca3')">③ 축전지 계산</div>
+  <div class="tab" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6','ca7'],'ca4')">④ 발전기·차단기</div>
+  <div class="tab" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6','ca7'],'ca5')">⑤ 콘덴서·동기속도</div>
+  <div class="tab" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6','ca7'],'ca6')">⑥ 설치개수 계산</div>
+  <div class="tab" onclick="st(this,['ca1','ca2','ca3','ca4','ca5','ca6','ca7'],'ca7')">⑦ 전동기 용량</div>
 </div>
 
 <div id="ca1" class="tc on">
@@ -1228,6 +1300,37 @@ C (Ah) = (1 / 보수율) × K × I
 【감지기】바닥면적 350㎡, 차동식2종(4m미만,70㎡)
   개수 = ⌈350/70⌉ = ⌈5.0⌉ = 5개</div>
 <div class="warn">⚠️ 유도등/유도표지 공식은 "-1"이 있고, 감지기는 올림만. 혼동 주의!</div>
+</div>
+</div>
+
+<div id="ca7" class="tc" style="display:none">
+<div class="card"><h3>⑦ 전동기 용량 (펌프·배연기)</h3>
+<div class="warn">⚠️ <b>액체(물 펌프)와 기체(배연기)는 공식이 다름!</b> 출제빈도 매우 높음</div>
+<h4>액체 (물 펌프, 소화펌프) — 출제 13회</h4>
+<div class="form">P (kW) = (9.8 × K × H × Q) / (η × 60)
+  K: 여유계수(안전율)
+  H: 전양정(m) — 마찰손실 + 낙차 등 포함
+  Q: 양수량 (m³/min)
+  η: 효율 (소수점)
+  60: 분→초 변환
+
+【예제】Q=2m³/min, H=30m, η=0.75, K=1.1이면?
+  P = (9.8 × 1.1 × 30 × 2) / (0.75 × 60)
+    = 646.8 / 45 = <b>14.37 kW</b></div>
+<h4>기체 (배연기, 송풍기) — 출제 4회</h4>
+<div class="form">P (kW) = (K × P_풍압 × Q) / (102 × η × 60)
+  P_풍압: 풍압 (mmH₂O)
+  Q: 풍량 (m³/min)
+
+단위 변환 암기:
+  1 HP (마력) = <b>0.746 kW</b>
+  760 mmHg = 10,332 mmH₂O (mmHg로 주어질 때 비례 변환)</div>
+<h4>출력 구하기 (전력 계산)</h4>
+<div class="form">단상 2선식:  P = V × I × cosθ
+3상 3선식:   P = √3 × V × I × cosθ
+피상전력:    Pa = V × I (단상) / √3 × V × I (3상)
+역률:        cosθ = P / Pa</div>
+<div class="tip">💡 1마력(HP) = 0.746kW 암기 필수! (마력→kW 변환 시 ×0.746)</div>
 </div>
 </div>`,
 
@@ -1542,6 +1645,22 @@ const QUIZ={
    q:'공기관식 차동식 분포형 감지기의 <b>시험 종류 5가지</b>를 쓰시오.',
    a:'① 화재작동시험 ② 작동계속시험 ③ 유통시험 ④ 접점수고시험 ⑤ 리크시험 / 암기: <b>화작유접리</b>',
    img:{y:'18',pg:47,label:'18년도 2회차 47p'}},
+  {yr:null,r:null,type:'서술형',key:'스포트형 감지기 구조 4가지',
+   q:'스포트형 감지기의 내부 구조 <b>4가지</b>를 쓰시오.',
+   a:'① <b>고정접점</b>: 화재신호 발신<br>② <b>리크공</b>: 완만한 온도 상승 시 공기 배출(오작동 방지)<br>③ <b>다이어프램</b>: 급격한 열 팽창 시 접점 압착<br>④ <b>감열실</b>: 외부 열 수용',
+   img:null},
+  {yr:null,r:null,type:'서술형',key:'광전식스포트형=산란광·분리형=감광식',
+   q:'광전식 <b>스포트형</b> 감지기와 <b>분리형</b> 감지기의 동작 원리를 비교 설명하시오.',
+   a:'• <b>스포트형(산란광식)</b>: 연기 미립자에 의해 빛이 <b>산란</b>되어 수광부에 전달되어 작동<br>• <b>분리형(감광식)</b>: 연기에 의해 수광부의 <b>광량이 감소</b>하는 것을 검출하여 작동',
+   img:null},
+  {yr:null,r:null,type:'서술형',key:'교차회로 미적용 감지기 8종류',
+   q:'교차회로방식을 적용하지 않아도 되는 감지기 <b>4가지 이상</b>을 쓰시오.',
+   a:'불꽃감지기, 정온식 감지선형, 분포형, 복합형, 광전식 분리형, 아날로그방식, 다신호방식, 축적방식<br>암기: <b>불정분복광아다축</b>',
+   img:null},
+  {yr:null,r:null,type:'서술형',key:'단독경보형감지기 150㎡ 30㎡미만',
+   q:'단독경보형 감지기의 설치기준을 쓰시오.',
+   a:'① 각 실마다 설치<br>② 바닥면적 <b>150㎡ 초과</b> 시: <b>150㎡마다 1개↑</b><br>③ 이웃 실 각각 <b>30㎡ 미만</b> + 공기 상호유통 → <b>1개의 실</b>로 간주<br>④ 주전원 건전지(교환 가능) / 상용전원: 2차전지',
+   img:null},
 ],
 'c-수신기':[
   {yr:2024,r:1,type:'서술형',key:'도통시험원인5 단단감종종',
@@ -1564,6 +1683,10 @@ const QUIZ={
    q:'P형 수신기의 <b>기능시험 7가지</b>를 쓰시오.',
    a:'① 화재표시작동시험 ② 회로저항시험(50Ω↓) ③ 공통선시험(7경계구역↓) ④ 예비전원시험 ⑤ 지구음향장치 작동시험 ⑥ 회로도통시험 ⑦ 동시작동시험(5회선)',
    img:{y:'19',pg:3,label:'19년도 1회차'}},
+  {yr:null,r:null,type:'서술형',key:'경계구역 600㎡·50m·1000㎡·지하구700m',
+   q:'자동화재탐지설비 <b>경계구역 설정기준</b>을 쓰시오.',
+   a:'① 1경계구역 면적: <b>600㎡ 이하</b>, 1변 길이: <b>50m 이하</b><br>② 주출입구에서 내부 전체 보이는 경우: 1변 50m이하 시 <b>1,000㎡ 이하</b><br>③ <b>지하구</b> 경계구역 길이: <b>700m 이하</b><br>④ 스프링클러·물분무·제연설비: 방사구역과 동일 설정 가능',
+   img:null},
 ],
 'c-발신기':[
   {yr:2024,r:2,type:'서술형',key:'단자용도 전공지응',
@@ -1578,6 +1701,10 @@ const QUIZ={
    q:'종단저항을 연결해야 하는 기기와 단자명을 쓰시오.',
    a:'기기: <b>발신기</b><br>단자: <b>지구선</b> 및 <b>지구공통선</b> 단자',
    img:{y:'20',pg:55,label:'20년도 2회차'}},
+  {yr:null,r:null,type:'서술형',key:'P형발신기 구성요소3 LED·푸시버튼·전화잭',
+   q:'P형 수동발신기의 <b>구성요소 3가지</b>와 각 역할을 쓰시오.',
+   a:'① <b>LED(발신확인 표시등)</b>: 화재신호가 수신기에 전달됐는지 확인<br>② <b>푸시버튼(누름버튼)</b>: 눌러서 화재신호 발신<br>③ <b>전화잭</b>: 수신기와 상호 통화 연락',
+   img:null},
 ],
 'c-누전':[
   {yr:2024,r:3,type:'서술형',key:'구성요소4 ZCT수신음차',
@@ -1628,12 +1755,24 @@ const QUIZ={
    q:'유도등 배선방식 <b>2선식과 3선식</b>의 평상시·화재시 점등 상태를 비교하시오.',
    a:'• <b>2선식</b>: 평상시 <b>항상 점등</b>, 화재시 항상 점등<br>• <b>3선식</b>: 평상시 <b>소등</b>, 화재시 <b>점등</b><br>→ 3선식: 평소 전력 절약, 화재 시 점등 (자동화재탐지 연동)',
    img:{y:'20',pg:78,label:'20년도 3회차'}},
+  {yr:null,r:null,type:'서술형',key:'3선식 반드시점등 5가지',
+   q:'3선식 유도등이 <b>반드시 점등</b>되어야 하는 경우 5가지를 쓰시오.',
+   a:'① 자동화재탐지설비 감지기·발신기 작동 시<br>② 비상경보설비 발신기 작동 시<br>③ 상용전원 차단, 화재 시 정전·단선 시<br>④ 방재실·전기실에서 수동 점등 시<br>⑤ 자동소화설비 작동 시',
+   img:null},
+  {yr:null,r:null,type:'서술형',key:'통로유도등 면제 30m·피난구유도등',
+   q:'통로유도등 <b>설치 면제 조건</b>을 쓰시오.',
+   a:'① 길이 <b>30m 미만</b>으로 구부러지지 않은 복도·통로<br>② 보행거리 <b>20m 미만</b>이고 출입구에 <b>피난구유도등</b>이 있는 복도·통로',
+   img:null},
 ],
 'c-비상조명':[
   {yr:2022,r:3,type:'서술형',key:'조도1lx 비상전원20분',
    q:'비상조명등의 <b>설치기준 3가지</b>를 쓰시오.',
    a:'① 각 거실~지상 복도·계단·통로에 설치<br>② 조도: 바닥 <b>1lx↑</b><br>③ 비상전원: <b>20분↑</b> (11층↑·지하도매 등: 60분)',
    img:{y:'22',pg:64,label:'22년도 3회차'}},
+  {yr:null,r:null,type:'서술형',key:'휴대용비상조명등 설치장소·25m·50m',
+   q:'휴대용 비상조명등을 설치해야 하는 <b>장소 4가지</b>와 설치기준을 쓰시오.',
+   a:'설치 장소: ① 숙박시설 ② 수용인원 <b>100명↑</b> 영화상영관 ③ 대규모 점포 ④ 지하역사·지하상가<br>설치 간격: 지하상가·지하역사: 보행거리 <b>25m↓</b>마다 <b>3개↑</b> / 대규모점포·영화관: <b>50m↓</b>마다 <b>3개↑</b><br>높이: 바닥 <b>0.8~1.5m</b> / 배터리: <b>20분↑</b>',
+   img:null},
 ],
 'c-비상콘센트':[
   {yr:2023,r:1,type:'서술형',key:'220V 1.5kVA 2회로 10개이하',
@@ -1644,6 +1783,10 @@ const QUIZ={
    q:'비상콘센트 <b>보호함</b>에 설치해야 할 것 3가지를 쓰시오.',
    a:'① 쉽게 개폐 가능한 <b>문</b><br>② 보호함 표면에 <b>"비상콘센트" 표지</b><br>③ 상부에 <b>적색 표시등</b>',
    img:{y:'21',pg:38,label:'21년도 2회차'}},
+  {yr:null,r:null,type:'서술형',key:'7개이상→전선용량3개분',
+   q:'하나의 전용회로에 비상콘센트를 <b>7개</b> 이상 설치하는 경우 전선 용량 기준을 쓰시오.',
+   a:'전선 용량은 비상콘센트 <b>3개</b>의 공급용량(1.5kVA×3=4.5kVA) 이상으로 할 것',
+   img:null},
 ],
 'c-축전지':[
   {yr:2024,r:2,type:'서술형',key:'부동충전 병렬접속 자기방전',
@@ -1696,6 +1839,14 @@ const QUIZ={
    q:'[조건] 객석통로 직선 32m / 유도표지 보행거리 46m / 복도통로유도등 보행거리 85m<br>각각의 <b>최소 설치 개수</b>를 구하시오.',
    a:'<b>객석유도등</b>: (32÷4)−1 = 8−1 = <b>7개</b><br><b>유도표지</b>: ⌈(46÷15)−1⌉ = ⌈3.07−1⌉ = ⌈2.07⌉ = <b>3개</b><br><b>복도통로유도등</b>: ⌈(85÷20)−1⌉ = ⌈4.25−1⌉ = ⌈3.25⌉ = <b>4개</b>',
    img:{y:'19',pg:35,label:'19년도 2회차'}},
+  {yr:null,r:null,type:'계산형',key:'소화펌프용량 P=9.8KHQ÷(η×60)',
+   q:'소화펌프: 양수량 Q=2m³/min, 전양정 H=30m, 효율 η=0.75, 여유계수 K=1.1일 때 <b>전동기 용량(kW)</b>을 구하시오.',
+   a:'<b>공식</b>: P = (9.8 × K × H × Q) / (η × 60)<br>P = (9.8 × 1.1 × 30 × 2) / (0.75 × 60)<br>= 646.8 / 45 = <b>14.37 kW</b><br>※ 1HP = <b>0.746kW</b>',
+   img:null},
+  {yr:null,r:null,type:'계산형',key:'2차충전전류=정격용량/공칭+상시부하/표준전압',
+   q:'연축전지 정격용량 200Ah, 상시부하 10kW, 표준전압 100V일 때 <b>부동충전 2차 전류(A)</b>를 구하시오.',
+   a:'<b>공식</b>: 2차 전류 = (정격용량/공칭용량) + (상시부하/표준전압)<br>= (200/10) + (10,000/100)<br>= 20 + 100 = <b>120A</b><br>※ 연축전지 공칭용량 = <b>10Ah</b>',
+   img:null},
 ],
 'c-가닥수':[
   {yr:2024,r:3,type:'계산형',key:'전화+지구+응답+경종+표시등=10가닥',
@@ -1779,6 +1930,14 @@ const QUIZ={
    q:'소방용 케이블과 비소방용 케이블을 배선전용실에 함께 배선할 경우 기준 2가지를 쓰시오.',
    a:'① 피복 간 이격: <b>15cm↑</b><br>② 불연성 격벽 높이: 가장 굵은 케이블 지름의 <b>1.5배↑</b>',
    img:{y:'21',pg:68,label:'21년도 3회차'}},
+  {yr:null,r:null,type:'서술형',key:'금속관공사 6배·3개소·25m풀박스',
+   q:'저압 옥내 금속관 공사 시 <b>굽힘 기준</b>을 쓰시오.',
+   a:'① 금속관 구부릴 때 안쪽 반지름 ≥ 관 안지름의 <b>6배</b><br>② 직각(또는 직각에 가까운) 굴곡개소: <b>3개소 초과 금지</b><br>③ 관 길이 <b>25m 초과</b> 또는 굴곡 많을 때: <b>풀박스</b> 설치',
+   img:null},
+  {yr:null,r:null,type:'표완성',key:'절연저항기준 감50·비상20·누전5·배선0.1',
+   q:'소방설비별 <b>절연저항 기준</b>을 쓰시오.',
+   a:'① 감지기: DC <b>500V</b> → <b>50MΩ↑</b><br>② 비상콘센트·자동화재속보(교류입력측): DC <b>500V</b> → <b>20MΩ↑</b><br>③ 자동화재속보(기본)·누전차단기: DC <b>500V</b> → <b>5MΩ↑</b><br>④ 시각경보·배선 상호간: DC <b>250V</b> → <b>0.1MΩ↑</b><br>암기: <b>감50→비상20→기본5→배선0.1</b>',
+   img:null},
 ],
 
 'c-시퀀스':[
