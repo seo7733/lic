@@ -417,15 +417,15 @@ body{
     <div class="ni" onclick="showTheory('c-감지기')">감지기<span class="ni-cnt">(7)</span></div>
     <div class="ni" onclick="showTheory('c-수신기')">자탐수신기<span class="ni-cnt">(5)</span></div>
     <div class="ni" onclick="showTheory('c-발신기')">발신기<span class="ni-cnt">(3)</span></div>
-    <div class="ni" onclick="showTheory('c-중계기')">중계기</div>
-    <div class="ni" onclick="showTheory('c-시각경보')">시각경보장치</div>
+    <div class="ni" onclick="showTheory('c-중계기')">중계기<span class="ni-cnt">(2)</span></div>
+    <div class="ni" onclick="showTheory('c-시각경보')">시각경보장치<span class="ni-cnt">(2)</span></div>
   </div>
   <div class="ns">
     <div class="ns-t">🔔 경보설비 파트 (10%)</div>
-    <div class="ni" onclick="showTheory('c-비상경보')">비상경보설비</div>
+    <div class="ni" onclick="showTheory('c-비상경보')">비상경보설비<span class="ni-cnt">(2)</span></div>
     <div class="ni" onclick="showTheory('c-비상방송')">비상방송설비<span class="ni-cnt">(2)</span></div>
     <div class="ni" onclick="showTheory('c-누전')">누전경보기<span class="ni-cnt">(5)</span></div>
-    <div class="ni" onclick="showTheory('c-가스')">가스누설경보기</div>
+    <div class="ni" onclick="showTheory('c-가스')">가스누설경보기<span class="ni-cnt">(3)</span></div>
   </div>
   <div class="ns">
     <div class="ns-t">🚦 피난설비 파트 (10~20%)</div>
@@ -435,7 +435,7 @@ body{
   <div class="ns">
     <div class="ns-t">🚒 소화활동설비</div>
     <div class="ni" onclick="showTheory('c-비상콘센트')">비상콘센트설비<span class="ni-cnt">(2)</span></div>
-    <div class="ni" onclick="showTheory('c-무선통신')">무선통신보조설비</div>
+    <div class="ni" onclick="showTheory('c-무선통신')">무선통신보조설비<span class="ni-cnt">(2)</span></div>
   </div>
   <div class="ns">
     <div class="ns-t">⚡ 전기설비 파트 (20~40%)</div>
@@ -451,16 +451,21 @@ body{
     <div class="ni" onclick="showQuiz('c-감지기')">감지기 기출<span class="ni-cnt">(7)</span></div>
     <div class="ni" onclick="showQuiz('c-수신기')">수신기 기출<span class="ni-cnt">(5)</span></div>
     <div class="ni" onclick="showQuiz('c-발신기')">발신기 기출<span class="ni-cnt">(3)</span></div>
+    <div class="ni" onclick="showQuiz('c-중계기')">중계기 기출<span class="ni-cnt">(2)</span></div>
+    <div class="ni" onclick="showQuiz('c-시각경보')">시각경보 기출<span class="ni-cnt">(2)</span></div>
+    <div class="ni" onclick="showQuiz('c-비상경보')">비상경보 기출<span class="ni-cnt">(2)</span></div>
     <div class="ni" onclick="showQuiz('c-누전')">누전경보기 기출<span class="ni-cnt">(5)</span></div>
     <div class="ni" onclick="showQuiz('c-비상방송')">비상방송 기출<span class="ni-cnt">(2)</span></div>
     <div class="ni" onclick="showQuiz('c-유도등')">유도등·비상조명 기출<span class="ni-cnt">(4)</span></div>
     <div class="ni" onclick="showQuiz('c-비상콘센트')">비상콘센트 기출<span class="ni-cnt">(2)</span></div>
+    <div class="ni" onclick="showQuiz('c-무선통신')">무선통신 기출<span class="ni-cnt">(2)</span></div>
+    <div class="ni" onclick="showQuiz('c-가스')">가스누설 기출<span class="ni-cnt">(3)</span></div>
     <div class="ni" onclick="showQuiz('c-축전지')">비상전원·축전지 기출<span class="ni-cnt">(4)</span></div>
     <div class="ni" onclick="showQuiz('c-계산')">전기 계산 기출<span class="ni-cnt">(8)</span></div>
     <div class="ni" onclick="showQuiz('c-가닥수')">가닥수 계산 기출<span class="ni-cnt">(3)</span></div>
     <div class="ni" onclick="showQuiz('c-시퀀스')">시퀀스회로 기출<span class="ni-cnt">(10)</span></div>
     <div class="ni" onclick="showQuiz('c-타임차트')">타임차트 기출<span class="ni-cnt">(6)</span></div>
-    <div class="ni" onclick="showQuiz('all')" style="margin-top:4px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px;font-weight:700;color:#ffd700;">🎯 전체 기출 모아보기<span class="ni-cnt" style="color:rgba(255,215,0,.6)">(59)</span></div>
+    <div class="ni" onclick="showQuiz('all')" style="margin-top:4px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px;font-weight:700;color:#ffd700;">🎯 전체 기출 모아보기<span class="ni-cnt" style="color:rgba(255,215,0,.6)">(73)</span></div>
   </div>
   <div class="ns">
     <div class="ns-t">📚 연도별 기출풀이 (풀해설)</div>
@@ -725,9 +730,11 @@ function buildChHtml(th, qItems) {
 // ── 기출문제 전용 페이지 ─────────────────────────────────────
 const QUIZ_LABELS = {
   'c-감지기':'감지기','c-수신기':'자탐수신기','c-발신기':'발신기',
+  'c-중계기':'중계기','c-시각경보':'시각경보장치','c-비상경보':'비상경보설비',
   'c-누전':'누전경보기','c-비상방송':'비상방송설비','c-유도등':'유도등·비상조명',
-  'c-비상콘센트':'비상콘센트','c-축전지':'비상전원·축전지',
-  'c-계산':'전기 계산','c-가닥수':'가닥수 계산',
+  'c-비상조명':'비상조명등','c-비상콘센트':'비상콘센트','c-축전지':'비상전원·축전지',
+  'c-무선통신':'무선통신보조설비','c-가스':'가스누설경보기',
+  'c-계산':'전기 계산','c-가닥수':'가닥수 계산','c-배선':'배선·결선',
   'c-시퀀스':'시퀀스회로','c-타임차트':'타임차트',
 };
 
@@ -1484,7 +1491,7 @@ const QUIZ={
   {yr:2024,r:1,type:'서술형',key:'축적기능없는감지기 3가지',
    q:'자동화재탐지설비에서 <b>축적기능이 없는 감지기</b>로 설치하여야 하는 경우 3가지를 쓰시오.',
    a:'① 급속한 연소 확대가 우려되는 장소<br>② 교차회로방식에 사용되는 감지기<br>③ 축적기능이 있는 수신기에 연결하여 사용하는 감지기',
-   img:{y:'24',pg:3,label:'24년도 1회차 3p'}},
+   img:{y:'24',pg:6,label:'24년도 1회차'}},
   {yr:2023,r:1,type:'서술형',key:'유통시험 마노미터100→50mm',
    q:'공기관식 차동식 분포형 감지기의 <b>유통시험 방법</b>을 설명하시오.',
    a:'① 검출부 한쪽→<b>마노미터</b>, 다른쪽→<b>테스트펌프</b> 접속<br>② 공기 주입→수위 <b>100mm</b> 상승<br>③ 송기구 열어 <b>50mm</b>까지 내려가는 시간(유통시간) 측정',
@@ -1514,7 +1521,7 @@ const QUIZ={
   {yr:2024,r:1,type:'서술형',key:'도통시험원인5 단단감종종',
    q:'P형 수신기 <b>회로도통시험</b>에서 정상신호 없을 때 원인 5가지를 쓰시오.',
    a:'① 감지기회로 단선 ② 감지기회로 단락 ③ 감지기 고장 ④ 종단저항 접속불량 ⑤ 종단저항 누락',
-   img:{y:'24',pg:2,label:'24년도 1회차 2p'}},
+   img:{y:'24',pg:8,label:'24년도 1회차'}},
   {yr:2023,r:2,type:'서술형',key:'공통선시험 7이하',
    q:'P형 1급 수신기 <b>공통선 시험</b>의 방법과 판정기준을 쓰시오.',
    a:'방법: 공통선 1선 제거→도통시험스위치→회로선택스위치 차례 회전→단선 지시 경계구역 회선수 확인<br>판정: 경계구역수 <b>7 이하</b>',
@@ -1600,7 +1607,7 @@ const QUIZ={
   {yr:2022,r:3,type:'서술형',key:'조도1lx 비상전원20분',
    q:'비상조명등의 <b>설치기준 3가지</b>를 쓰시오.',
    a:'① 각 거실~지상 복도·계단·통로에 설치<br>② 조도: 바닥 <b>1lx↑</b><br>③ 비상전원: <b>20분↑</b> (11층↑·지하도매 등: 60분)',
-   img:{y:'22',pg:60,label:'22년도 3회차'}},
+   img:{y:'22',pg:64,label:'22년도 3회차'}},
 ],
 'c-비상콘센트':[
   {yr:2023,r:1,type:'서술형',key:'220V 1.5kVA 2회로 10개이하',
@@ -1616,7 +1623,7 @@ const QUIZ={
   {yr:2024,r:2,type:'서술형',key:'부동충전 병렬접속 자기방전',
    q:'<b>부동충전방식</b>을 설명하시오.',
    a:'자기방전 보충+상용부하는 충전기 담당, 일시적 대전류는 축전지 부담. 축전지와 부하를 정류기에 <b>병렬</b> 접속하여 충전·방전 동시 수행.',
-   img:{y:'24',pg:28,label:'24년도 2회차'}},
+   img:{y:'24',pg:29,label:'24년도 2회차'}},
   {yr:2023,r:1,type:'계산형',key:'C=IT/L=6.25Ah',
    q:'부하전류 10A, 방전시간 30분, 보수율 0.8일 때 <b>축전지 용량(Ah)</b>을 구하시오.',
    a:'C=I×T/L=10×(30/60)/0.8=10×0.5/0.8=<b>6.25Ah</b>',
@@ -1638,7 +1645,7 @@ const QUIZ={
   {yr:2024,r:2,type:'계산형',key:'지름→단면적 A=πd²/4 후 전압강하',
    q:'단상2선식, 부하전류 2A, 배선거리 55m, 전선 지름 1.5mm일 때 <b>전압강하(V)</b>를 구하시오.',
    a:'<b>Step1</b> 단면적 변환: A = π × 1.5² / 4 = 3.14159 × 2.25 / 4 = <b>1.767mm²</b><br><b>Step2</b> 전압강하: e = 35.6 × 55 × 2 / (1000 × 1.767)<br>= 3,916 / 1,767 = <b>2.22V</b>',
-   img:{y:'24',pg:28,label:'24년도 2회차'}},
+   img:{y:'24',pg:45,label:'24년도 2회차'}},
   {yr:2023,r:1,type:'계산형',key:'비상콘센트 I=P/V×1.25→전선굵기',
    q:'비상콘센트 3개(1.5kVA, 220V, cosθ=1)의 <b>정격전류와 허용전류</b>를 구하고 전선 굵기를 선정하시오.',
    a:'정격전류: I = (1,500×3)/220 = <b>20.45A</b><br>허용전류 = 20.45 × 1.25 = <b>25.57A</b><br>→ 2.5mm²(허용 26A) 이상 선정',
@@ -1654,7 +1661,7 @@ const QUIZ={
   {yr:2020,r:2,type:'계산형',key:'축전지용량 C=(1/L)×K×I',
    q:'220V용 40W 80등, 50W 50등, 방전시간 30분, 보수율 0.8, 용량환산시간 K=1.2h일 때 <b>축전지 용량(Ah)</b>을 구하시오.',
    a:'<b>총전력</b> P = (40×80)+(50×50) = 3,200+2,500 = 5,700W<br><b>방전전류</b> I = 5,700/220 = 25.91A<br><b>용량</b> C = (1/0.8)×1.2×25.91 = 1.25×1.2×25.91 = <b>38.87Ah</b>',
-   img:{y:'20',pg:58,label:'20년도 2회차'}},
+   img:{y:'20',pg:68,label:'20년도 2회차'}},
   {yr:2019,r:3,type:'계산형',key:'동기속도 Ns=120f/P 회전속도 N=Ns×(1-S)',
    q:'60Hz, 6극, 슬립 4%인 3상 유도전동기의 <b>동기속도</b>와 <b>회전속도</b>를 구하시오.',
    a:'<b>동기속도</b> Ns = 120×60/6 = <b>1,200rpm</b><br><b>회전속도</b> N = 1,200×(1−0.04) = 1,200×0.96 = <b>1,152rpm</b>',
@@ -1662,7 +1669,7 @@ const QUIZ={
   {yr:2019,r:2,type:'계산형',key:'객석유도등 (길이÷4)−1, 유도표지 (거리÷15)−1',
    q:'[조건] 객석통로 직선 32m / 유도표지 보행거리 46m / 복도통로유도등 보행거리 85m<br>각각의 <b>최소 설치 개수</b>를 구하시오.',
    a:'<b>객석유도등</b>: (32÷4)−1 = 8−1 = <b>7개</b><br><b>유도표지</b>: ⌈(46÷15)−1⌉ = ⌈3.07−1⌉ = ⌈2.07⌉ = <b>3개</b><br><b>복도통로유도등</b>: ⌈(85÷20)−1⌉ = ⌈4.25−1⌉ = ⌈3.25⌉ = <b>4개</b>',
-   img:{y:'19',pg:28,label:'19년도 2회차'}},
+   img:{y:'19',pg:35,label:'19년도 2회차'}},
 ],
 'c-가닥수':[
   {yr:2024,r:3,type:'계산형',key:'전화+지구+응답+경종+표시등=10가닥',
@@ -1678,6 +1685,65 @@ const QUIZ={
    a:'감지기회로의 <b>도통시험을 용이하게 하기 위하여</b> (배선 도중에서 분기하지 않는 방식)',
    img:{y:'20',pg:5,label:'20년도 1회차'}},
 ],
+'c-중계기':[
+  {yr:2021,r:1,type:'서술형',key:'집합형AC220V분산형DC24V 회로용량',
+   q:'중계기의 <b>집합형</b>과 <b>분산형</b>의 입력전원 및 회로용량을 비교하시오.',
+   a:'<table class="table"><tr><th>구분</th><th>집합형</th><th>분산형</th></tr><tr><td>입력전원</td><td><b>AC 220V</b></td><td><b>DC 24V</b></td></tr><tr><td>회로용량</td><td><b>30~40회로</b></td><td><b>5회로 미만</b></td></tr></table>',
+   img:{y:'21',pg:7,label:'21년도 1회차'}},
+  {yr:2020,r:1,type:'서술형',key:'도통시험 수신기~감지기 사이 설치 5초',
+   q:'중계기 <b>설치 조건 2가지</b>와 수신→발신 소요시간을 쓰시오.',
+   a:'① 수신기에서 <b>도통시험을 하지 않아도 되는</b> 경우 수신기와 감지기 사이에 설치<br>② 별도의 전력공급 시: 과전류차단기 설치 + 정전 시 수신기에 표시<br>③ 수신→발신 소요시간: <b>5초 이내</b>',
+   img:{y:'20',pg:12,label:'20년도 1회차'}},
+],
+
+'c-시각경보':[
+  {yr:2022,r:1,type:'서술형',key:'높이2m이상2.5m이하 청각장애 공연장',
+   q:'시각경보장치의 <b>설치 높이</b> 기준과 <b>설치 장소 2가지</b>를 쓰시오.',
+   a:'높이: 바닥에서 <b>2m 이상 2.5m 이하</b><br>장소: ① 청각장애인용 <b>객실 및 공용 거실</b> ② <b>공연장 무대부</b> 등<br>광원: 축전지설비 또는 전기저장장치',
+   img:{y:'22',pg:10,label:'22년도 1회차'}},
+  {yr:2019,r:1,type:'서술형',key:'시각경보 DC250V 0.1MΩ 절연저항',
+   q:'시각경보장치의 <b>절연저항 시험 기준</b>을 쓰시오.',
+   a:'DC <b>250V</b> 절연저항계로 측정 시 <b>0.1MΩ 이상</b>',
+   img:{y:'19',pg:10,label:'19년도 1회차'}},
+],
+
+'c-비상경보':[
+  {yr:2019,r:2,type:'서술형',key:'우선경보 5층+3000㎡ 발화층별경보',
+   q:'비상경보설비 <b>우선경보방식</b>을 적용하는 기준과 발화층별 경보 방식을 쓰시오.',
+   a:'적용: <b>5층↑</b> + 연면적 <b>3,000㎡ 초과</b><br>• 2층↑ 발화: 발화층 + <b>직상층</b><br>• 1층 발화: 발화층 + 직상층 + <b>지하전층</b><br>• 지하층 발화: 발화층 + 직상층 + <b>기타 지하층</b>',
+   img:{y:'19',pg:38,label:'19년도 2회차'}},
+  {yr:2021,r:3,type:'서술형',key:'비상벨 음향장치 90dB 1m',
+   q:'비상경보설비 <b>음향장치 설치기준 3가지</b>를 쓰시오.',
+   a:'① 정격전압의 <b>80%</b> 전압에서 음향을 발할 것<br>② 음량: 부착면으로부터 <b>1m 거리</b>에서 <b>90dB 이상</b><br>③ 감지기·발신기 작동과 <b>연동하여 자동</b>으로 경보',
+   img:{y:'21',pg:72,label:'21년도 3회차'}},
+],
+
+'c-무선통신':[
+  {yr:2023,r:3,type:'서술형',key:'설치대상 지하가1000㎡ 지하층3층 3000㎡',
+   q:'무선통신보조설비의 <b>설치 대상 3가지</b>를 쓰시오.',
+   a:'① 지하가 연면적 <b>1,000㎡ 이상</b><br>② 지하층 바닥면적 합계 <b>3,000㎡ 이상</b><br>③ 지하층 층수 <b>3층 이상</b>',
+   img:{y:'23',pg:75,label:'23년도 3회차'}},
+  {yr:2020,r:2,type:'서술형',key:'증폭기 지하층 전원 비상전원 60분',
+   q:'무선통신보조설비의 <b>증폭기 설치기준 3가지</b>를 쓰시오.',
+   a:'① 전원은 전기가 정상적으로 공급되는 축전지, 전기저장장치 또는 교류전압 옥내 간선으로 할 것<br>② 비상전원: <b>30분↑</b> (지하에 설치 시 <b>60분↑</b>)<br>③ 증폭기 입력·출력 임피던스 <b>50Ω</b>',
+   img:{y:'20',pg:63,label:'20년도 2회차'}},
+],
+
+'c-가스':[
+  {yr:2019,r:2,type:'서술형',key:'LPG바닥30cm이하 LNG천장30cm이하',
+   q:'가스누설경보기 <b>검지부 설치 높이</b>를 가스 종류별로 쓰시오.',
+   a:'• <b>LPG·클로로메탄</b>(공기보다 무거운 가스): 바닥에서 <b>30cm 이하</b><br>• <b>LNG·일산화탄소(CO)</b>(공기보다 가벼운 가스): 천장에서 <b>30cm 이하</b>',
+   img:{y:'19',pg:37,label:'19년도 2회차'}},
+  {yr:2020,r:3,type:'서술형',key:'가스누설 구성요소 검지부수신부차단부',
+   q:'가스누설경보기의 <b>구성요소 3가지</b>와 각 역할을 쓰시오.',
+   a:'① <b>검지부</b>: 가스 누설을 검지하는 센서 (가스 농도 측정)<br>② <b>수신부</b>: 검지 신호를 수신하여 경보 발령<br>③ <b>차단부</b>: 가스 공급 차단 (자동 또는 수동, 선택 설치)',
+   img:{y:'20',pg:96,label:'20년도 3회차'}},
+  {yr:2018,r:2,type:'서술형',key:'가스누설 vs 누전경보기 비교',
+   q:'가스누설경보기와 누전경보기의 <b>검지 대상·설치 높이·전원 구분</b>을 비교하시오.',
+   a:'<table class="table"><tr><th>구분</th><th>가스누설경보기</th><th>누전경보기</th></tr><tr><td>검지 대상</td><td>가스 누설</td><td>누설 전류</td></tr><tr><td>설치 높이</td><td>가스 종류에 따라 상이</td><td>제한 없음</td></tr><tr><td>전원</td><td>교류전원 (DC 변환 사용)</td><td>교류전원</td></tr></table>',
+   img:{y:'18',pg:28,label:'18년도 2회차'}},
+],
+
 'c-배선':[
   {yr:2023,r:2,type:'서술형',key:'내화배선 25mm매설',
    q:'<b>내화배선</b>의 공사방법을 쓰시오.',
@@ -1693,11 +1759,11 @@ const QUIZ={
   {yr:2024,r:1,type:'서술형',key:'Y-Δ기동 원리 및 동작순서',
    q:'3상 유도전동기의 <b>Y-Δ(스타-델타) 기동법</b>을 설명하고, 기동 시 기동전류·기동토크가 직입기동 대비 몇 배인지 쓰시오.',
    a:'<b>원리</b>: 기동 시 Y결선(전압 1/√3 인가) → 정격속도 도달 후 Δ결선으로 전환하여 정격 운전<br><br><b>특성 비교</b>:<br>• 기동전류: 직입기동의 <b>1/3</b><br>• 기동토크: 직입기동의 <b>1/3</b><br>• 기동전압: 정격전압의 <b>1/√3 ≈ 58%</b>',
-   img:{y:'24',pg:2,label:'24년도 1회차'}},
+   img:{y:'24',pg:16,label:'24년도 1회차'}},
   {yr:2024,r:2,type:'서술형',key:'Y-Δ 동작순서 7단계',
    q:'Y-Δ 기동 시퀀스회로에서 <b>PBS_ON을 눌렀을 때의 동작 순서</b>를 쓰시오. (MC_M·MC_Y·MC_Δ·타이머 T 포함)',
    a:'① PBS_ON 누름<br>② MC_M(주접촉기) 여자 + MC_Y(Y접촉기) 여자 + 타이머 T 기동<br>③ 전동기 Y결선으로 기동 (RL 점등)<br>④ 타이머 T 설정시간 경과 → 한시접점 동작<br>⑤ MC_Y 소자 (Y결선 해제)<br>⑥ MC_Δ 여자 (Δ결선) → 전동기 정격 운전<br>⑦ PBS_OFF 누름 → MC_M·MC_Δ 소자 → 전동기 정지',
-   img:{y:'24',pg:22,label:'24년도 2회차'}},
+   img:{y:'24',pg:37,label:'24년도 2회차'}},
   {yr:2023,r:2,type:'서술형',key:'인터록 MC_Y↔MC_Δ b접점',
    q:'Y-Δ 기동회로에서 <b>인터록(Interlock)</b>이 필요한 이유와 방법을 설명하시오.',
    a:'<b>이유</b>: MC_Y(Y접촉기)와 MC_Δ(Δ접촉기)가 동시에 동작하면 전원 단락(Short)이 발생하기 때문<br><br><b>방법</b>: 서로의 <b>b접점</b>을 상대방 코일 회로에 직렬로 삽입<br>• MC_Y 회로에 → MC_Δ의 b접점 삽입<br>• MC_Δ 회로에 → MC_Y의 b접점 삽입',
@@ -1713,7 +1779,7 @@ const QUIZ={
   {yr:2022,r:3,type:'서술형',key:'시퀀스 기기 명칭 MCCB·MC·TH·PBS',
    q:'다음 기호의 명칭과 역할을 쓰시오: <b>MCCB, MC, TH(THR), PBS_ON, PBS_OFF</b>',
    a:'• <b>MCCB</b>: 배선용 차단기 - 과전류·단락 보호 및 주전원 개폐<br>• <b>MC</b>: 전자접촉기(마그네틱 컨택터) - 전동기 주회로 개폐<br>• <b>TH(THR)</b>: 열동계전기(서멀릴레이) - 과부하 보호 (b접점 사용)<br>• <b>PBS_ON</b>: 기동용 누름버튼 스위치 - a접점, 자동복귀형<br>• <b>PBS_OFF</b>: 정지용 누름버튼 스위치 - b접점, 자동복귀형',
-   img:{y:'22',pg:62,label:'22년도 3회차'}},
+   img:{y:'22',pg:78,label:'22년도 3회차'}},
   {yr:2021,r:2,type:'서술형',key:'a접점·b접점 차이',
    q:'시퀀스회로에서 <b>a접점(NO)</b>과 <b>b접점(NC)</b>의 차이를 설명하시오.',
    a:'• <b>a접점(NO, Normally Open)</b>: 평상시 열려있고, 코일이 여자되면 <b>닫힘</b><br>• <b>b접점(NC, Normally Closed)</b>: 평상시 닫혀있고, 코일이 여자되면 <b>열림</b><br><br>※ MC가 동작하면 MC의 a접점은 닫히고, b접점은 열린다',
@@ -1736,7 +1802,7 @@ const QUIZ={
   {yr:2024,r:1,type:'타임차트',key:'Y-Δ타임차트 MC_M항상ON MC_Y→MC_Δ순서',
    q:'Y-Δ 기동 시퀀스회로에서 PBS_ON을 눌러 기동하고, 일정시간 후 Y→Δ 전환, 이후 PBS_OFF로 정지할 때 <b>타임차트</b>를 완성하시오. (MC_M, MC_Y, MC_Δ, T, RL 포함)',
    a:'<div class="form" style="font-size:12px;line-height:2">기기명 　｜ 기동(t₀) 　　Y→Δ(t₁)　정지(t₂)\n──────────────────────────────────\nPBS_ON ｜ ─┐┐──────────────────────\nMC_M 　 ｜ ──┌──────────────────┐───  ← 항상 ON\nMC_Y 　 ｜ ──┌─────────┐────────────  ← t₀~t₁\nT(타이머)｜ ──┌─────────          　　  ← t₀에서 기동\nMC_Δ 　 ｜ ──────────────┌──────┐───  ← t₁~t₂\nRL 　 　 ｜ ──┌──────────────────┐───  ← 운전 중 점등</div>핵심: ① MC_M은 항상 ON ② MC_Y OFF → MC_Δ ON (동시 X) ③ T 동작 후 Y→Δ 전환',
-   img:{y:'24',pg:3,label:'24년도 1회차'}},
+   img:{y:'24',pg:17,label:'24년도 1회차'}},
   {yr:2023,r:1,type:'타임차트',key:'자기유지회로 타임차트 PBS→MC→RL',
    q:'자기유지회로에서 PBS_ON을 t₀에서 누르고, PBS_OFF를 t₁에서 누를 때 <b>타임차트</b>를 완성하시오. (PBS_ON, PBS_OFF, MC 코일, RL, GL 포함)',
    a:'<div class="form" style="font-size:12px;line-height:2">기기명 　｜ t₀(기동) 　 　 t₁(정지)\n────────────────────────────\nPBS_ON ｜ ─┐┐──────────────────\nPBS_OFF｜ ─────────────┐┐──────\nMC 코일 ｜ ──┌──────────┐────────\nRL(적색)｜ ──┌──────────┐────────\nGL(녹색)｜ ─┘──────────────┌───</div>핵심: ① t₀: PBS_ON 누름 → MC ON, RL ON, GL OFF ② t₁: PBS_OFF 누름 → MC OFF, RL OFF, GL ON',
@@ -1752,11 +1818,11 @@ const QUIZ={
   {yr:2020,r:2,type:'타임차트',key:'한시계전기 T 타임차트 온딜레이',
    q:'<b>한시계전기(타이머 T)의 온딜레이(ON-delay) 동작</b>을 설명하고 타임차트를 그리시오.',
    a:'<b>온딜레이(ON-delay)</b>: 입력신호(코일 여자) 후 설정시간이 경과한 뒤에 출력(한시접점) 동작<br><div class="form" style="font-size:12px;line-height:2">T 코일  ｜ ─┌────────────────────\n　　　　  　  ↑ 여자        ←→ 설정시간 T\nT 한시a ｜ ─────────────┌──────\nT 한시b ｜ ─┌───────────┘──────</div>※ 즉시접점(순시접점): 코일 여자와 동시에 동작',
-   img:{y:'20',pg:58,label:'20년도 2회차'}},
+   img:{y:'20',pg:61,label:'20년도 2회차'}},
   {yr:2019,r:2,type:'타임차트',key:'PBS누름=짧은펄스 자동복귀 확인',
    q:'타임차트에서 <b>자동복귀형 PBS(누름버튼 스위치)</b>의 표기 방법을 설명하시오.',
    a:'자동복귀형 PBS는 누르는 동안만 접점 상태가 변하고, 손을 떼면 원래 상태로 복귀.<br>→ 타임차트에서 <b>짧은 펄스(좁은 폭의 신호)</b>로 표현<br><br><div class="form" style="font-size:12px;line-height:2">PBS_ON ｜ ─┐┐─── (짧은 펄스 → 누름 후 복귀)\nMC 코일 ｜ ──┌──── (자기유지로 ON 유지)</div>',
-   img:{y:'19',pg:28,label:'19년도 2회차'}},
+   img:{y:'19',pg:43,label:'19년도 2회차'}},
 ],
 };
 
