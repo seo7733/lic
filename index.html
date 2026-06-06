@@ -3,1670 +3,765 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>소방설비기사(전기) 실기 대비 v1.2</title>
+<title>소방설비기사(전기) 실기 대비 v2.0</title>
 <style>
-:root{--red:#c0392b;--red2:#e74c3c;--dark:#2c3e50;--bg:#f0f2f5;--card:#fff;--border:#dde1e7;--ok:#27ae60;--muted:#636e72;--txt:#2d3436;--yellow:#f39c12;}
+:root{--red:#c0392b;--dark:#1a252f;--sb:#2c3e50;--bg:#f0f2f5;--card:#fff;--border:#dde1e7;--ok:#27ae60;--txt:#2d3436;--muted:#636e72;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Malgun Gothic','맑은 고딕',sans-serif;background:var(--bg);color:var(--txt);display:flex;min-height:100vh;font-size:14px;}
-/* SIDEBAR */
-#sb{width:270px;min-width:270px;background:var(--dark);color:#ecf0f1;height:100vh;position:sticky;top:0;overflow-y:auto;display:flex;flex-direction:column;}
-#sb-head{background:#1a252f;padding:16px 14px 12px;}
-#sb-head h1{font-size:13px;line-height:1.6;color:#fff;}
+body{font-family:'Malgun Gothic','맑은 고딕',sans-serif;background:var(--bg);color:var(--txt);display:flex;height:100vh;overflow:hidden;}
+#sb{width:240px;min-width:240px;background:var(--sb);color:#ecf0f1;display:flex;flex-direction:column;height:100vh;overflow-y:auto;flex-shrink:0;}
+#sb-head{background:var(--dark);padding:14px 12px 10px;flex-shrink:0;}
+#sb-head h1{font-size:12.5px;line-height:1.6;color:#fff;}
 #sb-head p{font-size:10px;color:#f1948a;margin-top:2px;}
-.pg-wrap{padding:10px 14px 6px;}
-.pg-lbl{font-size:10px;color:#7f8c9e;display:flex;justify-content:space-between;margin-bottom:3px;}
-.pg-bar{height:5px;background:#3d5166;border-radius:3px;}
-.pg-fill{height:5px;background:var(--ok);border-radius:3px;transition:width .4s;}
-.ns{padding:5px 0;border-top:1px solid #3d5166;}
-.ns-t{font-size:9.5px;color:#7f8c9e;padding:6px 14px 2px;text-transform:uppercase;letter-spacing:1px;}
-.ni{padding:8px 14px;cursor:pointer;font-size:12.5px;display:flex;align-items:center;gap:7px;border-left:3px solid transparent;transition:background .12s;}
+.ns{border-top:1px solid #3d5166;padding:4px 0;}
+.ns-t{font-size:9px;color:#7f8c9e;padding:5px 12px 2px;text-transform:uppercase;letter-spacing:1px;}
+.ni{padding:7px 12px;cursor:pointer;font-size:12px;border-left:3px solid transparent;transition:background .1s;display:flex;align-items:center;gap:6px;}
 .ni:hover{background:#3d5166;}
 .ni.on{background:var(--red);border-left-color:#ff8a80;font-weight:bold;}
-.ni .pct{margin-left:auto;font-size:10px;color:#aaa;}
-/* MAIN */
-#main{flex:1;display:flex;flex-direction:column;min-width:0;}
-#top{background:#fff;border-bottom:1px solid var(--border);padding:11px 24px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:9;}
-#top h2{font-size:15px;color:var(--red);flex:1;}
-.btn{padding:6px 14px;border-radius:5px;border:none;cursor:pointer;font-size:12px;font-family:inherit;}
-.btn-r{background:var(--red);color:#fff;}
-.btn-o{background:#fff;color:var(--red);border:1px solid var(--red);}
-.btn:hover{opacity:.85;}
-#con{padding:20px 28px;flex:1;}
-/* CARDS */
-.card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+#main{flex:1;display:flex;flex-direction:column;min-width:0;height:100vh;overflow:hidden;}
+#vbar{background:#fff;border-bottom:1px solid var(--border);padding:7px 12px;display:none;align-items:center;gap:6px;flex-wrap:wrap;flex-shrink:0;}
+.yr-btn{padding:4px 9px;border-radius:4px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:12px;font-family:inherit;font-weight:bold;}
+.yr-btn.on{background:var(--dark);color:#fff;border-color:var(--dark);}
+.rd-btn{padding:3px 8px;border-radius:12px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:11px;font-family:inherit;}
+.rd-btn.on{background:var(--red);color:#fff;border-color:var(--red);}
+.vbar-sep{width:1px;height:22px;background:var(--border);margin:0 2px;}
+.nav-btn{padding:4px 11px;border:1.5px solid var(--border);background:#fff;border-radius:4px;cursor:pointer;font-size:14px;}
+.nav-btn:hover{background:#f0f2f5;}
+.nav-btn:disabled{opacity:.3;cursor:default;}
+#pg-input{width:46px;padding:3px 4px;border:1px solid var(--border);border-radius:4px;font-size:12px;text-align:center;font-family:inherit;}
+#page-info{font-size:12px;color:var(--muted);}
+.zoom-btn{padding:3px 8px;border:1px solid var(--border);background:#fff;border-radius:4px;cursor:pointer;font-size:11px;font-family:inherit;}
+.zoom-btn.on{background:#2c3e50;color:#fff;border-color:#2c3e50;}
+#cat-lbl{background:#fde8e6;color:var(--red);padding:2px 9px;border-radius:10px;font-size:11px;font-weight:bold;display:none;}
+#viewer{flex:1;overflow:auto;background:#525659;display:none;align-items:flex-start;justify-content:center;padding:16px;}
+#vimg{display:block;box-shadow:0 4px 20px rgba(0,0,0,.5);background:#fff;}
+#vimg.fit{width:100%;max-width:920px;}
+#vimg.full{width:100%;}
+#vimg.z150{width:150%;}
+#vimg.z200{width:200%;}
+#theory-panel{flex:1;overflow-y:auto;padding:20px 28px;background:var(--bg);display:none;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:18px;margin-bottom:16px;}
 .card h3{font-size:14px;color:var(--red);margin-bottom:10px;padding-bottom:7px;border-bottom:2px solid #fde8e6;}
-.card h4{font-size:13px;color:var(--txt);margin:12px 0 5px;font-weight:bold;}
+.card h4{font-size:13px;margin:12px 0 5px;font-weight:bold;}
 .card p,.card li{font-size:13px;line-height:1.85;color:#444;}
 .card ul,.card ol{padding-left:18px;}
 .card table{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0;}
 .card th{background:#f0f2f5;padding:7px 9px;text-align:left;border:1px solid var(--border);font-weight:bold;}
 .card td{padding:6px 9px;border:1px solid var(--border);}
 .card tr:nth-child(even) td{background:#fafbfc;}
-.tip{background:#fff8e1;border-left:4px solid var(--yellow);padding:9px 12px;border-radius:3px;margin:8px 0;font-size:12.5px;}
+.tip{background:#fff8e1;border-left:4px solid #f39c12;padding:9px 12px;border-radius:3px;margin:8px 0;font-size:12.5px;}
 .warn{background:#fde8e6;border-left:4px solid var(--red);padding:9px 12px;border-radius:3px;margin:8px 0;font-size:12.5px;}
-.form{background:#eaf4fb;border:1px solid #aed6f1;padding:9px 12px;border-radius:5px;margin:6px 0;font-family:monospace;font-size:12.5px;color:#1a5276;white-space:pre-wrap;}
-/* TABS */
-.tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:16px;flex-wrap:wrap;}
+.form{background:#eaf4fb;border:1px solid #aed6f1;padding:9px 12px;border-radius:5px;margin:6px 0;font-family:monospace;font-size:12px;white-space:pre-wrap;}
+.tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:16px;}
 .tab{padding:8px 16px;cursor:pointer;font-size:12.5px;border-bottom:3px solid transparent;margin-bottom:-2px;color:var(--muted);}
 .tab.on{color:var(--red);border-bottom-color:var(--red);font-weight:bold;}
 .tc{display:none;}.tc.on{display:block;}
-/* HOME */
-.hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;}
-.hc{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:14px 12px;cursor:pointer;text-align:center;transition:all .18s;}
+.qi{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:16px;margin-bottom:14px;overflow:hidden;}
+.qi .q{font-size:13.5px;font-weight:bold;line-height:1.7;margin-bottom:10px;}
+.sa-btn{padding:5px 12px;border:1px solid var(--ok);background:#fff;color:var(--ok);border-radius:4px;cursor:pointer;font-size:11.5px;font-family:inherit;}
+.sa-ans{display:none;margin-top:9px;padding:9px 12px;background:#eafaf1;border-left:3px solid var(--ok);border-radius:4px;font-size:13px;line-height:1.8;}
+.sa-ans.on{display:block;}
+.badge{padding:2px 8px;border-radius:10px;font-size:10px;font-weight:bold;}
+#home-panel{flex:1;overflow-y:auto;padding:24px;display:block;}
+.hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-top:12px;}
+.hc{background:#fff;border:1px solid var(--border);border-radius:9px;padding:14px 12px;cursor:pointer;text-align:center;transition:all .18s;}
 .hc:hover{border-color:var(--red);box-shadow:0 4px 12px rgba(192,57,43,.12);transform:translateY(-2px);}
 .hc .icon{font-size:24px;margin-bottom:6px;}
 .hc .t{font-size:12px;font-weight:bold;}
 .hc .s{font-size:10.5px;color:var(--muted);margin-top:3px;}
-.hc .pg{font-size:10px;color:var(--ok);margin-top:5px;}
-/* ── 기출 갤러리 ─────────────────────── */
-.gy-filter{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;align-items:center;}
-.fy-btn{padding:5px 13px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:12px;cursor:pointer;font-family:inherit;color:var(--muted);transition:all .15s;}
-.fy-btn.on{background:var(--red);color:#fff;border-color:var(--red);}
-.gy-label{font-size:11px;color:var(--muted);margin-right:4px;}
-.gy-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
-.img-card{background:var(--card);border:1px solid var(--border);border-radius:9px;overflow:hidden;cursor:pointer;transition:all .18s;box-shadow:0 1px 3px rgba(0,0,0,.05);}
-.img-card:hover{box-shadow:0 6px 20px rgba(192,57,43,.15);transform:translateY(-2px);border-color:var(--red);}
-.img-card img{width:100%;display:block;object-fit:cover;}
-.img-card-info{padding:10px 12px;}
-.img-card-info .ic-top{display:flex;align-items:center;gap:6px;margin-bottom:5px;flex-wrap:wrap;}
-.badge{padding:2px 8px;border-radius:10px;font-size:10px;font-weight:bold;}
-.b-1{background:#fde8e6;color:#c0392b;}
-.b-2{background:#e8f4fd;color:#2980b9;}
-.b-3{background:#e9f7ef;color:#27ae60;}
-.b-탐{background:#fde8e6;color:#c0392b;}
-.b-전{background:#fdf2e9;color:#e67e22;}
-.b-경{background:#e8f8f5;color:#1abc9c;}
-.b-피{background:#f4ecf7;color:#8e44ad;}
-.ic-title{font-size:12px;font-weight:bold;color:var(--txt);line-height:1.4;}
-.ic-page{font-size:10.5px;color:var(--muted);margin-top:2px;}
-/* 라이트박스 */
-#lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:1000;flex-direction:column;align-items:center;justify-content:center;}
-#lb.open{display:flex;}
-#lb-img{max-width:96vw;max-height:88vh;object-fit:contain;border-radius:4px;box-shadow:0 8px 40px rgba(0,0,0,.6);}
-#lb-bar{display:flex;align-items:center;gap:14px;margin-top:14px;}
-#lb-bar button{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;padding:6px 18px;border-radius:5px;cursor:pointer;font-size:13px;font-family:inherit;transition:background .15s;}
-#lb-bar button:hover{background:rgba(255,255,255,.25);}
-#lb-info{color:#ccc;font-size:12px;min-width:180px;text-align:center;}
-#lb-close{position:fixed;top:16px;right:20px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;line-height:1;opacity:.75;}
-#lb-close:hover{opacity:1;}
-/* 통계 배너 */
-.stat-row{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap;}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 18px;flex:1;min-width:120px;text-align:center;}
-.stat-card .sv{font-size:22px;font-weight:bold;color:var(--red);}
-.stat-card .sl{font-size:11px;color:var(--muted);margin-top:2px;}
-/* QUIZ */
-.qi{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:16px;margin-bottom:14px;}
-.qi .qn{font-size:10px;color:var(--muted);font-weight:bold;margin-bottom:5px;}
-.qi .q{font-size:13.5px;font-weight:bold;line-height:1.7;margin-bottom:10px;}
-.choices{display:flex;flex-direction:column;gap:6px;}
-.cb{padding:8px 12px;border:1.5px solid var(--border);border-radius:5px;cursor:pointer;text-align:left;font-size:12.5px;font-family:inherit;background:#fff;color:var(--txt);transition:all .12s;}
-.cb:hover:not(:disabled){border-color:var(--red);background:#fde8e6;}
-.cb.ok{border-color:var(--ok)!important;background:#eafaf1!important;color:var(--ok);font-weight:bold;}
-.cb.no{border-color:var(--red)!important;background:#fde8e6!important;color:var(--red);}
-.cb:disabled{cursor:default;}
-.exp{margin-top:9px;padding:9px 12px;background:#f8f9fa;border-left:3px solid var(--ok);border-radius:3px;font-size:12.5px;display:none;line-height:1.7;}
-.exp.on{display:block;}
-.sa-ans{display:none;margin-top:9px;padding:9px 12px;background:#eafaf1;border-left:3px solid var(--ok);border-radius:3px;font-size:12.5px;line-height:1.7;}
-.sa-ans.on{display:block;}
-.sa-btn{margin-top:9px;padding:5px 12px;border:1px solid var(--ok);background:#fff;color:var(--ok);border-radius:4px;cursor:pointer;font-size:11.5px;font-family:inherit;}
-.qscore{background:var(--red);color:#fff;padding:12px 18px;border-radius:7px;font-size:14px;margin-bottom:14px;display:none;}
 </style>
 </head>
 <body>
 <nav id="sb">
   <div id="sb-head">
-    <h1>🔥 소방설비기사(전기)<br>실기 대비 v1.2</h1>
-    <p>권영태 PDF 기반 · 2025 최신</p>
+    <h1>🔥 소방설비기사(전기)<br>실기 대비 v2.0</h1>
+    <p>18~24년도 기출풀이 602장 수록</p>
   </div>
-  <div class="pg-wrap">
-    <div class="pg-lbl"><span>전체 진도</span><span id="opct">0%</span></div>
-    <div class="pg-bar"><div class="pg-fill" id="ofill" style="width:0%"></div></div>
-  </div>
-
   <div class="ns">
     <div class="ns-t">🏠 홈</div>
-    <div class="ni on" onclick="go('home')">학습 홈</div>
+    <div class="ni on" onclick="showHome()">학습 홈</div>
   </div>
-
+  <div class="ns">
+    <div class="ns-t">📚 연도별 기출풀이 (풀해설)</div>
+    <div class="ni" onclick="openViewer('24',1)">2024년도 기출풀이</div>
+    <div class="ni" onclick="openViewer('23',1)">2023년도 기출풀이</div>
+    <div class="ni" onclick="openViewer('22',1)">2022년도 기출풀이</div>
+    <div class="ni" onclick="openViewer('21',1)">2021년도 기출풀이</div>
+    <div class="ni" onclick="openViewer('20',1)">2020년도 기출풀이</div>
+    <div class="ni" onclick="openViewer('19',1)">2019년도 기출풀이</div>
+    <div class="ni" onclick="openViewer('18',1)">2018년도 기출풀이</div>
+  </div>
   <div class="ns">
     <div class="ns-t">🔴 자탐 파트 (40~60%)</div>
-    <div class="ni" onclick="go('c-감지기')">감지기</div>
-    <div class="ni" onclick="go('c-수신기')">자탐수신기</div>
-    <div class="ni" onclick="go('c-발신기')">발신기</div>
-    <div class="ni" onclick="go('c-중계기')">중계기</div>
-    <div class="ni" onclick="go('c-시각경보')">시각경보장치</div>
+    <div class="ni" onclick="showTheory('c-감지기')">감지기</div>
+    <div class="ni" onclick="showTheory('c-수신기')">자탐수신기</div>
+    <div class="ni" onclick="showTheory('c-발신기')">발신기</div>
+    <div class="ni" onclick="showTheory('c-중계기')">중계기</div>
+    <div class="ni" onclick="showTheory('c-시각경보')">시각경보장치</div>
   </div>
-
   <div class="ns">
     <div class="ns-t">🔔 경보설비 파트 (10%)</div>
-    <div class="ni" onclick="go('c-비상경보')">비상경보설비</div>
-    <div class="ni" onclick="go('c-비상방송')">비상방송설비</div>
-    <div class="ni" onclick="go('c-누전')">누전경보기</div>
-    <div class="ni" onclick="go('c-가스')">가스누설경보기</div>
+    <div class="ni" onclick="showTheory('c-비상경보')">비상경보설비</div>
+    <div class="ni" onclick="showTheory('c-비상방송')">비상방송설비</div>
+    <div class="ni" onclick="showTheory('c-누전')">누전경보기</div>
+    <div class="ni" onclick="showTheory('c-가스')">가스누설경보기</div>
   </div>
-
   <div class="ns">
     <div class="ns-t">🚦 피난설비 파트 (10~20%)</div>
-    <div class="ni" onclick="go('c-유도등')">유도등 및 유도표지</div>
-    <div class="ni" onclick="go('c-비상조명')">비상조명등</div>
+    <div class="ni" onclick="showTheory('c-유도등')">유도등 및 유도표지</div>
+    <div class="ni" onclick="showTheory('c-비상조명')">비상조명등</div>
   </div>
-
   <div class="ns">
-    <div class="ns-t">🚒 소화활동설비 파트</div>
-    <div class="ni" onclick="go('c-비상콘센트')">비상콘센트설비</div>
-    <div class="ni" onclick="go('c-무선통신')">무선통신보조설비</div>
+    <div class="ns-t">🚒 소화활동설비</div>
+    <div class="ni" onclick="showTheory('c-비상콘센트')">비상콘센트설비</div>
+    <div class="ni" onclick="showTheory('c-무선통신')">무선통신보조설비</div>
   </div>
-
   <div class="ns">
     <div class="ns-t">⚡ 전기설비 파트 (20~40%)</div>
-    <div class="ni" onclick="go('c-축전지')">비상전원 / 축전지</div>
-    <div class="ni" onclick="go('c-배선')">배선 / 결선</div>
-    <div class="ni" onclick="go('c-가닥수')">가닥수 계산</div>
-    <div class="ni" onclick="go('c-계산')">전기 계산 공식</div>
-  </div>
-
-  <div class="ns">
-    <div class="ns-t">📝 단답형 기출문제</div>
-    <div class="ni" onclick="go('q-자탐')">자탐 파트 기출</div>
-    <div class="ni" onclick="go('q-경보')">경보설비 기출</div>
-    <div class="ni" onclick="go('q-피난')">피난·소화활동 기출</div>
-    <div class="ni" onclick="go('q-전기')">전기설비 기출</div>
-    <div class="ni" onclick="go('q-모의')">🎯 전체 모의고사</div>
-  </div>
-
-  <div class="ns">
-    <div class="ns-t">📸 2018년 기출 캡처</div>
-    <div class="ni" onclick="go('gi-all')">전체 보기 (30장)</div>
-    <div class="ni" onclick="go('gi-r1')">1회차 (4월 14일)</div>
-    <div class="ni" onclick="go('gi-r2')">2회차 (6월 30일)</div>
-    <div class="ni" onclick="go('gi-r3')">3회차 (11월 10일)</div>
-    <div class="ni" onclick="go('gi-자탐')">🔴 자탐 파트 이미지</div>
-    <div class="ni" onclick="go('gi-전기')">⚡ 전기설비 파트 이미지</div>
-    <div class="ni" onclick="go('gi-경보')">🔔 경보·피난 파트 이미지</div>
+    <div class="ni" onclick="showTheory('c-축전지')">비상전원 / 축전지</div>
+    <div class="ni" onclick="showTheory('c-배선')">배선 / 결선</div>
+    <div class="ni" onclick="showTheory('c-가닥수')">가닥수 계산</div>
+    <div class="ni" onclick="showTheory('c-계산')">전기 계산 공식</div>
   </div>
 </nav>
 
 <div id="main">
-  <div id="top">
-    <h2 id="ptitle">학습 홈</h2>
-    <button class="btn btn-o" onclick="resetP()">진도 초기화</button>
+  <!-- 뷰어 툴바 -->
+  <div id="vbar">
+    <div id="yr-btns"></div>
+    <div class="vbar-sep"></div>
+    <div id="rd-btns"></div>
+    <div class="vbar-sep"></div>
+    <button class="nav-btn" id="btn-prev" onclick="movePage(-1)">&#9664;</button>
+    <input id="pg-input" type="number" min="1" onchange="jumpPage(this.value)">
+    <span id="page-info">/ 1</span>
+    <button class="nav-btn" id="btn-next" onclick="movePage(1)">&#9654;</button>
+    <div class="vbar-sep"></div>
+    <button class="zoom-btn on" onclick="setZoom(this,'fit')">맞춤</button>
+    <button class="zoom-btn" onclick="setZoom(this,'full')">전체폭</button>
+    <button class="zoom-btn" onclick="setZoom(this,'z150')">150%</button>
+    <button class="zoom-btn" onclick="setZoom(this,'z200')">200%</button>
+    <div class="vbar-sep"></div>
+    <span id="cat-lbl"></span>
+    <span style="font-size:10px;color:#aaa">← → 키 이동</span>
   </div>
-  <div id="con"></div>
+
+  <!-- 이미지 뷰어 -->
+  <div id="viewer">
+    <img id="vimg" class="fit" src="" alt="기출문제">
+  </div>
+
+  <!-- 이론 패널 -->
+  <div id="theory-panel"></div>
+
+  <!-- 홈 -->
+  <div id="home-panel">
+    <div class="card" style="background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;border:none;margin-bottom:16px;">
+      <h3 style="color:#fff;border:none;font-size:16px;">🔥 소방설비기사(전기) 실기 대비 v2.0</h3>
+      <p style="color:#fde;margin-top:6px;font-size:13px;">2018~2024년도 기출풀이 602장 · 이론 핵심정리 · 단원별 기출문제 연동</p>
+      <p style="font-size:11px;color:#fde;margin-top:6px;">자탐(40~60%) · 전기(20~40%) · 피난(10~20%) · 경보(10%)</p>
+    </div>
+    <div class="card">
+      <h3>📚 연도별 기출풀이 — 풀 사이즈 뷰어</h3>
+      <p style="font-size:12px;color:#666;margin-bottom:12px;">이미지를 전체 폭으로 확대 · ← → 키보드로 페이지 이동 · 줌 조절 가능</p>
+      <div class="hgrid" id="yr-home-grid"></div>
+    </div>
+    <div class="card">
+      <h3>📖 이론 단원 + 기출문제 탭</h3>
+      <div class="hgrid" id="theory-home-grid"></div>
+    </div>
+  </div>
 </div>
 
 <script>
-// ── progress ──────────────────────────────────────────────────────
-let P = JSON.parse(localStorage.getItem('fp2')|| '{}');
-function saveP(k){P[k]=1;localStorage.setItem('fp2',JSON.stringify(P));updP();}
-function updP(){
-  const all=['감지기','수신기','발신기','중계기','시각경보','비상경보','비상방송','누전','가스','유도등','비상조명','비상콘센트','무선통신','축전지','배선','가닥수','계산'];
-  const done=all.filter(k=>P['c-'+k]).length;
-  const pct=Math.round(done/all.length*100);
-  document.getElementById('opct').textContent=pct+'%';
-  document.getElementById('ofill').style.width=pct+'%';
-  document.querySelectorAll('.ni').forEach(el=>{
-    const m=el.getAttribute('onclick')?.match(/'(c-[^']+)'/);
-    if(m&&P[m[1]]) el.querySelector('.pct') ? null : el.insertAdjacentHTML('beforeend','<span class="pct">✓</span>');
-  });
-}
-function resetP(){if(confirm('진도를 초기화하시겠습니까?')){P={};localStorage.removeItem('fp2');location.reload();}}
-
-// ── navigation ─────────────────────────────────────────────────
-let cur='home';
-
-// ── tab helper ────────────────────────────────────────────────────
-function tab(el,id){
-  el.closest('.tabs').querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');
-  const wrap=el.closest('.tabs').parentElement||el.parentElement.parentElement;
-  wrap.querySelectorAll('.tc').forEach(t=>t.classList.remove('on'));
-  const tgt=document.getElementById(id);if(tgt)tgt.classList.add('on');
-}
-
-// ── HOME ──────────────────────────────────────────────────────────
-function renderHome(){
-  const mns=[
-    {k:'c-감지기',i:'🔴',t:'감지기',s:'자탐 파트'},
-    {k:'c-수신기',i:'🖥',t:'자탐수신기',s:'자탐 파트'},
-    {k:'c-발신기',i:'🔘',t:'발신기',s:'자탐 파트'},
-    {k:'c-중계기',i:'📶',t:'중계기',s:'자탐 파트'},
-    {k:'c-시각경보',i:'🚨',t:'시각경보장치',s:'자탐 파트'},
-    {k:'c-비상경보',i:'🔔',t:'비상경보설비',s:'경보 파트'},
-    {k:'c-비상방송',i:'📢',t:'비상방송설비',s:'경보 파트'},
-    {k:'c-누전',i:'⚡',t:'누전경보기',s:'경보 파트'},
-    {k:'c-가스',i:'💨',t:'가스누설경보기',s:'경보 파트'},
-    {k:'c-유도등',i:'🚦',t:'유도등',s:'피난 파트'},
-    {k:'c-비상조명',i:'💡',t:'비상조명등',s:'피난 파트'},
-    {k:'c-비상콘센트',i:'🔌',t:'비상콘센트',s:'소화활동'},
-    {k:'c-무선통신',i:'📡',t:'무선통신보조',s:'소화활동'},
-    {k:'c-축전지',i:'🔋',t:'비상전원/축전지',s:'전기 파트'},
-    {k:'c-배선',i:'🔩',t:'배선/결선',s:'전기 파트'},
-    {k:'c-가닥수',i:'📐',t:'가닥수 계산',s:'전기 파트'},
-    {k:'c-계산',i:'🧮',t:'전기 계산',s:'전기 파트'},
-  ];
-  const cards=mns.map(m=>`<div class="hc" onclick="go('${m.k}')"><div class="icon">${m.i}</div><div class="t">${m.t}</div><div class="s">${m.s}</div><div class="pg">${P[m.k]?'✓ 완료':'미학습'}</div></div>`).join('');
-  const qkImgs=[
-    {k:'gi-자탐',i:'🔴',t:'자탐 파트 이미지',n:IMGS.filter(x=>x.topics.includes('자탐')).length},
-    {k:'gi-전기',i:'⚡',t:'전기설비 이미지',n:IMGS.filter(x=>x.topics.includes('전기')).length},
-    {k:'gi-경보',i:'🔔',t:'경보·피난 이미지',n:IMGS.filter(x=>x.topics.includes('경보')||x.topics.includes('피난')).length},
-    {k:'gi-all',i:'📸',t:'전체 기출 캡처',n:IMGS.length},
-  ];
-  const imgCards=qkImgs.map(m=>`<div class="hc" onclick="go('${m.k}')"><div class="icon">${m.i}</div><div class="t">${m.t}</div><div class="s">2018년 기출 캡처</div><div class="pg">${m.n}장</div></div>`).join('');
-
-  return`<div class="card" style="background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;border:none;">
-    <h3 style="color:#fff;border-color:#e55;">🔥 소방설비기사(전기) 실기 대비 v1.2</h3>
-    <p style="color:#fde;">권영태 PDF 기반 · 2018 기출캡처 30장 + 핵심이론 통합</p>
-    <p style="margin-top:8px;font-size:11px;color:#fde;">자탐(40~60%) · 전기(20~40%) · 피난(10~20%) · 경보(10%)</p>
-  </div>
-  <div class="card">
-    <h3>📸 2018 기출 캡처 바로가기</h3>
-    <div class="hgrid">${imgCards}</div>
-  </div>
-  <div class="card"><h3>📚 이론 단원 선택</h3><div class="hgrid">${cards}</div></div>`;
-}
-
-// ── PAGE CONTENT ──────────────────────────────────────────────────
-const pages = {};
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-감지기']=`
-<div class="tabs">
-  <div class="tab on" onclick="tab(this,'g1')">① 형식별 특성</div>
-  <div class="tab" onclick="tab(this,'g2')">② 열감지기</div>
-  <div class="tab" onclick="tab(this,'g3')">③ 연기감지기</div>
-  <div class="tab" onclick="tab(this,'g4')">④ 설치기준</div>
-  <div class="tab" onclick="tab(this,'g5')">⑤ 설치제외·교차회로</div>
-</div>
-<div id="g1" class="tc on">
-<div class="card"><h3>감지기 형식별 특성 (화재신호 출력방식)</h3>
-<h4>1. 다신호식 감지기</h4><p>일정시간 간격을 두고 각각 다른 <b>2개 이상의 화재신호</b>를 발한다. <b>실드선</b> 사용 필수.</p>
-<h4>2. 아날로그식 감지기</h4><p>주위 온도 또는 연기량 변화에 따라 각각 다른 <b>전류치 또는 전압치</b> 등의 출력을 발한다. 실드선 사용 필수.</p>
-<h4>3. 축적형 감지기</h4><p>일정농도 이상의 연기가 <b>일정시간 연속</b>하는 것을 전기적으로 검출하여 작동.</p>
-<div class="warn">⚠️ 축적기능이 없는 감지기로 설치해야 하는 경우 3가지<br>① 급속한 연소 확대가 우려되는 장소 ② 교차회로방식에 사용되는 감지기 ③ 축적기능이 있는 수신기에 연결하여 사용하는 감지기</div>
-<div class="tip">💡 축적기능이 있는 감지기로 설치해야 하는 경우<br>① 실내면적 40㎡ 미만인 장소 ② 감지기 부착면과 실내바닥 사이가 2.3m 이하인 장소 ③ 지하층·무창층으로 환기가 잘 되지 않는 장소</div>
-<h4>실드선을 사용해야 하는 감지기 3가지</h4>
-<ul><li>아날로그식 감지기</li><li>다신호식 감지기</li><li>R형 수신기용 감지기</li></ul>
-<h4>작동표시장치를 설치하지 않아도 되는 감지기 4가지</h4>
-<ul><li>차동식 분포형 감지기</li><li>정온식 감지선형 감지기</li><li>방폭구조의 감지기</li><li>감지기 작동 내용이 수신기에 표시되는 감지기</li></ul>
-</div>
-</div>
-<div id="g2" class="tc">
-<div class="card"><h3>열감지기</h3>
-<h4>차동식 스포트형</h4><p>일국소의 <b>열효과</b>에 의하여 작동 / <b>온도 상승률</b>을 감지</p>
-<table><tr><th>리크구멍 상태</th><th>현상</th></tr>
-<tr><td>수축된 경우</td><td>비화재보 원인 / 작동시간 빨라짐</td></tr>
-<tr><td>확장된 경우</td><td>지연동작 원인 / 작동시간 늦어짐</td></tr></table>
-<h4>공기관식 차동식 분포형</h4>
-<ul>
-<li>수열부: 공기관 (두께 0.3mm↑, 바깥지름 1.9mm↑)</li>
-<li>검출부: 다이어프램, 리크구멍, 접점, 시험장치</li>
-<li>공기관 노출부분: 감지구역마다 <b>20m 이상</b></li>
-<li>하나의 검출부 공기관 길이: <b>100m 이하</b></li>
-<li>검출부 설치높이: <b>바닥 0.8m 이상 1.5m 이하</b></li>
-<li>공기관과 각 변 수평거리: <b>1.5m 이하</b></li>
-<li>공기관 상호간 거리: 6m(내화구조 9m) 이하</li>
-</ul>
-<h4>공기관식 시험 5종류 (화작유접리)</h4>
-<ul><li>화재작동시험(펌프시험)</li><li>작동계속시험</li><li>유통시험: 마노미터 수위 100mm→50mm 내려가는 시간</li><li>접점수고시험(다이어프램시험)</li><li>리크시험(리크저항시험)</li></ul>
-<div class="tip">💡 유통시험: 검출부 한쪽→마노미터, 다른쪽→테스트펌프 / 수위를 100mm까지 올린 후 송기구를 열어 50mm까지 내려가는 시간</div>
-<h4>열전대식 차동식 분포형</h4>
-<p>제어백효과(서로 다른 두 금속 접속 → 온도차 → 열기전력 발생)</p>
-<ul><li>열전대부: 바닥면적 18㎡(내화 22㎡)마다 1개 이상</li><li>하나의 검출부 접속 열전대: <b>20개 이하</b></li></ul>
-<h4>정온식 감지선형 감지기</h4>
-<ul>
-<li>단자부~마감고정금구 설치간격: <b>10cm</b></li>
-<li>굴곡반경: <b>5cm</b></li>
-<li>1종 수평거리: 내화 4.5m, 기타 3m</li>
-<li>보조선 또는 고정금구 사용</li>
-</ul>
-<table><tr><th>색상</th><th>공칭작동온도</th></tr>
-<tr><td>백색</td><td>80℃ 이하</td></tr>
-<tr><td>청색</td><td>80℃ 이상 120℃ 이하</td></tr>
-<tr><td>적색</td><td>120℃ 이상</td></tr></table>
-<h4>보상식 vs 열복합형</h4>
-<table><tr><th></th><th>보상식</th><th>열복합형</th></tr>
-<tr><td>동작방식</td><td>차동+정온 OR회로</td><td>차동+정온 AND회로</td></tr>
-<tr><td>신호출력 목적</td><td>실보 방지</td><td>비화재보 방지</td></tr></table>
-</div>
-</div>
-<div id="g3" class="tc">
-<div class="card"><h3>연기·불꽃감지기</h3>
-<h4>광전식 스포트형</h4><p>연기입자에 의해 <b>난반사(산란광식)</b>된 빛이 수광부로 들어옴을 감지</p>
-<h4>광전식 분리형</h4><p>연기에 의해 수광량이 <b>감소(감광식)</b>하는 것을 검출</p>
-<h4>광전식 분리형 설치기준</h4>
-<ul>
-<li>수광면은 햇빛을 직접 받지 않도록 설치</li>
-<li>송광부·수광부는 뒷벽으로부터 <b>1m 이내</b></li>
-<li>광축은 나란한 벽으로부터 <b>0.6m 이상</b> 이격</li>
-<li>광축 높이: 천장 높이의 <b>80% 이상</b></li>
-<li>광축 길이: <b>공칭감시거리(5m 이상 100m 이하, 5m 간격)</b> 범위 이내</li>
-</ul>
-<h4>광전식 공기흡입형</h4>
-<ul><li>말단 공기흡입구→감지기까지 <b>120초 이내</b> 연기 이송 가능</li><li>설치장소: 전산실, 반도체 공장</li></ul>
-<h4>연기감지기 설치 의무 장소 (계엘특복)</h4>
-<ul>
-<li>계단, 경사로 및 에스컬레이터 경사로</li>
-<li>엘리베이터 승강로</li>
-<li>특별피난계단 전실, 부속실</li>
-<li>복도(30m 미만 제외)</li>
-<li>천장 높이 15m 이상 20m 미만의 장소</li>
-<li>공동주택, 오피스텔, 숙박·노유자·수련시설</li>
-</ul>
-<h4>불꽃감지기 의무 설치</h4>
-<ul><li>화학공장, 격납고, 제련소: 광전식 분리형 + 불꽃감지기</li><li>전산실, 반도체 공장: 광전식 공기흡입형</li></ul>
-<h4>연기감지기 농도 단위</h4><p>%/m</p>
-</div>
-</div>
-<div id="g4" class="tc">
-<div class="card"><h3>감지기 설치 면적 기준 (스포트형)</h3>
-<table>
-<tr><th>감지기 종류</th><th>4m 미만</th><th>4~8m 미만</th></tr>
-<tr><td>차동식 1종 / 보상식 1종</td><td>90㎡</td><td>50㎡</td></tr>
-<tr><td>차동식 2종 / 보상식 2종</td><td>70㎡</td><td>40㎡</td></tr>
-<tr><td>정온식 특종 / 1종</td><td>60㎡</td><td>30㎡</td></tr>
-<tr><td>정온식 2종</td><td>20㎡</td><td>15㎡</td></tr>
-<tr><td>연기감지기 1종 / 2종</td><td>150㎡</td><td>75㎡</td></tr>
-</table>
-<div class="form">감지기 수량 = ⌈ 바닥면적 ÷ 1개 설치면적 ⌉ (소수점 올림)</div>
-<h4>연기감지기 (1종/2종) 수직/수평 설치기준</h4>
-<table><tr><th></th><th>1종 / 2종</th><th>3종</th></tr>
-<tr><td>계단·경사로 수직거리</td><td>15m마다 1개</td><td>10m마다 1개</td></tr>
-<tr><td>복도·통로 보행거리</td><td>30m마다 1개</td><td>20m마다 1개</td></tr>
-<tr><td>벽·보로부터 이격</td><td>0.6m 이상</td><td>0.6m 이상</td></tr>
-<tr><td>1개 당 바닥면적</td><td>150㎡</td><td>50㎡</td></tr></table>
-<div class="tip">💡 스포트형 감지기 부착 시 45도 이상 경사되지 않도록</div>
-</div>
-</div>
-<div id="g5" class="tc">
-<div class="card"><h3>감지기 설치제외 장소 / 교차회로</h3>
-<h4>설치제외 장소 (부천목프간고)</h4>
-<ul>
-<li>부식성 가스가 체류하는 장소</li>
-<li>천장 또는 반자의 높이가 <b>20m 이상</b>인 장소</li>
-<li>목욕실, 욕조·샤워시설이 있는 화장실</li>
-<li>프레스공장, 주조공장 등 화재 위험이 적은 장소</li>
-<li>간헐적으로 외부와 기류가 통하여 유효하게 감지 불가한 장소</li>
-<li>고온도·저온도로 감지기 기능이 정지되기 쉬운 장소</li>
-</ul>
-<h4>교차회로방식 적용 설비 6가지 (분할이준일할)</h4>
-<ul>
-<li>분말소화설비</li><li>할론소화설비</li><li>이산화탄소소화설비</li>
-<li>준비작동식 스프링클러설비</li><li>일제살수식 스프링클러설비</li>
-<li>할로겐화합물 및 불활성기체 소화설비</li>
-</ul>
-<h4>교차회로방식을 적용하지 않아도 되는 감지기 8가지 (불정분복광아다축)</h4>
-<ul>
-<li>불꽃감지기</li><li>정온식 감지선형</li><li>분포형</li><li>복합형</li>
-<li>광전식 분리형</li><li>아날로그방식</li><li>다신호방식</li><li>축적방식</li>
-</ul>
-<h4>배선방식</h4>
-<ul>
-<li><b>송배전식</b>: 감지기회로 도통시험을 용이하게 하기 위함 → 자동화재탐지설비, 제연설비 적용</li>
-<li><b>교차회로방식</b>: 설비(감지기)의 오동작 방지 → 2이상의 감지기회로가 동시에 감지될 때 설비 작동</li>
-</ul>
-<div class="tip">💡 종단저항 설치 이유: 감지기회로의 도통시험을 용이하게 하기 위함</div>
-</div>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-수신기']=`
-<div class="card"><h3>P형 수신기 기능시험</h3>
-<h4>P형 1급 수신기 시험 종류</h4>
-<table>
-<tr><th>시험명</th><th>내용</th><th>판정기준</th></tr>
-<tr><td>화재표시작동시험</td><td>회로마다 표시등·음향 확인</td><td>화재표시등·지구표시등 점등, 음향장치 작동</td></tr>
-<tr><td>회로저항시험</td><td>감지기회로 선로저항 확인</td><td>합성저항 <b>50Ω 이하</b></td></tr>
-<tr><td>공통선 시험</td><td>공통선 담당 경계구역 적정 여부</td><td>경계구역수 <b>7 이하</b></td></tr>
-<tr><td>예비전원 시험</td><td>자동절환 확인</td><td>전압·용량·절환상황·복구동작 정상</td></tr>
-<tr><td>지구음향장치 작동시험</td><td>음향장치 정상작동 여부</td><td>해당 지구음향 작동, 음량 정상</td></tr>
-<tr><td>회로 도통시험</td><td>감지기회로 단선 유무</td><td>정상신호 표시</td></tr>
-<tr><td>동시 작동시험</td><td>5회선 동시 작동</td><td>수신기 기능 이상 없음</td></tr>
-</table>
-<h4>도통시험 정상신호 나타나지 않는 원인 5가지</h4>
-<ul><li>감지기회로의 단선</li><li>감지기회로의 단락</li><li>감지기의 고장</li><li>종단저항의 접속 불량</li><li>종단저항의 누락</li></ul>
-<h4>스위치 주의등이 점멸(점등)되는 경우</h4>
-<ul><li>지구경종 정지 스위치 조작 시</li><li>주경종 정지 스위치 조작 시</li><li>자동복구 스위치 조작 시</li><li>도통시험 스위치 조작 시</li><li>동작시험 스위치 조작 시</li></ul>
-<div class="warn">⚠️ 복구스위치·예비전원 스위치 조작 시 → 소등</div>
-<h4>비화재보 원인 및 방지대책</h4>
-<ul>
-<li>수신기 릴레이의 오동작</li>
-<li>전자파에 의한 감지기 오동작</li>
-<li>먼지·분진 등에 의한 감지기 오동작</li>
-</ul>
-<div class="tip">💡 일과성 비화재보 방지: 비화재보 적응성 감지기 설치 / 축적기능 수신기 설치 / 절연저항 불량 선로 교체</div>
-<h4>R형 수신기</h4>
-<ul>
-<li>고유신호(어드레스)방식 → 회로수 제한 없음</li>
-<li>신호선: 쉴드선 사용 (전자파 방해 방지)</li>
-<li>수신기~중계기~감지기: 다중통신방식</li>
-</ul>
-<h4>복구스위치를 눌러도 복구되지 않는 경우 3가지</h4>
-<ul><li>복구스위치 배선 불량</li><li>릴레이 자체 불량</li><li>릴레이 배선 불량 (화재표시등 배선불량)</li></ul>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-발신기']=`
-<div class="card"><h3>P형 발신기</h3>
-<h4>구조·기능·종류</h4>
-<ul>
-<li><b>구조</b>: 누름버튼 스위치, 전화잭, 응답확인램프, 보호판</li>
-<li><b>기능</b>: 스위치 누름 → 응답램프 점등 → 수신기에 신호 발신 + 전화통화 가능</li>
-<li><b>사용 수신기</b>: P형 수신기, R형 수신기</li>
-</ul>
-<h4>발신기 단자 용도 (전공지응)</h4>
-<table>
-<tr><th>단자명</th><th>용도</th></tr>
-<tr><td>전화 단자</td><td>수신기와 발신기 간 상호 전화연락</td></tr>
-<tr><td>공통 단자</td><td>전화, 지구, 응답 단자를 공유</td></tr>
-<tr><td>지구 단자</td><td>화재신호를 수신기에 알림</td></tr>
-<tr><td>응답 단자</td><td>발신기 신호가 수신기에 전달되었는가 확인</td></tr>
-</table>
-<h4>설치 기준</h4>
-<ul>
-<li>설치 높이: 바닥에서 <b>0.8m 이상 1.5m 이하</b></li>
-<li>위치 표시등: 부착면으로부터 <b>15° 이상</b> 범위, 부착지점 <b>10m 이내</b> 식별, 적색</li>
-<li>보행거리 <b>25m 이하</b>마다 1개</li>
-</ul>
-<h4>종단저항 연결 기기·단자</h4>
-<p>발신기 / 지구선, 지구공통선 단자</p>
-<h4>발신기 세트 구성</h4>
-<ul>
-<li>단독형: P형 발신기 + 경종 + 표시등 (+ 종단저항)</li>
-<li>옥내소화전 내장형: 기동확인표시등 포함</li>
-</ul>
-<h4>반복시험</h4>
-<p>정격전압·정격전류에서 <b>5000회</b> 작동반복시험 → 구조기능 이상 없을 것</p>
-<div class="warn">⚠️ 발신기 누른 후 수신기에서 복구 불가 이유: 발신기의 스위치를 원상태로 되돌려 놓지 않았기 때문</div>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-중계기']=`
-<div class="card"><h3>중계기</h3>
-<h4>설치기준 3가지</h4>
-<ul>
-<li>수신기에서 직접 감지기회로의 도통시험을 행하지 않을 때: <b>수신기와 감지기 사이</b>에 설치</li>
-<li>수신기에 의해 감지되지 않는 배선을 통해 전력을 공급받는 것: 전원입력측 배선에 <b>과전류차단기</b> 설치, 정전 시 즉시 수신기 표시, 상용전원 및 예비전원 시험 가능</li>
-<li>조작·점검 편리하고 화재·침수 피해 우려 없는 장소</li>
-</ul>
-<h4>수신 개시 → 발신 개시까지 소요시간</h4>
-<p><b>5초 이내</b></p>
-<h4>집합형 vs 분산형</h4>
-<table>
-<tr><th>구분</th><th>집합형</th><th>분산형</th></tr>
-<tr><td>입력전원</td><td>AC 220V</td><td>DC 24V</td></tr>
-<tr><td>전원공급</td><td>외부전원(수신기 외)</td><td>수신기 이용</td></tr>
-<tr><td>회로수용</td><td>대용량(30~40회로)</td><td>소용량(5회로 미만)</td></tr>
-<tr><td>전원사고 시</td><td>내장 예비전원으로 정상작동</td><td>해당 계통 전체 마비</td></tr>
-</table>
-<h4>분산형 중계기 설치장소 6가지 (분할소댐스셔)</h4>
-<ul>
-<li>할론패키지 또는 판넬 내부</li>
-<li>소화전함 및 단독 발신기세트 내부</li>
-<li>방화문 중계기 근접, 댐퍼 수동조작함 내부</li>
-<li>댐퍼 수동조작함 내부 및 조작스위치함 내부</li>
-<li>스프링클러 접속박스 내 및 SVP 판넬 내부</li>
-<li>셔터, 배연창, 제연스크린, 연동제어기 내부</li>
-</ul>
-<h4>자동화재속보설비 속보기 성능인증</h4>
-<ul>
-<li>절연된 충전부~외함 간: DC 500V → <b>5MΩ 이상</b></li>
-<li>교류입력측~외함 간: <b>20MΩ 이상</b></li>
-<li>작동신호 수신 후 소방관서 통보: <b>20초 이내</b>, <b>3회 이상</b> 속보</li>
-</ul>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-시각경보']=`
-<div class="card"><h3>시각경보장치 (청각장애인용)</h3>
-<h4>설치기준 4가지</h4>
-<ul>
-<li>청각장애인용 객실 및 공용으로 사용하는 <b>거실</b>에 설치</li>
-<li>공연장·집회장: 시선이 집중되는 <b>무대부 부분</b> 등에 설치</li>
-<li>설치 높이: 바닥에서 <b>2m 이상 2.5m 이하</b> (천장 높이 2m 이하 시: 천장에서 0.15m 이내)</li>
-<li>광원: 전용 <b>축전지설비 또는 전기저장장치</b>에 의해 점등</li>
-</ul>
-<h4>설치 대상</h4>
-<ul>
-<li>지하가 중 지하상가</li>
-<li>교육연구시설 중 도서관, 방송통신시설 중 방송국</li>
-<li>의료시설, 노유자시설, 업무시설, 숙박시설, 발전시설, 장례시설</li>
-<li>근린생활시설, 문화·집회시설, 종교시설, 판매시설, 운수·운동·위락시설, 물류터미널</li>
-</ul>
-<h4>절연저항 기준</h4>
-<p>1경계구역마다 DC <b>250V</b> 절연저항측정기로 측정 → <b>0.1MΩ 이상</b></p>
-<h4>종단저항 설치기준 3가지</h4>
-<ul>
-<li>점검·관리가 쉬운 장소에 설치</li>
-<li>전용함 설치 시 높이: 바닥에서 <b>1.5m 이내</b></li>
-<li>감지기회로 끝부분에 설치, 종단감지기에 설치 시 별도 표시</li>
-</ul>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-비상경보']=`
-<div class="card"><h3>비상경보설비 및 비상방송설비</h3>
-<h4>우선경보방식 적용 대상</h4>
-<p><b>5층 이상</b>으로서 연면적이 <b>3,000㎡를 초과</b>하는 특정소방대상물</p>
-<h4>경보층 구분표</h4>
-<table>
-<tr><th>발화층</th><th>30층 미만</th><th>30층 이상</th></tr>
-<tr><td>2층 이상</td><td>발화층 + 직상층</td><td>발화층 + 직상 4개층</td></tr>
-<tr><td>1층</td><td>발화층 + 직상층 + 지하층</td><td>발화층 + 직상 4개층 + 지하층</td></tr>
-<tr><td>지하층</td><td>발화층 + 직상층 + 기타 지하층</td><td>발화층 + 직상층 + 기타 지하층</td></tr>
-</table>
-<h4>비상벨 설치기준</h4>
-<ul>
-<li>음량: 1m에서 <b>90dB 이상</b></li>
-<li>수평거리 <b>25m 이하</b>마다 1개</li>
-<li>높이: 바닥에서 <b>0.8~1.5m</b></li>
-</ul>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-비상방송']=`
-<div class="card"><h3>비상방송설비</h3>
-<h4>설치 대상</h4>
-<ul><li>연면적 <b>3,500㎡ 이상</b></li><li>지하층 제외 층수가 <b>11층 이상</b></li><li>지하층 층수가 <b>3층 이상</b></li></ul>
-<h4>설치기준 10가지</h4>
-<ul>
-<li>확성기 음성입력: <b>3W 이상</b> (실내 1W 이상)</li>
-<li>수평거리 <b>25m 이하</b>마다 확성기 1개 이상</li>
-<li>조작 스위치: 바닥에서 <b>0.8m 이상 1.5m 이하</b></li>
-<li>음량조정기 배선: <b>3선식</b></li>
-<li>화재신호 수신 후 방송 개시: <b>10초 이하</b></li>
-<li>증폭기·조작부: 수위실 등 상시 근무 장소에 설치</li>
-<li>조작부: 기동장치 연동, 해당 층·구역 표시 가능</li>
-<li>유도장애 방지</li>
-<li>다른 방송설비 공용 시: 화재 시 비상경보 외 방송 차단 구조</li>
-<li>2이상 조작부 시: 상호 동시통화 가능 + 전 구역 방송 가능</li>
-</ul>
-<h4>임피던스 매칭 순서 3단계</h4>
-<ul><li>스피커의 임피던스 및 음성입력 선정</li><li>AMP의 출력 선정</li><li>AMP의 출력모드 선정</li></ul>
-<h4>음향장치 구조·성능 기준</h4>
-<ul>
-<li>정격전압의 <b>80%</b> 전압에서 음향 발신 가능</li>
-<li>감지기·발신기 작동과 연동 작동</li>
-<li>음량: 1m에서 <b>90dB 이상</b></li>
-</ul>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-누전']=`
-<div class="card"><h3>누전경보기 (ELD)</h3>
-<h4>용어 정의</h4>
-<ul>
-<li><b>누전경보기</b>: 벽·바닥·천장에 불연재료가 아닌 재료로 만든 건물의 누설전류 탐지 → 경보, 변류기+수신부 구성</li>
-<li><b>수신부</b>: 변류기로부터 검출된 신호 수신 → 관계인에게 경보</li>
-<li><b>변류기</b>: 경계전로의 누설전류 자동 검출 → 수신부에 송신</li>
-</ul>
-<h4>작동 순서</h4>
-<div class="form">누전 발생 → 누설전류에 의한 자속 발생 → 변류기에 유도전압 유기 → 수신기 전압 증폭 → 릴레이 작동 → 경보·표시·회로차단</div>
-<h4>설치기준</h4>
-<table>
-<tr><th>항목</th><th>기준</th></tr>
-<tr><td>설치 대상</td><td>계약전류 <b>100A 초과</b> 특정소방대상물</td></tr>
-<tr><td>1급 설치 기준</td><td>경계전로 정격전류 <b>60A 초과</b></td></tr>
-<tr><td>1급 또는 2급</td><td>경계전로 정격전류 <b>60A 이하</b></td></tr>
-<tr><td>공칭작동전류치</td><td><b>200mA 이하</b></td></tr>
-<tr><td>감도조정장치 최대치</td><td><b>1A</b></td></tr>
-<tr><td>음향장치 음량</td><td>1m에서 <b>70dB 이상</b></td></tr>
-<tr><td>정격전압 80%에서 음향 발신</td><td>가능해야 함</td></tr>
-<tr><td>과전류차단기 용량</td><td><b>15A 이하</b></td></tr>
-<tr><td>배선용차단기 용량</td><td><b>20A 이하</b></td></tr>
-<tr><td>변류기 절연저항</td><td>DC 500V → <b>5MΩ 이상</b></td></tr>
-</table>
-<h4>수신기 설치제외 장소 5가지</h4>
-<ul>
-<li>습도가 높은 장소</li><li>온도 변화가 급격한 장소</li>
-<li>화학류를 제조·저장·취급하는 장소</li>
-<li>대전류회로·고주파 발생회로의 영향을 받을 우려가 있는 장소</li>
-<li>가연성 증기·먼지·가스 또는 부식성 증기·가스가 다량 체류하는 장소</li>
-</ul>
-<h4>ZNR 설치목적</h4>
-<p>낙뢰 발생 시 이상전압(충격파)으로부터 <b>수신기를 보호</b>하기 위함</p>
-<div class="tip">💡 변류기 점검 시 2차측은 반드시 <b>단락</b>시킨다</div>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-가스']=`
-<div class="card"><h3>가스누설경보기</h3>
-<h4>탐지부</h4>
-<p>가스누설을 검지하여 중계기·수신부에 신호를 보내는 부분</p>
-<h4>탐지부 설치제외 장소 3가지</h4>
-<ul><li>수분·증기와 접촉할 우려가 있는 곳</li><li>주위온도가 40℃ 이상 될 우려가 있는 곳</li><li>가스가 체류하기 어려운 곳</li></ul>
-<h4>구조·용도에 따른 구분</h4>
-<ul><li>구조: 단독형, 분리형</li><li>용도: 가정용, 영업용, 공업용</li></ul>
-<h4>수신개시 → 가스누설표시까지 소요시간</h4>
-<p><b>60초 이내</b> (지구등 점등: 황색)</p>
-<h4>주음향장치 음량</h4>
-<ul><li>공업용: <b>90dB 이상</b></li><li>고장표시장치용: <b>60dB 이상</b></li></ul>
-<h4>예비전원 용량</h4>
-<ul>
-<li>1회선용: 감시상태 <b>20분 계속</b> 후, 유효하게 작동 <b>10분간 경보</b></li>
-<li>2회선 이상: 감시상태 <b>10분 계속</b> 후, <b>2회선</b> 유효 작동 <b>10분간 경보</b></li>
-</ul>
-<h4>절연저항 (DC 500V)</h4>
-<ul><li>충전부~외함 간: <b>5MΩ 이상</b></li><li>교류입력측~외함 간: <b>20MΩ 이상</b></li><li>선로 간: <b>20MΩ 이상</b></li></ul>
-<h4>예비전원 종류</h4>
-<p>알칼리계 2차 축전지, 리튬계 2차 축전지 또는 무보수 밀폐형 연축전지</p>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-유도등']=`
-<div class="card"><h3>유도등 및 유도표지</h3>
-<h4>종류</h4>
-<table>
-<tr><th>종류</th><th>형상·색상</th><th>설치 위치</th></tr>
-<tr><td>피난구유도등</td><td>녹색바탕·백색그림(피난 형상)</td><td>출입구 상단, 1.5m 이상 높이</td></tr>
-<tr><td>복도통로유도등</td><td>백색바탕·형광녹색 화살표</td><td>복도, 1m 이하 높이</td></tr>
-<tr><td>계단통로유도등</td><td>백색바탕·형광녹색 화살표</td><td>계단 각 참</td></tr>
-<tr><td>객석유도등</td><td>원형 안 초록 화살표</td><td>객석 통로 바닥 또는 벽</td></tr>
-</table>
-<h4>통로유도등 설치기준</h4>
-<ul>
-<li>복도: 보행거리 <b>20m 이하</b>마다</li>
-<li>거실: 보행거리 <b>25m 이하</b>마다 (바닥면 조도 1lx 이상)</li>
-<li>계단: 각 층 계단참</li>
-</ul>
-<h4>비상전원 (유효 점등 시간)</h4>
-<ul>
-<li>일반: <b>20분 이상</b></li>
-<li>11층 이상(지하층 제외), 지하층·무창층 도매시장·소매시장·터미널·지하역사·지하상가: <b>60분 이상</b></li>
-</ul>
-<h4>유도등 배선방식</h4>
-<table>
-<tr><th></th><th>2선식</th><th>3선식</th></tr>
-<tr><td>평상시</td><td>항상 점등</td><td>소등</td></tr>
-<tr><td>화재시</td><td>항상 점등</td><td>점등</td></tr>
-</table>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-비상조명']=`
-<div class="card"><h3>비상조명등</h3>
-<h4>설치기준</h4>
-<ul>
-<li>각 거실과 지상에 이르는 <b>복도·계단 및 기타 통로</b>에 설치</li>
-<li>조도: 바닥 각 부분 <b>1lx 이상</b></li>
-<li>비상전원: <b>20분 이상</b> 유효 작동 (60분 예외: 11층↑·지하도매시장·지하역사·지하상가)</li>
-<li>예비전원 미내장 시: 자가발전설비·축전지설비·전기저장장치 설치</li>
-<li>예비전원 내장 시: 점검스위치 설치 + 축전지·예비전원충전장치 내장</li>
-</ul>
-<h4>설치제외 장소</h4>
-<ul>
-<li>보행거리 15m 이내에 출입구가 있는 거실 부분</li>
-<li>의원·경기장·공동주택·의료시설·학교의 거실</li>
-</ul>
-<h4>휴대용 비상조명등</h4>
-<ul>
-<li>숙박시설: 객실마다 1개 이상</li>
-<li>대규모점포·영화상영관: 보행거리 <b>50m 이내마다 3개 이상</b></li>
-<li>지하상가·지하역사: 보행거리 <b>25m 이내마다 3개 이상</b></li>
-<li>설치 높이: 바닥에서 <b>0.8m 이상 1.5m 이하</b></li>
-<li>사용 시 자동 점등 구조</li>
-<li>외함: 난연성능</li>
-<li>배터리 용량: <b>20분 이상</b> 유효 사용</li>
-</ul>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-비상콘센트']=`
-<div class="card"><h3>비상콘센트설비</h3>
-<h4>설치 목적</h4>
-<p>소방대의 <b>조명용 또는 소방활동상 필요한 장비의 전원설비</b>로 사용하기 위함</p>
-<h4>설치 대상</h4>
-<ul>
-<li>층수가 <b>11층 이상</b>인 특정소방대상물 (지하층 제외)</li>
-<li>지하 3층 이상이고 지하층 바닥면적 합계 <b>1,000㎡ 이상</b>인 것의 지하층 모든 층</li>
-<li>지하가 중 터널로서 길이 <b>500m 이상</b>인 것</li>
-</ul>
-<h4>전원회로 설치기준</h4>
-<table>
-<tr><th>항목</th><th>기준</th></tr>
-<tr><td>전원</td><td><b>단상 교류 220V</b>, 공급용량 <b>1.5kVA 이상</b></td></tr>
-<tr><td>각 층 회로수</td><td><b>2 이상</b> (비상콘센트 1개인 경우 1회로 가능)</td></tr>
-<tr><td>전원 분기 위치</td><td><b>주배전반</b>에서 전용회로</td></tr>
-<tr><td>하나의 전용회로 콘센트 수</td><td><b>10개 이하</b> (전선 용량: 3개 이상 시 3개 공급용량 합산)</td></tr>
-<tr><td>플러그 접속기</td><td><b>접지형 2극</b></td></tr>
-<tr><td>절연저항</td><td>DC 500V → <b>20MΩ 이상</b></td></tr>
-<tr><td>접지공사</td><td><b>제3종 접지공사 (100Ω 이하)</b></td></tr>
-</table>
-<h4>콘센트 설치 위치</h4>
-<ul>
-<li>높이: 바닥에서 <b>0.8m 이상 1.5m 이하</b></li>
-<li>아파트·바닥면적 1,000㎡ 미만: 계단 출입구에서 5m 이내</li>
-<li>지하상가·지하층 바닥면적 3,000㎡ 이상: 수평거리 25m 이하마다</li>
-<li>그 외: 수평거리 50m 이하마다</li>
-</ul>
-<h4>보호함 설치기준 3가지</h4>
-<ul>
-<li>쉽게 개폐할 수 있는 <b>문</b> 설치</li>
-<li>보호함 <b>표면</b>에 '비상콘센트' 표지 표시</li>
-<li>상부에 <b>적색 표시등</b> 설치</li>
-</ul>
-<h4>비상전원(자가발전/수전설비) 설치대상</h4>
-<ul>
-<li>7층 이상(지하층 제외) 연면적 <b>2,000㎡ 이상</b></li>
-<li>지하층 바닥면적 합계 <b>3,000㎡ 이상</b></li>
-</ul>
-<h4>비상전원 설치 제외 경우 2가지</h4>
-<ul>
-<li>둘 이상의 변전소에서 전력을 동시에 공급받는 경우</li>
-<li>하나의 변전소 전력 중단 시 자동으로 타 변전소에서 공급 가능한 상용전원 설치</li>
-</ul>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-무선통신']=`
-<div class="card"><h3>무선통신보조설비</h3>
-<h4>종류 (방식) 3가지</h4>
-<ul>
-<li><b>누설동축케이블 방식</b>: 동축케이블 + 누설동축케이블 조합</li>
-<li><b>안테나 방식</b>: 동축케이블 + 안테나 조합</li>
-<li><b>혼합 방식</b>: 누설동축케이블 + 안테나 혼합</li>
-</ul>
-<h4>설치기준</h4>
-<ul>
-<li>소방전용 주파수대에서 전파 전송·복사에 적합한 것</li>
-<li>LCX 케이블: <b>4m 이내</b>마다 금속제·자기제 지지금구로 고정 (불연재료 반자 안 제외)</li>
-<li>LCX: <b>불연 또는 난연성</b>, 습기에 전기적 특성 변질 없는 것</li>
-<li>LCX 끝부분: <b>무반사 종단저항</b> 견고하게 설치 (전자파 반사 방해 방지)</li>
-<li>LCX·안테나 임피던스: <b>50Ω</b></li>
-<li>고압전로로부터 <b>1.5m 이상</b> 이격 (정전기 차폐장치 설치 시 제외)</li>
-</ul>
-<h4>무선기기 접속단자 설치기준 3가지 (수단지단지)</h4>
-<ul>
-<li>수위실 등 상시 사람이 근무하는 장소에 설치</li>
-<li>단자 높이: <b>0.8m 이상 1.5m 이하</b></li>
-<li>지상 접속단자: <b>보행거리 300m 이내마다</b> + 다른 접속단자에서 <b>5m 이상</b> 거리</li>
-</ul>
-<h4>분배기·분파기·혼합기</h4>
-<ul>
-<li><b>분배기</b>: 신호 분기 장소에 설치, 임피던스 매칭 + 신호 균등 분배</li>
-<li><b>분파기</b>: 서로 다른 주파수의 합성 신호를 분리</li>
-<li><b>혼합기</b>: 2개 이상 입력신호를 원하는 비율로 조합</li>
-</ul>
-<h4>분배기·혼합기·분파기 설치기준 3가지 (지임점)</h4>
-<ul>
-<li>먼지·습기·부식 등에 이상 없을 것</li>
-<li>임피던스 <b>50Ω</b></li>
-<li>점검 편리하고 화재 피해 우려 없는 장소</li>
-</ul>
-<h4>증폭기 설치기준</h4>
-<ul>
-<li>전원: 축전지·전기저장장치 또는 교류전압 옥내간선, 전용 배선</li>
-<li>증폭기 전면: 주회로 전원 표시등 + 전압계 설치</li>
-<li>비상전원 용량: <b>30분 이상</b> 작동</li>
-</ul>
-<div class="tip">💡 LCX-FR-SS-20D-14-6 코드명: LCX(누설동축케이블), FR(난연성), SS(자기지지), 20(절연체외경), D(50Ω), 14(사용주파수), 6(결합손실)</div>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-축전지']=`
-<div class="card"><h3>비상전원 및 축전지</h3>
-<h4>비상전원 종류 4가지</h4>
-<ul><li>축전지 (연축전지, 리튬이온전지)</li><li>자가발전설비</li><li>비상전원수전설비</li><li>전기저장장치</li></ul>
-<h4>충전방식</h4>
-<table>
-<tr><th>방식</th><th>설명</th></tr>
-<tr><td>부동충전방식</td><td>자기방전 보충 + 상용부하 전력공급은 충전기 담당. 축전지와 부하를 정류기에 병렬 접속하여 충전·방전 동시 수행</td></tr>
-<tr><td>세류(트리클)충전</td><td>자기방전만 항상 충전하는 부동충전방식</td></tr>
-<tr><td>균등충전방식</td><td>1~3개월마다 1회, 10~12시간 충전. 연축전지 셀당 균등충전전압: 2.4V~2.5V</td></tr>
-<tr><td>회복충전방식</td><td>과방전 또는 방치상태에서 기능회복을 위해 실시</td></tr>
-</table>
-<h4>연축전지 vs 알칼리축전지</h4>
-<table>
-<tr><th>구분</th><th>연축전지</th><th>알칼리축전지</th></tr>
-<tr><td>공칭전압</td><td>2.0V/셀</td><td>1.2V/셀</td></tr>
-<tr><td>공칭용량</td><td>10Ah</td><td>5Ah</td></tr>
-<tr><td>수명</td><td>짧음</td><td>김</td></tr>
-<tr><td>가격</td><td>저렴</td><td>고가</td></tr>
-<tr><td>과충방전</td><td>약함</td><td>강함</td></tr>
-</table>
-<h4>연축전지 CS형 vs HS형</h4>
-<ul>
-<li>CS형: 부하에 따라 <b>일정한 방전전류</b></li>
-<li>HS형: 부하에 따라 <b>방전전류가 급격히 변화</b></li>
-</ul>
-<h4>용량저하율(보수율)</h4>
-<p>부하를 만족하는 용량 감정을 위한 계수: 보통 <b>0.8</b></p>
-<h4>납축전지 충전 시 발생 가스</h4>
-<p><b>수소가스</b></p>
-<h4>비상전원수전설비 (특고압·고압 수전 시 종류)</h4>
-<ul><li>방화구획형</li><li>옥외개방형</li><li>큐비클형</li></ul>
-<h4>자동절환개폐기</h4>
-<p>상용전원 정전 시 비상전원이 자동 기동 → 비상용 부하에 전력 공급 시 사용</p>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-배선']=`
-<div class="card"><h3>배선 / 결선</h3>
-<h4>내화배선 vs 내열배선</h4>
-<table>
-<tr><th>구분</th><th>내화배선</th><th>내열배선</th></tr>
-<tr><td>전선관</td><td>금속관, 2종 금속제 가요전선관, 합성수지관</td><td>금속관, 금속제 가요전선관, 금속덕트, 케이블</td></tr>
-<tr><td>매설 깊이</td><td>내화구조 벽·바닥에서 <b>25mm 이상</b></td><td>-</td></tr>
-</table>
-<h4>금속관 공사 부속품</h4>
-<table>
-<tr><th>부품명</th><th>용도</th></tr>
-<tr><td>유니버설 엘보</td><td>노출배관, 관을 직각으로 굽히는 곳</td></tr>
-<tr><td>노멀벤드</td><td>매입배관, 직각 굽힘</td></tr>
-<tr><td>커플링</td><td>금속관 상호간 접속</td></tr>
-<tr><td>유니언 커플링</td><td>금속관 고정 시 돌리지 못할 때</td></tr>
-<tr><td>링 리듀서</td><td>아우트렛박스에 로크너트만으로 고정 어려울 때 보조</td></tr>
-<tr><td>부싱</td><td>전선 절연피복 보호 (전선관과 박스 접속 시)</td></tr>
-<tr><td>스트레이트박스 컨넥터</td><td>가요전선관 ↔ 박스 연결</td></tr>
-<tr><td>컴비네이션 커플링</td><td>가요전선관 ↔ 스틸전선관 연결</td></tr>
-<tr><td>스플리트 커플링</td><td>가요전선관 ↔ 가요전선관 연결</td></tr>
-</table>
-<h4>후강전선관</h4>
-<ul><li>1본의 길이: <b>3.66m</b></li><li>호칭 표시: <b>안지름</b>의 근삿값을 짝수로 표시</li></ul>
-<h4>배선전용실 소방용 케이블 혼용 기준</h4>
-<ul>
-<li>소방용~비소방용 케이블 피복 간 이격거리: <b>15cm 이상</b></li>
-<li>불연성 격벽 높이: <b>가장 굵은 케이블 지름의 1.5배 이상</b></li>
-</ul>
-<h4>금속관 공사 조영재 지지 간격</h4>
-<p><b>2m 이하</b></p>
-<h4>합성수지관 배관 지지점 간격</h4>
-<p><b>1.5m 이하</b></p>
-<h4>박스 종류 구분</h4>
-<ul>
-<li>4각박스(4방출 이상): 발신기세트, 수신기, 부수신기, 제어반, 슈퍼비죠리판넬, 수동조작반</li>
-<li>8각박스: 감지기, 유도등, 사이렌, 방출표시등, 습식밸브, 준비작동식밸브</li>
-</ul>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-가닥수']=`
-<div class="card"><h3>가닥수 계산</h3>
-<h4>P형 발신기 세트 가닥수 (수신기 ↔ 발신기)</h4>
-<div class="form">전화선:   2가닥
-지구선:   2가닥 (화재신호)
-응답선:   2가닥 (응답확인)
-경종선:   2가닥 (지구음향)
-표시등선: 2가닥
-──────────────
-합계:    최소 8가닥 (공통선 활용 시 감소)
-</div>
-<h4>옥내소화전 기동·표시 포함 시</h4>
-<div class="form">기동선(펌프기동):   2가닥
-기동확인표시등:     2가닥 추가
-</div>
-<h4>감지기 회로 가닥수 (송배전식)</h4>
-<div class="form">수신기→감지기회로(N개 경계구역):
-공통(-)선: 1가닥
-신호(+)선: N가닥
-─────────────────
-합계: N+1가닥
-(단, 공통선 1선이 담당하는 경계구역: 7 이하)
-</div>
-<h4>비상콘센트 전선 가닥수</h4>
-<div class="form">단상 3선식: 3가닥 (L, N, E)
-</div>
-<h4>유도등 배선</h4>
-<div class="form">2선식: 2가닥 (항상 점등)
-3선식: 3가닥 (평상시 소등, 화재 시 점등)
-</div>
-<div class="tip">💡 실기시험 가닥수 계산 핵심<br>① 루프(loop)배선인지 말단배선인지 확인<br>② 공통선 공유 범위 확인 (P형: 7경계구역 이하)<br>③ 설비별 가닥수 더하기</div>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-pages['c-계산']=`
-<div class="card"><h3>전기 계산 공식</h3>
-<h4>기본 공식</h4>
-<div class="form">V = IR       전압 = 전류 × 저항
-P = VI = I²R = V²/R   전력
-Q = It       전하량 = 전류 × 시간
-</div>
-<h4>전압강하</h4>
-<div class="form">단상 2선식:  e = 2LI·ρ/A = 35.6LI/(1000A)
-3상 3선식:   e = √3·LI·ρ/A = 30.8LI/(1000A)
-
-L: 편도 거리(m), A: 단면적(mm²), I: 전류(A)
-ρ: 동의 고유저항 = 1/58 (Ω·mm²/m)
-</div>
-<h4>허용전류 기준 (HIV 전선)</h4>
-<table>
-<tr><th>단면적(mm²)</th><th>허용전류(A)</th></tr>
-<tr><td>1.5</td><td>19</td></tr>
-<tr><td>2.5</td><td>26</td></tr>
-<tr><td>4</td><td>34</td></tr>
-<tr><td>6</td><td>43</td></tr>
-<tr><td>10</td><td>60</td></tr>
-<tr><td>16</td><td>80</td></tr>
-</table>
-<h4>비상콘센트 전선 굵기 계산 예시</h4>
-<div class="form">I = P/(V·cosθ) = (1.5×1000×3)/(220×1) ≈ 20.45A
-허용전류 = 20.45 × 1.25 = 25.56A
-→ 2.5mm² 전선의 허용전류(26A) 이상 선택
-</div>
-<h4>축전지 용량</h4>
-<div class="form">C = I × T / L
-C: 용량(Ah), I: 부하전류(A), T: 시간(h), L: 보수율(0.8)
-</div>
-<h4>감지기 수량 계산</h4>
-<div class="form">감지기 수 = ⌈ 바닥면적(㎡) ÷ 1개 설치면적(㎡) ⌉
-(소수점은 무조건 올림)
-</div>
-<h4>경계구역 수</h4>
-<div class="form">경계구역 수 = ⌈ 바닥면적 ÷ 600 ⌉
-(단, 1변 길이 50m 초과 시 별도 분할)
-</div>
-</div>`;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// QUIZ DATA
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const QD={
-'q-자탐':[
-  {t:'sa',q:'축적기능이 없는 감지기로 설치해야 하는 경우 3가지를 쓰시오.',a:'① 급속한 연소 확대가 우려되는 장소에 사용되는 감지기\n② 교차회로방식에 사용되는 감지기\n③ 축적기능이 있는 수신기에 연결하여 사용하는 감지기'},
-  {t:'mc',q:'공기관식 차동식 분포형 감지기의 검출부 설치 높이 기준은?',o:['바닥 0.5m 이상 1.0m 이하','바닥 0.8m 이상 1.5m 이하','바닥 1.0m 이상 1.8m 이하','바닥 1.2m 이상 2.0m 이하'],a:1,e:'공기관식 분포형 감지기 검출부: 바닥 0.8m 이상 1.5m 이하에 설치'},
-  {t:'mc',q:'광전식 분리형 감지기의 광축 높이 기준은?',o:['천장 높이의 60% 이상','천장 높이의 70% 이상','천장 높이의 80% 이상','천장 높이의 90% 이상'],a:2,e:'광전식 분리형: 광축 높이 = 천장 높이의 80% 이상'},
-  {t:'sa',q:'P형 수신기의 공통선 시험에서 판정기준을 쓰시오.',a:'공통선이 담당하고 있는 경계구역수가 7 이하일 것\n(시험방법: 공통선 1선 제거 → 회로도통시험 스위치 조작 → 단선 지시한 경계구역의 회선수 확인)'},
-  {t:'mc',q:'P형 수신기의 회로저항시험 판정기준은?',o:['감지기회로 합성저항 30Ω 이하','감지기회로 합성저항 50Ω 이하','감지기회로 합성저항 100Ω 이하','감지기회로 합성저항 200Ω 이하'],a:1,e:'P형 수신기 회로저항시험: 하나의 감지기회로 합성저항 50Ω 이하'},
-  {t:'sa',q:'비화재보(일과성)의 방지대책 4가지를 쓰시오.',a:'① 비화재보에 적응성 있는 감지기 설치\n② 환경 적응성 있는 감지기 사용\n③ 축적기능이 있는 수신기 설치\n④ 절연저항이 불량한 선로 교체'},
-  {t:'mc',q:'R형 수신기 신호선으로 쉴드선을 사용하는 이유는?',o:['배선 비용 절감','전자파의 방해 방지','고주파 신호 전송','배선 가닥수 감소'],a:1,e:'R형 수신기는 전자파 방해 방지를 위해 쉴드선 사용'},
-  {t:'sa',q:'중계기에서 수신 개시로부터 발신 개시까지의 시간 기준은?',a:'5초 이내'},
-  {t:'mc',q:'열전대식 차동식 분포형 감지기의 바닥면적 기준(내화구조)은?',o:['18㎡마다 1개 이상','22㎡마다 1개 이상','25㎡마다 1개 이상','30㎡마다 1개 이상'],a:1,e:'내화구조: 22㎡마다 1개 이상 / 기타구조: 18㎡마다 1개 이상'},
-  {t:'sa',q:'발신기 위치 표시등의 식별 범위와 색깔을 쓰시오.',a:'부착면으로부터 15° 이상의 범위 안에서 부착지점으로부터 10m 이내 / 색깔: 적색'},
-],
-'q-경보':[
-  {t:'mc',q:'비상방송설비 설치 대상이 아닌 것은?',o:['연면적 3,500㎡ 이상','지하층 제외 층수 11층 이상','지하층 층수 3층 이상','연면적 1,000㎡ 이상'],a:3,e:'비상방송 설치 대상: ①연면적 3,500㎡↑ ②지하층 제외 11층↑ ③지하층 3층↑'},
-  {t:'sa',q:'5층 이상 연면적 3,000㎡ 초과 건물(30층 미만)에서 2층에서 화재 발생 시 우선 경보층을 쓰시오.',a:'발화층(2층) + 직상층(3층)에 우선 경보'},
-  {t:'mc',q:'누전경보기의 공칭작동전류치 기준은?',o:['100mA 이하','200mA 이하','300mA 이하','500mA 이하'],a:1,e:'누전경보기 공칭작동전류치: 200mA 이하, 감도조정장치 최대치: 1A'},
-  {t:'sa',q:'누전경보기 ZNR의 설치목적을 쓰시오.',a:'낙뢰 발생 시 이상전압(충격파)으로부터 수신기를 보호하기 위함'},
-  {t:'mc',q:'가스누설경보기 수신개시~가스누설표시까지 소요시간은?',o:['10초 이내','30초 이내','60초 이내','120초 이내'],a:2,e:'가스누설경보기: 수신개시~가스누설표시까지 60초 이내'},
-  {t:'sa',q:'가스누설경보기 예비전원 종류 3가지를 쓰시오.',a:'① 알칼리계 2차 축전지\n② 리튬계 2차 축전지\n③ 무보수 밀폐형 연축전지'},
-  {t:'mc',q:'시각경보장치의 설치 높이 기준은?',o:['바닥에서 1m 이상 2m 이하','바닥에서 1.5m 이상 2m 이하','바닥에서 2m 이상 2.5m 이하','바닥에서 2.5m 이상 3m 이하'],a:2,e:'시각경보장치: 바닥에서 2m 이상 2.5m 이하 (천장 2m 이하 시: 천장에서 0.15m 이내)'},
-],
-'q-피난':[
-  {t:'mc',q:'비상조명등의 바닥 조도 기준은?',o:['0.5lx 이상','1lx 이상','3lx 이상','5lx 이상'],a:1,e:'비상조명등 조도: 바닥 각 부분 1lx 이상'},
-  {t:'sa',q:'비상콘센트 보호함 설치기준 3가지를 쓰시오.',a:'① 쉽게 개폐할 수 있는 문 설치\n② 보호함 표면에 "비상콘센트" 표지 표시\n③ 상부에 적색 표시등 설치'},
-  {t:'mc',q:'무선통신보조설비 누설동축케이블의 임피던스는?',o:['25Ω','50Ω','75Ω','100Ω'],a:1,e:'누설동축케이블 및 안테나 임피던스: 50Ω'},
-  {t:'sa',q:'무선통신보조설비 무반사 종단저항의 설치위치와 목적을 쓰시오.',a:'설치위치: 누설동축케이블의 끝부분\n목적: 전송되는 전자파가 종단에서 반사되어 교신을 방해하는 것을 막기 위함'},
-  {t:'mc',q:'휴대용 비상조명등을 지하상가에 설치할 때 간격 기준은?',o:['보행거리 25m 이내마다 3개 이상','보행거리 50m 이내마다 3개 이상','보행거리 25m 이내마다 1개 이상','보행거리 50m 이내마다 1개 이상'],a:0,e:'지하상가·지하역사: 보행거리 25m 이내마다 3개 이상'},
-],
-'q-전기':[
-  {t:'sa',q:'부동충전방식을 설명하시오.',a:'전지의 자기방전을 보충함과 동시에 상용부하에 대한 전력공급은 충전기가 부담하되, 일시적인 대전류부하는 축전지가 부담하도록 하는 방식. 축전지와 부하를 정류기에 병렬 접속하여 충전과 방전을 동시에 수행.'},
-  {t:'mc',q:'연축전지의 공칭전압(셀당)은?',o:['1.2V','1.5V','2.0V','2.4V'],a:2,e:'연축전지: 2.0V/셀, 알칼리축전지: 1.2V/셀'},
-  {t:'sa',q:'균등충전방식을 설명하고 연축전지의 균등충전전압 범위를 쓰시오.',a:'여러 개의 축전지 개개 전압을 측정 시 전압 차이가 나거나 기준 이하로 낮은 것이 있을 경우 1~3개월마다 1회, 10~12시간 충전하는 방식.\n연축전지 셀당 균등충전전압: 2.4V ~ 2.5V'},
-  {t:'mc',q:'비상콘센트 전원회로 기준으로 옳은 것은?',o:['단상 110V, 1kVA 이상','단상 220V, 1.5kVA 이상','3상 380V, 3kVA 이상','단상 220V, 3kVA 이상'],a:1,e:'비상콘센트: 단상 교류 220V, 공급용량 1.5kVA 이상'},
-  {t:'sa',q:'내화배선 공사방법에서 전선관의 종류와 매설 깊이 기준을 쓰시오.',a:'전선관: 금속관, 2종 금속제 가요전선관 또는 합성수지관\n내화구조로 된 벽 또는 바닥의 표면으로부터 25mm 이상 깊이로 매설'},
-],
+// ═══════════════════════════════════════════════════
+// 연도별 시험 구조
+// ═══════════════════════════════════════════════════
+const EXAM = {
+  '24':{year:2024,total:74, pad:2,rounds:[
+    {r:0,label:'표지',   date:'',         s:1, e:1},
+    {r:1,label:'1회차',  date:'4월 27일',  s:2, e:24},
+    {r:2,label:'2회차',  date:'7월 28일',  s:25,e:47},
+    {r:3,label:'3회차',  date:'10월 19일', s:48,e:74}]},
+  '23':{year:2023,total:90, pad:2,rounds:[
+    {r:1,label:'1회차',  date:'4월 22일',  s:1, e:30},
+    {r:2,label:'2회차',  date:'7월 22일',  s:31,e:61},
+    {r:3,label:'3회차',  date:'11월 4일',  s:62,e:90}]},
+  '22':{year:2022,total:84, pad:2,rounds:[
+    {r:0,label:'표지',   date:'',         s:1, e:1},
+    {r:1,label:'1회차',  date:'5월 7일',   s:2, e:25},
+    {r:2,label:'2회차',  date:'7월 24일',  s:26,e:54},
+    {r:3,label:'3회차',  date:'11월 19일', s:55,e:84}]},
+  '21':{year:2021,total:86, pad:2,rounds:[
+    {r:0,label:'표지',   date:'',         s:1, e:1},
+    {r:1,label:'1회차',  date:'4월 24일',  s:2, e:28},
+    {r:2,label:'2회차',  date:'7월 10일',  s:29,e:55},
+    {r:3,label:'3회차',  date:'11월 13일', s:56,e:86}]},
+  '20':{year:2020,total:130,pad:3,rounds:[
+    {r:0,label:'표지',   date:'',         s:1,  e:1},
+    {r:1,label:'1회차',  date:'5월 24일',  s:2,  e:52},
+    {r:2,label:'2회차',  date:'7월 25일',  s:53, e:74},
+    {r:3,label:'3회차',  date:'11월 15일', s:75, e:105},
+    {r:4,label:'4회차',  date:'11월 29일', s:106,e:130}]},
+  '19':{year:2019,total:68, pad:2,rounds:[
+    {r:0,label:'표지',   date:'',         s:1, e:1},
+    {r:1,label:'1회차',  date:'4월 14일',  s:2, e:24},
+    {r:2,label:'2회차',  date:'6월 29일',  s:25,e:45},
+    {r:3,label:'3회차',  date:'11월 9일',  s:46,e:68}]},
+  '18':{year:2018,total:70, pad:2,rounds:[
+    {r:0,label:'표지',   date:'',         s:1, e:1},
+    {r:1,label:'1회차',  date:'4월 14일',  s:2, e:27},
+    {r:2,label:'2회차',  date:'6월 30일',  s:28,e:48},
+    {r:3,label:'3회차',  date:'11월 10일', s:49,e:70}]}
 };
-QD['q-모의']=[...QD['q-자탐'].slice(0,3),...QD['q-경보'].slice(0,3),...QD['q-피난'].slice(0,2),...QD['q-전기'].slice(0,2)];
 
-// ── QUIZ RENDER ───────────────────────────────────────────────────
-let QS={};
-function renderQuiz(pg){
-  const items=QD[pg]||[];
-  QS[pg]={score:0,ans:0,total:items.filter(i=>i.t==='mc').length};
-  const html=items.map((it,i)=>{
-    if(it.t==='mc'){
-      const opts=it.o.map((o,j)=>`<button class="cb" onclick="chk(this,${j},${it.a},'${pg}',${i})">${j+1}. ${o}</button>`).join('');
-      return`<div class="qi"><div class="qn">문제${i+1} · 객관식</div><div class="q">${it.q}</div><div class="choices">${opts}</div><div class="exp" id="ep-${pg}-${i}">${it.e}</div></div>`;
-    } else {
-      return`<div class="qi"><div class="qn">문제${i+1} · 서술형</div><div class="q">${it.q}</div><button class="sa-btn" onclick="tsa('${pg}',${i})">정답 보기 ▼</button><div class="sa-ans" id="sa-${pg}-${i}">${it.a.replace(/\n/g,'<br>')}</div></div>`;
-    }
-  }).join('');
-  return`<div class="qscore" id="sc-${pg}"></div>${html}<div style="text-align:center;margin:16px 0;"><button class="btn btn-r" onclick="showAll('${pg}')">전체 정답 보기</button></div>`;
+// ═══════════════════════════════════════════════════
+// 뷰어
+// ═══════════════════════════════════════════════════
+let cY='24', cP=1, cZ='fit';
+
+function imgSrc(y,p){
+  const d=EXAM[y]; const n=String(p).padStart(d.pad,'0');
+  return `exam_images/${y}년도/page-${n}.png`;
 }
-function chk(btn,chosen,correct,pg,qi){
-  const wrap=btn.closest('.choices');
-  wrap.querySelectorAll('.cb').forEach(b=>b.disabled=true);
-  wrap.querySelectorAll('.cb')[correct].classList.add('ok');
-  if(chosen!==correct)btn.classList.add('no');
-  document.getElementById('ep-'+pg+'-'+qi).classList.add('on');
-  if(chosen===correct)QS[pg].score++;
-  QS[pg].ans++;
-  const sc=document.getElementById('sc-'+pg);
-  if(sc){sc.style.display='block';sc.textContent=`현재 점수: ${QS[pg].score} / ${QS[pg].total} (객관식 기준)`;}
+function roundOf(y,p){ return EXAM[y].rounds.find(r=>p>=r.s&&p<=r.e)||EXAM[y].rounds[0]; }
+
+function openViewer(y,pg){
+  cY=y; cP=parseInt(pg);
+  document.getElementById('viewer').style.display='flex';
+  document.getElementById('vbar').style.display='flex';
+  document.getElementById('theory-panel').style.display='none';
+  document.getElementById('home-panel').style.display='none';
+  hiNav(null);
+  document.querySelectorAll('.ni').forEach(n=>{
+    if(n.getAttribute('onclick')?.includes(`openViewer('${y}'`)) n.classList.add('on');
+  });
+  buildYrBtns(); buildRdBtns(); loadPg();
 }
-function tsa(pg,i){document.getElementById('sa-'+pg+'-'+i).classList.toggle('on');}
-function showAll(pg){
-  (QD[pg]||[]).forEach((it,i)=>{
-    if(it.t==='mc'){
-      const wrap=document.querySelector(`#con .qi:nth-child(${i+2}) .choices`)||document.querySelectorAll('.choices')[i];
-      if(!wrap)return;
-      wrap.querySelectorAll('.cb').forEach(b=>b.disabled=true);
-      const okBtns=wrap.querySelectorAll('.cb');
-      if(okBtns[it.a])okBtns[it.a].classList.add('ok');
-      const ep=document.getElementById('ep-'+pg+'-'+i);
-      if(ep)ep.classList.add('on');
-    } else {
-      const sa=document.getElementById('sa-'+pg+'-'+i);
-      if(sa)sa.classList.add('on');
-    }
+
+function buildYrBtns(){
+  document.getElementById('yr-btns').innerHTML=
+    Object.keys(EXAM).map(y=>`<button class="yr-btn${y===cY?' on':''}" onclick="openViewer('${y}',1)">20${y}</button>`).join('');
+}
+
+function buildRdBtns(){
+  document.getElementById('rd-btns').innerHTML=
+    EXAM[cY].rounds.map(r=>`<button class="rd-btn" onclick="openViewer('${cY}',${r.s})" id="rb-${r.r}">${r.label}${r.date?` (${r.date})`:''}</button>`).join('');
+  hiliteRd();
+}
+
+function hiliteRd(){
+  EXAM[cY].rounds.forEach(r=>{
+    const el=document.getElementById(`rb-${r.r}`);
+    if(el) el.classList.toggle('on', cP>=r.s && cP<=r.e);
   });
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 2018 기출 이미지 데이터
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const IMGS = [
-  {id:1, file:'image1.png', round:0, label:'표지·목차 (3회차 일정)', topics:[], pages:'표지'},
-  // ── 1회차 (4월 14일 시행) ──────────────────────────────────────
-  {id:2,  file:'image2.png',  round:1, label:'경계구역 설정·수신기 기능시험', topics:['자탐'], pages:'18-2, 18-4',
-    desc:'• 경계구역 수 및 감지기 수량 계산\n• P형 수신기 도통시험 정상신호 없을 때 원인\n• 비화재보 방지대책'},
-  {id:3,  file:'image3.png',  round:1, label:'가닥수 계산·배선 회로도', topics:['자탐','전기'], pages:'18-7, 18-8',
-    desc:'• P형 발신기 세트 배선 가닥수 산정\n• 내화배선·내열배선 구분\n• 전선관 굵기 선정'},
-  {id:4,  file:'image4.png',  round:1, label:'발신기세트 배선·결선도 작성', topics:['자탐'], pages:'18-9, 18-10',
-    desc:'• 발신기 세트 구성 (경종·표시등·발신기)\n• P형 수신기~발신기 결선도 작성\n• 자탐설비 연결 계통도'},
-  {id:5,  file:'image5.png',  round:1, label:'수신기 배치도·감지기 설치기준 표', topics:['자탐'], pages:'18-11, 18-12',
-    desc:'• 수신기 평면 배치도 읽기\n• 감지기 종류별 설치면적 기준 표 완성\n• 스포트형 감지기 부착 높이별 면적'},
-  {id:6,  file:'image6.png',  round:1, label:'유도등 종류·시퀀스회로', topics:['피난','전기'], pages:'18-13, 18-14',
-    desc:'• 유도등 설치기준 및 비상전원 기준\n• 3상 전동기 Y-Δ 기동 시퀀스 회로\n• 접점기호 및 시퀀스 동작 설명'},
-  {id:7,  file:'image7.png',  round:1, label:'내화배선 기준·결선도', topics:['전기','자탐'], pages:'18-15, 18-16',
-    desc:'• 내화배선·내열배선 공사방법 비교\n• 수신기~감지기~발신기 결선도 완성\n• 배선 가닥수 및 전선 규격'},
-  {id:8,  file:'image8.png',  round:1, label:'수신기 블록다이어그램·자탐 계통도', topics:['자탐'], pages:'18-17, 18-18',
-    desc:'• P형 수신기 내부 블록 구성도\n• 자탐설비 전체 계통도 완성\n• 주음향·지구음향 연결 방법'},
-  {id:9,  file:'image9.png',  round:1, label:'누전경보기 회로·설치기준', topics:['경보'], pages:'18-19, 18-20',
-    desc:'• 누전경보기 구성요소 및 동작원리\n• 영상변류기(ZCT) 설치 방법\n• 기기 심볼표 (영상변류기·수신기 등)'},
-  {id:10, file:'image10.png', round:1, label:'발신기 배선도·수신기 관련', topics:['자탐'], pages:'18-21, 18-22',
-    desc:'• 발신기 단자 용도 및 배선도\n• P형 수신기 기능시험 종류 및 판정기준\n• 회로저항·공통선 시험'},
-  {id:11, file:'image11.png', round:1, label:'자탐설비 결선도·배선 판단', topics:['자탐'], pages:'18-23, 18-24',
-    desc:'• 자탐설비 배선 결선도 작성\n• 경계구역별 감지기 회로 배선\n• 말단저항 접속 위치 확인'},
-  {id:12, file:'image12.png', round:1, label:'감지기 설치기준·계산 문제', topics:['자탐'], pages:'18-25, 18-26',
-    desc:'• 감지기 수량 계산 (바닥면적÷설치면적)\n• 연기감지기 설치 의무 장소\n• 1종·2종 연기감지기 설치기준 비교'},
-  // ── 2회차 (6월 30일 시행) ──────────────────────────────────────
-  {id:13, file:'image13.png', round:2, label:'전기계산·축전지·비상전원', topics:['전기'], pages:'18-27, 18-28',
-    desc:'• 전압강하 계산 (단상 2선식·3상 3선식)\n• 축전지 용량 계산 (C=IT/L)\n• 비상전원 종류 및 설치기준'},
-  {id:14, file:'image14.png', round:2, label:'자탐 배선·스프링클러 연동', topics:['자탐'], pages:'18-29, 18-30',
-    desc:'• 자탐설비~스프링클러 연동 결선도\n• 준비작동식 스프링클러 동작 순서\n• 탬퍼스위치 설치 장소'},
-  {id:15, file:'image15.png', round:2, label:'배선기준·감지기 종류 적용', topics:['전기','자탐'], pages:'18-31, 18-32',
-    desc:'• 내화·내열 배선 적용 기준\n• 감지기 종류별 적응 장소 표 완성\n• 부착 높이에 따른 감지기 종류 선정'},
-  {id:16, file:'image16.png', round:2, label:'우선경보방식·결선도 완성', topics:['자탐'], pages:'18-33, 18-34',
-    desc:'• 발화층별 우선경보 방식 (30층 미만·이상)\n• 비상방송과 자탐 연동 결선도\n• 수신기 기동 출력 계통도'},
-  {id:17, file:'image17.png', round:2, label:'자탐 배선 결선도·가닥수', topics:['자탐'], pages:'18-35, 18-36',
-    desc:'• 자탐설비 회로별 배선 결선도 완성\n• 공통선 배선 방식 (송배전식)\n• 전선 가닥수 산정 방법'},
-  {id:18, file:'image18.png', round:2, label:'비상전원 기준·자탐 배선', topics:['전기','자탐'], pages:'18-37, 18-38',
-    desc:'• 비상전원 수전설비 설치기준\n• 자탐설비 예비전원 용량 계산\n• 자탐 배선 가닥수 (발신기세트 포함)'},
-  {id:19, file:'image19.png', round:2, label:'감지기 설치기준표·결선도 완성', topics:['자탐'], pages:'18-39, 18-40',
-    desc:'• 감지기 종류별 설치 면적 기준 표 완성\n• 자탐 결선도 (수신기~감지기~발신기)\n• 경보 구역 설정 기준'},
-  {id:20, file:'image20.png', round:2, label:'자탐 결선도·심볼 작성', topics:['자탐'], pages:'18-41, 18-42',
-    desc:'• 자탐설비 전체 결선도 완성\n• 소방 심볼 기호 표기\n• P형 수신기 입출력 배선 구성'},
-  {id:21, file:'image21.png', round:2, label:'전기계산·누전경보기', topics:['전기','경보'], pages:'18-43, 18-46',
-    desc:'• 전선 굵기 계산 (허용전류법·전압강하법)\n• 누전경보기 설치 기준 및 구성\n• 변류기(ZCT) 결선 방법'},
-  {id:22, file:'image22.png', round:2, label:'가닥수 계산·공기관식 감지기', topics:['자탐','전기'], pages:'18-47, 18-48',
-    desc:'• 발신기세트 배선 가닥수 정밀 계산\n• 공기관식 차동식 분포형 감지기 시험\n• 3정수 시험 (유통·접점수고·리크)'},
-  // ── 3회차 (11월 10일 시행) ─────────────────────────────────────
-  {id:23, file:'image23.png', round:3, label:'감지기 설치기준·평면 배치도', topics:['자탐'], pages:'18-51, 18-52',
-    desc:'• 평면도에서 감지기 배치 결정\n• 경계구역 설정 방법\n• 감지기 수량 배치 계획'},
-  {id:24, file:'image24.png', round:3, label:'감지기 수량계산·설치기준', topics:['자탐'], pages:'18-53, 18-54',
-    desc:'• 감지기 수량 계산 풀이\n• 경계구역별 감지기 선정\n• 특수 설치 장소 감지기 종류'},
-  {id:25, file:'image25.png', round:3, label:'제어회로도·소방설비 비교표', topics:['전기'], pages:'18-55, 18-56',
-    desc:'• 전동기 제어회로 (유무접점 회로)\n• 소방설비 설치기준 비교표\n• 비상전원 종류별 적용 기준'},
-  {id:26, file:'image26.png', round:3, label:'자탐 설치기준·비상방송설비', topics:['자탐','경보'], pages:'18-57, 18-58',
-    desc:'• 자탐설비 설치기준 서술 문제\n• 비상방송설비 확성기 설치기준\n• 음성입력·수평거리·스피커 기준'},
-  {id:27, file:'image27.png', round:3, label:'비상방송 기준·시퀀스회로', topics:['경보','전기'], pages:'18-59, 18-60',
-    desc:'• 비상방송설비 설치기준 10가지\n• 3상 전동기 정·역회전 시퀀스 회로\n• MC·PBS·인터록 회로 구성'},
-  {id:28, file:'image28.png', round:3, label:'시퀀스회로·전기계산', topics:['전기'], pages:'18-61, 18-62',
-    desc:'• 전동기 Y-Δ 기동 시퀀스 회로 완성\n• 전압강하 및 전선 굵기 계산\n• 역률 포함 전류 계산'},
-  {id:29, file:'image29.png', round:3, label:'누전경보기·자탐 설치기준', topics:['경보','자탐'], pages:'18-63, 18-64',
-    desc:'• 누전경보기 설치기준 서술\n• 자탐설비 비화재보 원인 및 방지대책\n• 수신기 절연저항 측정 방법'},
-  {id:30, file:'image30.png', round:3, label:'시퀀스회로 완성·심볼표', topics:['전기'], pages:'18-65, 18-66',
-    desc:'• 전동기 제어 시퀀스 회로 완성 문제\n• 시퀀스 회로 심볼표 (MCCB·MC·TH·BL 등)\n• PBS 누름에 따른 동작 순서 설명'},
-];
-
-const ROUND_LABEL = {0:'표지', 1:'1회차 (4월 14일)', 2:'2회차 (6월 30일)', 3:'3회차 (11월 10일)'};
-const ROUND_COLOR = {0:'b-1', 1:'b-1', 2:'b-2', 3:'b-3'};
-const TOPIC_COLOR = {'자탐':'b-탐', '전기':'b-전', '경보':'b-경', '피난':'b-피'};
-const IMG_DIR = '기출_이미지/';
-
-// ── 라이트박스 ────────────────────────────────────────────────────
-let lbList = [], lbIdx = 0;
-
-function openLB(list, idx) {
-  lbList = list; lbIdx = idx;
-  updateLB();
-  document.getElementById('lb').classList.add('open');
-  document.body.style.overflow = 'hidden';
+function loadPg(){
+  const img=document.getElementById('vimg');
+  img.src=imgSrc(cY,cP); img.className=cZ;
+  const total=EXAM[cY].total;
+  document.getElementById('pg-input').value=cP;
+  document.getElementById('pg-input').max=total;
+  document.getElementById('page-info').textContent=`/ ${total}`;
+  document.getElementById('btn-prev').disabled=cP<=1;
+  document.getElementById('btn-next').disabled=cP>=total;
+  hiliteRd();
+  document.getElementById('viewer').scrollTop=0;
+  const rd=roundOf(cY,cP);
+  const lbl=document.getElementById('cat-lbl');
+  if(rd&&rd.r>0){lbl.textContent=`20${cY}년 ${rd.label}·${rd.date}`;lbl.style.display='inline';}
+  else{lbl.style.display='none';}
 }
-function closeLB() {
-  document.getElementById('lb').classList.remove('open');
-  document.body.style.overflow = '';
+
+function movePage(d){const n=cP+d; if(n<1||n>EXAM[cY].total)return; cP=n; loadPg();}
+function jumpPage(v){cP=Math.max(1,Math.min(parseInt(v)||1,EXAM[cY].total)); loadPg();}
+function setZoom(btn,cls){
+  document.querySelectorAll('.zoom-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); cZ=cls;
+  document.getElementById('vimg').className=cls;
 }
-function updateLB() {
-  const img = lbList[lbIdx];
-  document.getElementById('lb-img').src = IMG_DIR + img.file;
-  document.getElementById('lb-info').textContent =
-    `[2018년 ${ROUND_LABEL[img.round]}] ${img.label} (p.${img.pages}) ${lbIdx+1}/${lbList.length}`;
-}
-function lbPrev() { if(lbIdx > 0){ lbIdx--; updateLB(); } }
-function lbNext() { if(lbIdx < lbList.length-1){ lbIdx++; updateLB(); } }
-document.addEventListener('keydown', e => {
-  if(!document.getElementById('lb').classList.contains('open')) return;
-  if(e.key === 'ArrowLeft') lbPrev();
-  else if(e.key === 'ArrowRight') lbNext();
-  else if(e.key === 'Escape') closeLB();
+
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('viewer').style.display==='none') return;
+  if(e.target.tagName==='INPUT') return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') movePage(1);
+  if(e.key==='ArrowLeft' ||e.key==='ArrowUp')   movePage(-1);
+  if(e.key==='Home'){cP=1;loadPg();}
+  if(e.key==='End'){cP=EXAM[cY].total;loadPg();}
 });
 
-// ── 갤러리 렌더 ───────────────────────────────────────────────────
-function renderGallery(pageKey) {
-  let filterImgs, heading, subHeading;
+// ═══════════════════════════════════════════════════
+// 이론 패널
+// ═══════════════════════════════════════════════════
+function showTheory(key){
+  document.getElementById('viewer').style.display='none';
+  document.getElementById('vbar').style.display='none';
+  document.getElementById('home-panel').style.display='none';
+  const panel=document.getElementById('theory-panel');
+  panel.style.display='block';
+  hiNav(key);
+  const th=THEORY[key]||'<p>준비 중</p>';
+  const qz=QUIZ[key]||[];
+  panel.innerHTML=buildChHtml(th,qz);
+}
 
-  if(pageKey === 'gi-all') {
-    filterImgs = IMGS; heading = '2018년 전체 기출 캡처'; subHeading = '전체 30장 · 3회차';
-  } else if(pageKey === 'gi-r1') {
-    filterImgs = IMGS.filter(i=>i.round===1); heading = '2018년 1회차 기출 (4월 14일)'; subHeading = filterImgs.length+'장';
-  } else if(pageKey === 'gi-r2') {
-    filterImgs = IMGS.filter(i=>i.round===2); heading = '2018년 2회차 기출 (6월 30일)'; subHeading = filterImgs.length+'장';
-  } else if(pageKey === 'gi-r3') {
-    filterImgs = IMGS.filter(i=>i.round===3); heading = '2018년 3회차 기출 (11월 10일)'; subHeading = filterImgs.length+'장';
-  } else if(pageKey === 'gi-자탐') {
-    filterImgs = IMGS.filter(i=>i.topics.includes('자탐')); heading = '🔴 자탐 파트 기출 이미지'; subHeading = filterImgs.length+'장 (경계구역·감지기·수신기·발신기·결선도)';
-  } else if(pageKey === 'gi-전기') {
-    filterImgs = IMGS.filter(i=>i.topics.includes('전기')); heading = '⚡ 전기설비 파트 기출 이미지'; subHeading = filterImgs.length+'장 (시퀀스회로·전기계산·배선기준·비상전원)';
-  } else if(pageKey === 'gi-경보') {
-    filterImgs = IMGS.filter(i=>i.topics.includes('경보')||i.topics.includes('피난')); heading = '🔔 경보·피난 파트 기출 이미지'; subHeading = filterImgs.length+'장 (누전경보기·비상방송·유도등)';
-  }
+function hiNav(key){
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  if(key) document.querySelectorAll('.ni').forEach(n=>{if(n.getAttribute('onclick')?.includes(`'${key}'`))n.classList.add('on');});
+  else document.querySelectorAll('.ni').forEach(n=>{if(n.getAttribute('onclick')==='showHome()')n.classList.add('on');});
+}
 
-  // 통계
-  const r1 = filterImgs.filter(i=>i.round===1).length;
-  const r2 = filterImgs.filter(i=>i.round===2).length;
-  const r3 = filterImgs.filter(i=>i.round===3).length;
-
-  const statHtml = (pageKey==='gi-all') ? `
-    <div class="stat-row">
-      <div class="stat-card"><div class="sv">${IMGS.length}</div><div class="sl">전체 캡처 수</div></div>
-      <div class="stat-card"><div class="sv">${IMGS.filter(i=>i.topics.includes('자탐')).length}</div><div class="sl">자탐 파트</div></div>
-      <div class="stat-card"><div class="sv">${IMGS.filter(i=>i.topics.includes('전기')).length}</div><div class="sl">전기 파트</div></div>
-      <div class="stat-card"><div class="sv">${IMGS.filter(i=>i.topics.includes('경보')||i.topics.includes('피난')).length}</div><div class="sl">경보·피난 파트</div></div>
-    </div>` : `
-    <div class="stat-row">
-      <div class="stat-card"><div class="sv">${filterImgs.length}</div><div class="sl">해당 이미지 수</div></div>
-      ${r1?`<div class="stat-card"><div class="sv">${r1}</div><div class="sl">1회차</div></div>`:''}
-      ${r2?`<div class="stat-card"><div class="sv">${r2}</div><div class="sl">2회차</div></div>`:''}
-      ${r3?`<div class="stat-card"><div class="sv">${r3}</div><div class="sl">3회차</div></div>`:''}
-    </div>`;
-
-  // 필터 버튼 (전체보기에서만)
-  const filterBtns = (pageKey==='gi-all') ? `
-    <div class="gy-filter">
-      <span class="gy-label">회차:</span>
-      <button class="fy-btn on" onclick="gyFilter(this,'all')">전체</button>
-      <button class="fy-btn" onclick="gyFilter(this,'r1')">1회차</button>
-      <button class="fy-btn" onclick="gyFilter(this,'r2')">2회차</button>
-      <button class="fy-btn" onclick="gyFilter(this,'r3')">3회차</button>
-      <span class="gy-label" style="margin-left:10px">주제:</span>
-      <button class="fy-btn" onclick="gyFilter(this,'자탐')">자탐</button>
-      <button class="fy-btn" onclick="gyFilter(this,'전기')">전기</button>
-      <button class="fy-btn" onclick="gyFilter(this,'경보')">경보</button>
-      <button class="fy-btn" onclick="gyFilter(this,'피난')">피난</button>
-    </div>` : '';
-
-  // 카드 목록
-  const cards = filterImgs.map((img, i) => {
-    const roundBadge = img.round > 0
-      ? `<span class="badge ${ROUND_COLOR[img.round]}">${img.round}회차</span>` : '';
-    const topicBadges = img.topics.map(t=>`<span class="badge ${TOPIC_COLOR[t]||'b-탐'}">${t}</span>`).join('');
-    const descHtml = img.desc ? img.desc.replace(/\n/g,'<br>') : '';
-    return `<div class="img-card" data-round="${img.round}" data-topics="${img.topics.join(',')}"
-      onclick="openLB(currentGalleryList, ${i})">
-      <img src="${IMG_DIR}${img.file}" alt="${img.label}" loading="lazy">
-      <div class="img-card-info">
-        <div class="ic-top">${roundBadge}${topicBadges}</div>
-        <div class="ic-title">${img.label}</div>
-        <div class="ic-page">p.${img.pages}</div>
-        ${descHtml?`<div style="font-size:11px;color:#666;margin-top:5px;line-height:1.6">${descHtml}</div>`:''}
+function buildChHtml(th,qItems){
+  const qHtml=qItems.map(q=>{
+    const rc=q.r===1?'#c0392b':q.r===2?'#2980b9':q.r===3?'#27ae60':'#8e44ad';
+    const thumb=q.img?`<div onclick="openViewer('${q.img.y}',${q.img.pg})" style="float:right;margin:0 0 12px 14px;cursor:pointer;border:2px solid #ddd;border-radius:6px;overflow:hidden;width:200px;transition:border-color .15s" onmouseover="this.style.borderColor='#c0392b'" onmouseout="this.style.borderColor='#ddd'"><img src="exam_images/${q.img.y}년도/page-${String(q.img.pg).padStart(EXAM[q.img.y]?.pad||2,'0')}.png" style="width:100%;display:block"><div style="font-size:9.5px;text-align:center;padding:3px;background:#f8f9fa;color:#888">🔍 ${q.img.label} → 클릭하면 해당 페이지</div></div>`:'';
+    return `<div class="qi">
+      <div style="display:flex;gap:6px;align-items:center;margin-bottom:8px;flex-wrap:wrap">
+        <span class="badge" style="background:${rc}22;color:${rc}">${q.yr}년 ${q.r}회차</span>
+        <span class="badge" style="background:#f0f2f5;color:#636e72">${q.type}</span>
+        <span style="margin-left:auto;font-size:10px;font-weight:bold;color:#e67e22">핵심: ${q.key}</span>
       </div>
+      ${thumb}
+      <div class="q">${q.q}</div>
+      <div style="clear:both"></div>
+      <button class="sa-btn" onclick="tgl(this)">정답·해설 보기 ▼</button>
+      <div class="sa-ans">${q.a}</div>
     </div>`;
   }).join('');
+  return `<div class="tabs">
+    <div class="tab on" onclick="swT(this,'tp-th')">📖 이론 정리</div>
+    <div class="tab" onclick="swT(this,'tp-qz')">📝 기출문제 <span class="badge" style="background:#c0392b;color:#fff;margin-left:4px">${qItems.length}</span></div>
+  </div>
+  <div id="tp-th">${th}</div>
+  <div id="tp-qz" style="display:none">${qHtml||'<div class="card"><p style="text-align:center;color:#999;padding:20px">준비 중</p></div>'}</div>`;
+}
+function swT(el,id){
+  el.closest('.tabs').querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
+  document.getElementById('tp-th').style.display=id==='tp-th'?'':'none';
+  document.getElementById('tp-qz').style.display=id==='tp-qz'?'':'none';
+}
+function tgl(btn){btn.nextElementSibling.classList.toggle('on');btn.textContent=btn.nextElementSibling.classList.contains('on')?'닫기 ▲':'정답·해설 보기 ▼';}
+function st(el,ids,id){el.closest('.tabs').querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');ids.forEach(x=>{const e=document.getElementById(x);if(e)e.style.display='none';});const t=document.getElementById(id);if(t)t.style.display='block';}
 
-  // currentGalleryList를 전역으로 노출
-  window.currentGalleryList = filterImgs;
-
-  return `
-    <div class="card" style="background:linear-gradient(135deg,#2c3e50,#3d5166);color:#fff;border:none;padding:16px 20px;">
-      <h3 style="color:#fff;border-color:#4a6278;font-size:15px;">${heading}</h3>
-      <p style="color:#adb5bd;font-size:12px;margin-top:4px;">${subHeading} · 이미지 클릭 시 확대 · ←→ 키로 이동</p>
-    </div>
-    ${statHtml}
-    ${filterBtns}
-    <div class="gy-grid" id="gy-grid">${cards}</div>`;
+// ═══════════════════════════════════════════════════
+// 홈
+// ═══════════════════════════════════════════════════
+function showHome(){
+  document.getElementById('viewer').style.display='none';
+  document.getElementById('vbar').style.display='none';
+  document.getElementById('theory-panel').style.display='none';
+  document.getElementById('home-panel').style.display='block';
+  hiNav(null);
 }
 
-// 갤러리 필터
-function gyFilter(btn, type) {
-  document.querySelectorAll('.fy-btn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  const grid = document.getElementById('gy-grid');
-  if(!grid) return;
-  const cards = grid.querySelectorAll('.img-card');
-  let visibleList = [];
-  cards.forEach(card => {
-    const round = card.dataset.round;
-    const topics = card.dataset.topics;
-    let show = false;
-    if(type==='all') show = true;
-    else if(type==='r1') show = round==='1';
-    else if(type==='r2') show = round==='2';
-    else if(type==='r3') show = round==='3';
-    else show = topics.includes(type);
-    card.style.display = show ? '' : 'none';
-    if(show) visibleList.push(parseInt(card.querySelector('img').src.match(/image(\d+)/)[1])-1);
-  });
-  // 라이트박스 리스트 업데이트
-  window.currentGalleryList = type==='all' ? IMGS :
-    type==='r1' ? IMGS.filter(i=>i.round===1) :
-    type==='r2' ? IMGS.filter(i=>i.round===2) :
-    type==='r3' ? IMGS.filter(i=>i.round===3) :
-    IMGS.filter(i=>i.topics.includes(type));
-  // 카드 onclick 인덱스 재계산
-  let ci = 0;
-  cards.forEach(card => {
-    if(card.style.display!=='none'){
-      const idx = ci++;
-      card.setAttribute('onclick', `openLB(currentGalleryList, ${idx})`);
-    }
-  });
-}
+// ═══════════════════════════════════════════════════
+// 이론 콘텐츠
+// ═══════════════════════════════════════════════════
+const THEORY={
+'c-감지기':`
+<div class="tabs"><div class="tab on" onclick="st(this,['g1','g2','g3','g4','g5'],'g1')">① 형식</div><div class="tab" onclick="st(this,['g1','g2','g3','g4','g5'],'g2')">② 열감지기</div><div class="tab" onclick="st(this,['g1','g2','g3','g4','g5'],'g3')">③ 연기감지기</div><div class="tab" onclick="st(this,['g1','g2','g3','g4','g5'],'g4')">④ 설치기준</div><div class="tab" onclick="st(this,['g1','g2','g3','g4','g5'],'g5')">⑤ 제외·교차</div></div>
+<div id="g1" class="tc on"><div class="card"><h3>형식별 특성</h3>
+<h4>다신호식</h4><p>일정시간 간격, 각각 다른 <b>2개 이상 화재신호</b> 발신. <b>실드선</b> 필수.</p>
+<h4>아날로그식</h4><p>온도·연기량 변화에 따라 다른 <b>전류치·전압치</b> 출력. 실드선 필수.</p>
+<h4>축적형</h4><p>일정농도 이상 연기가 일정시간 연속 → 전기적 검출 → 작동.</p>
+<div class="warn">⚠️ <b>축적기능 없는 감지기</b> 3가지: ①급속연소 우려 ②교차회로방식 ③축적기능 수신기 연결</div>
+<div class="tip">💡 <b>축적기능 있는 감지기</b>: ①실내 40㎡미만 ②부착면~바닥 2.3m이하 ③지하·무창층 환기불량</div>
+<h4>작동표시장치 불필요 4가지</h4>
+<ul><li>차동식 분포형</li><li>정온식 감지선형</li><li>방폭구조</li><li>수신기에 작동내용 표시되는 감지기</li></ul>
+</div></div>
+<div id="g2" class="tc" style="display:none"><div class="card"><h3>열감지기</h3>
+<h4>공기관식 차동식 분포형</h4>
+<ul><li>노출부분: 구역마다 <b>20m 이상</b></li><li>공기관 길이: <b>100m 이하</b></li><li>검출부: <b>0.8~1.5m</b></li><li>공기관~각 변: <b>1.5m 이하</b>, 상호간: <b>6m(내화9m) 이하</b></li></ul>
+<h4>3정수 시험 암기: <b>화작유접리</b></h4>
+<ul><li>화재작동시험 / 작동계속시험</li><li>유통시험: 마노미터 <b>100mm→50mm</b></li><li>접점수고시험 / 리크시험</li></ul>
+<h4>정온식 감지선형 색상</h4>
+<table><tr><th>색</th><th>공칭작동온도</th></tr><tr><td>백색</td><td>80℃ 이하</td></tr><tr><td>청색</td><td>80~120℃</td></tr><tr><td>적색</td><td>120℃ 이상</td></tr></table>
+</div></div>
+<div id="g3" class="tc" style="display:none"><div class="card"><h3>연기·불꽃감지기</h3>
+<h4>광전식 분리형 설치기준</h4>
+<ul><li>수광면: 햇빛 직접 받지 않도록</li><li>뒷벽으로부터: <b>1m 이내</b></li><li>광축~나란한 벽: <b>0.6m 이상</b></li><li>광축 높이: 천장의 <b>80% 이상</b></li><li>공칭감시거리: <b>5~100m, 5m 간격</b></li></ul>
+<h4>연기감지기 의무 장소</h4>
+<ul><li>계단·경사로·에스컬레이터</li><li>엘리베이터 승강로</li><li>특별피난계단 전실·부속실</li><li>복도 (30m 미만 제외)</li><li>천장 15m 이상 20m 미만</li></ul>
+</div></div>
+<div id="g4" class="tc" style="display:none"><div class="card"><h3>설치면적 기준표</h3>
+<table><tr><th>감지기</th><th>4m 미만</th><th>4~8m 미만</th></tr>
+<tr><td>차동식·보상식 1종</td><td><b>90㎡</b></td><td><b>50㎡</b></td></tr>
+<tr><td>차동식·보상식 2종</td><td><b>70㎡</b></td><td><b>40㎡</b></td></tr>
+<tr><td>정온식 특종·1종</td><td><b>60㎡</b></td><td><b>30㎡</b></td></tr>
+<tr><td>정온식 2종</td><td><b>20㎡</b></td><td><b>15㎡</b></td></tr>
+<tr><td>연기 1·2종</td><td><b>150㎡</b></td><td><b>75㎡</b></td></tr></table>
+<div class="form">수량 = ⌈ 바닥면적 ÷ 1개 설치면적 ⌉</div>
+</div></div>
+<div id="g5" class="tc" style="display:none"><div class="card"><h3>설치제외·교차회로</h3>
+<h4>설치제외 (부20목프간고)</h4>
+<ul><li>부식성 가스 체류</li><li>천장·반자 <b>20m 이상</b></li><li>목욕실·샤워실</li><li>프레스·주조공장</li><li>헛간 등 기류 통하는 곳</li><li>고온·저온 기능정지 우려</li></ul>
+<h4>교차회로 적용 설비 (분할이준일할)</h4>
+<ul><li>분말·할론·이산화탄소 소화설비</li><li>준비작동식·일제살수식 스프링클러</li><li>할로겐화합물·불활성기체 소화설비</li></ul>
+</div></div>`,
 
-// ── go() 메인 네비게이션 함수 ─────────────────────────────────────
-function go(pg) {
-  cur = pg;
-  document.querySelectorAll('.ni').forEach(el => el.classList.remove('on'));
-  document.querySelectorAll('.ni').forEach(el => {
-    if(el.getAttribute('onclick')?.includes("'"+pg+"'")) el.classList.add('on');
-  });
-  const titles = {
-    home:'학습 홈',
-    'c-감지기':'감지기','c-수신기':'자탐수신기','c-발신기':'발신기','c-중계기':'중계기',
-    'c-시각경보':'시각경보장치','c-비상경보':'비상경보설비','c-비상방송':'비상방송설비',
-    'c-누전':'누전경보기','c-가스':'가스누설경보기','c-유도등':'유도등 및 유도표지',
-    'c-비상조명':'비상조명등','c-비상콘센트':'비상콘센트설비','c-무선통신':'무선통신보조설비',
-    'c-축전지':'비상전원/축전지','c-배선':'배선/결선','c-가닥수':'가닥수 계산','c-계산':'전기 계산 공식',
-    'q-자탐':'자탐 파트 기출','q-경보':'경보설비 기출','q-피난':'피난·소화활동 기출',
-    'q-전기':'전기설비 기출','q-모의':'전체 모의고사',
-    'gi-all':'2018년 전체 기출 캡처 (30장)',
-    'gi-r1':'2018년 1회차 기출 (4/14)',
-    'gi-r2':'2018년 2회차 기출 (6/30)',
-    'gi-r3':'2018년 3회차 기출 (11/10)',
-    'gi-자탐':'자탐 파트 기출 이미지',
-    'gi-전기':'전기설비 파트 기출 이미지',
-    'gi-경보':'경보·피난 파트 기출 이미지',
-  };
-  document.getElementById('ptitle').textContent = titles[pg] || pg;
-  const c = document.getElementById('con');
-  if(pg === 'home') c.innerHTML = renderHome();
-  else if(pg.startsWith('q-')) c.innerHTML = renderQuiz(pg);
-  else if(pg.startsWith('gi-')) c.innerHTML = renderGallery(pg);
-  else if(pg.startsWith('c-')) {
-    const theory = pages[pg] || '<p>준비 중</p>';
-    c.innerHTML = wrapWithQuizTab(theory, pg);
-    saveP(pg);
-  }
-  else { c.innerHTML = pages[pg] || '<p>준비 중</p>'; saveP(pg); }
-  c.scrollTop = 0;
-  window.scrollTo(0,0);
-  updP();
-}
+'c-수신기':`<div class="card"><h3>P형 수신기 기능시험</h3>
+<table><tr><th>시험명</th><th>판정기준</th></tr>
+<tr><td>회로저항시험</td><td>합성저항 <b>50Ω 이하</b></td></tr>
+<tr><td>공통선 시험</td><td>경계구역수 <b>7 이하</b></td></tr>
+<tr><td>동시작동시험</td><td><b>5회선</b> 동시 작동 이상 없을 것</td></tr></table>
+<h4>도통시험 정상신호 없는 원인 5가지</h4>
+<ul><li>감지기회로 단선·단락</li><li>감지기 고장</li><li>종단저항 접속불량·누락</li></ul>
+<h4>주의등 점멸: 지구경종정지·주경종정지·자동복구·도통시험·동작시험 조작 시</h4>
+<h4>주의등 소등: 복구·예비전원 스위치 조작 시</h4>
+<div class="warn">⚠️ 우선경보: 5층↑ + 3,000㎡ 초과 / 30층↑: 직상 <b>4개층</b></div>
+</div>`,
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 단원별 기출문제 데이터 (2018년 실제 기출)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const CQ = {
+'c-발신기':`<div class="card"><h3>P형 발신기</h3>
+<h4>단자 용도 (전공지응)</h4>
+<table><tr><th>단자</th><th>용도</th></tr>
+<tr><td>전화</td><td>수신기↔발신기 전화연락</td></tr>
+<tr><td>공통</td><td>전화·지구·응답 공유</td></tr>
+<tr><td>지구</td><td>화재신호 수신기 전달</td></tr>
+<tr><td>응답</td><td>수신기 전달 여부 확인</td></tr></table>
+<p>위치표시등: <b>15° 이상</b> / <b>10m 이내</b> / <b>적색</b></p>
+<div class="tip">💡 종단저항: 발신기의 지구선·지구공통선 단자에 접속</div>
+</div>`,
 
-'c-감지기': [
-  { yr:2018, r:1, pg:'18-2', img:2, type:'서술형',
-    q:'자동화재탐지설비에서 <b>축적기능이 없는 감지기</b>로 설치하여야 하는 경우 3가지를 쓰시오.',
-    a:'① 급속한 연소 확대가 우려되는 장소에 사용되는 감지기<br>② 교차회로방식에 사용되는 감지기<br>③ 축적기능이 있는 수신기에 연결하여 사용하는 감지기',
-    key:'급속·교차·축적수신기' },
-  { yr:2018, r:1, pg:'18-2', img:2, type:'서술형',
-    q:'<b>축적기능이 있는 감지기</b>로 설치하여야 하는 경우 3가지를 쓰시오.',
-    a:'① 실내면적이 40㎡ 미만인 장소<br>② 감지기의 부착면과 실내바닥 사이가 2.3m 이하인 장소<br>③ 지하층 또는 무창층으로 환기가 잘 되지 않는 장소',
-    key:'실내40·2.3m·지하무창' },
-  { yr:2018, r:1, pg:'18-12', img:5, type:'표 완성',
-    q:'다음 표를 완성하시오. (스포트형 감지기 부착높이별 설치면적 기준)\n<br><br><table style="font-size:12px;border-collapse:collapse;width:100%"><tr style="background:#f0f2f5"><th style="border:1px solid #ddd;padding:6px">감지기 종류</th><th style="border:1px solid #ddd;padding:6px">4m 미만</th><th style="border:1px solid #ddd;padding:6px">4~8m 미만</th></tr><tr><td style="border:1px solid #ddd;padding:5px">차동식 스포트형 1종</td><td style="border:1px solid #ddd;padding:5px">?㎡</td><td style="border:1px solid #ddd;padding:5px">?㎡</td></tr><tr><td style="border:1px solid #ddd;padding:5px">차동식 스포트형 2종</td><td style="border:1px solid #ddd;padding:5px">?㎡</td><td style="border:1px solid #ddd;padding:5px">?㎡</td></tr><tr><td style="border:1px solid #ddd;padding:5px">정온식 스포트형 1종</td><td style="border:1px solid #ddd;padding:5px">?㎡</td><td style="border:1px solid #ddd;padding:5px">?㎡</td></tr><tr><td style="border:1px solid #ddd;padding:5px">정온식 스포트형 2종</td><td style="border:1px solid #ddd;padding:5px">?㎡</td><td style="border:1px solid #ddd;padding:5px">?㎡</td></tr><tr><td style="border:1px solid #ddd;padding:5px">연기감지기 1·2종</td><td style="border:1px solid #ddd;padding:5px">?㎡</td><td style="border:1px solid #ddd;padding:5px">?㎡</td></tr></table>',
-    a:'<table style="font-size:12px;border-collapse:collapse;width:100%"><tr style="background:#eafaf1"><th style="border:1px solid #ddd;padding:6px">감지기 종류</th><th style="border:1px solid #ddd;padding:6px">4m 미만</th><th style="border:1px solid #ddd;padding:6px">4~8m 미만</th></tr><tr><td style="border:1px solid #ddd;padding:5px">차동식·보상식 1종</td><td style="border:1px solid #ddd;padding:5px"><b>90㎡</b></td><td style="border:1px solid #ddd;padding:5px"><b>50㎡</b></td></tr><tr><td style="border:1px solid #ddd;padding:5px">차동식·보상식 2종</td><td style="border:1px solid #ddd;padding:5px"><b>70㎡</b></td><td style="border:1px solid #ddd;padding:5px"><b>40㎡</b></td></tr><tr><td style="border:1px solid #ddd;padding:5px">정온식 특종·1종</td><td style="border:1px solid #ddd;padding:5px"><b>60㎡</b></td><td style="border:1px solid #ddd;padding:5px"><b>30㎡</b></td></tr><tr><td style="border:1px solid #ddd;padding:5px">정온식 2종</td><td style="border:1px solid #ddd;padding:5px"><b>20㎡</b></td><td style="border:1px solid #ddd;padding:5px"><b>15㎡</b></td></tr><tr><td style="border:1px solid #ddd;padding:5px">연기감지기 1·2종</td><td style="border:1px solid #ddd;padding:5px"><b>150㎡</b></td><td style="border:1px solid #ddd;padding:5px"><b>75㎡</b></td></tr></table>',
-    key:'90·70·60·20·150' },
-  { yr:2018, r:2, pg:'18-32', img:15, type:'서술형',
-    q:'감지기를 설치하지 않아도 되는 장소(설치제외 장소) 5가지를 쓰시오.',
-    a:'① 부식성 가스가 체류하는 장소<br>② 천장 또는 반자의 높이가 20m 이상인 장소<br>③ 목욕실·욕조·샤워시설이 있는 화장실<br>④ 프레스공장·주조공장 등 화재 위험이 적은 장소<br>⑤ 헛간 등 외부와 기류가 통하여 유효하게 감지할 수 없는 장소',
-    key:'부20목프간' },
-  { yr:2018, r:2, pg:'18-48', img:22, type:'서술형',
-    q:'공기관식 차동식 분포형 감지기의 <b>시험 종류 5가지</b>를 쓰시오.',
-    a:'① 화재작동시험(펌프시험)<br>② 작동계속시험<br>③ 유통시험<br>④ 접점수고시험(다이어프램시험)<br>⑤ 리크시험(리크저항시험)<br><br>암기: <b>화작유접리</b>',
-    key:'화작유접리' },
-  { yr:2018, r:2, pg:'18-48', img:22, type:'서술형',
-    q:'공기관식 차동식 분포형 감지기의 <b>유통시험 방법</b>을 설명하시오.',
-    a:'① 검출부 공기관의 한쪽 끝에 <b>마노미터</b>를, 다른 한쪽 끝에 <b>테스트펌프</b>를 접속한다.<br>② 테스트펌프로 공기를 불어넣어 마노미터 수위를 <b>100mm</b>까지 상승시켜 정지시킨다.<br>③ 시험코크를 이동시켜 송기구를 열고 수위가 <b>50mm</b>까지 내려가는 시간(유통시간)을 측정한다.',
-    key:'마노미터·펌프·100mm→50mm' },
-  { yr:2018, r:2, pg:'18-48', img:22, type:'서술형',
-    q:'공기관식 차동식 분포형 감지기의 <b>설치기준</b> 4가지를 쓰시오.',
-    a:'① 공기관의 노출부분은 감지구역마다 <b>20m 이상</b><br>② 하나의 검출부에 접속하는 공기관 길이: <b>100m 이하</b><br>③ 검출부: 바닥 <b>0.8m 이상 1.5m 이하</b><br>④ 공기관과 각 변 수평거리: <b>1.5m 이하</b>, 상호간: <b>6m(내화 9m) 이하</b>',
-    key:'20m·100m·0.8~1.5m·1.5m' },
-  { yr:2018, r:3, pg:'18-53', img:24, type:'계산형',
-    q:'[조건] 바닥면적: 450㎡, 감지기 종류: 차동식 스포트형 2종, 부착높이: 3m<br><br>이 장소에 필요한 감지기의 <b>최소 수량</b>을 구하시오.',
-    a:'• 차동식 스포트형 2종, 4m 미만 → 1개당 설치면적: <b>70㎡</b><br>• 필요 수량 = ⌈450 ÷ 70⌉ = ⌈6.43⌉ = <b>7개</b>',
-    key:'450÷70=6.43→7개' },
-  { yr:2018, r:1, pg:'18-25', img:12, type:'서술형',
-    q:'연기감지기를 <b>복도</b>에 설치할 때의 기준을 쓰시오. (1종·2종 기준)',
-    a:'보행거리 <b>30m마다 1개 이상</b> 설치 (3종: 20m마다)<br>※ 보행거리 30m 미만인 복도: 설치 제외 가능',
-    key:'30m마다 1개' },
-  { yr:2018, r:1, pg:'18-25', img:12, type:'서술형',
-    q:'<b>광전식 분리형 감지기</b>의 설치기준 4가지를 쓰시오.',
-    a:'① 수광면은 햇빛을 직접 받지 않도록 설치<br>② 송광부·수광부는 설치된 뒷벽으로부터 <b>1m 이내</b><br>③ 광축은 나란한 벽으로부터 <b>0.6m 이상</b> 이격<br>④ 광축 높이: 천장 높이의 <b>80% 이상</b><br>⑤ 광축 길이: 공칭감시거리(5~100m, 5m 간격) 이내',
-    key:'1m·0.6m·80%' },
-],
+'c-중계기':`<div class="card"><h3>중계기</h3>
+<ul><li>수신기에서 도통시험 안 할 때 → 수신기~감지기 사이 설치</li><li>별도 전력공급 시 → 과전류차단기 + 정전 시 수신기 표시</li><li>수신→발신 소요시간: <b>5초 이내</b></li></ul>
+<table><tr><th>구분</th><th>집합형</th><th>분산형</th></tr>
+<tr><td>입력전원</td><td>AC 220V</td><td>DC 24V</td></tr>
+<tr><td>회로용량</td><td>30~40회로</td><td>5회로 미만</td></tr></table>
+</div>`,
 
-'c-수신기': [
-  { yr:2018, r:1, pg:'18-2', img:2, type:'서술형',
-    q:'P형 수신기에서 <b>회로도통시험</b>을 한 결과 정상신호가 나타나지 않았을 경우 원인 5가지를 쓰시오. (수신기 자체 고장은 없다고 가정)',
-    a:'① 감지기회로의 단선<br>② 감지기회로의 단락<br>③ 감지기의 고장<br>④ 종단저항의 접속 불량<br>⑤ 종단저항의 누락',
-    key:'단선·단락·감지기고장·접속불량·누락' },
-  { yr:2018, r:1, pg:'18-4', img:2, type:'서술형',
-    q:'P형 1급 수신기의 <b>공통선 시험</b> 방법과 판정기준을 쓰시오.',
-    a:'【방법】 수신기 내 공통선 1선을 제거 → 회로도통시험 스위치를 누르고 회로선택스위치를 차례로 회전 → 계기가 단선을 지시한 경계구역의 회선수를 확인<br><br>【판정기준】 공통선이 담당하고 있는 경계구역수가 <b>7 이하</b>일 것',
-    key:'공통선 제거→7이하' },
-  { yr:2018, r:1, pg:'18-21', img:10, type:'서술형',
-    q:'P형 수신기의 <b>기능시험 7가지</b>를 쓰시오.',
-    a:'① 화재표시작동시험<br>② 회로저항시험 (판정: 50Ω 이하)<br>③ 공통선 시험 (판정: 7경계구역 이하)<br>④ 예비전원 시험<br>⑤ 지구음향장치 작동시험<br>⑥ 회로도통시험<br>⑦ 동시작동시험 (5회선 동시)',
-    key:'화회공예지도동' },
-  { yr:2018, r:1, pg:'18-21', img:10, type:'서술형',
-    q:'P형 수신기 전면의 <b>스위치 주의등이 점멸(점등)되는 경우</b> 5가지를 쓰시오.',
-    a:'① 지구경종 정지 스위치 조작 시<br>② 주경종 정지 스위치 조작 시<br>③ 자동복구 스위치 조작 시<br>④ 도통시험 스위치 조작 시<br>⑤ 동작시험 스위치 조작 시<br><br>※ <b>소등</b>되는 경우: 복구 스위치 조작 시, 예비전원 스위치 조작 시',
-    key:'지주자도동 점멸 / 복예 소등' },
-  { yr:2018, r:1, pg:'18-17', img:8, type:'서술형',
-    q:'P형 수신기에서 복구스위치를 눌러도 <b>화재표시등·지구표시등이 소등되지 않는 경우</b> 3가지를 쓰시오.',
-    a:'① 복구스위치 배선 불량<br>② 릴레이 자체 불량<br>③ 릴레이 배선 불량 (화재표시등·지구표시등 배선불량)',
-    key:'복구배선·릴레이자체·릴레이배선' },
-  { yr:2018, r:2, pg:'18-33', img:16, type:'서술형',
-    q:'5층 이상, 연면적 3,000㎡ 초과 건물(30층 미만)에서 <b>우선경보방식</b>의 경보층을 발화층별로 쓰시오.',
-    a:'• <b>2층 이상</b> 발화: 발화층 + 직상층<br>• <b>1층</b> 발화: 발화층 + 직상층 + 지하층 전체<br>• <b>지하층</b> 발화: 발화층 + 직상층 + 기타 지하층<br><br>※ 30층 이상: 직상 <b>4개층</b> (1층 발화 시 직상4+지하)',
-    key:'2층↑=직상1/1층=직상+지하/지하=직상+기타지하' },
-  { yr:2018, r:1, pg:'18-4', img:2, type:'서술형',
-    q:'자동화재탐지설비에서 <b>비화재보(일과성)</b>의 방지대책 4가지를 쓰시오.',
-    a:'① 비화재보에 적응성 있는 감지기 설치<br>② 환경 적응성 있는 감지기 사용<br>③ 축적기능이 있는 수신기 설치<br>④ 절연저항이 불량한 선로 교체<br><br>(+) 감지기 설치 수 최소화 / 연기감지기 설치 제한',
-    key:'적응감지기·축적수신기·절연교체' },
-],
+'c-시각경보':`<div class="card"><h3>시각경보장치</h3>
+<ul><li>청각장애인용 객실 및 공용 <b>거실</b>에 설치</li><li>공연장: <b>무대부</b> 등에 설치</li><li>높이: 바닥 <b>2m 이상 2.5m 이하</b></li><li>광원: <b>축전지설비 또는 전기저장장치</b></li></ul>
+<p>절연저항: DC <b>250V</b> → <b>0.1MΩ 이상</b></p>
+</div>`,
 
-'c-발신기': [
-  { yr:2018, r:1, pg:'18-9', img:4, type:'서술형',
-    q:'P형 수동발신기의 <b>단자별 명칭과 용도</b>를 쓰시오.',
-    a:'① <b>전화 단자</b>: 수신기와 발신기 간 상호 전화연락을 하기 위한 단자<br>② <b>공통 단자</b>: 전화·지구·응답 단자를 공유하는 단자<br>③ <b>지구 단자</b>: 화재신호를 수신기에 알리기 위한 단자<br>④ <b>응답 단자</b>: 발신기의 신호가 수신기에 전달되었는가를 확인해 주기 위한 단자',
-    key:'전공지응' },
-  { yr:2018, r:1, pg:'18-21', img:10, type:'서술형',
-    q:'발신기의 <b>위치 표시등</b>의 불빛 식별범위와 색깔을 쓰시오.',
-    a:'• 식별범위: 부착면으로부터 <b>15° 이상</b>의 범위 안에서 부착지점으로부터 <b>10m 이내</b><br>• 색깔: <b>적색</b>',
-    key:'15°·10m·적색' },
-  { yr:2018, r:1, pg:'18-9', img:4, type:'서술형',
-    q:'발신기를 손으로 눌러 경보를 발생시킨 뒤 수신기에서 복구시켰는데도 <b>화재신호가 복구되지 않은 이유</b>는? (감지기 수동시험 후 수신기에서 복구는 된다고 가정)',
-    a:'발신기의 <b>스위치를 원상태로 되돌려 놓지 않았기 때문</b>이다.<br>(발신기는 수신기 복구와 별도로, 발신기 자체 버튼을 원위치해야 복구됨)',
-    key:'발신기 스위치 미복구' },
-  { yr:2018, r:1, pg:'18-21', img:10, type:'서술형',
-    q:'<b>종단저항</b>을 연결해야 하는 기기의 명칭과 단자의 명칭을 쓰시오.',
-    a:'• 기기 명칭: <b>발신기</b><br>• 단자 명칭: <b>지구선</b> 및 <b>지구공통선</b> 단자 사이에 접속',
-    key:'발신기의 지구선·지구공통선' },
-],
+'c-비상경보':`<div class="card"><h3>비상경보설비 우선경보방식</h3>
+<p>적용: <b>5층 이상</b> + 연면적 <b>3,000㎡ 초과</b></p>
+<table><tr><th>발화층</th><th>30층 미만</th><th>30층 이상</th></tr>
+<tr><td>2층↑</td><td>발화+직상층</td><td>발화+직상 4개층</td></tr>
+<tr><td>1층</td><td>발화+직상+지하</td><td>발화+직상4+지하</td></tr>
+<tr><td>지하층</td><td>발화+직상+기타지하</td><td>발화+직상+기타지하</td></tr></table>
+<p>비상벨: 1m에서 <b>90dB↑</b> / 수평거리 <b>25m↓</b>마다</p>
+</div>`,
 
-'c-중계기': [
-  { yr:2018, r:1, pg:'18-17', img:8, type:'서술형',
-    q:'자동화재탐지설비 <b>중계기의 설치기준 3가지</b>를 쓰시오.',
-    a:'① 수신기에서 직접 감지기회로의 도통시험을 행하지 않을 때에는 <b>수신기와 감지기 사이</b>에 설치<br>② 수신기에 의해 감지되지 않는 배선을 통해 전력을 공급받는 것은 전원입력측 배선에 <b>과전류차단기</b>를 설치하고, 정전 시 즉시 수신기에 표시되도록 하며 상용전원 및 예비전원 시험 가능할 것<br>③ 조작·점검 편리하고 화재·침수 피해 우려 없는 장소에 설치',
-    key:'수신기~감지기사이·과전류차단기·편리한장소' },
-  { yr:2018, r:1, pg:'18-17', img:8, type:'서술형',
-    q:'중계기에서 <b>수신 개시로부터 발신 개시까지의 시간</b>은 몇 초 이내이어야 하는가?',
-    a:'<b>5초 이내</b>',
-    key:'5초' },
-  { yr:2018, r:1, pg:'18-17', img:8, type:'서술형',
-    q:'자동화재탐지설비 중계기의 <b>집합형과 분산형의 차이</b>를 쓰시오.',
-    a:'<table style="font-size:12px;border-collapse:collapse;width:100%"><tr style="background:#f0f2f5"><th style="border:1px solid #ddd;padding:5px">구분</th><th style="border:1px solid #ddd;padding:5px">집합형</th><th style="border:1px solid #ddd;padding:5px">분산형</th></tr><tr><td style="border:1px solid #ddd;padding:5px">입력전원</td><td style="border:1px solid #ddd;padding:5px">AC 220V</td><td style="border:1px solid #ddd;padding:5px">DC 24V</td></tr><tr><td style="border:1px solid #ddd;padding:5px">전원공급</td><td style="border:1px solid #ddd;padding:5px">외부전원</td><td style="border:1px solid #ddd;padding:5px">수신기 이용</td></tr><tr><td style="border:1px solid #ddd;padding:5px">회로용량</td><td style="border:1px solid #ddd;padding:5px">대용량(30~40회로)</td><td style="border:1px solid #ddd;padding:5px">소용량(5회로 미만)</td></tr><tr><td style="border:1px solid #ddd;padding:5px">전원사고</td><td style="border:1px solid #ddd;padding:5px">내장 예비전원으로 정상작동</td><td style="border:1px solid #ddd;padding:5px">해당 계통 전체 마비</td></tr></table>',
-    key:'AC·DC / 외부·수신기 / 대·소용량' },
-],
+'c-비상방송':`<div class="card"><h3>비상방송설비</h3>
+<h4>설치 대상</h4><ul><li>연면적 <b>3,500㎡↑</b></li><li>지하층 제외 <b>11층↑</b></li><li>지하층 <b>3층↑</b></li></ul>
+<h4>핵심 설치기준</h4>
+<ul><li>음성입력: <b>3W↑</b> (실내 1W)</li><li>수평거리: <b>25m↓</b>마다</li><li>방송 개시: <b>10초↓</b></li><li>음량조정기 배선: <b>3선식</b></li></ul>
+</div>`,
 
-'c-비상경보': [
-  { yr:2018, r:2, pg:'18-33', img:16, type:'서술형',
-    q:'비상경보설비 <b>발화층 및 직상층 우선경보방식</b>의 적용 대상과 경보층을 쓰시오.',
-    a:'【적용 대상】 <b>5층 이상</b>으로서 연면적이 <b>3,000㎡를 초과</b>하는 특정소방대상물<br><br>【경보층 (30층 미만)】<br>• 2층 이상 발화: 발화층 + 직상층<br>• 1층 발화: 발화층 + 직상층 + 지하층 전체<br>• 지하층 발화: 발화층 + 직상층 + 기타 지하층<br><br>【30층 이상】직상 4개층 적용',
-    key:'5층이상·3000㎡초과' },
-],
+'c-누전':`<div class="card"><h3>누전경보기</h3>
+<div class="form">작동순서: 누전→자속→변류기 유도전압→수신기 증폭→릴레이→경보·차단</div>
+<table><tr><th>항목</th><th>기준</th></tr>
+<tr><td>설치대상</td><td>계약전류 <b>100A 초과</b></td></tr>
+<tr><td>공칭작동전류</td><td><b>200mA 이하</b></td></tr>
+<tr><td>감도조정 최대</td><td><b>1A</b></td></tr>
+<tr><td>음량</td><td>1m에서 <b>70dB↑</b></td></tr>
+<tr><td>변류기 절연저항</td><td>DC500V → <b>5MΩ↑</b></td></tr></table>
+<div class="tip">💡 ZNR: 낙뢰 이상전압으로부터 수신기 보호 / 변류기 점검 시 2차측 <b>단락</b></div>
+</div>`,
 
-'c-비상방송': [
-  { yr:2018, r:3, pg:'18-57', img:26, type:'서술형',
-    q:'비상방송설비의 <b>설치기준 10가지</b>를 쓰시오.',
-    a:'① 확성기 음성입력: <b>3W 이상</b>(실내 1W 이상)<br>② 수평거리 <b>25m 이하</b>마다 확성기 1개 이상<br>③ 조작 스위치: 바닥 <b>0.8m 이상 1.5m 이하</b><br>④ 음량조정기 배선: <b>3선식</b><br>⑤ 방송 개시 소요시간: <b>10초 이하</b><br>⑥ 증폭기·조작부: 상시 근무 장소, 점검 편리·방화상 유효한 곳<br>⑦ 조작부: 기동장치 작동과 연동하여 층·구역 표시<br>⑧ 유도장애 방지<br>⑨ 다른 방송설비와 공용 시 화재 시 비상경보 외 방송 차단 구조<br>⑩ 2이상 조작부 설치 시 상호 동시통화 가능 + 전 구역 방송 가능',
-    key:'3W·25m·10초·3선식' },
-  { yr:2018, r:3, pg:'18-59', img:27, type:'서술형',
-    q:'비상방송설비에서 <b>임피던스 매칭(AMP와 스피커)</b>을 위한 순서 3단계를 쓰시오.',
-    a:'① 스피커의 임피던스 및 음성입력 선정<br>② AMP의 출력 선정<br>③ AMP의 출력모드 선정',
-    key:'스피커→AMP출력→출력모드' },
-  { yr:2018, r:2, pg:'18-33', img:16, type:'서술형',
-    q:'비상방송설비의 <b>설치 대상</b> 3가지를 쓰시오.',
-    a:'① 연면적 <b>3,500㎡ 이상</b><br>② 지하층을 제외한 층수가 <b>11층 이상</b><br>③ 지하층의 층수가 <b>3층 이상</b>',
-    key:'3500㎡·11층·지하3층' },
-],
+'c-가스':`<div class="card"><h3>가스누설경보기</h3>
+<table><tr><th>종류</th><th>설치위치</th></tr>
+<tr><td>LPG (무거움)</td><td>바닥에서 <b>30cm 이하</b></td></tr>
+<tr><td>LNG (가벼움)</td><td>천장에서 <b>30cm 이하</b></td></tr></table>
+<p>수신→표시: <b>60초 이내</b></p>
+<ul><li>1회선: 감시 <b>20분</b> 후 10분 경보</li><li>2회선↑: 감시 <b>10분</b> 후 2회선 10분 경보</li></ul>
+</div>`,
 
-'c-누전': [
-  { yr:2018, r:1, pg:'18-19', img:9, type:'서술형',
-    q:'누전경보기의 <b>구성요소 4가지와 각 기능</b>을 쓰시오.',
-    a:'① <b>영상변류기(ZCT)</b>: 경계전로의 누설전류를 자동으로 검출<br>② <b>수신부(수신기)</b>: 변류기에서 검출된 신호를 수신하여 관계인에게 경보<br>③ <b>음향장치</b>: 누전 시 경보음 발령<br>④ <b>차단기(차단릴레이)</b>: 누설전류 발생 시 전원 차단',
-    key:'ZCT·수신부·음향·차단기' },
-  { yr:2018, r:1, pg:'18-19', img:9, type:'서술형',
-    q:'누전경보기의 <b>작동 순서</b>를 쓰시오.',
-    a:'누전 발생 → <b>누설전류에 의한 자속 발생</b> → <b>변류기에 유도전압 유기</b> → 수신기 전압 증폭 → <b>릴레이 작동</b> → 관계인에게 경보·표시 및 회로차단',
-    key:'누전→자속→유도전압→증폭→릴레이→경보' },
-  { yr:2018, r:1, pg:'18-19', img:9, type:'서술형',
-    q:'누전경보기의 <b>수신기(수신부) 설치제외 장소 5가지</b>를 쓰시오.',
-    a:'① 습도가 높은 장소<br>② 온도 변화가 급격한 장소<br>③ 화학류를 제조·저장·취급하는 장소<br>④ 대전류회로·고주파 발생회로 영향을 받을 우려가 있는 장소<br>⑤ 가연성 증기·먼지·가스 또는 부식성 증기·가스가 다량으로 체류하는 장소',
-    key:'습온화대가' },
-  { yr:2018, r:2, pg:'18-43', img:21, type:'서술형',
-    q:'누전경보기의 <b>공칭작동전류치</b>와 <b>감도조정장치의 최대조정범위</b>를 쓰시오.',
-    a:'• 공칭작동전류치: <b>200mA 이하</b><br>• 감도조정장치 최대치: <b>1A</b>',
-    key:'200mA·1A' },
-  { yr:2018, r:2, pg:'18-43', img:21, type:'서술형',
-    q:'누전경보기 수신기 전원부의 1차측에 설치하는 <b>ZNR의 설치목적</b>을 쓰시오.',
-    a:'낙뢰 발생 시 이상전압(충격파)으로부터 <b>수신기를 보호</b>하기 위함',
-    key:'낙뢰 충격파 수신기 보호' },
-  { yr:2018, r:3, pg:'18-63', img:29, type:'서술형',
-    q:'누전경보기의 설치기준 중 <b>음향장치·과전류차단기 용량</b>에 관한 기준을 쓰시오.',
-    a:'• 음향장치 음량: 1m 거리에서 <b>70dB 이상</b><br>• 과전류차단기 용량: <b>15A 이하</b><br>• 배선용차단기 용량: <b>20A 이하</b><br>• 정격전압 <b>80%</b> 전압에서 음향 발신 가능',
-    key:'70dB·15A·20A·80%' },
-],
+'c-유도등':`<div class="card"><h3>유도등</h3>
+<table><tr><th>종류</th><th>설치높이</th></tr>
+<tr><td>피난구유도등</td><td>1.5m 이상</td></tr>
+<tr><td>복도통로유도등</td><td>1m 이하</td></tr>
+<tr><td>계단통로유도등</td><td>계단참</td></tr></table>
+<p>복도: <b>20m↓</b>마다 / 거실: <b>25m↓</b>마다</p>
+<p>비상전원: <b>20분</b> (11층↑·지하도매·지하역사: <b>60분</b>)</p>
+<table><tr><th>배선</th><th>평상시</th><th>화재시</th></tr>
+<tr><td>2선식</td><td>점등</td><td>점등</td></tr>
+<tr><td>3선식</td><td>소등</td><td>점등</td></tr></table>
+</div>`,
 
-'c-가스': [
-  { yr:2018, r:2, pg:'18-47', img:22, type:'서술형',
-    q:'가스누설경보기의 <b>탐지부 설치제외 장소 3가지</b>를 쓰시오.',
-    a:'① 수분·증기와 접촉할 우려가 있는 곳<br>② 주위온도가 <b>40℃ 이상</b> 될 우려가 있는 곳<br>③ 가스가 체류하기 어려운 곳',
-    key:'수분·40℃·체류곤란' },
-  { yr:2018, r:2, pg:'18-47', img:22, type:'서술형',
-    q:'가스누설경보기의 수신개시부터 <b>가스누설표시까지 소요시간</b>과 <b>예비전원 용량</b>을 쓰시오.',
-    a:'• 소요시간: <b>60초 이내</b> (지구표시등: 황색)<br>• 예비전원 용량<br>&nbsp;&nbsp;- 1회선: 감시상태 <b>20분 계속</b> 후 10분간 경보<br>&nbsp;&nbsp;- 2회선 이상: 감시상태 <b>10분 계속</b> 후 2회선 유효 작동 10분간 경보',
-    key:'60초·1회선20분·2회선10분' },
-],
+'c-비상조명':`<div class="card"><h3>비상조명등</h3>
+<ul><li>각 거실~지상 복도·계단·통로에 설치</li><li>조도: <b>1lx↑</b></li><li>비상전원: <b>20분↑</b> (11층↑·지하도매 등: 60분)</li></ul>
+<h4>휴대용 비상조명등</h4>
+<ul><li>지하상가·지하역사: <b>25m마다 3개↑</b></li><li>대규모점포·영화관: <b>50m마다 3개↑</b></li><li>높이: <b>0.8~1.5m</b></li></ul>
+</div>`,
 
-'c-유도등': [
-  { yr:2018, r:1, pg:'18-13', img:6, type:'서술형',
-    q:'<b>통로유도등</b>의 복도·거실·계단별 설치기준을 쓰시오.',
-    a:'• <b>복도</b>: 보행거리 <b>20m 이하</b>마다 1개 이상<br>• <b>거실</b>: 보행거리 <b>25m 이하</b>마다 1개 이상 (바닥 1lx 이상)<br>• <b>계단</b>: 각 층 계단참에 설치',
-    key:'복도20m·거실25m·계단참' },
-  { yr:2018, r:1, pg:'18-13', img:6, type:'서술형',
-    q:'유도등의 비상전원 유효 점등 시간을 쓰시오. (일반·특수 구분)',
-    a:'• <b>일반</b>: 20분 이상<br>• <b>60분 이상</b> 적용 대상:<br>&nbsp;&nbsp;① 11층 이상(지하층 제외)<br>&nbsp;&nbsp;② 지하층·무창층으로서 도매시장·소매시장·여객자동차터미널·지하역사·지하상가',
-    key:'20분/60분(11층·지하도매등)' },
-  { yr:2018, r:1, pg:'18-13', img:6, type:'서술형',
-    q:'유도등 배선방식(2선식·3선식)을 비교하여 쓰시오.',
-    a:'<table style="font-size:12px;border-collapse:collapse;width:100%"><tr style="background:#f0f2f5"><th style="border:1px solid #ddd;padding:5px">구분</th><th style="border:1px solid #ddd;padding:5px">2선식</th><th style="border:1px solid #ddd;padding:5px">3선식</th></tr><tr><td style="border:1px solid #ddd;padding:5px">평상시</td><td style="border:1px solid #ddd;padding:5px">항상 점등</td><td style="border:1px solid #ddd;padding:5px">소등</td></tr><tr><td style="border:1px solid #ddd;padding:5px">화재시</td><td style="border:1px solid #ddd;padding:5px">항상 점등</td><td style="border:1px solid #ddd;padding:5px">점등</td></tr></table>',
-    key:'2선=항상점등/3선=평소소등화재점등' },
-],
+'c-비상콘센트':`<div class="card"><h3>비상콘센트설비</h3>
+<ul><li>전원: <b>단상 AC 220V</b> / 용량: <b>1.5kVA↑</b></li><li>각 층 회로: <b>2↑</b> / 1회로 콘센트: <b>10개↓</b></li><li>플러그: <b>접지형 2극</b> / 접지: <b>제3종 100Ω↓</b></li></ul>
+<h4>보호함 3가지: 문·표지·적색표시등</h4>
+</div>`,
 
-'c-비상조명': [
-  { yr:2018, r:1, pg:'18-13', img:6, type:'서술형',
-    q:'비상조명등의 <b>설치기준 3가지</b>를 쓰시오.',
-    a:'① 각 거실과 그로부터 지상에 이르는 복도·계단 및 통로에 설치<br>② 조도: 바닥 각 부분 <b>1lx 이상</b><br>③ 비상전원: <b>20분 이상</b> 유효 작동 (11층 이상·지하도매 등: 60분)',
-    key:'1lx·20분(60분예외)' },
-  { yr:2018, r:1, pg:'18-13', img:6, type:'서술형',
-    q:'<b>휴대용 비상조명등</b> 설치 시 지하상가·지하역사의 설치 간격과 수량 기준을 쓰시오.',
-    a:'보행거리 <b>25m 이내마다 3개 이상</b> 설치<br>(대규모점포·영화상영관: 50m 이내마다 3개 이상)',
-    key:'지하상가: 25m·3개/대규모점포: 50m·3개' },
-],
+'c-무선통신':`<div class="card"><h3>무선통신보조설비</h3>
+<p>종류: 누설동축케이블·안테나·혼합 방식</p>
+<ul><li>LCX: <b>4m↓</b>마다 지지금구 고정</li><li>끝부분: <b>무반사 종단저항</b></li><li>임피던스: <b>50Ω</b> / 고압전로: <b>1.5m↑</b> 이격</li></ul>
+<p>분배기=균등분배 / 분파기=주파수분리 / 혼합기=신호조합</p>
+</div>`,
 
-'c-비상콘센트': [
-  { yr:2018, r:2, pg:'18-47', img:22, type:'서술형',
-    q:'비상콘센트설비의 <b>전원회로 설치기준</b>을 쓰시오. (전원·용량·회로수·콘센트수)',
-    a:'① 전원: <b>단상 교류 220V</b><br>② 공급용량: <b>1.5kVA 이상</b><br>③ 각 층 회로수: <b>2 이상</b> (비상콘센트 1개인 경우 1회로)<br>④ 하나의 전용회로 콘센트 수: <b>10개 이하</b><br>⑤ 플러그 접속기: <b>접지형 2극</b><br>⑥ 접지공사: <b>제3종(100Ω 이하)</b>',
-    key:'220V·1.5kVA·2회로·10개이하' },
-  { yr:2018, r:2, pg:'18-47', img:22, type:'서술형',
-    q:'비상콘센트 <b>보호함</b>에 설치해야 할 것 3가지를 쓰시오.',
-    a:'① 쉽게 개폐할 수 있는 <b>문</b><br>② 보호함 표면에 <b>"비상콘센트" 표지</b><br>③ 상부에 <b>적색 표시등</b>',
-    key:'문·비상콘센트표지·적색표시등' },
-],
+'c-축전지':`<div class="card"><h3>비상전원 / 축전지</h3>
+<table><tr><th>방식</th><th>설명</th></tr>
+<tr><td>부동충전</td><td>자기방전 보충+대전류는 축전지, 정류기에 병렬 접속</td></tr>
+<tr><td>세류(트리클)</td><td>자기방전만 항상 충전</td></tr>
+<tr><td>균등충전</td><td>1~3개월마다 1회, 10~12시간 / 연축전지: 2.4~2.5V/셀</td></tr>
+<tr><td>회복충전</td><td>과방전·방치 상태에서 기능 회복</td></tr></table>
+<table><tr><th></th><th>연축전지</th><th>알칼리</th></tr><tr><td>공칭전압</td><td><b>2.0V</b></td><td><b>1.2V</b></td></tr></table>
+<div class="form">C = I × T / L  (L=보수율 0.8)</div>
+<p>납축전지 충전 시 발생: <b>수소가스(H₂)</b></p>
+</div>`,
 
-'c-무선통신': [
-  { yr:2018, r:3, pg:'18-57', img:26, type:'서술형',
-    q:'무선통신보조설비의 <b>종류(방식) 3가지</b>와 각 설명을 쓰시오.',
-    a:'① <b>누설동축케이블 방식</b>: 동축케이블 + 누설동축케이블 조합<br>② <b>안테나 방식</b>: 동축케이블 + 안테나 조합<br>③ <b>혼합 방식</b>: 누설동축케이블 + 안테나 혼합 방식',
-    key:'누설동축·안테나·혼합' },
-  { yr:2018, r:3, pg:'18-57', img:26, type:'서술형',
-    q:'무선통신보조설비의 <b>무반사 종단저항</b> 설치위치와 목적을 쓰시오.',
-    a:'• 설치위치: <b>누설동축케이블의 끝부분</b><br>• 목적: 전송로로 전송되는 전자파가 종단에서 반사되어 교신을 방해하는 것을 막기 위함',
-    key:'끝부분·반사방지' },
-  { yr:2018, r:3, pg:'18-57', img:26, type:'서술형',
-    q:'무선통신보조설비의 <b>분배기·분파기·혼합기</b>의 기능을 설명하시오.',
-    a:'• <b>분배기</b>: 신호 분기 장소에서 임피던스 매칭 + 신호 균등 분배<br>• <b>분파기</b>: 서로 다른 주파수의 합성 신호를 분리<br>• <b>혼합기</b>: 2개 이상의 입력신호를 원하는 비율로 조합',
-    key:'분배=균등분배·분파=주파수분리·혼합=조합' },
-],
+'c-배선':`<div class="card"><h3>배선 / 결선</h3>
+<table><tr><th></th><th>내화배선</th><th>내열배선</th></tr>
+<tr><td>전선관</td><td>금속관·2종가요·합성수지관</td><td>금속관·금속가요·덕트·케이블</td></tr>
+<tr><td>매설깊이</td><td><b>25mm↑</b></td><td>-</td></tr></table>
+<table><tr><th>부품</th><th>용도</th></tr>
+<tr><td>유니버설 엘보</td><td>노출배관 직각 굽힘</td></tr>
+<tr><td>링 리듀서</td><td>박스 고정 보조</td></tr>
+<tr><td>부싱</td><td>절연피복 보호</td></tr>
+<tr><td>유니언 커플링</td><td>관 고정 시 접속</td></tr></table>
+<p>후강전선관 1본: <b>3.66m</b> / 호칭: 안지름 짝수</p>
+<p>배선전용실 이격: <b>15cm↑</b> / 격벽: 굵기의 <b>1.5배↑</b></p>
+</div>`,
 
-'c-축전지': [
-  { yr:2018, r:2, pg:'18-27', img:13, type:'서술형',
-    q:'<b>부동충전방식</b>을 설명하시오.',
-    a:'전지의 자기방전을 보충함과 동시에 상용부하에 대한 전력공급은 충전기가 부담하되, 부담하기 어려운 일시적인 <b>대전류부하는 축전지가 부담</b>하도록 하는 방식. 축전지와 부하를 정류기에 <b>병렬</b>로 접속하여 충전과 방전을 동시에 행하는 방식.',
-    key:'자기방전보충·대전류=축전지·병렬접속' },
-  { yr:2018, r:2, pg:'18-27', img:13, type:'서술형',
-    q:'<b>연축전지와 알칼리축전지</b>의 공칭전압을 쓰시오.',
-    a:'• 연축전지: <b>2.0V</b>/셀<br>• 알칼리축전지: <b>1.2V</b>/셀',
-    key:'연2.0V·알1.2V' },
-  { yr:2018, r:2, pg:'18-27', img:13, type:'서술형',
-    q:'<b>균등충전방식</b>을 설명하고 연축전지의 균등충전전압 범위를 쓰시오.',
-    a:'여러 개의 축전지 중 전압 차이가 나거나 기준전압 이하로 낮은 것이 있을 경우 <b>1~3개월마다 1회, 10~12시간</b> 충전하는 방식<br><br>연축전지 셀당 균등충전전압: <b>2.4V ~ 2.5V</b>',
-    key:'1~3월·10~12시간·2.4~2.5V' },
-  { yr:2018, r:2, pg:'18-27', img:13, type:'서술형',
-    q:'납축전지 충전 시 발생하는 가스의 종류와, 축전지 용량저하율(보수율)을 쓰시오.',
-    a:'• 발생 가스: <b>수소가스(H₂)</b><br>• 용량저하율(보수율): <b>0.8</b>',
-    key:'수소가스·보수율0.8' },
-],
+'c-가닥수':`<div class="card"><h3>가닥수 계산</h3>
+<div class="form">P형 발신기 세트 (수신기↔발신기):
+전화2 + 지구2 + 응답2 + 경종2 + 표시등2 = 최소 10가닥
 
-'c-배선': [
-  { yr:2018, r:1, pg:'18-15', img:7, type:'서술형',
-    q:'<b>내화배선</b>의 공사방법을 쓰시오.',
-    a:'금속관, 2종 금속제 가요전선관 또는 합성수지관에 수납하여 <b>내화구조</b>로 된 벽 또는 바닥 등에 벽 또는 바닥 표면으로부터 <b>25mm 이상</b>의 깊이로 매설',
-    key:'금속관·가요·합성수지관·25mm매설' },
-  { yr:2018, r:2, pg:'18-31', img:15, type:'서술형',
-    q:'소방용 케이블과 다른 용도 케이블을 배선전용실에 함께 배선할 경우의 기준 2가지를 쓰시오.',
-    a:'① 소방용~비소방용 케이블 피복 간 이격거리: <b>15cm 이상</b><br>② 불연성 격벽 설치 시 높이: <b>가장 굵은 케이블 지름의 1.5배 이상</b>',
-    key:'15cm이상·1.5배이상' },
-  { yr:2018, r:1, pg:'18-15', img:7, type:'서술형',
-    q:'금속관 공사에서 <b>후강전선관 1본의 길이</b>와 <b>호칭 표시 방법</b>을 쓰시오.',
-    a:'• 1본의 길이: <b>3.66m</b><br>• 호칭 표시방법: <b>안지름</b>의 근삿값을 짝수로 표시',
-    key:'3.66m·안지름짝수' },
-],
+감지기 회로 (N경계구역):
+공통(-)1 + 신호(+)N = N+1 가닥
+→ 공통선 1선 담당: 7경계구역 이하</div>
+<div class="tip">💡 송배전식 이유: 감지기회로 도통시험을 용이하게 하기 위함</div>
+</div>`,
 
-'c-가닥수': [
-  { yr:2018, r:1, pg:'18-7', img:3, type:'계산형',
-    q:'P형 자동화재탐지설비에서 수신기~발신기 세트 간의 <b>배선 가닥수</b>를 산출하시오. (전화·지구·응답·경종 포함 기준)',
-    a:'① 전화선: <b>2가닥</b><br>② 지구선(화재신호): <b>2가닥</b><br>③ 응답확인선: <b>2가닥</b><br>④ 지구경종선: <b>2가닥</b><br>⑤ 발신기 표시등선: <b>2가닥</b><br>─────────<br>합계: <b>최소 10가닥</b> (공통선 공유 활용 시 감소)<br><br>※ 공통선 1선이 담당하는 경계구역: <b>7 이하</b>',
-    key:'전화·지구·응답·경종 각2가닥=10' },
-  { yr:2018, r:2, pg:'18-47', img:22, type:'계산형',
-    q:'[조건] P형 수신기, 경계구역 4개, 발신기 1개소 (전화 포함)<br><br>수신기에서 발신기 세트까지의 <b>총 전선 가닥수</b>를 산출하시오.',
-    a:'• 감지기회로: 공통선(1) + 신호선(4) = <b>5가닥</b><br>• 발신기세트: 전화(2) + 지구(2) + 응답(2) + 경종(2) = <b>8가닥</b><br>• 합계: <b>13가닥</b><br><br>(단, 감지기 공통선과 발신기 공통 단자 공유 시 1가닥 절감 가능)',
-    key:'감지기5+발신기8=13가닥' },
-  { yr:2018, r:1, pg:'18-9', img:4, type:'서술형',
-    q:'P형 자동화재탐지설비에서 <b>송배전식</b>으로 배선하는 이유를 쓰시오.',
-    a:'감지기회로의 <b>도통시험을 용이하게 하기 위하여</b> (배선의 도중에서 분기하지 않는 방식)',
-    key:'도통시험 용이' },
-],
+'c-계산':`<div class="card"><h3>전기 계산 공식</h3>
+<div class="form">전압강하 (단상2선): e = 35.6 × L × I / (1000 × A)
+전압강하 (3상3선):  e = 30.8 × L × I / (1000 × A)
 
-'c-계산': [
-  { yr:2018, r:2, pg:'18-27', img:13, type:'계산형',
-    q:'<b>전압강하 계산</b>: 단상 2선식, 부하전류 15A, 편도거리 80m, 전선 단면적 4mm² 일 때 전압강하(V)를 구하시오.',
-    a:'e = 35.6 × L × I / (1000 × A)<br>e = 35.6 × 80 × 15 / (1000 × 4)<br>e = 42,720 / 4,000<br>e = <b>10.68V</b>',
-    key:'35.6×80×15/(1000×4)=10.68V' },
-  { yr:2018, r:3, pg:'18-61', img:28, type:'계산형',
-    q:'비상콘센트설비 전선의 정격전류를 구하시오.<br>[조건] 비상콘센트 3개, 1.5kVA/개, 단상 220V, 역률 1.0',
-    a:'I = P / (V × cosθ)<br>= (1,500 × 3) / (220 × 1.0)<br>= 4,500 / 220<br>= <b>20.45A</b><br><br>허용전류 = 20.45 × 1.25 = <b>25.57A</b> → 2.5mm² (26A) 이상 선정',
-    key:'P/V=20.45A×1.25=25.57A→2.5mm²' },
-  { yr:2018, r:2, pg:'18-27', img:13, type:'계산형',
-    q:'<b>축전지 용량 계산</b>: 부하전류 10A, 방전시간 30분, 보수율 0.8일 때 필요한 축전지 용량(Ah)을 구하시오.',
-    a:'C = I × T / L<br>= 10 × (30/60) / 0.8<br>= 10 × 0.5 / 0.8<br>= <b>6.25Ah</b>',
-    key:'I×T/L=10×0.5/0.8=6.25Ah' },
-],
-
-'c-시각경보': [
-  { yr:2018, r:1, pg:'18-11', img:5, type:'서술형',
-    q:'청각장애인용 <b>시각경보장치의 설치기준 4가지</b>를 쓰시오.',
-    a:'① 청각장애인용 객실 및 공용으로 사용하는 <b>거실</b>에 설치<br>② 공연장·집회장: 시선이 집중되는 <b>무대부 부분</b> 등에 설치<br>③ 설치 높이: 바닥에서 <b>2m 이상 2.5m 이하</b> (천장 2m 이하 시: 천장에서 0.15m 이내)<br>④ 광원: 전용 <b>축전지설비 또는 전기저장장치</b>에 의해 점등',
-    key:'거실·무대부·2~2.5m·축전지' },
-],
-
+축전지 용량: C = I × T / L  (L=보수율 0.8)
+전류: I = P / (V × cosθ)</div>
+<table><tr><th>mm²</th><th>1.5</th><th>2.5</th><th>4</th><th>6</th><th>10</th></tr>
+<tr><td>허용A</td><td>19</td><td>26</td><td>34</td><td>43</td><td>60</td></tr></table>
+</div>`,
 };
 
-// ── 단원별 기출탭 래퍼 ─────────────────────────────────────────────
-function wrapWithQuizTab(theoryHtml, chapterKey) {
-  const items = CQ[chapterKey] || [];
-  const cnt = items.length;
-  const quizHtml = cnt === 0
-    ? '<div class="card"><p style="color:#999;text-align:center;padding:20px">해당 단원 기출문제를 준비 중입니다.</p></div>'
-    : items.map((q, i) => {
-        const imgThumb = q.img ? `
-          <div onclick="openLB(IMGS.filter(x=>x.id===${q.img}),0)" style="float:right;margin:0 0 10px 14px;cursor:pointer;border:2px solid var(--border);border-radius:6px;overflow:hidden;width:180px;flex-shrink:0;transition:border-color .15s" onmouseover="this.style.borderColor='#c0392b'" onmouseout="this.style.borderColor='#dde1e7'">
-            <img src="기출_이미지/image${q.img}.png" style="width:100%;display:block" alt="기출이미지">
-            <div style="font-size:9.5px;text-align:center;padding:3px 4px;background:#f8f9fa;color:#888">🔍 클릭하여 원본 확대</div>
-          </div>` : '';
-        const roundColor = q.r===1?'#c0392b':q.r===2?'#2980b9':'#27ae60';
-        return `<div class="qi" style="overflow:hidden">
-          <div class="qn" style="display:flex;align-items:center;gap:7px;margin-bottom:8px">
-            <span style="background:${roundColor};color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:bold">${q.yr}년 ${q.r}회차</span>
-            <span style="background:#f0f2f5;color:#636e72;padding:2px 8px;border-radius:10px;font-size:10px">${q.type}</span>
-            <span style="font-size:10px;color:#aaa">p.${q.pg}</span>
-            <span style="margin-left:auto;font-size:10px;font-weight:bold;color:#e67e22">핵심: ${q.key}</span>
-          </div>
-          ${imgThumb}
-          <div class="q" style="clear:none">${q.q}</div>
-          <div style="clear:both"></div>
-          <button class="sa-btn" onclick="toggleAns(this)">정답·해설 보기 ▼</button>
-          <div class="sa-ans">${q.a}</div>
-        </div>`;
-      }).join('');
+// ═══════════════════════════════════════════════════
+// 단원별 기출 (이미지 썸네일 연동)
+// ═══════════════════════════════════════════════════
+const QUIZ={
+'c-감지기':[
+  {yr:2024,r:1,type:'서술형',key:'축적기능없는감지기 3가지',
+   q:'자동화재탐지설비에서 <b>축적기능이 없는 감지기</b>로 설치하여야 하는 경우 3가지를 쓰시오.',
+   a:'① 급속한 연소 확대가 우려되는 장소<br>② 교차회로방식에 사용되는 감지기<br>③ 축적기능이 있는 수신기에 연결하여 사용하는 감지기',
+   img:{y:'24',pg:3,label:'24년도 1회차 3p'}},
+  {yr:2023,r:1,type:'서술형',key:'유통시험 마노미터100→50mm',
+   q:'공기관식 차동식 분포형 감지기의 <b>유통시험 방법</b>을 설명하시오.',
+   a:'① 검출부 한쪽→<b>마노미터</b>, 다른쪽→<b>테스트펌프</b> 접속<br>② 공기 주입→수위 <b>100mm</b> 상승<br>③ 송기구 열어 <b>50mm</b>까지 내려가는 시간(유통시간) 측정',
+   img:{y:'23',pg:4,label:'23년도 1회차'}},
+  {yr:2022,r:2,type:'표완성',key:'90·70·60·20·150',
+   q:'스포트형 감지기 설치면적 기준표를 완성하시오. (부착높이 4m미만 / 4~8m미만)',
+   a:'차동식1종: <b>90/50㎡</b> · 차동식2종: <b>70/40㎡</b> · 정온식1종: <b>60/30㎡</b> · 정온식2종: <b>20/15㎡</b> · 연기1·2종: <b>150/75㎡</b>',
+   img:{y:'22',pg:5,label:'22년도 2회차'}},
+  {yr:2021,r:1,type:'서술형',key:'광전식분리형 1m·0.6m·80%',
+   q:'광전식 분리형 감지기의 설치기준 4가지를 쓰시오.',
+   a:'① 수광면: 햇빛 직접 받지 않도록<br>② 뒷벽으로부터 <b>1m 이내</b><br>③ 광축~나란한 벽: <b>0.6m 이상</b><br>④ 광축 높이: 천장의 <b>80% 이상</b>',
+   img:{y:'21',pg:3,label:'21년도 1회차'}},
+  {yr:2020,r:1,type:'서술형',key:'설치제외 부20목프간고',
+   q:'감지기 설치제외 장소 5가지를 쓰시오.',
+   a:'① 부식성 가스 체류 ② 천장 <b>20m↑</b> ③ 목욕실·샤워실 ④ 프레스·주조공장 ⑤ 헛간 등 기류 통하는 곳',
+   img:{y:'20',pg:3,label:'20년도 1회차'}},
+  {yr:2019,r:2,type:'계산형',key:'수량=⌈면적÷90⌉',
+   q:'[조건] 바닥면적 560㎡, 차동식 스포트형 1종, 부착높이 3m<br>감지기 최소 수량을 구하시오.',
+   a:'1개 설치면적(4m미만,1종)=<b>90㎡</b><br>수량=⌈560÷90⌉=⌈6.22⌉=<b>7개</b>',
+   img:{y:'19',pg:28,label:'19년도 2회차'}},
+  {yr:2018,r:2,type:'서술형',key:'시험5가지 화작유접리',
+   q:'공기관식 차동식 분포형 감지기의 <b>시험 종류 5가지</b>를 쓰시오.',
+   a:'① 화재작동시험 ② 작동계속시험 ③ 유통시험 ④ 접점수고시험 ⑤ 리크시험 / 암기: <b>화작유접리</b>',
+   img:{y:'18',pg:47,label:'18년도 2회차 47p'}},
+],
+'c-수신기':[
+  {yr:2024,r:1,type:'서술형',key:'도통시험원인5 단단감종종',
+   q:'P형 수신기 <b>회로도통시험</b>에서 정상신호 없을 때 원인 5가지를 쓰시오.',
+   a:'① 감지기회로 단선 ② 감지기회로 단락 ③ 감지기 고장 ④ 종단저항 접속불량 ⑤ 종단저항 누락',
+   img:{y:'24',pg:2,label:'24년도 1회차 2p'}},
+  {yr:2023,r:2,type:'서술형',key:'공통선시험 7이하',
+   q:'P형 1급 수신기 <b>공통선 시험</b>의 방법과 판정기준을 쓰시오.',
+   a:'방법: 공통선 1선 제거→도통시험스위치→회로선택스위치 차례 회전→단선 지시 경계구역 회선수 확인<br>판정: 경계구역수 <b>7 이하</b>',
+   img:{y:'23',pg:35,label:'23년도 2회차'}},
+  {yr:2022,r:1,type:'서술형',key:'비화재보 방지4가지',
+   q:'자동화재탐지설비 <b>비화재보(일과성)</b>의 방지대책 4가지를 쓰시오.',
+   a:'① 비화재보 적응성 감지기 설치 ② 환경 적응성 감지기 사용 ③ 축적기능 수신기 설치 ④ 절연불량 선로 교체',
+   img:{y:'22',pg:3,label:'22년도 1회차'}},
+  {yr:2021,r:2,type:'서술형',key:'우선경보 30층미만·이상',
+   q:'5층↑ 연면적 3,000㎡ 초과(30층 미만)에서 <b>우선경보방식</b> 발화층별 경보층을 쓰시오.',
+   a:'2층↑ 발화: 발화+직상층<br>1층 발화: 발화+직상+지하<br>지하층 발화: 발화+직상+기타지하',
+   img:{y:'21',pg:32,label:'21년도 2회차'}},
+  {yr:2019,r:1,type:'서술형',key:'기능시험7가지 화회공예지도동',
+   q:'P형 수신기의 <b>기능시험 7가지</b>를 쓰시오.',
+   a:'① 화재표시작동시험 ② 회로저항시험(50Ω↓) ③ 공통선시험(7경계구역↓) ④ 예비전원시험 ⑤ 지구음향장치 작동시험 ⑥ 회로도통시험 ⑦ 동시작동시험(5회선)',
+   img:{y:'19',pg:3,label:'19년도 1회차'}},
+],
+'c-발신기':[
+  {yr:2024,r:2,type:'서술형',key:'단자용도 전공지응',
+   q:'P형 수동발신기의 <b>단자별 명칭과 용도</b>를 쓰시오.',
+   a:'① 전화단자: 수신기↔발신기 전화연락<br>② 공통단자: 전화·지구·응답 공유<br>③ 지구단자: 화재신호 수신기 전달<br>④ 응답단자: 수신기 전달 여부 확인',
+   img:{y:'24',pg:26,label:'24년도 2회차'}},
+  {yr:2022,r:3,type:'서술형',key:'표시등 15°·10m·적색',
+   q:'발신기 <b>위치 표시등</b>의 식별 범위와 색깔을 쓰시오.',
+   a:'부착면 <b>15° 이상</b> 범위 / 부착지점 <b>10m 이내</b> / 색: <b>적색</b>',
+   img:{y:'22',pg:57,label:'22년도 3회차'}},
+  {yr:2020,r:2,type:'서술형',key:'종단저항 발신기 지구단자',
+   q:'종단저항을 연결해야 하는 기기와 단자명을 쓰시오.',
+   a:'기기: <b>발신기</b><br>단자: <b>지구선</b> 및 <b>지구공통선</b> 단자',
+   img:{y:'20',pg:55,label:'20년도 2회차'}},
+],
+'c-누전':[
+  {yr:2024,r:3,type:'서술형',key:'구성요소4 ZCT수신음차',
+   q:'누전경보기의 <b>구성요소 4가지와 각 기능</b>을 쓰시오.',
+   a:'① ZCT(영상변류기): 누설전류 검출<br>② 수신부: 신호 수신·경보 발령<br>③ 음향장치: 경보음 발령<br>④ 차단기: 전원 차단',
+   img:{y:'24',pg:50,label:'24년도 3회차'}},
+  {yr:2023,r:3,type:'서술형',key:'설치제외 습온화대가',
+   q:'누전경보기 수신기 <b>설치제외 장소 5가지</b>를 쓰시오.',
+   a:'① 습도 높은 장소 ② 온도변화 급격 ③ 화학류 제조·저장 ④ 대전류·고주파 영향 우려 ⑤ 가연성·부식성 증기·가스 다량 체류',
+   img:{y:'23',pg:65,label:'23년도 3회차'}},
+  {yr:2021,r:1,type:'서술형',key:'ZNR 낙뢰 수신기보호',
+   q:'누전경보기 수신기 1차측 <b>ZNR의 설치목적</b>을 쓰시오.',
+   a:'낙뢰 발생 시 이상전압(충격파)으로부터 <b>수신기를 보호</b>하기 위함',
+   img:{y:'21',pg:5,label:'21년도 1회차'}},
+  {yr:2019,r:3,type:'서술형',key:'공칭작동전류 200mA 감도1A',
+   q:'누전경보기의 <b>공칭작동전류치</b>와 <b>감도조정장치 최대치</b>를 쓰시오.',
+   a:'공칭작동전류치: <b>200mA 이하</b><br>감도조정장치 최대치: <b>1A</b>',
+   img:{y:'19',pg:50,label:'19년도 3회차'}},
+  {yr:2018,r:1,type:'서술형',key:'작동순서',
+   q:'누전경보기의 <b>작동 순서</b>를 쓰시오.',
+   a:'누전→누설전류 자속→변류기 유도전압→수신기 증폭→릴레이→경보·표시·회로차단',
+   img:{y:'18',pg:19,label:'18년도 1회차 19p'}},
+],
+'c-비상방송':[
+  {yr:2024,r:1,type:'서술형',key:'설치기준10가지',
+   q:'비상방송설비의 <b>설치기준 10가지</b>를 쓰시오.',
+   a:'①음성입력3W↑(실내1W) ②수평거리25m↓ ③조작스위치0.8~1.5m ④음량조정기3선식 ⑤방송개시10초↓ ⑥증폭기·조작부 상시근무장소 ⑦기동장치 연동 층표시 ⑧유도장애방지 ⑨비상경보외 차단구조 ⑩2이상 조작부 동시통화+전구역방송',
+   img:{y:'24',pg:15,label:'24년도 1회차'}},
+  {yr:2022,r:2,type:'서술형',key:'설치대상 3500㎡·11층·지하3층',
+   q:'비상방송설비의 <b>설치 대상 3가지</b>를 쓰시오.',
+   a:'① 연면적 <b>3,500㎡↑</b><br>② 지하층 제외 <b>11층↑</b><br>③ 지하층 <b>3층↑</b>',
+   img:{y:'22',pg:32,label:'22년도 2회차'}},
+],
+'c-유도등':[
+  {yr:2023,r:2,type:'서술형',key:'통로유도등 복도20m거실25m',
+   q:'통로유도등의 복도·거실·계단별 설치기준을 쓰시오.',
+   a:'복도: 보행거리 <b>20m↓</b>마다<br>거실: 보행거리 <b>25m↓</b>마다 (바닥 1lx↑)<br>계단: 각 층 <b>계단참</b>',
+   img:{y:'23',pg:38,label:'23년도 2회차'}},
+  {yr:2021,r:3,type:'서술형',key:'비상전원 20분 60분',
+   q:'유도등의 비상전원 유효 점등 시간을 쓰시오.',
+   a:'일반: <b>20분↑</b><br>60분 적용: 11층↑(지하층 제외), 지하도매·소매·터미널·지하역사·지하상가',
+   img:{y:'21',pg:62,label:'21년도 3회차'}},
+],
+'c-비상조명':[
+  {yr:2022,r:3,type:'서술형',key:'조도1lx 비상전원20분',
+   q:'비상조명등의 <b>설치기준 3가지</b>를 쓰시오.',
+   a:'① 각 거실~지상 복도·계단·통로에 설치<br>② 조도: 바닥 <b>1lx↑</b><br>③ 비상전원: <b>20분↑</b> (11층↑·지하도매 등: 60분)',
+   img:{y:'22',pg:60,label:'22년도 3회차'}},
+],
+'c-비상콘센트':[
+  {yr:2023,r:1,type:'서술형',key:'220V 1.5kVA 2회로 10개이하',
+   q:'비상콘센트설비의 <b>전원회로 설치기준</b>을 쓰시오.',
+   a:'① 단상 <b>AC 220V</b> ② 공급용량 <b>1.5kVA↑</b> ③ 각층 회로 <b>2↑</b> ④ 1회로 콘센트 <b>10개↓</b> ⑤ 접지형 2극 플러그 ⑥ 제3종 접지(100Ω↓)',
+   img:{y:'23',pg:18,label:'23년도 1회차'}},
+  {yr:2021,r:2,type:'서술형',key:'보호함 문·표지·적색표시등',
+   q:'비상콘센트 <b>보호함</b>에 설치해야 할 것 3가지를 쓰시오.',
+   a:'① 쉽게 개폐 가능한 <b>문</b><br>② 보호함 표면에 <b>"비상콘센트" 표지</b><br>③ 상부에 <b>적색 표시등</b>',
+   img:{y:'21',pg:38,label:'21년도 2회차'}},
+],
+'c-축전지':[
+  {yr:2024,r:2,type:'서술형',key:'부동충전 병렬접속 자기방전',
+   q:'<b>부동충전방식</b>을 설명하시오.',
+   a:'자기방전 보충+상용부하는 충전기 담당, 일시적 대전류는 축전지 부담. 축전지와 부하를 정류기에 <b>병렬</b> 접속하여 충전·방전 동시 수행.',
+   img:{y:'24',pg:28,label:'24년도 2회차'}},
+  {yr:2023,r:1,type:'계산형',key:'C=IT/L=6.25Ah',
+   q:'부하전류 10A, 방전시간 30분, 보수율 0.8일 때 <b>축전지 용량(Ah)</b>을 구하시오.',
+   a:'C=I×T/L=10×(30/60)/0.8=10×0.5/0.8=<b>6.25Ah</b>',
+   img:{y:'23',pg:2,label:'23년도 1회차 2p'}},
+  {yr:2022,r:2,type:'서술형',key:'연2.0V 알1.2V',
+   q:'연축전지와 알칼리축전지의 공칭전압을 쓰시오.',
+   a:'연축전지: <b>2.0V/셀</b><br>알칼리축전지: <b>1.2V/셀</b>',
+   img:{y:'22',pg:30,label:'22년도 2회차'}},
+  {yr:2020,r:1,type:'서술형',key:'균등충전 1~3개월 10~12시간 2.4~2.5V',
+   q:'<b>균등충전방식</b>을 설명하고 연축전지 균등충전전압 범위를 쓰시오.',
+   a:'전압 차이나거나 낮은 축전지: <b>1~3개월마다 1회, 10~12시간</b> 충전<br>연축전지 셀당: <b>2.4~2.5V</b>',
+   img:{y:'20',pg:8,label:'20년도 1회차'}},
+],
+'c-계산':[
+  {yr:2024,r:1,type:'계산형',key:'35.6×60×12÷(1000×2.5)=10.25V',
+   q:'단상2선식, 부하전류 12A, 편도거리 60m, 전선 2.5mm² 일 때 <b>전압강하(V)</b>를 구하시오.',
+   a:'e=35.6×L×I/(1000×A)<br>=35.6×60×12/(1000×2.5)<br>=25,632/2,500=<b>10.25V</b>',
+   img:{y:'24',pg:4,label:'24년도 1회차'}},
+  {yr:2023,r:1,type:'계산형',key:'P/V×1.25→2.5mm²',
+   q:'비상콘센트 3개(1.5kVA, 220V, cosθ=1)의 정격전류와 허용전류를 구하시오.',
+   a:'정격전류: I=(1500×3)/220=<b>20.45A</b><br>허용전류: 20.45×1.25=<b>25.57A</b>→2.5mm²(26A) 선정',
+   img:{y:'23',pg:3,label:'23년도 1회차'}},
+  {yr:2022,r:1,type:'계산형',key:'C=20×(20/60)/0.8=8.33Ah',
+   q:'부하전류 20A, 방전시간 20분, 보수율 0.8일 때 축전지 용량(Ah)을 구하시오.',
+   a:'C=20×(20/60)/0.8=20×0.333/0.8=<b>8.33Ah</b>',
+   img:{y:'22',pg:4,label:'22년도 1회차'}},
+],
+'c-가닥수':[
+  {yr:2024,r:3,type:'계산형',key:'전화+지구+응답+경종+표시등=10가닥',
+   q:'P형 수신기↔발신기 세트 간 <b>최소 배선 가닥수</b>를 산출하시오. (전화·지구·응답·경종·표시등 포함)',
+   a:'전화2+지구2+응답2+경종2+표시등2=<b>최소 10가닥</b><br>(공통선 공유 시 감소 / 공통선 1선: 7경계구역↓)',
+   img:{y:'24',pg:52,label:'24년도 3회차'}},
+  {yr:2022,r:3,type:'계산형',key:'N경계구역 N+1가닥',
+   q:'P형 수신기, 경계구역 5개일 때 감지기회로 <b>총 가닥수</b>를 구하시오.',
+   a:'공통(-)1+신호(+)5=<b>6가닥</b><br>(공통선 1선 담당: 7경계구역↓)',
+   img:{y:'22',pg:60,label:'22년도 3회차'}},
+  {yr:2020,r:1,type:'서술형',key:'송배전식=도통시험 용이',
+   q:'P형 자탐설비에서 <b>송배전식</b>으로 배선하는 이유를 쓰시오.',
+   a:'감지기회로의 <b>도통시험을 용이하게 하기 위하여</b> (배선 도중에서 분기하지 않는 방식)',
+   img:{y:'20',pg:5,label:'20년도 1회차'}},
+],
+'c-배선':[
+  {yr:2023,r:2,type:'서술형',key:'내화배선 25mm매설',
+   q:'<b>내화배선</b>의 공사방법을 쓰시오.',
+   a:'금속관, 2종 금속제 가요전선관 또는 합성수지관에 수납하여 내화구조 벽·바닥 표면으로부터 <b>25mm↑</b> 깊이로 매설',
+   img:{y:'23',pg:40,label:'23년도 2회차'}},
+  {yr:2021,r:3,type:'서술형',key:'배선전용실 15cm·1.5배',
+   q:'소방용 케이블과 비소방용 케이블을 배선전용실에 함께 배선할 경우 기준 2가지를 쓰시오.',
+   a:'① 피복 간 이격: <b>15cm↑</b><br>② 불연성 격벽 높이: 가장 굵은 케이블 지름의 <b>1.5배↑</b>',
+   img:{y:'21',pg:68,label:'21년도 3회차'}},
+],
+};
 
-  return `
-    <div style="display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:16px" id="ct-tabs">
-      <div class="tab on" onclick="ctTab(this,'ct-theory')" style="font-size:13px;padding:9px 20px">📖 이론 정리</div>
-      <div class="tab" onclick="ctTab(this,'ct-quiz')" style="font-size:13px;padding:9px 20px">📝 기출문제 <span style="background:#c0392b;color:#fff;border-radius:10px;padding:1px 7px;font-size:10px;margin-left:4px">${cnt}</span></div>
-    </div>
-    <div id="ct-theory">${theoryHtml}</div>
-    <div id="ct-quiz" style="display:none">${quizHtml}</div>`;
-}
-
-function ctTab(el, targetId) {
-  document.querySelectorAll('#ct-tabs .tab').forEach(t => t.classList.remove('on'));
-  el.classList.add('on');
-  document.getElementById('ct-theory').style.display = targetId === 'ct-theory' ? '' : 'none';
-  document.getElementById('ct-quiz').style.display   = targetId === 'ct-quiz'   ? '' : 'none';
-}
-
-function toggleAns(btn) {
-  btn.nextElementSibling.classList.toggle('on');
-  btn.textContent = btn.nextElementSibling.classList.contains('on') ? '정답·해설 닫기 ▲' : '정답·해설 보기 ▼';
-}
-
-// ── INIT ──────────────────────────────────────────────────────────
-updP();
-go('home');
+// ═══════════════════════════════════════════════════
+// 홈 그리드 초기화
+// ═══════════════════════════════════════════════════
+(function initHome(){
+  const yrGrid=document.getElementById('yr-home-grid');
+  yrGrid.innerHTML=Object.keys(EXAM).map(y=>{
+    const d=EXAM[y];
+    const rds=d.rounds.filter(r=>r.r>0).length;
+    return `<div class="hc" onclick="openViewer('${y}',1)">
+      <div class="icon">📋</div>
+      <div class="t">${d.year}년도</div>
+      <div class="s">${d.total}장 · ${rds}회차</div>
+    </div>`;
+  }).join('');
+  const thGrid=document.getElementById('theory-home-grid');
+  const chs=[
+    {k:'c-감지기',i:'🔴',t:'감지기'},
+    {k:'c-수신기',i:'🖥',t:'자탐수신기'},
+    {k:'c-발신기',i:'🔘',t:'발신기'},
+    {k:'c-누전',i:'⚡',t:'누전경보기'},
+    {k:'c-비상방송',i:'📢',t:'비상방송'},
+    {k:'c-유도등',i:'🚦',t:'유도등'},
+    {k:'c-비상콘센트',i:'🔌',t:'비상콘센트'},
+    {k:'c-축전지',i:'🔋',t:'축전지'},
+    {k:'c-계산',i:'🧮',t:'전기계산'},
+    {k:'c-가닥수',i:'📐',t:'가닥수계산'},
+    {k:'c-배선',i:'🔩',t:'배선/결선'},
+  ];
+  thGrid.innerHTML=chs.map(c=>`<div class="hc" onclick="showTheory('${c.k}')">
+    <div class="icon">${c.i}</div>
+    <div class="t">${c.t}</div>
+    <div class="s">기출 ${(QUIZ[c.k]||[]).length}문항</div>
+  </div>`).join('');
+})();
 </script>
-
-<!-- 라이트박스 -->
-<div id="lb" onclick="if(event.target===this)closeLB()">
-  <button id="lb-close" onclick="closeLB()">✕</button>
-  <img id="lb-img" src="" alt="기출문제 이미지">
-  <div id="lb-bar">
-    <button onclick="lbPrev()">◀ 이전</button>
-    <div id="lb-info"></div>
-    <button onclick="lbNext()">다음 ▶</button>
-    <button onclick="closeLB()">닫기</button>
-  </div>
-</div>
-
 </body>
 </html>
