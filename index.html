@@ -484,6 +484,14 @@ body{
 <div id="main">
   <!-- 뷰어 툴바 -->
   <div id="vbar">
+    <button id="btn-back" onclick="goBack()"
+      style="display:none;align-items:center;gap:5px;padding:5px 13px;
+             border:1.5px solid var(--accent);border-radius:7px;
+             background:#eaf3fb;color:var(--accent);font-size:13px;
+             font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;">
+      ← 공부로 돌아가기
+    </button>
+    <div class="vbar-sep" id="back-sep" style="display:none"></div>
     <div id="yr-btns"></div>
     <div class="vbar-sep"></div>
     <div id="rd-btns"></div>
@@ -579,6 +587,7 @@ const EXAM = {
 // 뷰어
 // ═══════════════════════════════════════════════════
 let cY='24', cP=1, cZ='fit';
+let currentPanel=null, prevPanel=null;
 
 function imgSrc(y,p){
   const d=EXAM[y]; const n=String(p).padStart(d.pad,'0');
@@ -588,10 +597,21 @@ function roundOf(y,p){ return EXAM[y].rounds.find(r=>p>=r.s&&p<=r.e)||EXAM[y].ro
 
 function openViewer(y,pg){
   cY=y; cP=parseInt(pg);
+  // 이론/기출 패널에서 열린 경우 → 돌아가기 상태 저장
+  const tp=document.getElementById('theory-panel');
+  if(tp.style.display==='block' && currentPanel){
+    prevPanel=currentPanel;
+  } else if(tp.style.display!=='block'){
+    prevPanel=null;
+  }
   document.getElementById('viewer').style.display='flex';
   document.getElementById('vbar').style.display='flex';
-  document.getElementById('theory-panel').style.display='none';
+  tp.style.display='none';
   document.getElementById('home-panel').style.display='none';
+  const bb=document.getElementById('btn-back');
+  const bs=document.getElementById('back-sep');
+  if(bb){bb.style.display=prevPanel?'inline-flex':'none';}
+  if(bs){bs.style.display=prevPanel?'block':'none';}
   // 모바일 하단 네비 표시
   const mn=document.getElementById('mob-nav');
   if(mn) mn.style.display='flex';
@@ -666,6 +686,8 @@ document.addEventListener('keydown',e=>{
 // 이론 패널
 // ═══════════════════════════════════════════════════
 function showTheory(key){
+  currentPanel={fn:'showTheory',key};
+  prevPanel=null;
   document.getElementById('viewer').style.display='none';
   document.getElementById('vbar').style.display='none';
   document.getElementById('home-panel').style.display='none';
@@ -741,6 +763,8 @@ const QUIZ_LABELS = {
 };
 
 function showQuiz(key) {
+  currentPanel={fn:'showQuiz',key};
+  prevPanel=null;
   document.getElementById('viewer').style.display='none';
   document.getElementById('vbar').style.display='none';
   document.getElementById('home-panel').style.display='none';
@@ -1907,6 +1931,16 @@ const QUIZ={
 })();
 
 // ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+// 뷰어 → 이전 패널 돌아가기
+// ═══════════════════════════════════════════════════
+function goBack(){
+  if(!prevPanel) return;
+  const p=prevPanel; prevPanel=null;
+  if(p.fn==='showTheory') showTheory(p.key);
+  else showQuiz(p.key);
+}
+
 // 모바일 사이드바 토글
 // ═══════════════════════════════════════════════════
 function toggleSidebar(){
