@@ -265,9 +265,134 @@ body{
 }
 .quiz-page-header h2{font-size:16px;font-weight:700;margin-bottom:4px;}
 .quiz-page-header p{font-size:12.5px;color:#fde8e6;opacity:.9;}
+
+/* ── 모바일 햄버거 ── */
+#mob-menu{
+  display:none;position:fixed;top:10px;left:10px;z-index:200;
+  background:var(--dark);color:#fff;border:none;border-radius:8px;
+  width:44px;height:44px;cursor:pointer;font-size:22px;
+  align-items:center;justify-content:center;
+  box-shadow:var(--shadow-lg);
+}
+#overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.5);z-index:99;
+}
+
+/* ── 모바일 하단 뷰어 네비 ── */
+#mob-nav{
+  display:none;position:fixed;bottom:0;left:0;right:0;
+  background:#fff;border-top:1px solid var(--border);
+  padding:8px 12px;gap:8px;align-items:center;
+  z-index:50;box-shadow:0 -2px 8px rgba(0,0,0,.1);
+}
+#mob-nav button{
+  flex:1;padding:10px;border:1.5px solid var(--border);
+  border-radius:8px;background:#fff;font-size:20px;
+  cursor:pointer;min-height:46px;
+}
+#mob-nav button:active{background:var(--bg);}
+#mob-nav button:disabled{opacity:.3;}
+#mob-nav .mn-info{flex:2;text-align:center;font-size:13px;color:var(--muted);font-weight:600;}
+
+/* ══════════════════════════════════
+   모바일 반응형 (≤768px)
+══════════════════════════════════ */
+@media(max-width:768px){
+  body{
+    display:block;
+    height:100dvh;height:100vh;
+    overflow:hidden;
+  }
+  #mob-menu{display:flex;}
+
+  /* 사이드바: 슬라이드 오버레이 */
+  #sb{
+    position:fixed;left:0;top:0;bottom:0;z-index:100;
+    width:280px;min-width:unset;
+    transform:translateX(-100%);
+    transition:transform .25s ease;
+  }
+  #sb.open{transform:translateX(0);}
+  #overlay.open{display:block;}
+
+  /* 메인 전체폭 */
+  #main{
+    width:100%;height:100dvh;height:100vh;
+    overflow:hidden;display:flex;flex-direction:column;
+  }
+
+  /* 툴바: 가로 스크롤 */
+  #vbar{
+    padding:6px 50px 6px 8px;gap:4px;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    flex-wrap:nowrap;
+  }
+  #vbar>*{flex-shrink:0;}
+  .yr-btn{padding:8px 11px;min-height:38px;font-size:12px;}
+  .rd-btn{padding:7px 10px;min-height:38px;font-size:12px;}
+  .zoom-btn{padding:7px 10px;min-height:38px;font-size:12px;}
+  .nav-btn{padding:8px 13px;min-height:38px;font-size:16px;}
+  #pg-input{width:46px;min-height:38px;font-size:13px;}
+  .vbar-sep{height:20px;}
+  /* 키보드 안내 숨김 */
+  #vbar .kb-hint{display:none;}
+
+  /* 이미지 뷰어 하단 여백 (하단 네비 높이) */
+  #viewer{padding:8px 8px 70px;}
+  #vimg.fit{width:100%;max-width:100%;}
+  #vimg.full{width:100%;}
+
+  /* 이론·기출 패널 */
+  #theory-panel{padding:12px 14px 80px;}
+  .card{padding:14px 14px;}
+  .card table{font-size:12px;}
+  .card th,.card td{padding:6px 8px;}
+
+  /* 홈 패널 */
+  #home-panel{padding:50px 14px 14px;}
+  .hgrid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
+
+  /* 기출 썸네일: float 해제, 전체폭 */
+  .qi-thumb-wrap{
+    float:none!important;width:100%!important;
+    margin:0 0 12px 0!important;
+  }
+
+  /* 탭: 가로 스크롤 */
+  .tabs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;}
+  .tab{flex-shrink:0;padding:10px 14px;font-size:13px;}
+
+  /* 기출 카드 */
+  .qi{padding:14px 12px;}
+  .qi .q{font-size:14px;}
+  .sa-btn{padding:9px 16px;min-height:40px;font-size:13px;}
+  .qi-meta{flex-wrap:wrap;gap:5px;}
+
+  /* 홈 카드 */
+  .hc{padding:13px 10px;}
+  .hc .icon{font-size:22px;}
+  .hc .t{font-size:12px;}
+
+  /* 하단 네비 표시 */
+  #mob-nav{display:flex;}
+}
+
+@media(min-width:769px){
+  #mob-menu{display:none!important;}
+  #mob-nav{display:none!important;}
+  #overlay{display:none!important;}
+}
 </style>
 </head>
 <body>
+<button id="mob-menu" onclick="toggleSidebar()" aria-label="메뉴">☰</button>
+<div id="overlay" onclick="closeSidebar()"></div>
+<div id="mob-nav" style="display:none">
+  <button id="mn-prev" onclick="movePage(-1)">&#9664;</button>
+  <span class="mn-info" id="mn-info">1 / 1</span>
+  <button id="mn-next" onclick="movePage(1)">&#9654;</button>
+</div>
 <nav id="sb">
   <div id="sb-head">
     <h1>🔥 소방설비기사(전기)<br>실기 대비 v2.0</h1>
@@ -358,7 +483,7 @@ body{
     <button class="zoom-btn" onclick="setZoom(this,'z200')">200%</button>
     <div class="vbar-sep"></div>
     <span id="cat-lbl"></span>
-    <span style="font-size:10px;color:#aaa">← → 키 이동</span>
+    <span class="kb-hint" style="font-size:10px;color:#aaa">← → 키 이동</span>
   </div>
 
   <!-- 이미지 뷰어 -->
@@ -451,11 +576,15 @@ function openViewer(y,pg){
   document.getElementById('vbar').style.display='flex';
   document.getElementById('theory-panel').style.display='none';
   document.getElementById('home-panel').style.display='none';
+  // 모바일 하단 네비 표시
+  const mn=document.getElementById('mob-nav');
+  if(mn) mn.style.display='flex';
   hiNav(null);
   document.querySelectorAll('.ni').forEach(n=>{
     if(n.getAttribute('onclick')?.includes(`openViewer('${y}'`)) n.classList.add('on');
   });
   buildYrBtns(); buildRdBtns(); loadPg();
+  if(window.innerWidth<=768) closeSidebar();
 }
 
 function buildYrBtns(){
@@ -485,6 +614,13 @@ function loadPg(){
   document.getElementById('page-info').textContent=`/ ${total}`;
   document.getElementById('btn-prev').disabled=cP<=1;
   document.getElementById('btn-next').disabled=cP>=total;
+  // 모바일 하단 네비 업데이트
+  const mnPrev=document.getElementById('mn-prev');
+  const mnNext=document.getElementById('mn-next');
+  if(mnPrev){mnPrev.disabled=cP<=1;}
+  if(mnNext){mnNext.disabled=cP>=total;}
+  const mnInfo=document.getElementById('mn-info');
+  if(mnInfo){mnInfo.textContent=`${cP} / ${total}`;}
   hiliteRd();
   document.getElementById('viewer').scrollTop=0;
   const rd=roundOf(cY,cP);
@@ -517,12 +653,15 @@ function showTheory(key){
   document.getElementById('viewer').style.display='none';
   document.getElementById('vbar').style.display='none';
   document.getElementById('home-panel').style.display='none';
+  const mn=document.getElementById('mob-nav');
+  if(mn) mn.style.display='none';
   const panel=document.getElementById('theory-panel');
   panel.style.display='block';
   hiNav(key);
   const th=THEORY[key]||'<p>준비 중</p>';
   const qz=QUIZ[key]||[];
   panel.innerHTML=buildChHtml(th,qz);
+  if(window.innerWidth<=768) closeSidebar();
 }
 
 function hiNav(key){
@@ -535,7 +674,7 @@ function makeQiHtml(q, showThumb=true) {
   const rColors = {1:'#c0392b',2:'#2471a3',3:'#1e8449',4:'#7d3c98'};
   const rc = rColors[q.r] || '#636e72';
   const thumb = (showThumb && q.img)
-    ? `<div onclick="openViewer('${q.img.y}',${q.img.pg})"
+    ? `<div class="qi-thumb-wrap" onclick="openViewer('${q.img.y}',${q.img.pg})"
           style="float:right;margin:0 0 14px 16px;cursor:pointer;
                  border:2px solid var(--border);border-radius:8px;
                  overflow:hidden;width:210px;flex-shrink:0;
@@ -587,9 +726,12 @@ function showQuiz(key) {
   document.getElementById('viewer').style.display='none';
   document.getElementById('vbar').style.display='none';
   document.getElementById('home-panel').style.display='none';
+  const mn=document.getElementById('mob-nav');
+  if(mn) mn.style.display='none';
   const panel=document.getElementById('theory-panel');
   panel.style.display='block';
   panel.scrollTop=0;
+  if(window.innerWidth<=768) closeSidebar();
 
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
   document.querySelectorAll('.ni').forEach(n=>{
@@ -611,7 +753,7 @@ function showQuiz(key) {
     const rColors={1:'#c0392b',2:'#2471a3',3:'#1e8449',4:'#7d3c98'};
     const rc=rColors[q.r]||'#636e72';
     const thumb = q.img
-      ? `<div onclick="openViewer('${q.img.y}',${q.img.pg})"
+      ? `<div class="qi-thumb-wrap" onclick="openViewer('${q.img.y}',${q.img.pg})"
             style="float:right;margin:0 0 14px 16px;cursor:pointer;
                    border:2px solid var(--border);border-radius:8px;overflow:hidden;width:210px;
                    box-shadow:var(--shadow);transition:border-color .15s"
@@ -662,7 +804,10 @@ function showHome(){
   document.getElementById('vbar').style.display='none';
   document.getElementById('theory-panel').style.display='none';
   document.getElementById('home-panel').style.display='block';
+  const mn=document.getElementById('mob-nav');
+  if(mn) mn.style.display='none';
   hiNav(null);
+  if(window.innerWidth<=768) closeSidebar();
 }
 
 // ═══════════════════════════════════════════════════
@@ -1669,6 +1814,42 @@ const QUIZ={
       <div class="s" style="color:var(--red);font-weight:600">${cnt}문항</div>
     </div>`;
   }).join('');
+})();
+
+// ═══════════════════════════════════════════════════
+// 모바일 사이드바 토글
+// ═══════════════════════════════════════════════════
+function toggleSidebar(){
+  const sb=document.getElementById('sb');
+  const ov=document.getElementById('overlay');
+  const btn=document.getElementById('mob-menu');
+  const open=sb.classList.toggle('open');
+  ov.classList.toggle('open',open);
+  btn.textContent=open?'✕':'☰';
+}
+function closeSidebar(){
+  document.getElementById('sb').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('mob-menu').textContent='☰';
+}
+
+// ═══════════════════════════════════════════════════
+// 터치 스와이프 — 이미지 뷰어
+// ═══════════════════════════════════════════════════
+(function(){
+  let tx=0, ty=0;
+  const viewer=document.getElementById('viewer');
+  viewer.addEventListener('touchstart',e=>{
+    tx=e.touches[0].clientX;
+    ty=e.touches[0].clientY;
+  },{passive:true});
+  viewer.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tx;
+    const dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5){
+      if(dx<0) movePage(1); else movePage(-1);
+    }
+  },{passive:true});
 })();
 </script>
 </body>
