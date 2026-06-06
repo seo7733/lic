@@ -5,69 +5,266 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>소방설비기사(전기) 실기 대비 v2.0</title>
 <style>
-:root{--red:#c0392b;--dark:#1a252f;--sb:#2c3e50;--bg:#f0f2f5;--card:#fff;--border:#dde1e7;--ok:#27ae60;--txt:#2d3436;--muted:#636e72;}
+/* ── CSS 변수 ── */
+:root{
+  --red:#c0392b; --red-light:#fde8e6; --red-dark:#922b21;
+  --dark:#1a252f; --sb:#263646;
+  --bg:#eef1f6; --card:#ffffff;
+  --border:#d8dee8; --border-light:#eef1f6;
+  --ok:#1e8449; --ok-light:#eafaf1;
+  --txt:#1a1f2e; --muted:#5d6d7e;
+  --yellow:#f39c12; --yellow-light:#fef9e7;
+  --blue:#2471a3; --blue-light:#eaf4fb;
+  --shadow:0 2px 8px rgba(0,0,0,.08);
+  --shadow-lg:0 4px 20px rgba(0,0,0,.12);
+}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Malgun Gothic','맑은 고딕',sans-serif;background:var(--bg);color:var(--txt);display:flex;height:100vh;overflow:hidden;}
-#sb{width:240px;min-width:240px;background:var(--sb);color:#ecf0f1;display:flex;flex-direction:column;height:100vh;overflow-y:auto;flex-shrink:0;}
-#sb-head{background:var(--dark);padding:14px 12px 10px;flex-shrink:0;}
-#sb-head h1{font-size:12.5px;line-height:1.6;color:#fff;}
-#sb-head p{font-size:10px;color:#f1948a;margin-top:2px;}
-.ns{border-top:1px solid #3d5166;padding:4px 0;}
-.ns-t{font-size:9px;color:#7f8c9e;padding:5px 12px 2px;text-transform:uppercase;letter-spacing:1px;}
-.ni{padding:7px 12px;cursor:pointer;font-size:12px;border-left:3px solid transparent;transition:background .1s;display:flex;align-items:center;gap:6px;}
-.ni:hover{background:#3d5166;}
-.ni.on{background:var(--red);border-left-color:#ff8a80;font-weight:bold;}
+
+/* ── 전체 ── */
+body{
+  font-family:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif;
+  background:var(--bg);color:var(--txt);
+  display:flex;height:100vh;overflow:hidden;
+  font-size:14px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── 사이드바 ── */
+#sb{
+  width:256px;min-width:256px;
+  background:var(--sb);color:#dce6f0;
+  display:flex;flex-direction:column;
+  height:100vh;overflow-y:auto;flex-shrink:0;
+  scrollbar-width:thin;scrollbar-color:#3d5166 transparent;
+}
+#sb::-webkit-scrollbar{width:4px;}
+#sb::-webkit-scrollbar-thumb{background:#3d5166;border-radius:2px;}
+#sb-head{
+  background:var(--dark);
+  padding:18px 14px 14px;flex-shrink:0;
+  border-bottom:1px solid #2c3e50;
+}
+#sb-head h1{font-size:13px;line-height:1.65;color:#fff;font-weight:700;}
+#sb-head p{font-size:10.5px;color:#f1948a;margin-top:4px;}
+
+.ns{border-top:1px solid rgba(255,255,255,.06);padding:6px 0;}
+.ns-t{
+  font-size:9.5px;color:#7f96ab;
+  padding:7px 14px 3px;
+  text-transform:uppercase;letter-spacing:1.2px;font-weight:600;
+}
+.ni{
+  padding:8px 14px;cursor:pointer;font-size:12.5px;
+  border-left:3px solid transparent;
+  transition:background .12s,border-color .12s;
+  display:flex;align-items:center;gap:7px;
+  color:#c8d6e5;
+}
+.ni:hover{background:rgba(255,255,255,.07);color:#fff;}
+.ni.on{
+  background:var(--red);border-left-color:#ff8a80;
+  font-weight:700;color:#fff;
+}
+
+/* ── 기출문제 섹션 강조 ── */
+.ns.quiz-section .ns-t{color:#f9c74f;letter-spacing:1px;}
+.ns.quiz-section .ni{color:#fce4d6;}
+.ns.quiz-section .ni:hover{background:rgba(255,200,150,.1);color:#fff;}
+.ns.quiz-section .ni.on{background:#b7451e;}
+
+/* ── 메인 ── */
 #main{flex:1;display:flex;flex-direction:column;min-width:0;height:100vh;overflow:hidden;}
-#vbar{background:#fff;border-bottom:1px solid var(--border);padding:7px 12px;display:none;align-items:center;gap:6px;flex-wrap:wrap;flex-shrink:0;}
-.yr-btn{padding:4px 9px;border-radius:4px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:12px;font-family:inherit;font-weight:bold;}
+
+/* ── 뷰어 툴바 ── */
+#vbar{
+  background:#fff;border-bottom:1px solid var(--border);
+  padding:8px 14px;display:none;
+  align-items:center;gap:7px;flex-wrap:wrap;flex-shrink:0;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+.yr-btn{
+  padding:5px 11px;border-radius:5px;
+  border:1.5px solid var(--border);background:#fff;
+  cursor:pointer;font-size:12.5px;font-family:inherit;font-weight:700;
+  transition:all .12s;
+}
 .yr-btn.on{background:var(--dark);color:#fff;border-color:var(--dark);}
-.rd-btn{padding:3px 8px;border-radius:12px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:11px;font-family:inherit;}
+.rd-btn{
+  padding:4px 10px;border-radius:14px;
+  border:1.5px solid var(--border);background:#fff;
+  cursor:pointer;font-size:11.5px;font-family:inherit;
+  transition:all .12s;
+}
 .rd-btn.on{background:var(--red);color:#fff;border-color:var(--red);}
-.vbar-sep{width:1px;height:22px;background:var(--border);margin:0 2px;}
-.nav-btn{padding:4px 11px;border:1.5px solid var(--border);background:#fff;border-radius:4px;cursor:pointer;font-size:14px;}
-.nav-btn:hover{background:#f0f2f5;}
+.vbar-sep{width:1px;height:24px;background:var(--border);margin:0 3px;}
+.nav-btn{
+  padding:5px 13px;border:1.5px solid var(--border);
+  background:#fff;border-radius:5px;cursor:pointer;font-size:15px;
+  transition:background .1s;
+}
+.nav-btn:hover{background:var(--bg);}
 .nav-btn:disabled{opacity:.3;cursor:default;}
-#pg-input{width:46px;padding:3px 4px;border:1px solid var(--border);border-radius:4px;font-size:12px;text-align:center;font-family:inherit;}
-#page-info{font-size:12px;color:var(--muted);}
-.zoom-btn{padding:3px 8px;border:1px solid var(--border);background:#fff;border-radius:4px;cursor:pointer;font-size:11px;font-family:inherit;}
-.zoom-btn.on{background:#2c3e50;color:#fff;border-color:#2c3e50;}
-#cat-lbl{background:#fde8e6;color:var(--red);padding:2px 9px;border-radius:10px;font-size:11px;font-weight:bold;display:none;}
-#viewer{flex:1;overflow:auto;background:#525659;display:none;align-items:flex-start;justify-content:center;padding:16px;}
-#vimg{display:block;box-shadow:0 4px 20px rgba(0,0,0,.5);background:#fff;}
-#vimg.fit{width:100%;max-width:920px;}
+#pg-input{
+  width:50px;padding:4px 5px;
+  border:1.5px solid var(--border);border-radius:5px;
+  font-size:13px;text-align:center;font-family:inherit;
+}
+#page-info{font-size:13px;color:var(--muted);}
+.zoom-btn{
+  padding:4px 10px;border:1.5px solid var(--border);
+  background:#fff;border-radius:5px;
+  cursor:pointer;font-size:11.5px;font-family:inherit;
+  transition:all .12s;
+}
+.zoom-btn.on{background:var(--dark);color:#fff;border-color:var(--dark);}
+#cat-lbl{
+  background:var(--red-light);color:var(--red);
+  padding:3px 10px;border-radius:12px;
+  font-size:11.5px;font-weight:700;display:none;
+}
+
+/* ── 이미지 뷰어 ── */
+#viewer{
+  flex:1;overflow:auto;background:#404040;
+  display:none;align-items:flex-start;
+  justify-content:center;padding:20px;
+}
+#vimg{display:block;box-shadow:0 6px 30px rgba(0,0,0,.6);background:#fff;border-radius:2px;}
+#vimg.fit{width:100%;max-width:940px;}
 #vimg.full{width:100%;}
 #vimg.z150{width:150%;}
 #vimg.z200{width:200%;}
-#theory-panel{flex:1;overflow-y:auto;padding:20px 28px;background:var(--bg);display:none;}
-.card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:18px;margin-bottom:16px;}
-.card h3{font-size:14px;color:var(--red);margin-bottom:10px;padding-bottom:7px;border-bottom:2px solid #fde8e6;}
-.card h4{font-size:13px;margin:12px 0 5px;font-weight:bold;}
-.card p,.card li{font-size:13px;line-height:1.85;color:#444;}
-.card ul,.card ol{padding-left:18px;}
-.card table{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0;}
-.card th{background:#f0f2f5;padding:7px 9px;text-align:left;border:1px solid var(--border);font-weight:bold;}
-.card td{padding:6px 9px;border:1px solid var(--border);}
-.card tr:nth-child(even) td{background:#fafbfc;}
-.tip{background:#fff8e1;border-left:4px solid #f39c12;padding:9px 12px;border-radius:3px;margin:8px 0;font-size:12.5px;}
-.warn{background:#fde8e6;border-left:4px solid var(--red);padding:9px 12px;border-radius:3px;margin:8px 0;font-size:12.5px;}
-.form{background:#eaf4fb;border:1px solid #aed6f1;padding:9px 12px;border-radius:5px;margin:6px 0;font-family:monospace;font-size:12px;white-space:pre-wrap;}
-.tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:16px;}
-.tab{padding:8px 16px;cursor:pointer;font-size:12.5px;border-bottom:3px solid transparent;margin-bottom:-2px;color:var(--muted);}
-.tab.on{color:var(--red);border-bottom-color:var(--red);font-weight:bold;}
+
+/* ── 이론·기출 패널 ── */
+#theory-panel{flex:1;overflow-y:auto;padding:24px 32px;background:var(--bg);display:none;}
+
+/* ── 카드 ── */
+.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:22px 24px;
+  margin-bottom:18px;box-shadow:var(--shadow);
+}
+.card h3{
+  font-size:15.5px;color:var(--red);
+  margin-bottom:13px;padding-bottom:10px;
+  border-bottom:2px solid var(--red-light);font-weight:700;
+}
+.card h4{
+  font-size:13.5px;margin:16px 0 7px;
+  font-weight:700;color:#1a1f2e;
+}
+.card p{font-size:14px;line-height:1.9;color:#333;margin:4px 0;}
+.card li{font-size:14px;line-height:2.0;color:#333;}
+.card ul,.card ol{padding-left:20px;margin:4px 0;}
+.card table{
+  width:100%;border-collapse:collapse;
+  font-size:13.5px;margin:8px 0;border-radius:6px;overflow:hidden;
+}
+.card th{
+  background:#f0f4f8;padding:9px 12px;text-align:left;
+  border:1px solid var(--border);font-weight:700;
+  font-size:13px;color:#2c3e50;
+}
+.card td{
+  padding:8px 12px;border:1px solid var(--border);
+  font-size:13.5px;line-height:1.65;
+}
+.card tr:nth-child(even) td{background:#f8fafc;}
+.card tr:hover td{background:#f0f4f8;}
+
+/* ── 알림 박스 ── */
+.tip{
+  background:var(--yellow-light);border-left:4px solid var(--yellow);
+  padding:11px 15px;border-radius:5px;margin:10px 0;
+  font-size:13.5px;line-height:1.8;
+}
+.warn{
+  background:var(--red-light);border-left:4px solid var(--red);
+  padding:11px 15px;border-radius:5px;margin:10px 0;
+  font-size:13.5px;line-height:1.8;
+}
+.form{
+  background:var(--blue-light);border:1px solid #aed6f1;
+  padding:12px 15px;border-radius:7px;margin:8px 0;
+  font-family:'Consolas','D2Coding',monospace;
+  font-size:13px;white-space:pre-wrap;line-height:1.8;color:#1a4a7a;
+}
+
+/* ── 탭 ── */
+.tabs{
+  display:flex;border-bottom:2px solid var(--border);
+  margin-bottom:20px;gap:0;
+}
+.tab{
+  padding:10px 18px;cursor:pointer;font-size:13.5px;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  color:var(--muted);transition:color .12s;font-weight:500;
+}
+.tab:hover{color:var(--txt);}
+.tab.on{color:var(--red);border-bottom-color:var(--red);font-weight:700;}
 .tc{display:none;}.tc.on{display:block;}
-.qi{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:16px;margin-bottom:14px;overflow:hidden;}
-.qi .q{font-size:13.5px;font-weight:bold;line-height:1.7;margin-bottom:10px;}
-.sa-btn{padding:5px 12px;border:1px solid var(--ok);background:#fff;color:var(--ok);border-radius:4px;cursor:pointer;font-size:11.5px;font-family:inherit;}
-.sa-ans{display:none;margin-top:9px;padding:9px 12px;background:#eafaf1;border-left:3px solid var(--ok);border-radius:4px;font-size:13px;line-height:1.8;}
+
+/* ── 기출문제 카드 ── */
+.qi{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:20px;margin-bottom:16px;
+  overflow:hidden;box-shadow:var(--shadow);
+  transition:box-shadow .15s;
+}
+.qi:hover{box-shadow:var(--shadow-lg);}
+.qi-meta{
+  display:flex;gap:7px;align-items:center;
+  margin-bottom:11px;flex-wrap:wrap;
+}
+.qi .q{
+  font-size:14.5px;font-weight:700;
+  line-height:1.8;margin-bottom:13px;
+  color:var(--txt);
+}
+.sa-btn{
+  padding:7px 16px;border:1.5px solid var(--ok);
+  background:#fff;color:var(--ok);border-radius:6px;
+  cursor:pointer;font-size:12.5px;font-family:inherit;
+  font-weight:600;transition:all .12s;
+}
+.sa-btn:hover{background:var(--ok);color:#fff;}
+.sa-ans{
+  display:none;margin-top:12px;padding:13px 16px;
+  background:var(--ok-light);border-left:4px solid var(--ok);
+  border-radius:6px;font-size:14px;line-height:1.9;
+  color:#1a3a2a;
+}
 .sa-ans.on{display:block;}
-.badge{padding:2px 8px;border-radius:10px;font-size:10px;font-weight:bold;}
-#home-panel{flex:1;overflow-y:auto;padding:24px;display:block;}
-.hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-top:12px;}
-.hc{background:#fff;border:1px solid var(--border);border-radius:9px;padding:14px 12px;cursor:pointer;text-align:center;transition:all .18s;}
-.hc:hover{border-color:var(--red);box-shadow:0 4px 12px rgba(192,57,43,.12);transform:translateY(-2px);}
-.hc .icon{font-size:24px;margin-bottom:6px;}
-.hc .t{font-size:12px;font-weight:bold;}
-.hc .s{font-size:10.5px;color:var(--muted);margin-top:3px;}
+
+/* ── 뱃지 ── */
+.badge{padding:3px 9px;border-radius:12px;font-size:11px;font-weight:700;}
+
+/* ── 홈 패널 ── */
+#home-panel{flex:1;overflow-y:auto;padding:28px 32px;display:block;}
+.hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:14px;margin-top:14px;}
+.hc{
+  background:#fff;border:1px solid var(--border);
+  border-radius:12px;padding:16px 14px;
+  cursor:pointer;text-align:center;
+  transition:all .18s;box-shadow:var(--shadow);
+}
+.hc:hover{
+  border-color:var(--red);
+  box-shadow:0 6px 20px rgba(192,57,43,.14);
+  transform:translateY(-3px);
+}
+.hc .icon{font-size:26px;margin-bottom:8px;}
+.hc .t{font-size:12.5px;font-weight:700;color:var(--txt);}
+.hc .s{font-size:11px;color:var(--muted);margin-top:4px;}
+
+/* ── 기출 전용 패널 헤더 ── */
+.quiz-page-header{
+  background:linear-gradient(135deg,#922b21,#c0392b);
+  color:#fff;padding:18px 22px;border-radius:12px;
+  margin-bottom:20px;box-shadow:var(--shadow-lg);
+}
+.quiz-page-header h2{font-size:16px;font-weight:700;margin-bottom:4px;}
+.quiz-page-header p{font-size:12.5px;color:#fde8e6;opacity:.9;}
 </style>
 </head>
 <body>
@@ -124,6 +321,23 @@ body{font-family:'Malgun Gothic','맑은 고딕',sans-serif;background:var(--bg)
     <div class="ni" onclick="showTheory('c-시퀀스')">시퀀스회로</div>
     <div class="ni" onclick="showTheory('c-타임차트')">타임차트</div>
   </div>
+
+  <div class="ns quiz-section">
+    <div class="ns-t">📝 단원별 기출문제</div>
+    <div class="ni" onclick="showQuiz('c-감지기')">감지기 기출</div>
+    <div class="ni" onclick="showQuiz('c-수신기')">수신기 기출</div>
+    <div class="ni" onclick="showQuiz('c-발신기')">발신기 기출</div>
+    <div class="ni" onclick="showQuiz('c-누전')">누전경보기 기출</div>
+    <div class="ni" onclick="showQuiz('c-비상방송')">비상방송 기출</div>
+    <div class="ni" onclick="showQuiz('c-유도등')">유도등·비상조명 기출</div>
+    <div class="ni" onclick="showQuiz('c-비상콘센트')">비상콘센트 기출</div>
+    <div class="ni" onclick="showQuiz('c-축전지')">비상전원·축전지 기출</div>
+    <div class="ni" onclick="showQuiz('c-계산')">전기 계산 기출</div>
+    <div class="ni" onclick="showQuiz('c-가닥수')">가닥수 계산 기출</div>
+    <div class="ni" onclick="showQuiz('c-시퀀스')">시퀀스회로 기출</div>
+    <div class="ni" onclick="showQuiz('c-타임차트')">타임차트 기출</div>
+    <div class="ni" onclick="showQuiz('all')" style="margin-top:4px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px;font-weight:700;color:#ffd700;">🎯 전체 기출 모아보기</div>
+  </div>
 </nav>
 
 <div id="main">
@@ -168,8 +382,12 @@ body{font-family:'Malgun Gothic','맑은 고딕',sans-serif;background:var(--bg)
       <div class="hgrid" id="yr-home-grid"></div>
     </div>
     <div class="card">
-      <h3>📖 이론 단원 + 기출문제 탭</h3>
+      <h3>📖 이론 단원 학습 (이론 + 기출문제 탭)</h3>
       <div class="hgrid" id="theory-home-grid"></div>
+    </div>
+    <div class="card">
+      <h3>📝 단원별 기출문제 바로가기</h3>
+      <div class="hgrid" id="quiz-home-grid"></div>
     </div>
   </div>
 </div>
@@ -313,15 +531,106 @@ function hiNav(key){
   else document.querySelectorAll('.ni').forEach(n=>{if(n.getAttribute('onclick')==='showHome()')n.classList.add('on');});
 }
 
-function buildChHtml(th,qItems){
-  const qHtml=qItems.map(q=>{
-    const rc=q.r===1?'#c0392b':q.r===2?'#2980b9':q.r===3?'#27ae60':'#8e44ad';
-    const thumb=q.img?`<div onclick="openViewer('${q.img.y}',${q.img.pg})" style="float:right;margin:0 0 12px 14px;cursor:pointer;border:2px solid #ddd;border-radius:6px;overflow:hidden;width:200px;transition:border-color .15s" onmouseover="this.style.borderColor='#c0392b'" onmouseout="this.style.borderColor='#ddd'"><img src="exam_images/${q.img.y}년도/page-${String(q.img.pg).padStart(EXAM[q.img.y]?.pad||2,'0')}.png" style="width:100%;display:block"><div style="font-size:9.5px;text-align:center;padding:3px;background:#f8f9fa;color:#888">🔍 ${q.img.label} → 클릭하면 해당 페이지</div></div>`:'';
+function makeQiHtml(q, showThumb=true) {
+  const rColors = {1:'#c0392b',2:'#2471a3',3:'#1e8449',4:'#7d3c98'};
+  const rc = rColors[q.r] || '#636e72';
+  const thumb = (showThumb && q.img)
+    ? `<div onclick="openViewer('${q.img.y}',${q.img.pg})"
+          style="float:right;margin:0 0 14px 16px;cursor:pointer;
+                 border:2px solid var(--border);border-radius:8px;
+                 overflow:hidden;width:210px;flex-shrink:0;
+                 transition:border-color .15s,box-shadow .15s;box-shadow:var(--shadow)"
+          onmouseover="this.style.borderColor='#c0392b';this.style.boxShadow='0 4px 14px rgba(192,57,43,.2)'"
+          onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='var(--shadow)'">
+         <img src="exam_images/${q.img.y}년도/page-${String(q.img.pg).padStart(EXAM[q.img.y]?.pad||2,'0')}.png"
+              style="width:100%;display:block" loading="lazy" alt="기출이미지">
+         <div style="font-size:10px;text-align:center;padding:4px 6px;background:#f8fafc;color:#888;border-top:1px solid var(--border)">
+           🔍 ${q.img.label} — 클릭하면 원본 이동
+         </div>
+       </div>` : '';
+  return `<div class="qi">
+    <div class="qi-meta">
+      <span class="badge" style="background:${rc}18;color:${rc};border:1px solid ${rc}40">${q.yr}년 ${q.r}회차</span>
+      <span class="badge" style="background:#f0f4f8;color:#5d6d7e;border:1px solid var(--border)">${q.type}</span>
+      <span style="margin-left:auto;font-size:11.5px;font-weight:700;color:#d35400;background:#fef5ec;padding:2px 9px;border-radius:10px;border:1px solid #f5cba7">핵심 ${q.key}</span>
+    </div>
+    ${thumb}
+    <div class="q">${q.q}</div>
+    <div style="clear:both"></div>
+    <button class="sa-btn" onclick="tgl(this)">정답·해설 보기 ▼</button>
+    <div class="sa-ans">${q.a}</div>
+  </div>`;
+}
+
+function buildChHtml(th, qItems) {
+  const qHtml = qItems.length
+    ? qItems.map(q => makeQiHtml(q)).join('')
+    : '<div class="card"><p style="text-align:center;color:#aaa;padding:24px">준비 중입니다</p></div>';
+  return `<div class="tabs">
+    <div class="tab on" onclick="swT(this,'tp-th')">📖 이론 정리</div>
+    <div class="tab" onclick="swT(this,'tp-qz')">📝 기출문제 <span class="badge" style="background:var(--red);color:#fff;margin-left:5px">${qItems.length}</span></div>
+  </div>
+  <div id="tp-th">${th}</div>
+  <div id="tp-qz" style="display:none">${qHtml}</div>`;
+}
+
+// ── 기출문제 전용 페이지 ─────────────────────────────────────
+const QUIZ_LABELS = {
+  'c-감지기':'감지기','c-수신기':'자탐수신기','c-발신기':'발신기',
+  'c-누전':'누전경보기','c-비상방송':'비상방송설비','c-유도등':'유도등·비상조명',
+  'c-비상콘센트':'비상콘센트','c-축전지':'비상전원·축전지',
+  'c-계산':'전기 계산','c-가닥수':'가닥수 계산',
+  'c-시퀀스':'시퀀스회로','c-타임차트':'타임차트',
+};
+
+function showQuiz(key) {
+  document.getElementById('viewer').style.display='none';
+  document.getElementById('vbar').style.display='none';
+  document.getElementById('home-panel').style.display='none';
+  const panel=document.getElementById('theory-panel');
+  panel.style.display='block';
+  panel.scrollTop=0;
+
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(n=>{
+    if(n.getAttribute('onclick')===`showQuiz('${key}')`) n.classList.add('on');
+  });
+
+  let items=[], title='', sub='';
+  if(key==='all') {
+    items = Object.entries(QUIZ).flatMap(([k,arr])=>arr.map(q=>({...q,_cat:QUIZ_LABELS[k]||k})));
+    title='🎯 전체 기출 모아보기';
+    sub=`총 ${items.length}문항 · 18~24년도 기출 기반`;
+  } else {
+    items = (QUIZ[key]||[]).map(q=>({...q,_cat:QUIZ_LABELS[key]}));
+    title=`📝 ${QUIZ_LABELS[key]||key} 기출문제`;
+    sub=`${items.length}문항 · 18~24년도 기출 기반`;
+  }
+
+  const html = items.map(q => {
+    const rColors={1:'#c0392b',2:'#2471a3',3:'#1e8449',4:'#7d3c98'};
+    const rc=rColors[q.r]||'#636e72';
+    const thumb = q.img
+      ? `<div onclick="openViewer('${q.img.y}',${q.img.pg})"
+            style="float:right;margin:0 0 14px 16px;cursor:pointer;
+                   border:2px solid var(--border);border-radius:8px;overflow:hidden;width:210px;
+                   box-shadow:var(--shadow);transition:border-color .15s"
+            onmouseover="this.style.borderColor='#c0392b'" onmouseout="this.style.borderColor='var(--border)'">
+           <img src="exam_images/${q.img.y}년도/page-${String(q.img.pg).padStart(EXAM[q.img.y]?.pad||2,'0')}.png"
+                style="width:100%;display:block" loading="lazy">
+           <div style="font-size:10px;text-align:center;padding:4px;background:#f8fafc;color:#888;border-top:1px solid var(--border)">
+             🔍 ${q.img.label} → 클릭
+           </div>
+         </div>` : '';
+    const catBadge = key==='all'
+      ? `<span class="badge" style="background:#eef4ff;color:#2471a3;border:1px solid #aed6f1">${q._cat}</span>`
+      : '';
     return `<div class="qi">
-      <div style="display:flex;gap:6px;align-items:center;margin-bottom:8px;flex-wrap:wrap">
-        <span class="badge" style="background:${rc}22;color:${rc}">${q.yr}년 ${q.r}회차</span>
-        <span class="badge" style="background:#f0f2f5;color:#636e72">${q.type}</span>
-        <span style="margin-left:auto;font-size:10px;font-weight:bold;color:#e67e22">핵심: ${q.key}</span>
+      <div class="qi-meta">
+        ${catBadge}
+        <span class="badge" style="background:${rc}18;color:${rc};border:1px solid ${rc}40">${q.yr}년 ${q.r}회차</span>
+        <span class="badge" style="background:#f0f4f8;color:#5d6d7e;border:1px solid var(--border)">${q.type}</span>
+        <span style="margin-left:auto;font-size:11.5px;font-weight:700;color:#d35400;background:#fef5ec;padding:2px 9px;border-radius:10px;border:1px solid #f5cba7">핵심 ${q.key}</span>
       </div>
       ${thumb}
       <div class="q">${q.q}</div>
@@ -330,12 +639,12 @@ function buildChHtml(th,qItems){
       <div class="sa-ans">${q.a}</div>
     </div>`;
   }).join('');
-  return `<div class="tabs">
-    <div class="tab on" onclick="swT(this,'tp-th')">📖 이론 정리</div>
-    <div class="tab" onclick="swT(this,'tp-qz')">📝 기출문제 <span class="badge" style="background:#c0392b;color:#fff;margin-left:4px">${qItems.length}</span></div>
+
+  panel.innerHTML=`<div class="quiz-page-header">
+    <h2>${title}</h2>
+    <p>${sub}</p>
   </div>
-  <div id="tp-th">${th}</div>
-  <div id="tp-qz" style="display:none">${qHtml||'<div class="card"><p style="text-align:center;color:#999;padding:20px">준비 중</p></div>'}</div>`;
+  ${html||'<div class="card"><p style="text-align:center;color:#aaa;padding:20px">준비 중</p></div>'}`;
 }
 function swT(el,id){
   el.closest('.tabs').querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');
@@ -1046,6 +1355,34 @@ const QUIZ={
     <div class="t">${c.t}</div>
     <div class="s">기출 ${(QUIZ[c.k]||[]).length}문항</div>
   </div>`).join('');
+
+  // 기출문제 바로가기 그리드
+  const qzGrid=document.getElementById('quiz-home-grid');
+  const qzItems=[
+    {k:'c-감지기',i:'🔴',t:'감지기'},
+    {k:'c-수신기',i:'🖥',t:'수신기'},
+    {k:'c-발신기',i:'🔘',t:'발신기'},
+    {k:'c-누전',i:'⚡',t:'누전경보기'},
+    {k:'c-비상방송',i:'📢',t:'비상방송'},
+    {k:'c-유도등',i:'🚦',t:'유도등'},
+    {k:'c-비상콘센트',i:'🔌',t:'비상콘센트'},
+    {k:'c-축전지',i:'🔋',t:'축전지'},
+    {k:'c-계산',i:'🧮',t:'전기계산'},
+    {k:'c-가닥수',i:'📐',t:'가닥수'},
+    {k:'c-시퀀스',i:'⚙️',t:'시퀀스'},
+    {k:'c-타임차트',i:'📊',t:'타임차트'},
+    {k:'all',i:'🎯',t:'전체 모아보기'},
+  ];
+  qzGrid.innerHTML=qzItems.map(c=>{
+    const cnt = c.k==='all'
+      ? Object.values(QUIZ).reduce((s,a)=>s+a.length,0)
+      : (QUIZ[c.k]||[]).length;
+    return `<div class="hc" onclick="showQuiz('${c.k}')" style="${c.k==='all'?'border-color:var(--red);background:#fff8f7':''}">
+      <div class="icon">${c.i}</div>
+      <div class="t">${c.t}</div>
+      <div class="s" style="color:var(--red);font-weight:600">${cnt}문항</div>
+    </div>`;
+  }).join('');
 })();
 </script>
 </body>
