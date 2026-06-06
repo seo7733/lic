@@ -1,0 +1,19 @@
+# 대용량/불필요 파일 제외
+node_modules/
+*.zip
+*.xlsx
+*.hwp
+*.pdf
+*.pptx
+pptx_extracted/
+권영태_PDF_extracted/
+소방설비기사 전기실기(권영태_PDF)/
+과년도기출문제풀이(7개년_공하성)/
+서술형 기출문제 반복기출/
+소방설비기사_전기실기_공부사이트.html
+package.json
+package-lock.json
+*.log
+.DS_Store
+Thumbs.db
+~$*
