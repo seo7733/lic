@@ -72,6 +72,16 @@ body{
 .ns.quiz-section .ni:hover{background:rgba(255,200,150,.1);color:#fff;}
 .ns.quiz-section .ni.on{background:#b7451e;}
 
+/* ── 기출 건수 뱃지 ── */
+.ni-cnt{
+  margin-left:auto;font-size:10.5px;
+  color:rgba(200,214,229,.55);font-weight:400;
+  flex-shrink:0;
+}
+.ni.on .ni-cnt{color:rgba(255,255,255,.75);}
+.ns.quiz-section .ni-cnt{color:rgba(252,228,214,.55);}
+.ns.quiz-section .ni.on .ni-cnt{color:rgba(255,255,255,.8);}
+
 /* ── 메인 ── */
 #main{flex:1;display:flex;flex-direction:column;min-width:0;height:100vh;overflow:hidden;}
 
@@ -403,6 +413,56 @@ body{
     <div class="ni on" onclick="showHome()">학습 홈</div>
   </div>
   <div class="ns">
+    <div class="ns-t">🔴 자탐 파트 (40~60%)</div>
+    <div class="ni" onclick="showTheory('c-감지기')">감지기<span class="ni-cnt">(7)</span></div>
+    <div class="ni" onclick="showTheory('c-수신기')">자탐수신기<span class="ni-cnt">(5)</span></div>
+    <div class="ni" onclick="showTheory('c-발신기')">발신기<span class="ni-cnt">(3)</span></div>
+    <div class="ni" onclick="showTheory('c-중계기')">중계기</div>
+    <div class="ni" onclick="showTheory('c-시각경보')">시각경보장치</div>
+  </div>
+  <div class="ns">
+    <div class="ns-t">🔔 경보설비 파트 (10%)</div>
+    <div class="ni" onclick="showTheory('c-비상경보')">비상경보설비</div>
+    <div class="ni" onclick="showTheory('c-비상방송')">비상방송설비<span class="ni-cnt">(2)</span></div>
+    <div class="ni" onclick="showTheory('c-누전')">누전경보기<span class="ni-cnt">(5)</span></div>
+    <div class="ni" onclick="showTheory('c-가스')">가스누설경보기</div>
+  </div>
+  <div class="ns">
+    <div class="ns-t">🚦 피난설비 파트 (10~20%)</div>
+    <div class="ni" onclick="showTheory('c-유도등')">유도등 및 유도표지<span class="ni-cnt">(4)</span></div>
+    <div class="ni" onclick="showTheory('c-비상조명')">비상조명등</div>
+  </div>
+  <div class="ns">
+    <div class="ns-t">🚒 소화활동설비</div>
+    <div class="ni" onclick="showTheory('c-비상콘센트')">비상콘센트설비<span class="ni-cnt">(2)</span></div>
+    <div class="ni" onclick="showTheory('c-무선통신')">무선통신보조설비</div>
+  </div>
+  <div class="ns">
+    <div class="ns-t">⚡ 전기설비 파트 (20~40%)</div>
+    <div class="ni" onclick="showTheory('c-축전지')">비상전원 / 축전지<span class="ni-cnt">(4)</span></div>
+    <div class="ni" onclick="showTheory('c-배선')">배선 / 결선</div>
+    <div class="ni" onclick="showTheory('c-가닥수')">가닥수 계산<span class="ni-cnt">(3)</span></div>
+    <div class="ni" onclick="showTheory('c-계산')">전기 계산 공식<span class="ni-cnt">(8)</span></div>
+    <div class="ni" onclick="showTheory('c-시퀀스')">시퀀스회로<span class="ni-cnt">(10)</span></div>
+    <div class="ni" onclick="showTheory('c-타임차트')">타임차트<span class="ni-cnt">(6)</span></div>
+  </div>
+  <div class="ns quiz-section">
+    <div class="ns-t">📝 단원별 기출문제</div>
+    <div class="ni" onclick="showQuiz('c-감지기')">감지기 기출<span class="ni-cnt">(7)</span></div>
+    <div class="ni" onclick="showQuiz('c-수신기')">수신기 기출<span class="ni-cnt">(5)</span></div>
+    <div class="ni" onclick="showQuiz('c-발신기')">발신기 기출<span class="ni-cnt">(3)</span></div>
+    <div class="ni" onclick="showQuiz('c-누전')">누전경보기 기출<span class="ni-cnt">(5)</span></div>
+    <div class="ni" onclick="showQuiz('c-비상방송')">비상방송 기출<span class="ni-cnt">(2)</span></div>
+    <div class="ni" onclick="showQuiz('c-유도등')">유도등·비상조명 기출<span class="ni-cnt">(4)</span></div>
+    <div class="ni" onclick="showQuiz('c-비상콘센트')">비상콘센트 기출<span class="ni-cnt">(2)</span></div>
+    <div class="ni" onclick="showQuiz('c-축전지')">비상전원·축전지 기출<span class="ni-cnt">(4)</span></div>
+    <div class="ni" onclick="showQuiz('c-계산')">전기 계산 기출<span class="ni-cnt">(8)</span></div>
+    <div class="ni" onclick="showQuiz('c-가닥수')">가닥수 계산 기출<span class="ni-cnt">(3)</span></div>
+    <div class="ni" onclick="showQuiz('c-시퀀스')">시퀀스회로 기출<span class="ni-cnt">(10)</span></div>
+    <div class="ni" onclick="showQuiz('c-타임차트')">타임차트 기출<span class="ni-cnt">(6)</span></div>
+    <div class="ni" onclick="showQuiz('all')" style="margin-top:4px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px;font-weight:700;color:#ffd700;">🎯 전체 기출 모아보기<span class="ni-cnt" style="color:rgba(255,215,0,.6)">(59)</span></div>
+  </div>
+  <div class="ns">
     <div class="ns-t">📚 연도별 기출풀이 (풀해설)</div>
     <div class="ni" onclick="openViewer('24',1)">2024년도 기출풀이</div>
     <div class="ni" onclick="openViewer('23',1)">2023년도 기출풀이</div>
@@ -411,57 +471,6 @@ body{
     <div class="ni" onclick="openViewer('20',1)">2020년도 기출풀이</div>
     <div class="ni" onclick="openViewer('19',1)">2019년도 기출풀이</div>
     <div class="ni" onclick="openViewer('18',1)">2018년도 기출풀이</div>
-  </div>
-  <div class="ns">
-    <div class="ns-t">🔴 자탐 파트 (40~60%)</div>
-    <div class="ni" onclick="showTheory('c-감지기')">감지기</div>
-    <div class="ni" onclick="showTheory('c-수신기')">자탐수신기</div>
-    <div class="ni" onclick="showTheory('c-발신기')">발신기</div>
-    <div class="ni" onclick="showTheory('c-중계기')">중계기</div>
-    <div class="ni" onclick="showTheory('c-시각경보')">시각경보장치</div>
-  </div>
-  <div class="ns">
-    <div class="ns-t">🔔 경보설비 파트 (10%)</div>
-    <div class="ni" onclick="showTheory('c-비상경보')">비상경보설비</div>
-    <div class="ni" onclick="showTheory('c-비상방송')">비상방송설비</div>
-    <div class="ni" onclick="showTheory('c-누전')">누전경보기</div>
-    <div class="ni" onclick="showTheory('c-가스')">가스누설경보기</div>
-  </div>
-  <div class="ns">
-    <div class="ns-t">🚦 피난설비 파트 (10~20%)</div>
-    <div class="ni" onclick="showTheory('c-유도등')">유도등 및 유도표지</div>
-    <div class="ni" onclick="showTheory('c-비상조명')">비상조명등</div>
-  </div>
-  <div class="ns">
-    <div class="ns-t">🚒 소화활동설비</div>
-    <div class="ni" onclick="showTheory('c-비상콘센트')">비상콘센트설비</div>
-    <div class="ni" onclick="showTheory('c-무선통신')">무선통신보조설비</div>
-  </div>
-  <div class="ns">
-    <div class="ns-t">⚡ 전기설비 파트 (20~40%)</div>
-    <div class="ni" onclick="showTheory('c-축전지')">비상전원 / 축전지</div>
-    <div class="ni" onclick="showTheory('c-배선')">배선 / 결선</div>
-    <div class="ni" onclick="showTheory('c-가닥수')">가닥수 계산</div>
-    <div class="ni" onclick="showTheory('c-계산')">전기 계산 공식</div>
-    <div class="ni" onclick="showTheory('c-시퀀스')">시퀀스회로</div>
-    <div class="ni" onclick="showTheory('c-타임차트')">타임차트</div>
-  </div>
-
-  <div class="ns quiz-section">
-    <div class="ns-t">📝 단원별 기출문제</div>
-    <div class="ni" onclick="showQuiz('c-감지기')">감지기 기출</div>
-    <div class="ni" onclick="showQuiz('c-수신기')">수신기 기출</div>
-    <div class="ni" onclick="showQuiz('c-발신기')">발신기 기출</div>
-    <div class="ni" onclick="showQuiz('c-누전')">누전경보기 기출</div>
-    <div class="ni" onclick="showQuiz('c-비상방송')">비상방송 기출</div>
-    <div class="ni" onclick="showQuiz('c-유도등')">유도등·비상조명 기출</div>
-    <div class="ni" onclick="showQuiz('c-비상콘센트')">비상콘센트 기출</div>
-    <div class="ni" onclick="showQuiz('c-축전지')">비상전원·축전지 기출</div>
-    <div class="ni" onclick="showQuiz('c-계산')">전기 계산 기출</div>
-    <div class="ni" onclick="showQuiz('c-가닥수')">가닥수 계산 기출</div>
-    <div class="ni" onclick="showQuiz('c-시퀀스')">시퀀스회로 기출</div>
-    <div class="ni" onclick="showQuiz('c-타임차트')">타임차트 기출</div>
-    <div class="ni" onclick="showQuiz('all')" style="margin-top:4px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px;font-weight:700;color:#ffd700;">🎯 전체 기출 모아보기</div>
   </div>
 </nav>
 
