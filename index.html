@@ -46,7 +46,7 @@ body{
   position:relative;
 }
 #sb-close{
-  display:none;position:absolute;top:10px;right:10px;
+  display:flex;position:absolute;top:10px;right:10px;
   background:rgba(255,255,255,.13);border:none;border-radius:6px;
   color:#fff;font-size:15px;width:30px;height:30px;
   cursor:pointer;align-items:center;justify-content:center;
@@ -400,6 +400,7 @@ body{
 
 @media(min-width:769px){
   #mob-menu{display:none!important;}
+  body.sb-hidden #mob-menu{display:flex!important;}
   #mob-nav{display:none!important;}
   #overlay{display:none!important;}
 }
@@ -2127,6 +2128,14 @@ function goBack(){
 // ═══════════════════════════════════════════════════
 function toggleSidebar(){
   const sb=document.getElementById('sb');
+  if(window.innerWidth>768){
+    // 데스크톱: 숨김 상태면 다시 표시
+    if(document.body.classList.contains('sb-hidden')){
+      document.body.classList.remove('sb-hidden');
+      sb.style.display='';
+    }
+    return;
+  }
   const ov=document.getElementById('overlay');
   const btn=document.getElementById('mob-menu');
   const open=sb.classList.toggle('open');
@@ -2134,9 +2143,15 @@ function toggleSidebar(){
   btn.textContent=open?'✕':'☰';
 }
 function closeSidebar(){
-  document.getElementById('sb').classList.remove('open');
+  const sb=document.getElementById('sb');
+  sb.classList.remove('open');
   document.getElementById('overlay').classList.remove('open');
   document.getElementById('mob-menu').textContent='☰';
+  if(window.innerWidth>768){
+    // 데스크톱: 사이드바 숨기고 ☰ 버튼 표시
+    sb.style.display='none';
+    document.body.classList.add('sb-hidden');
+  }
 }
 
 // ═══════════════════════════════════════════════════
