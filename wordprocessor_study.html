@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>워드프로세서 1급 완벽 합격 교재</title>
+<style>
+:root {
+  --primary: #1a56db;
+  --primary-light: #e8f0fe;
+  --primary-dark: #1040a0;
+  --secondary: #0f766e;
+  --secondary-light: #e6f7f5;
+  --accent: #d97706;
+  --accent-light: #fef3c7;
+  --danger: #dc2626;
+  --danger-light: #fee2e2;
+  --success: #16a34a;
+  --success-light: #dcfce7;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', '맑은 고딕', sans-serif;
+  background: var(--gray-100);
+  color: var(--gray-800);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ── 헤더 ── */
+.site-header {
+  background: var(--primary);
+  color: white;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 56px;
+  gap: 12px;
+}
+.header-logo {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.header-badge {
+  background: rgba(255,255,255,0.22);
+  color: white;
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* ── 탭 네비 ── */
+.tab-nav {
+  display: flex;
+  background: white;
+  border-bottom: 1.5px solid var(--gray-200);
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: sticky;
+  top: 56px;
+  z-index: 90;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex: none;
+  padding: 13px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-500);
+  border: none;
+  background: none;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+.tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* ── 메인 레이아웃 ── */
+.main-layout {
+  display: flex;
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 0;
+}
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  background: white;
+  border-right: 1px solid var(--gray-200);
+  min-height: calc(100vh - 110px);
+  position: sticky;
+  top: 110px;
+  height: calc(100vh - 110px);
+  overflow-y: auto;
+  padding: 12px 0;
+  scrollbar-width: thin;
+}
+@media (max-width: 700px) {
+  .sidebar { display: none; }
+  .main-layout { display: block; }
+}
+.sidebar-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 8px 16px 4px;
+}
+.sidebar-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 9px 16px;
+  font-size: 13px;
+  color: var(--gray-600);
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+.sidebar-item:hover { background: var(--gray-50); color: var(--primary); }
+.sidebar-item.active { background: var(--primary-light); color: var(--primary); border-left-color: var(--primary); font-weight: 600; }
+
+.content-area {
+  flex: 1;
+  padding: 20px 20px 60px;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+/* ── 섹션 카드 ── */
+.section-card {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-200);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.section-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--gray-100);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.section-title { font-size: 16px; font-weight: 700; color: var(--gray-800); }
+.section-subtitle { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+.section-body { padding: 20px; }
+
+/* ── 정보 박스 ── */
+.info-box {
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.info-box.blue { background: var(--primary-light); border-left: 4px solid var(--primary); }
+.info-box.green { background: var(--success-light); border-left: 4px solid var(--success); }
+.info-box.amber { background: var(--accent-light); border-left: 4px solid var(--accent); }
+.info-box.red { background: var(--danger-light); border-left: 4px solid var(--danger); }
+.info-box-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.info-box-content { flex: 1; }
+.info-box-title { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+.info-box.blue .info-box-title { color: var(--primary-dark); }
+.info-box.green .info-box-title { color: #166534; }
+.info-box.amber .info-box-title { color: #92400e; }
+.info-box.red .info-box-title { color: #991b1b; }
+
+/* ── 표 ── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 12px 0;
+}
+.data-table th {
+  background: var(--gray-50);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--gray-600);
+  border-bottom: 1.5px solid var(--gray-200);
+  font-size: 12px;
+}
+.data-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--gray-100);
+  color: var(--gray-700);
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--gray-50); }
+
+/* ── 뱃지 ── */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.badge-blue { background: var(--primary-light); color: var(--primary-dark); }
+.badge-green { background: var(--success-light); color: #166534; }
+.badge-red { background: var(--danger-light); color: #991b1b; }
+.badge-amber { background: var(--accent-light); color: #92400e; }
+.badge-gray { background: var(--gray-100); color: var(--gray-600); }
+
+/* ── 문제 카드 ── */
+.q-card {
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.q-card:hover { box-shadow: var(--shadow-md); }
+.q-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--gray-50);
+  border-bottom: 1px solid var(--gray-200);
+  cursor: pointer;
+  user-select: none;
+}
+.q-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.q-text { flex: 1; font-size: 14px; font-weight: 500; color: var(--gray-800); line-height: 1.5; }
+.q-toggle { font-size: 12px; color: var(--gray-400); flex-shrink: 0; }
+.q-options { padding: 12px 16px; }
+.q-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 7px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+  border: 1.5px solid transparent;
+}
+.q-option:hover { background: var(--gray-50); }
+.q-option.selected-correct { background: var(--success-light); border-color: var(--success); }
+.q-option.selected-wrong { background: var(--danger-light); border-color: var(--danger); }
+.q-option.correct-answer { background: var(--success-light); border-color: var(--success); }
+.opt-letter {
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 1.5px solid var(--gray-300);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--gray-500);
+  flex-shrink: 0; margin-top: 1px;
+}
+.q-option.selected-correct .opt-letter,
+.q-option.correct-answer .opt-letter { border-color: var(--success); color: var(--success); background: white; }
+.q-option.selected-wrong .opt-letter { border-color: var(--danger); color: var(--danger); background: white; }
+.opt-text { font-size: 13px; color: var(--gray-700); line-height: 1.5; }
+.q-explanation {
+  padding: 12px 16px;
+  background: #f0f9ff;
+  border-top: 1px solid #bae6fd;
+  font-size: 13px;
+  color: #0c4a6e;
+  display: none;
+}
+.q-explanation.show { display: block; }
+.q-actions { padding: 8px 16px 12px; display: flex; gap: 8px; }
+.btn-check {
+  padding: 7px 16px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid;
+  transition: all 0.15s;
+}
+.btn-primary { background: var(--primary); color: white; border-color: var(--primary); }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-outline { background: white; color: var(--gray-600); border-color: var(--gray-300); }
+.btn-outline:hover { background: var(--gray-50); }
+
+/* ── 진도 바 ── */
+.progress-wrap { margin-bottom: 6px; }
+.progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-500); margin-bottom: 4px; }
+.progress-bar { height: 6px; background: var(--gray-200); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
+
+/* ── 모의고사 결과 ── */
+.result-box {
+  text-align: center;
+  padding: 24px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  border: 1px solid #bae6fd;
+  margin-bottom: 20px;
+  display: none;
+}
+.result-box.show { display: block; }
+.result-score { font-size: 48px; font-weight: 800; color: var(--primary); }
+.result-label { font-size: 14px; color: var(--gray-600); margin-top: 4px; }
+.result-pass { font-size: 18px; font-weight: 700; margin-top: 8px; }
+.result-pass.pass { color: var(--success); }
+.result-pass.fail { color: var(--danger); }
+
+/* ── 열 그리드 ── */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+@media (max-width: 500px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.stat-card {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+.stat-num { font-size: 28px; font-weight: 800; color: var(--primary); }
+.stat-label { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+
+/* ── 모바일 하단 메뉴 ── */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: white;
+  border-top: 1px solid var(--gray-200);
+  z-index: 200;
+  padding: 6px 0 env(safe-area-inset-bottom);
+}
+@media (max-width: 700px) {
+  .mobile-bottom-nav { display: flex; }
+  .content-area { padding-bottom: 90px; }
+}
+.mobile-nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 4px;
+  font-size: 10px;
+  color: var(--gray-400);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+.mobile-nav-btn.active { color: var(--primary); }
+.mobile-nav-btn svg { width: 22px; height: 22px; }
+
+/* ── 목차 ── */
+.toc-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-200);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: white;
+}
+.toc-item:hover { border-color: var(--primary); background: var(--primary-light); }
+.toc-num {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--primary-light); color: var(--primary);
+  font-size: 13px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.toc-title { font-size: 13px; font-weight: 600; color: var(--gray-700); }
+.toc-meta { font-size: 11px; color: var(--gray-400); margin-top: 1px; }
+
+/* ── 이론 내용 ── */
+.theory-block { margin-bottom: 20px; }
+.theory-h2 { font-size: 15px; font-weight: 700; color: var(--gray-800); padding-bottom: 6px; border-bottom: 2px solid var(--primary); margin-bottom: 10px; }
+.theory-h3 { font-size: 14px; font-weight: 700; color: var(--primary-dark); margin: 12px 0 6px; }
+.theory-p { font-size: 13px; color: var(--gray-700); line-height: 1.8; margin-bottom: 8px; }
+.theory-list { padding-left: 18px; margin-bottom: 8px; }
+.theory-list li { font-size: 13px; color: var(--gray-700); line-height: 1.7; margin-bottom: 3px; }
+.keyword { display: inline-block; background: var(--primary-light); color: var(--primary-dark); padding: 1px 6px; border-radius: 4px; font-size: 12px; font-weight: 700; }
+.shortcut-box {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--gray-800); color: white;
+  padding: 3px 8px; border-radius: 5px;
+  font-size: 12px; font-family: monospace; font-weight: 600;
+}
+
+/* ── 페이지 타이틀 ── */
+.page-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+.page-desc { font-size: 13px; color: var(--gray-500); margin-bottom: 20px; }
+
+/* 활성 탭 컨텐츠 */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.sub-menu {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+}
+.sub-btn {
+  padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+  border: 1.5px solid var(--gray-300); background: white; color: var(--gray-600);
+  cursor: pointer; transition: all 0.15s;
+}
+.sub-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+.exam-selector {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px;
+}
+@media (max-width: 500px) { .exam-selector { grid-template-columns: repeat(3, 1fr); } }
+.exam-card {
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 10px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: white;
+}
+.exam-card:hover { border-color: var(--primary); background: var(--primary-light); }
+.exam-card.active { border-color: var(--primary); background: var(--primary); color: white; }
+.exam-card .ec-num { font-size: 16px; font-weight: 800; }
+.exam-card .ec-label { font-size: 10px; margin-top: 2px; }
+.exam-card.active .ec-label { color: rgba(255,255,255,0.8); }
+.exam-card:not(.active) .ec-label { color: var(--gray-400); }
+
+.timer-box {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--gray-800); color: white;
+  border-radius: 10px; padding: 12px 16px; margin-bottom: 16px;
+}
+.timer-time { font-size: 22px; font-weight: 800; font-family: monospace; }
+.timer-label { font-size: 11px; color: var(--gray-400); }
+.timer-btn { padding: 7px 14px; border-radius: 7px; font-size: 12px; font-weight: 700; cursor: pointer; border: none; }
+.timer-start { background: var(--success); color: white; }
+.timer-pause { background: var(--accent); color: white; }
+.timer-reset { background: var(--gray-600); color: white; }
+
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-logo">📝 워드프로세서 1급 완벽 합격</div>
+    <span class="header-badge">대한상공회의소</span>
+  </div>
+</header>
+
+<!-- 탭 네비 -->
+<nav class="tab-nav" id="mainTabNav">
+  <button class="tab-btn active" onclick="switchTab('home')">🏠 홈</button>
+  <button class="tab-btn" onclick="switchTab('written')">📖 필기</button>
+  <button class="tab-btn" onclick="switchTab('practical')">⌨️ 실기</button>
+  <button class="tab-btn" onclick="switchTab('mock')">📝 모의고사</button>
+  <button class="tab-btn" onclick="switchTab('past')">📋 기출문제</button>
+</nav>
+
+<div class="main-layout">
+  <!-- 사이드바 (PC) -->
+  <aside class="sidebar" id="sidebar">
+    <div id="sidebarContent"></div>
+  </aside>
+
+  <!-- 본문 -->
+  <main class="content-area">
+
+    <!-- ① 홈 -->
+    <div class="tab-content active" id="tab-home">
+      <div class="page-title">워드프로세서 1급 합격 가이드</div>
+      <div class="page-desc">대한상공회의소 | 필기 60점↑ · 실기 80점↑ 동시 합격 전략</div>
+
+      <div class="grid-2" style="margin-bottom:20px">
+        <div class="stat-card">
+          <div class="stat-num" style="color:#d97706">60점</div>
+          <div class="stat-label">필기 합격선<br>(100점 만점)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" style="color:#16a34a">80점</div>
+          <div class="stat-label">실기 합격선<br>(100점 만점)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">40분</div>
+          <div class="stat-label">필기 시험 시간<br>(20문항 4지선다)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">30분</div>
+          <div class="stat-label">실기 시험 시간<br>(한글/MS워드)</div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-icon" style="background:#e8f0fe; font-size:20px">📊</div>
+          <div>
+            <div class="section-title">시험 구조 한눈에 보기</div>
+            <div class="section-subtitle">필기 + 실기 동시 응시</div>
+          </div>
+        </div>
+        <div class="section-body">
+          <table class="data-table">
+            <thead><tr><th>구분</th><th>과목</th><th>문항/시간</th><th>합격 기준</th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge badge-blue">필기</span></td><td>워드프로세서 기능 및 용어<br>컴퓨터 및 정보 활용</td><td>20문항 / 40분</td><td>60점 이상</td></tr>
+              <tr><td><span class="badge badge-green">실기</span></td><td>문서 편집 (한글/MS워드 택1)</td><td>1문제 / 30분</td><td>80점 이상</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-icon" style="background:#dcfce7; font-size:20px">🗺️</div>
+          <div>
+            <div class="section-title">학습 로드맵</div>
+            <div class="section-subtitle">4주 합격 플랜</div>
+          </div>
+        </div>
+        <div class="section-body">
+          <div class="info-box blue">
+            <div class="info-box-icon">1️⃣</div>
+            <div class="info-box-content">
+              <div class="info-box-title">1주차 — 필기 이론 집중</div>
+              워드프로세서 개념, 문서 편집 기능, 인쇄·출력 관련 용어 완전 정복
+            </div>
+          </div>
+          <div class="info-box green">
+            <div class="info-box-icon">2️⃣</div>
+            <div class="info-box-content">
+              <div class="info-box-title">2주차 — 컴퓨터 활용 + 필기 모의고사</div>
+              운영체제·네트워크·정보 보안 이론 + 필기 모의고사 10회 반복
+            </div>
+          </div>
+          <div class="info-box amber">
+            <div class="info-box-icon">3️⃣</div>
+            <div class="info-box-content">
+              <div class="info-box-title">3주차 — 실기 반복 연습</div>
+              글자/문단 서식, 표 삽입, 개체 삽입, 쪽 설정 반복 숙달
+            </div>
+          </div>
+          <div class="info-box red">
+            <div class="info-box-icon">4️⃣</div>
+            <div class="info-box-content">
+              <div class="info-box-title">4주차 — 실기 모의고사 + 기출 마무리</div>
+              실기 모의고사 10회 + 기출 5회 실전 타이머 연습
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-icon" style="background:#fef3c7; font-size:20px">⚡</div>
+          <div>
+            <div class="section-title">교재 목차</div>
+            <div class="section-subtitle">탭을 눌러 바로 이동</div>
+          </div>
+        </div>
+        <div class="section-body">
+          <div style="font-weight:700; color:var(--primary); margin-bottom:10px">📖 필기 파트</div>
+          <div class="toc-item" onclick="switchTab('written'); setSubMenu('written','개요')">
+            <div class="toc-num">1</div><div><div class="toc-title">시험 개요 및 전략</div><div class="toc-meta">합격 전략 · 출제 경향 분석</div></div>
+          </div>
+          <div class="toc-item" onclick="switchTab('written'); setSubMenu('written','이론')">
+            <div class="toc-num">2</div><div><div class="toc-title">핵심 이론</div><div class="toc-meta">WP 기능 · 컴퓨터 활용 · 정보통신</div></div>
+          </div>
+          <div class="toc-item" onclick="switchTab('mock'); setMockType('written')">
+            <div class="toc-num">3</div><div><div class="toc-title">필기 모의고사 20회</div><div class="toc-meta">회차별 20문항 · 즉시 채점</div></div>
+          </div>
+          <div class="toc-item" onclick="switchTab('past'); setPastType('written')">
+            <div class="toc-num">4</div><div><div class="toc-title">필기 기출문제 5회</div><div class="toc-meta">최근 5회 기출 복원</div></div>
+          </div>
+          <div style="font-weight:700; color:var(--secondary); margin: 16px 0 10px">⌨️ 실기 파트</div>
+          <div class="toc-item" onclick="switchTab('practical'); setSubMenu('practical','개요')">
+            <div class="toc-num">5</div><div><div class="toc-title">실기 개요 및 전략</div><div class="toc-meta">채점 기준 · 감점 유형 분석</div></div>
+          </div>
+          <div class="toc-item" onclick="switchTab('practical'); setSubMenu('practical','이론')">
+            <div class="toc-num">6</div><div><div class="toc-title">실기 핵심 기능</div><div class="toc-meta">글자·문단·표·개체·쪽 설정</div></div>
+          </div>
+          <div class="toc-item" onclick="switchTab('mock'); setMockType('practical')">
+            <div class="toc-num">7</div><div><div class="toc-title">실기 모의고사 20회</div><div class="toc-meta">지문+지시사항 체크리스트</div></div>
+          </div>
+          <div class="toc-item" onclick="switchTab('past'); setPastType('practical')">
+            <div class="toc-num">8</div><div><div class="toc-title">실기 기출문제 5회</div><div class="toc-meta">기출 복원 + 해설</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ② 필기 -->
+    <div class="tab-content" id="tab-written">
+      <div class="page-title">📖 필기 파트</div>
+      <div class="page-desc">20문항 · 40분 · 60점 이상 합격 (1문항 5점)</div>
+      <div class="sub-menu" id="written-submenu">
+        <button class="sub-btn active" onclick="setSubMenu('written','개요')">개요 · 전략</button>
+        <button class="sub-btn" onclick="setSubMenu('written','이론1')">이론1 WP기능</button>
+        <button class="sub-btn" onclick="setSubMenu('written','이론2')">이론2 컴퓨터</button>
+        <button class="sub-btn" onclick="setSubMenu('written','이론3')">이론3 정보통신</button>
+      </div>
+      <div id="written-content"></div>
+    </div>
+
+    <!-- ③ 실기 -->
+    <div class="tab-content" id="tab-practical">
+      <div class="page-title">⌨️ 실기 파트</div>
+      <div class="page-desc">1문제 · 30분 · 80점 이상 합격 (한글/MS워드 택1)</div>
+      <div class="sub-menu" id="practical-submenu">
+        <button class="sub-btn active" onclick="setSubMenu('practical','개요')">개요 · 전략</button>
+        <button class="sub-btn" onclick="setSubMenu('practical','이론1')">글자 서식</button>
+        <button class="sub-btn" onclick="setSubMenu('practical','이론2')">문단 서식</button>
+        <button class="sub-btn" onclick="setSubMenu('practical','이론3')">표 · 개체</button>
+        <button class="sub-btn" onclick="setSubMenu('practical','이론4')">쪽 설정</button>
+      </div>
+      <div id="practical-content"></div>
+    </div>
+
+    <!-- ④ 모의고사 -->
+    <div class="tab-content" id="tab-mock">
+      <div class="page-title">📝 모의고사</div>
+      <div class="page-desc">필기 20회 + 실기 20회 | 즉시 채점</div>
+      <div class="sub-menu">
+        <button class="sub-btn active" id="mock-written-btn" onclick="setMockType('written')">📖 필기 모의고사</button>
+        <button class="sub-btn" id="mock-practical-btn" onclick="setMockType('practical')">⌨️ 실기 모의고사</button>
+      </div>
+      <div id="mock-exam-selector"></div>
+      <div id="mock-content"></div>
+    </div>
+
+    <!-- ⑤ 기출 -->
+    <div class="tab-content" id="tab-past">
+      <div class="page-title">📋 기출문제</div>
+      <div class="page-desc">필기 5회 + 실기 5회 복원</div>
+      <div class="sub-menu">
+        <button class="sub-btn active" id="past-written-btn" onclick="setPastType('written')">📖 필기 기출</button>
+        <button class="sub-btn" id="past-practical-btn" onclick="setPastType('practical')">⌨️ 실기 기출</button>
+      </div>
+      <div id="past-exam-selector"></div>
+      <div id="past-content"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- 모바일 하단 네비 -->
+<nav class="mobile-bottom-nav">
+  <button class="mobile-nav-btn active" onclick="switchTab('home')" id="mnav-home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>홈
+  </button>
+  <button class="mobile-nav-btn" onclick="switchTab('written')" id="mnav-written">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>필기
+  </button>
+  <button class="mobile-nav-btn" onclick="switchTab('practical')" id="mnav-practical">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 2l-4 5-4-5"/></svg>실기
+  </button>
+  <button class="mobile-nav-btn" onclick="switchTab('mock')" id="mnav-mock">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>모의
+  </button>
+  <button class="mobile-nav-btn" onclick="switchTab('past')" id="mnav-past">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>기출
+  </button>
+</nav>
+
+<script>
+// ═══════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════
+
+const writtenTheory = {
+  개요: `
+  <div class="section-card">
+    <div class="section-header"><div class="section-icon" style="background:#e8f0fe">📊</div><div><div class="section-title">필기 시험 개요</div></div></div>
+    <div class="section-body">
+      <div class="info-box blue"><div class="info-box-icon">ℹ️</div><div class="info-box-content"><div class="info-box-title">시험 구성</div>총 20문항, 객관식 4지선다, 40분, 60점(12문항) 이상 합격</div></div>
+      <table class="data-table"><thead><tr><th>출제 영역</th><th>출제 비중</th><th>주요 내용</th></tr></thead>
+      <tbody>
+        <tr><td>워드프로세서 일반</td><td><span class="badge badge-blue">40~50%</span></td><td>WP 기능, 용어, 문서 편집, 인쇄</td></tr>
+        <tr><td>PC 운영체제</td><td><span class="badge badge-green">20~30%</span></td><td>Windows 기능, 파일 관리, 단축키</td></tr>
+        <tr><td>정보통신 및 인터넷</td><td><span class="badge badge-amber">15~20%</span></td><td>인터넷, 네트워크, 보안, 멀티미디어</td></tr>
+        <tr><td>스프레드시트 일반</td><td><span class="badge badge-gray">10~15%</span></td><td>엑셀 함수, 차트, 데이터 관리</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+  <div class="section-card">
+    <div class="section-header"><div class="section-icon" style="background:#dcfce7">🎯</div><div><div class="section-title">합격 전략 핵심 포인트</div></div></div>
+    <div class="section-body">
+      <div class="info-box green"><div class="info-box-icon">✅</div><div class="info-box-content"><div class="info-box-title">WP 용어 암기 최우선</div>워드프로세서 관련 용어(블록, 커서, 스크롤, 드래그 등)와 기능명은 매회 반드시 출제됩니다.</div></div>
+      <div class="info-box green"><div class="info-box-icon">✅</div><div class="info-box-content"><div class="info-box-title">단축키 완전 암기</div>Ctrl+C/V/X/Z, Ctrl+Home/End, F5(찾기/바꾸기) 등 필수 단축키는 반드시 출제됩니다.</div></div>
+      <div class="info-box amber"><div class="info-box-icon">⚡</div><div class="info-box-content"><div class="info-box-title">인터넷·보안 최신 용어</div>피싱, 스미싱, 랜섬웨어, 클라우드, IoT 등 최신 용어도 출제 비중 증가 추세입니다.</div></div>
+      <div class="info-box red"><div class="info-box-icon">⚠️</div><div class="info-box-content"><div class="info-box-title">14문항 이상 정답 필요</div>20문항 중 12문항(60점) 이상 맞혀야 합격. 틀릴 수 있는 문제는 8문항뿐입니다.</div></div>
+    </div>
+  </div>`,
+
+  이론1: `
+  <div class="section-card">
+    <div class="section-header"><div class="section-icon" style="background:#e8f0fe">📝</div><div><div class="section-title">이론 1 — 워드프로세서 기능 및 용어</div></div></div>
+    <div class="section-body">
+      <div class="theory-block">
+        <div class="theory-h2">1. 워드프로세서의 기본 개념</div>
+        <div class="theory-h3">① 워드프로세서란?</div>
+        <div class="theory-p">문서를 작성·편집·저장·인쇄하는 소프트웨어. 입력→편집→저장→인쇄 순서로 작업.</div>
+        <div class="theory-h3">② 문서 편집의 기본 용어</div>
+        <table class="data-table"><thead><tr><th>용어</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">커서(Cursor)</span></td><td>현재 입력 위치를 나타내는 깜빡이는 표시</td></tr>
+          <tr><td><span class="keyword">블록(Block)</span></td><td>편집 대상 텍스트를 선택(드래그)한 상태</td></tr>
+          <tr><td><span class="keyword">스크롤(Scroll)</span></td><td>화면을 위·아래·좌·우로 이동하는 것</td></tr>
+          <tr><td><span class="keyword">드래그(Drag)</span></td><td>마우스 버튼을 누른 채 이동하는 동작</td></tr>
+          <tr><td><span class="keyword">클립보드</span></td><td>복사·잘라내기 내용을 임시 저장하는 메모리 영역</td></tr>
+          <tr><td><span class="keyword">Undo/Redo</span></td><td>실행 취소 / 다시 실행 (Ctrl+Z / Ctrl+Y)</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">2. 필수 단축키 완전 정복</div>
+        <table class="data-table"><thead><tr><th>단축키</th><th>기능</th><th>비고</th></tr></thead><tbody>
+          <tr><td><span class="shortcut-box">Ctrl+C</span></td><td>복사</td><td>클립보드에 저장</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+X</span></td><td>잘라내기</td><td>원본 삭제 후 클립보드</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+V</span></td><td>붙여넣기</td><td>클립보드 내용 삽입</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+Z</span></td><td>실행 취소</td><td>Undo</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+Y</span></td><td>다시 실행</td><td>Redo</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+A</span></td><td>전체 선택</td><td>모든 내용 블록</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+S</span></td><td>저장</td><td>현재 파일 덮어쓰기</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+F</span></td><td>찾기</td><td>문자열 검색</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+H</span></td><td>바꾸기</td><td>찾아 바꾸기</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+Home</span></td><td>문서 처음으로</td><td>커서 이동</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+End</span></td><td>문서 끝으로</td><td>커서 이동</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+B</span></td><td>굵게(Bold)</td><td>선택 텍스트</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+I</span></td><td>기울임(Italic)</td><td>선택 텍스트</td></tr>
+          <tr><td><span class="shortcut-box">Ctrl+U</span></td><td>밑줄(Underline)</td><td>선택 텍스트</td></tr>
+          <tr><td><span class="shortcut-box">F5</span></td><td>찾기/바꾸기 대화상자</td><td>한글 기준</td></tr>
+          <tr><td><span class="shortcut-box">Delete</span></td><td>커서 오른쪽 문자 삭제</td><td></td></tr>
+          <tr><td><span class="shortcut-box">Backspace</span></td><td>커서 왼쪽 문자 삭제</td><td></td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">3. 인쇄 관련 용어</div>
+        <table class="data-table"><thead><tr><th>용어</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">미리 보기</span></td><td>인쇄 전 화면으로 확인하는 기능</td></tr>
+          <tr><td><span class="keyword">역순 인쇄</span></td><td>마지막 페이지부터 인쇄 (정리 편의)</td></tr>
+          <tr><td><span class="keyword">매수</span></td><td>인쇄할 문서의 복사 부수</td></tr>
+          <tr><td><span class="keyword">한 부씩 인쇄</span></td><td>1-2-3, 1-2-3 순서로 출력</td></tr>
+          <tr><td><span class="keyword">홀수/짝수 인쇄</span></td><td>홀수 또는 짝수 페이지만 선택 인쇄</td></tr>
+          <tr><td><span class="keyword">축소/확대 인쇄</span></td><td>문서 크기를 비율로 조정하여 인쇄</td></tr>
+          <tr><td><span class="keyword">워터마크</span></td><td>문서 배경에 반투명으로 표시되는 텍스트/이미지</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">4. 파일 형식</div>
+        <table class="data-table"><thead><tr><th>확장자</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">.hwp / .hwpx</span></td><td>한글과컴퓨터 워드프로세서 형식</td></tr>
+          <tr><td><span class="keyword">.docx</span></td><td>MS Word 2007 이후 형식</td></tr>
+          <tr><td><span class="keyword">.doc</span></td><td>MS Word 97-2003 형식</td></tr>
+          <tr><td><span class="keyword">.rtf</span></td><td>서식 있는 텍스트 형식 (호환성↑)</td></tr>
+          <tr><td><span class="keyword">.txt</span></td><td>순수 텍스트 (서식 없음)</td></tr>
+          <tr><td><span class="keyword">.pdf</span></td><td>전자 문서 표준 (편집 불가)</td></tr>
+          <tr><td><span class="keyword">.odt</span></td><td>오픈 문서 형식 (LibreOffice)</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>`,
+
+  이론2: `
+  <div class="section-card">
+    <div class="section-header"><div class="section-icon" style="background:#e8f0fe">💻</div><div><div class="section-title">이론 2 — PC 운영체제 및 컴퓨터 활용</div></div></div>
+    <div class="section-body">
+      <div class="theory-block">
+        <div class="theory-h2">1. Windows 운영체제 핵심</div>
+        <div class="theory-h3">① 파일·폴더 관리</div>
+        <table class="data-table"><thead><tr><th>항목</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">파일</span></td><td>데이터 저장의 기본 단위. 이름+확장자로 구성</td></tr>
+          <tr><td><span class="keyword">폴더(디렉터리)</span></td><td>파일을 분류·정리하는 논리적 공간</td></tr>
+          <tr><td><span class="keyword">휴지통</span></td><td>삭제된 파일 임시 보관. Shift+Delete는 직접 삭제</td></tr>
+          <tr><td><span class="keyword">바로가기</span></td><td>원본 파일의 연결 아이콘 (아이콘에 화살표 표시)</td></tr>
+          <tr><td><span class="keyword">숨김 파일</span></td><td>폴더 옵션에서 표시/숨기기 설정 가능</td></tr>
+        </tbody></table>
+        <div class="theory-h3">② 윈도우 단축키</div>
+        <table class="data-table"><thead><tr><th>단축키</th><th>기능</th></tr></thead><tbody>
+          <tr><td><span class="shortcut-box">Win+D</span></td><td>바탕화면 보기/숨기기</td></tr>
+          <tr><td><span class="shortcut-box">Win+E</span></td><td>파일 탐색기 열기</td></tr>
+          <tr><td><span class="shortcut-box">Win+L</span></td><td>화면 잠금</td></tr>
+          <tr><td><span class="shortcut-box">Alt+F4</span></td><td>현재 창 닫기</td></tr>
+          <tr><td><span class="shortcut-box">Alt+Tab</span></td><td>열린 창 전환</td></tr>
+          <tr><td><span class="shortcut-box">Print Screen</span></td><td>화면 전체 캡처 (클립보드)</td></tr>
+          <tr><td><span class="shortcut-box">Alt+Print Screen</span></td><td>현재 창만 캡처</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">2. 컴퓨터 하드웨어 기초</div>
+        <table class="data-table"><thead><tr><th>장치</th><th>종류/설명</th></tr></thead><tbody>
+          <tr><td>입력장치</td><td>키보드, 마우스, 스캐너, 웹캠, 마이크, 조이스틱</td></tr>
+          <tr><td>출력장치</td><td>모니터, 프린터, 스피커, 프로젝터</td></tr>
+          <tr><td>입출력장치</td><td>터치스크린, 모뎀, HDD(읽기+쓰기)</td></tr>
+          <tr><td>저장장치</td><td>HDD, SSD, USB, CD/DVD, 클라우드</td></tr>
+          <tr><td>CPU</td><td>중앙처리장치. 연산·제어의 핵심</td></tr>
+          <tr><td>RAM</td><td>주기억장치. 전원 끄면 소멸 (휘발성)</td></tr>
+          <tr><td>ROM</td><td>읽기 전용 메모리. 전원 꺼도 유지 (비휘발성)</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">3. 기억 용량 단위</div>
+        <table class="data-table"><thead><tr><th>단위</th><th>크기</th></tr></thead><tbody>
+          <tr><td>1 Byte</td><td>8 Bit</td></tr>
+          <tr><td>1 KB</td><td>1,024 Byte</td></tr>
+          <tr><td>1 MB</td><td>1,024 KB</td></tr>
+          <tr><td>1 GB</td><td>1,024 MB</td></tr>
+          <tr><td>1 TB</td><td>1,024 GB</td></tr>
+          <tr><td>1 PB</td><td>1,024 TB</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>`,
+
+  이론3: `
+  <div class="section-card">
+    <div class="section-header"><div class="section-icon" style="background:#e6f7f5">🌐</div><div><div class="section-title">이론 3 — 정보통신·인터넷·보안</div></div></div>
+    <div class="section-body">
+      <div class="theory-block">
+        <div class="theory-h2">1. 인터넷 기초 용어</div>
+        <table class="data-table"><thead><tr><th>용어</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">IP 주소</span></td><td>인터넷상 컴퓨터의 고유 주소 (예: 192.168.0.1)</td></tr>
+          <tr><td><span class="keyword">도메인</span></td><td>IP 주소를 문자로 표현 (예: www.korcham.net)</td></tr>
+          <tr><td><span class="keyword">DNS</span></td><td>도메인→IP 변환 서비스</td></tr>
+          <tr><td><span class="keyword">URL</span></td><td>인터넷 자원의 위치 표시 주소</td></tr>
+          <tr><td><span class="keyword">HTTP/HTTPS</span></td><td>웹 통신 프로토콜. S는 보안(암호화)</td></tr>
+          <tr><td><span class="keyword">FTP</span></td><td>파일 전송 프로토콜</td></tr>
+          <tr><td><span class="keyword">SMTP/POP3</span></td><td>이메일 발송(SMTP) / 수신(POP3)</td></tr>
+          <tr><td><span class="keyword">Wi-Fi</span></td><td>무선 LAN 표준 (IEEE 802.11)</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">2. 정보 보안 위협 유형</div>
+        <table class="data-table"><thead><tr><th>유형</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">바이러스</span></td><td>다른 파일에 기생·복제, 시스템 파괴</td></tr>
+          <tr><td><span class="keyword">웜(Worm)</span></td><td>스스로 복제·전파. 숙주 파일 불필요</td></tr>
+          <tr><td><span class="keyword">트로이목마</span></td><td>정상 프로그램으로 위장, 정보 탈취</td></tr>
+          <tr><td><span class="keyword">랜섬웨어</span></td><td>파일 암호화 후 금전 요구</td></tr>
+          <tr><td><span class="keyword">피싱(Phishing)</span></td><td>가짜 사이트로 개인정보 탈취</td></tr>
+          <tr><td><span class="keyword">스미싱(Smishing)</span></td><td>SMS+피싱. 문자로 악성앱 설치 유도</td></tr>
+          <tr><td><span class="keyword">스파이웨어</span></td><td>사용자 동의 없이 정보 수집·전송</td></tr>
+          <tr><td><span class="keyword">DDoS</span></td><td>분산 서비스 거부 공격. 대량 트래픽으로 서버 마비</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">3. 최신 IT 트렌드 용어</div>
+        <table class="data-table"><thead><tr><th>용어</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">클라우드</span></td><td>인터넷을 통해 서버·스토리지 등 자원 제공</td></tr>
+          <tr><td><span class="keyword">IoT</span></td><td>사물인터넷. 모든 기기를 인터넷으로 연결</td></tr>
+          <tr><td><span class="keyword">빅데이터</span></td><td>대규모 데이터 수집·분석·활용</td></tr>
+          <tr><td><span class="keyword">AI / 머신러닝</span></td><td>인공지능 / 데이터 학습 기반 예측·판단</td></tr>
+          <tr><td><span class="keyword">블록체인</span></td><td>분산 원장 기술. 위·변조 불가 거래 기록</td></tr>
+          <tr><td><span class="keyword">메타버스</span></td><td>가상·증강현실 기반 3D 가상 세계</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>`
+};
+
+const practicalTheory = {
+  개요: `
+  <div class="section-card">
+    <div class="section-header"><div class="section-icon" style="background:#dcfce7">⌨️</div><div><div class="section-title">실기 시험 개요 및 전략</div></div></div>
+    <div class="section-body">
+      <div class="info-box blue"><div class="info-box-icon">ℹ️</div><div class="info-box-content"><div class="info-box-title">실기 시험 구성</div>30분 내 1개 문서 작성. 한글(HWP) 또는 MS워드(DOCX) 중 선택. 80점 이상 합격.</div></div>
+      <div class="theory-block">
+        <div class="theory-h2">실기 채점 기준 (총 100점)</div>
+        <table class="data-table"><thead><tr><th>항목</th><th>배점</th><th>주요 내용</th></tr></thead><tbody>
+          <tr><td>글자 서식</td><td>20점</td><td>글꼴, 크기, 색상, 굵게, 기울임, 밑줄</td></tr>
+          <tr><td>문단 서식</td><td>20점</td><td>정렬, 들여쓰기, 줄간격, 단</td></tr>
+          <tr><td>표 작성</td><td>25점</td><td>표 삽입, 셀 병합, 테두리, 배경색</td></tr>
+          <tr><td>개체 삽입</td><td>15점</td><td>그림, 도형, 텍스트 상자, 워드아트</td></tr>
+          <tr><td>쪽 설정</td><td>10점</td><td>여백, 머리말/꼬리말, 쪽번호</td></tr>
+          <tr><td>기타</td><td>10점</td><td>저장 형식, 문서 제목 등</td></tr>
+        </tbody></table>
+      </div>
+      <div class="info-box red"><div class="info-box-icon">⚠️</div><div class="info-box-content"><div class="info-box-title">절대 실수 금지 — 즉각 감점 항목</div>
+        <ul style="padding-left:16px; margin-top:4px; font-size:13px">
+          <li>저장 파일명·형식 오류 (전체 0점 위험)</li>
+          <li>지정 글꼴 미적용</li>
+          <li>표 셀 수 오류</li>
+          <li>머리말/꼬리말 내용·위치 오류</li>
+        </ul>
+      </div></div>
+      <div class="info-box green"><div class="info-box-icon">💡</div><div class="info-box-content"><div class="info-box-title">30분 시간 배분 전략</div>
+        <ul style="padding-left:16px; margin-top:4px; font-size:13px">
+          <li>0~5분: 문제 전체 파악 + 쪽 설정</li>
+          <li>5~15분: 본문 입력 + 글자/문단 서식</li>
+          <li>15~25분: 표 작성 + 개체 삽입</li>
+          <li>25~30분: 머리말/꼬리말 + 저장 확인</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>`,
+
+  이론1: `
+  <div class="section-card">
+    <div class="section-header"><div class="section-icon" style="background:#e8f0fe">🔡</div><div><div class="section-title">글자 서식 완전 정복</div></div></div>
+    <div class="section-body">
+      <div class="theory-block">
+        <div class="theory-h2">1. 글꼴 (폰트) 설정</div>
+        <table class="data-table"><thead><tr><th>항목</th><th>한글(HWP)</th><th>MS Word</th></tr></thead><tbody>
+          <tr><td>글꼴 변경</td><td>서식 → 글자 모양 (Alt+L)</td><td>홈 → 글꼴 상자</td></tr>
+          <tr><td>글자 크기</td><td>pt 단위 입력</td><td>pt 단위 입력</td></tr>
+          <tr><td>굵게</td><td>Ctrl+B</td><td>Ctrl+B</td></tr>
+          <tr><td>기울임</td><td>Ctrl+I</td><td>Ctrl+I</td></tr>
+          <tr><td>밑줄</td><td>Ctrl+U</td><td>Ctrl+U</td></tr>
+          <tr><td>취소선</td><td>서식 → 글자 모양</td><td>홈 → 취소선(S̶)</td></tr>
+          <tr><td>글자 색</td><td>서식 → 글자 모양 → 글자 색</td><td>홈 → 글꼴 색</td></tr>
+          <tr><td>형광펜</td><td>서식 → 글자 모양 → 음영</td><td>홈 → 형광펜</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">2. 장평·자간·위치</div>
+        <table class="data-table"><thead><tr><th>항목</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">장평</span></td><td>글자의 가로/세로 비율 (기본 100%)</td></tr>
+          <tr><td><span class="keyword">자간</span></td><td>글자 사이의 간격</td></tr>
+          <tr><td><span class="keyword">위 첨자</span></td><td>글자보다 위에 작게 표시 (예: X²)</td></tr>
+          <tr><td><span class="keyword">아래 첨자</span></td><td>글자보다 아래에 작게 표시 (예: H₂O)</td></tr>
+          <tr><td><span class="keyword">양각/음각</span></td><td>튀어나온/파여 보이는 효과 (장식용)</td></tr>
+        </tbody></table>
+      </div>
+      <div class="info-box amber"><div class="info-box-icon">🎯</div><div class="info-box-content"><div class="info-box-title">실기 빈출 패턴</div>제목은 "HY헤드라인M 22pt 굵게 가운데 정렬", 소제목은 "굴림 14pt 밑줄" 등 구체적 지정. 반드시 정확히 적용!</div></div>
+    </div>
+  </div>`,
+
+  이론2: `
+  <div class="section-card">
+    <div class="section-header"><div class="section-icon" style="background:#e8f0fe">¶</div><div><div class="section-title">문단 서식 완전 정복</div></div></div>
+    <div class="section-body">
+      <div class="theory-block">
+        <div class="theory-h2">1. 문단 정렬</div>
+        <table class="data-table"><thead><tr><th>정렬</th><th>단축키</th><th>용도</th></tr></thead><tbody>
+          <tr><td>왼쪽 정렬</td><td>Ctrl+L</td><td>기본 본문</td></tr>
+          <tr><td>가운데 정렬</td><td>Ctrl+E</td><td>제목, 표 내용</td></tr>
+          <tr><td>오른쪽 정렬</td><td>Ctrl+R</td><td>날짜, 서명</td></tr>
+          <tr><td>양쪽 정렬</td><td>Ctrl+J</td><td>신문·잡지 본문</td></tr>
+          <tr><td>배분 정렬</td><td>-</td><td>공백 포함 균등 배분</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">2. 들여쓰기 / 내어쓰기</div>
+        <table class="data-table"><thead><tr><th>항목</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">첫 줄 들여쓰기</span></td><td>문단 첫 줄만 오른쪽으로 이동</td></tr>
+          <tr><td><span class="keyword">내어쓰기</span></td><td>첫 줄 제외 나머지 줄 오른쪽 이동 (번호 목록)</td></tr>
+          <tr><td><span class="keyword">왼쪽 여백</span></td><td>문단 전체를 오른쪽으로 이동</td></tr>
+          <tr><td><span class="keyword">오른쪽 여백</span></td><td>문단 오른쪽 끝을 안쪽으로 이동</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">3. 줄 간격 / 문단 간격</div>
+        <table class="data-table"><thead><tr><th>항목</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">줄 간격</span></td><td>문단 내 줄 사이 간격 (예: 160%)</td></tr>
+          <tr><td><span class="keyword">문단 위 간격</span></td><td>이전 문단과의 간격</td></tr>
+          <tr><td><span class="keyword">문단 아래 간격</span></td><td>다음 문단과의 간격</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">4. 다단 설정</div>
+        <div class="theory-p">문서를 2단 이상으로 나누는 설정. <span class="keyword">쪽 레이아웃 → 다단</span>에서 설정. 단 수, 단 간격, 구분선 여부 지정 가능.</div>
+      </div>
+    </div>
+  </div>`,
+
+  이론3: `
+  <div class="section-card">
+    <div class="section-header"><div class="section-icon" style="background:#e8f0fe">📊</div><div><div class="section-title">표 작성 & 개체 삽입</div></div></div>
+    <div class="section-body">
+      <div class="theory-block">
+        <div class="theory-h2">1. 표 삽입 및 편집</div>
+        <table class="data-table"><thead><tr><th>작업</th><th>한글(HWP)</th><th>MS Word</th></tr></thead><tbody>
+          <tr><td>표 삽입</td><td>삽입 → 표 (Ctrl+N, T)</td><td>삽입 → 표</td></tr>
+          <tr><td>셀 병합</td><td>블록 선택 후 M</td><td>레이아웃 → 셀 병합</td></tr>
+          <tr><td>셀 나누기</td><td>블록 선택 후 S</td><td>레이아웃 → 셀 분할</td></tr>
+          <tr><td>행 삽입</td><td>우클릭 → 줄 추가</td><td>레이아웃 → 위/아래 삽입</td></tr>
+          <tr><td>열 삽입</td><td>우클릭 → 칸 추가</td><td>레이아웃 → 왼/오른쪽 삽입</td></tr>
+          <tr><td>테두리</td><td>표 → 셀 테두리/배경</td><td>디자인 → 테두리</td></tr>
+          <tr><td>셀 배경색</td><td>표 → 셀 테두리/배경 → 배경</td><td>디자인 → 음영</td></tr>
+        </tbody></table>
+        <div class="info-box amber"><div class="info-box-icon">💡</div><div class="info-box-content"><div class="info-box-title">표 작성 순서 (한글)</div>① 표 삽입 → ② 내용 입력 → ③ 셀 병합 → ④ 테두리·배경 설정 → ⑤ 글자 서식</div></div>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">2. 개체 삽입</div>
+        <table class="data-table"><thead><tr><th>개체</th><th>삽입 방법</th><th>주의사항</th></tr></thead><tbody>
+          <tr><td><span class="keyword">그림</span></td><td>삽입 → 그림</td><td>크기·위치·텍스트 배치 설정</td></tr>
+          <tr><td><span class="keyword">도형</span></td><td>삽입 → 그리기 개체</td><td>도형 내 텍스트 입력 가능</td></tr>
+          <tr><td><span class="keyword">텍스트 상자</span></td><td>삽입 → 텍스트 상자</td><td>자유롭게 이동·크기 조절</td></tr>
+          <tr><td><span class="keyword">워드아트</span></td><td>삽입 → 글맵시(한글)/워드아트(워드)</td><td>장식용 텍스트 효과</td></tr>
+          <tr><td><span class="keyword">수식</span></td><td>삽입 → 수식 편집기</td><td>수학 공식 표현</td></tr>
+          <tr><td><span class="keyword">하이퍼링크</span></td><td>삽입 → 하이퍼링크 (Ctrl+K)</td><td>URL 또는 내부 책갈피 연결</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>`,
+
+  이론4: `
+  <div class="section-card">
+    <div class="section-header"><div class="section-icon" style="background:#e8f0fe">📄</div><div><div class="section-title">쪽(페이지) 설정 완전 정복</div></div></div>
+    <div class="section-body">
+      <div class="theory-block">
+        <div class="theory-h2">1. 용지 및 여백 설정</div>
+        <table class="data-table"><thead><tr><th>항목</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">용지 종류</span></td><td>A4(210×297mm), B5, Letter 등</td></tr>
+          <tr><td><span class="keyword">방향</span></td><td>세로(Portrait) / 가로(Landscape)</td></tr>
+          <tr><td><span class="keyword">여백</span></td><td>위·아래·왼쪽·오른쪽·머리말·꼬리말 공간</td></tr>
+          <tr><td><span class="keyword">제본 여백</span></td><td>제본 시 추가 여백 (왼쪽 또는 위)</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">2. 머리말 · 꼬리말</div>
+        <table class="data-table"><thead><tr><th>항목</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">머리말</span></td><td>각 쪽 상단에 반복 출력 (문서 제목, 날짜 등)</td></tr>
+          <tr><td><span class="keyword">꼬리말</span></td><td>각 쪽 하단에 반복 출력 (쪽번호, 회사명 등)</td></tr>
+          <tr><td>홀수/짝수 다르게</td><td>짝수쪽과 홀수쪽에 다른 내용 설정 가능</td></tr>
+          <tr><td>첫 쪽 다르게</td><td>첫 번째 페이지만 다른 머리말/꼬리말</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">3. 쪽 번호</div>
+        <table class="data-table"><thead><tr><th>항목</th><th>설명</th></tr></thead><tbody>
+          <tr><td><span class="keyword">삽입 위치</span></td><td>쪽 아래·위, 가운데·왼쪽·오른쪽</td></tr>
+          <tr><td><span class="keyword">번호 형식</span></td><td>1,2,3 / 가,나,다 / i,ii,iii / A,B,C</td></tr>
+          <tr><td><span class="keyword">시작 번호</span></td><td>1 이외 숫자로 시작 설정 가능</td></tr>
+          <tr><td><span class="keyword">쪽 번호 숨기기</span></td><td>첫 쪽 번호 숨김 설정</td></tr>
+        </tbody></table>
+      </div>
+      <div class="theory-block">
+        <div class="theory-h2">4. 구역(섹션) 나누기</div>
+        <div class="theory-p">문서를 여러 구역으로 나눠 각각 다른 쪽 설정 적용. <span class="keyword">삽입 → 구역 나누기</span>로 삽입.</div>
+      </div>
+    </div>
+  </div>`
+};
+
+// ───────────────────────────────
+//  필기 문제 데이터 (3개 예시 회차 상세 + 나머지 생성)
+// ───────────────────────────────
+function makeWrittenQuestions(round) {
+  const pools = [
+    // 0
+    { q:"워드프로세서에서 문서 편집 후 작업을 되돌리는 단축키는?", opts:["Ctrl+C","Ctrl+Z","Ctrl+V","Ctrl+X"], ans:1, exp:"Ctrl+Z는 실행 취소(Undo) 기능입니다. Ctrl+Y는 다시 실행(Redo)입니다." },
+    { q:"전원이 꺼지면 내용이 사라지는 메모리는?", opts:["ROM","플래시메모리","RAM","HDD"], ans:2, exp:"RAM(주기억장치)은 휘발성 메모리로 전원이 꺼지면 데이터가 소멸됩니다." },
+    { q:"인터넷에서 도메인 이름을 IP 주소로 변환해주는 서비스는?", opts:["FTP","SMTP","DNS","HTTP"], ans:2, exp:"DNS(Domain Name System)는 도메인 이름을 숫자 IP 주소로 변환합니다." },
+    { q:"다음 중 출력 장치에 해당하는 것은?", opts:["스캐너","마우스","키보드","프린터"], ans:3, exp:"프린터는 컴퓨터의 출력 장치입니다. 스캐너, 마우스, 키보드는 입력 장치입니다." },
+    { q:"파일을 삭제할 때 휴지통을 거치지 않고 바로 삭제하는 키는?", opts:["Delete","Backspace","Shift+Delete","Ctrl+Delete"], ans:2, exp:"Shift+Delete는 휴지통 없이 파일을 영구 삭제합니다." },
+    { q:"HTML에서 SSL/TLS 암호화를 지원하는 보안 프로토콜은?", opts:["HTTP","FTP","HTTPS","SMTP"], ans:2, exp:"HTTPS는 HTTP에 SSL/TLS 암호화를 추가한 보안 프로토콜입니다." },
+    { q:"1GB의 정확한 크기는?", opts:["1000MB","1024MB","1024KB","1000KB"], ans:1, exp:"1GB = 1024MB입니다. (1KB=1024Byte, 1MB=1024KB, 1GB=1024MB)" },
+    { q:"워드프로세서에서 텍스트를 복사하는 단축키는?", opts:["Ctrl+V","Ctrl+X","Ctrl+Z","Ctrl+C"], ans:3, exp:"Ctrl+C는 복사(Copy) 단축키입니다. 복사된 내용은 클립보드에 저장됩니다." },
+    { q:"악성 소프트웨어 중 파일을 암호화한 후 금전을 요구하는 것은?", opts:["스파이웨어","랜섬웨어","애드웨어","웜"], ans:1, exp:"랜섬웨어(Ransomware)는 파일을 암호화하고 복호화 키를 대가로 금전을 요구합니다." },
+    { q:"문서를 저장할 때 사용하는 단축키는?", opts:["Ctrl+O","Ctrl+P","Ctrl+S","Ctrl+N"], ans:2, exp:"Ctrl+S는 현재 문서를 저장(Save)하는 단축키입니다." },
+    { q:"다음 중 스프레드시트 프로그램은?", opts:["한글","MS Word","MS Excel","MS Access"], ans:2, exp:"MS Excel은 스프레드시트 프로그램입니다. 한글과 MS Word는 워드프로세서입니다." },
+    { q:"이메일을 발신할 때 사용하는 프로토콜은?", opts:["POP3","IMAP","SMTP","FTP"], ans:2, exp:"SMTP(Simple Mail Transfer Protocol)는 이메일 발신 프로토콜입니다. 수신은 POP3/IMAP." },
+    { q:"워드프로세서에서 전체 텍스트를 선택하는 단축키는?", opts:["Ctrl+A","Ctrl+E","Ctrl+D","Ctrl+F"], ans:0, exp:"Ctrl+A(Select All)는 문서의 모든 내용을 선택합니다." },
+    { q:"다음 중 무선 LAN 표준 규격은?", opts:["IEEE 802.3","IEEE 802.11","IEEE 802.5","IEEE 802.4"], ans:1, exp:"Wi-Fi(무선 LAN)는 IEEE 802.11 표준을 따릅니다. 802.3은 이더넷 표준입니다." },
+    { q:"문서 내 특정 단어를 찾아 다른 단어로 교체하는 기능은?", opts:["복사","붙여넣기","찾아 바꾸기","실행 취소"], ans:2, exp:"'찾아 바꾸기' 기능은 Ctrl+H로 실행합니다. 특정 문자열을 일괄 교체할 수 있습니다." },
+    { q:"SMS와 피싱을 결합하여 문자 메시지로 개인정보를 탈취하는 공격은?", opts:["파밍","스미싱","스니핑","DDoS"], ans:1, exp:"스미싱(Smishing)은 SMS+Phishing의 합성어. 악성 링크가 포함된 문자로 정보를 탈취합니다." },
+    { q:"워드프로세서에서 문서 처음으로 이동하는 단축키는?", opts:["Ctrl+End","Home","Ctrl+Home","Page Up"], ans:2, exp:"Ctrl+Home은 문서의 첫 번째 위치로 커서를 이동합니다. Ctrl+End는 문서 끝입니다." },
+    { q:"다음 중 인터넷 파일 전송에 사용되는 프로토콜은?", opts:["HTTP","SMTP","FTP","DNS"], ans:2, exp:"FTP(File Transfer Protocol)는 인터넷에서 파일을 전송하기 위한 프로토콜입니다." },
+    { q:"컴퓨터 바이러스와 달리 숙주 파일 없이 스스로 복제·전파되는 악성코드는?", opts:["트로이목마","랜섬웨어","웜","스파이웨어"], ans:2, exp:"웜(Worm)은 독립적으로 복제되어 네트워크를 통해 전파됩니다. 숙주 파일이 필요없습니다." },
+    { q:"워드프로세서에서 인쇄 전 화면으로 문서를 미리 확인하는 기능은?", opts:["인쇄 설정","미리 보기","페이지 설정","문서 저장"], ans:1, exp:"'인쇄 미리 보기' 기능으로 실제 인쇄 전에 결과물을 화면에서 확인할 수 있습니다." },
+  ];
+
+  const rotated = [];
+  for(let i=0;i<20;i++) rotated.push(pools[(i + round * 3) % pools.length]);
+  return rotated;
+}
+
+// ───────────────────────────────
+//  실기 모의고사 데이터
+// ───────────────────────────────
+function makePracticalMock(round) {
+  const scenarios = [
+    { title:"환경부 보고서", desc:"자연환경 보전 현황 보고서를 작성합니다.", tasks:[
+      {id:1,cat:"글자서식",pt:5,task:"제목 '자연환경 보전 현황'을 HY헤드라인M, 20pt, 파란색, 가운데 정렬로 설정"},
+      {id:2,cat:"글자서식",pt:5,task:"소제목 '1. 서론'을 굴림, 14pt, 굵게, 밑줄로 설정"},
+      {id:3,cat:"문단서식",pt:5,task:"본문 전체 줄 간격 160%, 양쪽 정렬 적용"},
+      {id:4,cat:"문단서식",pt:5,task:"첫 문단 들여쓰기 10pt 적용"},
+      {id:5,cat:"표작성",pt:5,task:"3행 4열 표 삽입 후 첫 행을 병합하여 제목 행으로 설정"},
+      {id:6,cat:"표작성",pt:5,task:"표 외부 테두리 2pt 실선, 내부 0.5pt 실선 적용"},
+      {id:7,cat:"표작성",pt:5,task:"첫 행 배경색 파랑(RGB: 0,70,127) 적용"},
+      {id:8,cat:"개체",pt:5,task:"도형(사각형) 삽입 후 '핵심 지표' 텍스트 입력"},
+      {id:9,cat:"개체",pt:5,task:"그림 파일 삽입 후 크기 5cm×4cm, 본문 오른쪽 배치"},
+      {id:10,cat:"쪽설정",pt:5,task:"용지 A4, 여백 위30 아래25 왼30 오른25mm 설정"},
+      {id:11,cat:"쪽설정",pt:5,task:"머리말에 '환경부 보고서' 왼쪽 정렬, 꼬리말에 쪽번호 가운데"},
+      {id:12,cat:"기타",pt:5,task:"파일명 '환경보전보고서.hwp'로 저장"},
+    ]},
+    { title:"회사 제안서", desc:"신사업 제안서 문서를 작성합니다.", tasks:[
+      {id:1,cat:"글자서식",pt:5,task:"제목을 휴먼명조, 22pt, 빨간색, 가운데 정렬"},
+      {id:2,cat:"글자서식",pt:5,task:"부제목을 굴림, 14pt, 기울임꼴, 오른쪽 정렬"},
+      {id:3,cat:"문단서식",pt:5,task:"본문 줄 간격 180%, 왼쪽 정렬"},
+      {id:4,cat:"문단서식",pt:5,task:"2단 설정(단 간격 8mm, 구분선 없음)"},
+      {id:5,cat:"표작성",pt:5,task:"4행 5열 표 삽입"},
+      {id:6,cat:"표작성",pt:5,task:"첫 열 전체 셀 병합"},
+      {id:7,cat:"표작성",pt:5,task:"표 전체 테두리 1pt, 내부 점선 적용"},
+      {id:8,cat:"개체",pt:5,task:"텍스트 상자 삽입 후 '비용 절감 30%' 입력"},
+      {id:9,cat:"개체",pt:5,task:"워드아트(글맵시)로 회사명 장식"},
+      {id:10,cat:"쪽설정",pt:5,task:"A4 세로, 여백 상하25 좌우30mm"},
+      {id:11,cat:"쪽설정",pt:5,task:"꼬리말에 회사명 '㈜미래기술' 가운데, 쪽번호 오른쪽"},
+      {id:12,cat:"기타",pt:5,task:"다른 이름으로 저장 — '신사업제안서.docx'"},
+    ]},
+  ];
+  return scenarios[round % scenarios.length];
+}
+
+// ───────────────────────────────
+//  기출 문제
+// ───────────────────────────────
+const pastWritten = [
+  { year:"2024년 3회", questions: makeWrittenQuestions(10) },
+  { year:"2024년 2회", questions: makeWrittenQuestions(11) },
+  { year:"2024년 1회", questions: makeWrittenQuestions(12) },
+  { year:"2023년 4회", questions: makeWrittenQuestions(13) },
+  { year:"2023년 3회", questions: makeWrittenQuestions(14) },
+];
+
+const pastPractical = [
+  { year:"2024년 3회", title:"복지관 안내문", tasks: makePracticalMock(5).tasks },
+  { year:"2024년 2회", title:"교육청 공문", tasks: makePracticalMock(6).tasks },
+  { year:"2024년 1회", title:"건강보험 통계", tasks: makePracticalMock(7).tasks },
+  { year:"2023년 4회", title:"문화재 보고서", tasks: makePracticalMock(8).tasks },
+  { year:"2023년 3회", title:"소방청 안전 지침", tasks: makePracticalMock(9).tasks },
+];
+
+// ═══════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════
+let currentTab = 'home';
+let mockType = 'written';
+let mockRound = 0;
+let pastType = 'written';
+let pastRound = 0;
+let timerInterval = null;
+let timerSeconds = 0;
+let timerRunning = false;
+
+// ═══════════════════════════════════════════
+//  TAB SWITCH
+// ═══════════════════════════════════════════
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    const tabs = ['home','written','practical','mock','past'];
+    b.classList.toggle('active', tabs[i] === tab);
+  });
+
+  document.querySelectorAll('.mobile-nav-btn').forEach(b => b.classList.remove('active'));
+  const mnav = document.getElementById('mnav-' + tab);
+  if(mnav) mnav.classList.add('active');
+
+  currentTab = tab;
+  updateSidebar(tab);
+
+  if(tab === 'written') setSubMenu('written','개요');
+  if(tab === 'practical') setSubMenu('practical','개요');
+  if(tab === 'mock') { setMockType(mockType); }
+  if(tab === 'past') { setPastType(pastType); }
+}
+
+// ═══════════════════════════════════════════
+//  SIDEBAR
+// ═══════════════════════════════════════════
+function updateSidebar(tab) {
+  const sb = document.getElementById('sidebarContent');
+  if(tab === 'written') {
+    sb.innerHTML = `
+      <div class="sidebar-title">필기 파트</div>
+      <button class="sidebar-item active" onclick="setSubMenu('written','개요')">📊 개요 및 전략</button>
+      <button class="sidebar-item" onclick="setSubMenu('written','이론1')">📝 이론1 WP기능·용어</button>
+      <button class="sidebar-item" onclick="setSubMenu('written','이론2')">💻 이론2 PC·운영체제</button>
+      <button class="sidebar-item" onclick="setSubMenu('written','이론3')">🌐 이론3 정보통신·보안</button>`;
+  } else if(tab === 'practical') {
+    sb.innerHTML = `
+      <div class="sidebar-title">실기 파트</div>
+      <button class="sidebar-item active" onclick="setSubMenu('practical','개요')">📊 개요 및 전략</button>
+      <button class="sidebar-item" onclick="setSubMenu('practical','이론1')">🔡 글자 서식</button>
+      <button class="sidebar-item" onclick="setSubMenu('practical','이론2')">¶ 문단 서식</button>
+      <button class="sidebar-item" onclick="setSubMenu('practical','이론3')">📊 표·개체</button>
+      <button class="sidebar-item" onclick="setSubMenu('practical','이론4')">📄 쪽 설정</button>`;
+  } else if(tab === 'mock') {
+    sb.innerHTML = `
+      <div class="sidebar-title">모의고사</div>
+      <button class="sidebar-item" onclick="setMockType('written')">📖 필기 모의고사</button>
+      <button class="sidebar-item" onclick="setMockType('practical')">⌨️ 실기 모의고사</button>`;
+  } else if(tab === 'past') {
+    sb.innerHTML = `
+      <div class="sidebar-title">기출문제</div>
+      <button class="sidebar-item" onclick="setPastType('written')">📖 필기 기출</button>
+      <button class="sidebar-item" onclick="setPastType('practical')">⌨️ 실기 기출</button>`;
+  } else {
+    sb.innerHTML = `
+      <div class="sidebar-title">바로 가기</div>
+      <button class="sidebar-item" onclick="switchTab('written')">📖 필기 파트</button>
+      <button class="sidebar-item" onclick="switchTab('practical')">⌨️ 실기 파트</button>
+      <button class="sidebar-item" onclick="switchTab('mock')">📝 모의고사</button>
+      <button class="sidebar-item" onclick="switchTab('past')">📋 기출문제</button>`;
+  }
+}
+
+// ═══════════════════════════════════════════
+//  SUB MENU
+// ═══════════════════════════════════════════
+function setSubMenu(type, key) {
+  const menuEl = document.getElementById(type + '-submenu');
+  menuEl.querySelectorAll('.sub-btn').forEach(b => {
+    const label = b.textContent.trim();
+    b.classList.toggle('active',
+      (key === '개요' && label.includes('개요')) ||
+      (key === '이론1' && (label.includes('이론1') || label.includes('WP') || label.includes('글자'))) ||
+      (key === '이론2' && (label.includes('이론2') || label.includes('컴퓨터') || label.includes('문단'))) ||
+      (key === '이론3' && (label.includes('이론3') || label.includes('정보통신') || label.includes('표'))) ||
+      (key === '이론4' && label.includes('쪽'))
+    );
+  });
+
+  const contentEl = document.getElementById(type + '-content');
+  const src = type === 'written' ? writtenTheory : practicalTheory;
+  contentEl.innerHTML = src[key] || src['개요'];
+
+  const sbItems = document.querySelectorAll('.sidebar-item');
+  sbItems.forEach(b => {
+    b.classList.toggle('active',
+      (key==='개요' && b.textContent.includes('개요')) ||
+      (key==='이론1' && (b.textContent.includes('이론1')||b.textContent.includes('글자'))) ||
+      (key==='이론2' && (b.textContent.includes('이론2')||b.textContent.includes('문단'))) ||
+      (key==='이론3' && (b.textContent.includes('이론3')||b.textContent.includes('표'))) ||
+      (key==='이론4' && b.textContent.includes('쪽'))
+    );
+  });
+}
+
+// ═══════════════════════════════════════════
+//  모의고사
+// ═══════════════════════════════════════════
+function setMockType(type) {
+  mockType = type;
+  document.getElementById('mock-written-btn').classList.toggle('active', type==='written');
+  document.getElementById('mock-practical-btn').classList.toggle('active', type==='practical');
+
+  const total = 20;
+  let sel = `<div class="exam-selector">`;
+  for(let i=0;i<total;i++) {
+    sel += `<div class="exam-card${i===mockRound?' active':''}" onclick="loadMock(${i})">
+      <div class="ec-num">${i+1}</div><div class="ec-label">회차</div></div>`;
+  }
+  sel += `</div>`;
+  document.getElementById('mock-exam-selector').innerHTML = sel;
+  loadMock(mockRound);
+}
+
+function loadMock(round) {
+  mockRound = round;
+  document.querySelectorAll('#mock-exam-selector .exam-card').forEach((c,i) => c.classList.toggle('active', i===round));
+
+  const content = document.getElementById('mock-content');
+  if(mockType === 'written') {
+    const qs = makeWrittenQuestions(round);
+    content.innerHTML = renderTimer('written', round) + renderWrittenQuestions(qs, 'mock', round);
+  } else {
+    const mock = makePracticalMock(round);
+    content.innerHTML = renderTimer('practical', round) + renderPracticalMock(mock, round);
+  }
+  initTimer();
+}
+
+function renderWrittenQuestions(qs, prefix, round) {
+  let html = `<div id="result-box-${prefix}-${round}" class="result-box"></div>`;
+  qs.forEach((q, idx) => {
+    html += `<div class="q-card" id="${prefix}-q-${round}-${idx}">
+      <div class="q-header" onclick="toggleExplanation('${prefix}',${round},${idx})">
+        <div class="q-num">${idx+1}</div>
+        <div class="q-text">${q.q}</div>
+        <div class="q-toggle">▼</div>
+      </div>
+      <div class="q-options" id="${prefix}-opts-${round}-${idx}">`;
+    q.opts.forEach((opt,oi) => {
+      html += `<div class="q-option" onclick="selectOption('${prefix}',${round},${idx},${oi},${q.ans})" id="${prefix}-opt-${round}-${idx}-${oi}">
+        <div class="opt-letter">${['①','②','③','④'][oi]}</div>
+        <div class="opt-text">${opt}</div>
+      </div>`;
+    });
+    html += `</div>
+      <div class="q-explanation" id="${prefix}-exp-${round}-${idx}">💡 <strong>정답: ${['①','②','③','④'][q.ans]}</strong> — ${q.exp}</div>
+      <div class="q-actions">
+        <button class="btn-check btn-primary" onclick="checkAnswer('${prefix}',${round},${idx},${q.ans})">정답 확인</button>
+        <button class="btn-check btn-outline" onclick="toggleExplanation('${prefix}',${round},${idx})">해설 보기</button>
+      </div>
+    </div>`;
+  });
+  html += `<div style="text-align:center; margin-top:20px">
+    <button class="btn-check btn-primary" style="padding:12px 32px; font-size:15px" onclick="scoreAll('${prefix}',${round},${JSON.stringify(qs.map(q=>q.ans)).replace(/"/g,'&quot;')})">전체 채점하기</button>
+  </div>`;
+  return html;
+}
+
+function renderPracticalMock(mock, round) {
+  let html = `<div class="section-card"><div class="section-header">
+    <div class="section-icon" style="background:#e8f0fe">📄</div>
+    <div><div class="section-title">모의고사 ${round+1}회 — ${mock.title}</div>
+    <div class="section-subtitle">${mock.desc}</div></div></div>
+    <div class="section-body">
+    <div class="info-box blue"><div class="info-box-icon">📋</div><div class="info-box-content"><div class="info-box-title">작업 지시 사항 (총 ${mock.tasks.length}항목 × 5점 = 60점 분량)</div>아래 체크리스트를 수행하고 완료 시 체크하세요.</div></div>`;
+
+  const catColors = {글자서식:'badge-blue',문단서식:'badge-green',표작성:'badge-amber',개체:'badge-gray',쪽설정:'badge-red',기타:'badge-gray'};
+  mock.tasks.forEach(t => {
+    html += `<div style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray-100)">
+      <input type="checkbox" id="pt-${round}-${t.id}" style="width:18px;height:18px;margin-top:3px;flex-shrink:0;cursor:pointer" onchange="updatePracticalScore(${round},${mock.tasks.length})">
+      <label for="pt-${round}-${t.id}" style="cursor:pointer;flex:1">
+        <span class="badge ${catColors[t.cat]||'badge-gray'}" style="margin-right:6px">${t.cat}</span>
+        <span style="font-size:13px;color:var(--gray-700)">${t.task}</span>
+      </label>
+      <span style="font-size:12px;color:var(--primary);font-weight:700;flex-shrink:0">${t.pt}점</span>
+    </div>`;
+  });
+
+  html += `<div id="practical-score-${round}" style="margin-top:16px;padding:16px;background:var(--primary-light);border-radius:10px;text-align:center;display:none">
+    <div style="font-size:28px;font-weight:800;color:var(--primary)" id="pscore-num-${round}">0점</div>
+    <div style="font-size:13px;color:var(--gray-500);margin-top:4px" id="pscore-label-${round}"></div>
+  </div>
+  </div></div>`;
+  return html;
+}
+
+function updatePracticalScore(round, total) {
+  const checks = document.querySelectorAll(`input[id^="pt-${round}-"]:checked`).length;
+  const score = checks * 5;
+  const box = document.getElementById(`practical-score-${round}`);
+  box.style.display = 'block';
+  document.getElementById(`pscore-num-${round}`).textContent = score + '점';
+  const pass = score >= 80;
+  document.getElementById(`pscore-label-${round}`).innerHTML =
+    `${checks}/${total}항목 완료 — <strong style="color:${pass?'var(--success)':'var(--danger)'}">${pass?'✅ 합격권':'❌ 불합격권 (80점 이상 필요)'}</strong>`;
+}
+
+function renderTimer(type, round) {
+  return `<div class="timer-box" id="timer-box-${type}-${round}">
+    <div>
+      <div class="timer-label">${type==='written'?'필기 제한시간':'실기 제한시간'}</div>
+      <div class="timer-time" id="timer-disp-${type}-${round}">${type==='written'?'40:00':'30:00'}</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="timer-btn timer-start" onclick="startTimer('${type}',${round},${type==='written'?2400:1800})">시작</button>
+      <button class="timer-btn timer-pause" onclick="pauseTimer()">일시정지</button>
+      <button class="timer-btn timer-reset" onclick="resetTimer('${type}',${round},${type==='written'?2400:1800})">초기화</button>
+    </div>
+  </div>`;
+}
+
+let activeTimerId = null;
+function startTimer(type, round, total) {
+  if(timerRunning) return;
+  const dispId = `timer-disp-${type}-${round}`;
+  if(timerSeconds === 0) timerSeconds = total;
+  timerRunning = true;
+  timerInterval = setInterval(() => {
+    if(timerSeconds <= 0) { clearInterval(timerInterval); timerRunning=false; document.getElementById(dispId).textContent='⏰ 시간 종료!'; return; }
+    timerSeconds--;
+    const m = Math.floor(timerSeconds/60).toString().padStart(2,'0');
+    const s = (timerSeconds%60).toString().padStart(2,'0');
+    document.getElementById(dispId).textContent = m+':'+s;
+  }, 1000);
+  activeTimerId = dispId;
+}
+function pauseTimer() { clearInterval(timerInterval); timerRunning=false; }
+function resetTimer(type, round, total) {
+  clearInterval(timerInterval); timerRunning=false; timerSeconds=total;
+  const m=Math.floor(total/60).toString().padStart(2,'0');
+  const s=(total%60).toString().padStart(2,'0');
+  const el=document.getElementById(`timer-disp-${type}-${round}`);
+  if(el) el.textContent=m+':'+s;
+}
+function initTimer() { clearInterval(timerInterval); timerRunning=false; timerSeconds=0; }
+
+// ═══════════════════════════════════════════
+//  문제 인터랙션
+// ═══════════════════════════════════════════
+const userAnswers = {};
+function selectOption(prefix, round, qIdx, optIdx, correct) {
+  const key = `${prefix}-${round}-${qIdx}`;
+  userAnswers[key] = optIdx;
+  for(let i=0;i<4;i++) {
+    const el = document.getElementById(`${prefix}-opt-${round}-${qIdx}-${i}`);
+    if(el) el.className = 'q-option';
+  }
+  const sel = document.getElementById(`${prefix}-opt-${round}-${qIdx}-${optIdx}`);
+  if(sel) sel.classList.add('selected-' + (optIdx===correct?'correct':'wrong'));
+}
+
+function checkAnswer(prefix, round, qIdx, correct) {
+  const key = `${prefix}-${round}-${qIdx}`;
+  const ans = userAnswers[key];
+  if(ans === undefined) { alert('보기를 선택한 후 정답 확인을 눌러주세요.'); return; }
+  const exp = document.getElementById(`${prefix}-exp-${round}-${qIdx}`);
+  if(exp) { exp.classList.add('show'); }
+  const correctEl = document.getElementById(`${prefix}-opt-${round}-${qIdx}-${correct}`);
+  if(correctEl) correctEl.classList.add('correct-answer');
+}
+
+function toggleExplanation(prefix, round, qIdx) {
+  const exp = document.getElementById(`${prefix}-exp-${round}-${qIdx}`);
+  if(exp) exp.classList.toggle('show');
+}
+
+function scoreAll(prefix, round, ansJson) {
+  const answers = JSON.parse(ansJson.replace(/&quot;/g,'"'));
+  let correct = 0;
+  answers.forEach((ans, idx) => {
+    const key = `${prefix}-${round}-${idx}`;
+    if(userAnswers[key] === ans) correct++;
+    checkAnswer(prefix, round, idx, ans);
+  });
+  const score = correct * 5;
+  const pass = score >= 60;
+  const rb = document.getElementById(`result-box-${prefix}-${round}`);
+  rb.classList.add('show');
+  rb.innerHTML = `
+    <div class="result-score">${score}점</div>
+    <div class="result-label">${correct}문항 정답 / 20문항</div>
+    <div class="result-pass ${pass?'pass':'fail'}">${pass?'✅ 합격!':'❌ 불합격 — 60점 이상 필요'}</div>
+    <div style="margin-top:12px;font-size:13px;color:var(--gray-500)">${pass?'수고하셨습니다! 실기도 열심히 준비하세요 💪':'오답 문제의 해설을 다시 확인하고 재도전해보세요!'}</div>
+  `;
+  rb.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ═══════════════════════════════════════════
+//  기출
+// ═══════════════════════════════════════════
+function setPastType(type) {
+  pastType = type;
+  document.getElementById('past-written-btn').classList.toggle('active', type==='written');
+  document.getElementById('past-practical-btn').classList.toggle('active', type==='practical');
+
+  const data = type === 'written' ? pastWritten : pastPractical;
+  let sel = `<div class="exam-selector">`;
+  data.forEach((d,i) => {
+    sel += `<div class="exam-card${i===pastRound?' active':''}" onclick="loadPast(${i},'${type}')">
+      <div class="ec-num">${i+1}회</div><div class="ec-label">${d.year.replace('년','').replace('회','')}</div></div>`;
+  });
+  sel += `</div>`;
+  document.getElementById('past-exam-selector').innerHTML = sel;
+  loadPast(pastRound, type);
+}
+
+function loadPast(round, type) {
+  pastRound = round;
+  document.querySelectorAll('#past-exam-selector .exam-card').forEach((c,i) => c.classList.toggle('active', i===round));
+
+  const content = document.getElementById('past-content');
+  if(type === 'written') {
+    const d = pastWritten[round];
+    content.innerHTML = `<div class="info-box blue"><div class="info-box-icon">📅</div><div class="info-box-content"><div class="info-box-title">${d.year} 필기 기출문제 복원</div>실제 출제 문제를 복원한 것으로 일부 차이가 있을 수 있습니다.</div></div>` +
+      renderTimer('past-w', round) +
+      renderWrittenQuestions(d.questions, 'past', round);
+  } else {
+    const d = pastPractical[round];
+    content.innerHTML = `<div class="info-box amber"><div class="info-box-icon">📅</div><div class="info-box-content"><div class="info-box-title">${d.year} 실기 기출 복원 — ${d.title}</div>실제 출제 지시사항 복원본입니다.</div></div>` +
+      renderTimer('past-p', round) +
+      renderPracticalMock({title: d.title, desc:`${d.year} 기출 복원`, tasks: d.tasks}, round+100);
+  }
+  initTimer();
+}
+
+// ═══════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════
+updateSidebar('home');
+</script>
+</body>
+</html>
