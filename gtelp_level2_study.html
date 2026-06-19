@@ -6,19 +6,19 @@
 <title>G-TELP Level 2 | 75점 목표 웹교재</title>
 <style>
   :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --surface2: #22263a;
-    --accent: #ff6b35;
-    --accent2: #4ecdc4;
-    --accent3: #ffe66d;
-    --text: #e8e8f0;
-    --text-dim: #8888aa;
-    --border: #2e3350;
-    --grammar: #ff6b35;
-    --listening: #4ecdc4;
-    --reading: #ffe66d;
-    --pass: #6bcb77;
+    --bg: #f5f6fa;
+    --surface: #ffffff;
+    --surface2: #eef0f7;
+    --accent: #d94f1e;
+    --accent2: #0fa89e;
+    --accent3: #d4900a;
+    --text: #1a1c2e;
+    --text-dim: #6b6f8a;
+    --border: #dde0ef;
+    --grammar: #c94a15;
+    --listening: #0b8a82;
+    --reading: #b87a00;
+    --pass: #2a9d4e;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif; line-height:1.7; }
@@ -26,7 +26,7 @@
   /* NAV */
   nav {
     position:fixed; top:0; left:0; width:100%; z-index:100;
-    background:rgba(15,17,23,0.92); backdrop-filter:blur(12px);
+    background:rgba(255,255,255,0.96); backdrop-filter:blur(12px); box-shadow:0 1px 0 #dde0ef;
     border-bottom:1px solid var(--border);
     display:flex; align-items:center; justify-content:space-between;
     padding:0 2rem; height:56px;
@@ -41,12 +41,12 @@
     min-height:100vh; display:flex; flex-direction:column;
     justify-content:center; align-items:center; text-align:center;
     padding:5rem 2rem 3rem;
-    background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,107,53,0.12) 0%, transparent 60%);
+    background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(217,79,30,0.07) 0%, transparent 60%);
   }
   .hero-eyebrow { font-size:0.78rem; letter-spacing:0.2em; color:var(--accent); text-transform:uppercase; margin-bottom:1.2rem; }
   .hero-title { font-size:clamp(2.4rem,6vw,4.5rem); font-weight:800; line-height:1.1; margin-bottom:1rem; }
   .hero-title span { color:var(--accent); }
-  .hero-sub { font-size:1.1rem; color:var(--text-dim); max-width:540px; margin:0 auto 2.5rem; }
+  .hero-sub { font-size:1.1rem; color:#555878; max-width:540px; margin:0 auto 2.5rem; }
   .score-bar {
     display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:3rem;
   }
@@ -54,10 +54,10 @@
     padding:0.5rem 1.2rem; border-radius:2rem; font-size:0.85rem; font-weight:700;
     border:1px solid;
   }
-  .badge-target { background:rgba(107,203,119,0.15); border-color:var(--pass); color:var(--pass); }
-  .badge-grammar { background:rgba(255,107,53,0.15); border-color:var(--grammar); color:var(--grammar); }
-  .badge-listen { background:rgba(78,205,196,0.15); border-color:var(--listening); color:var(--listening); }
-  .badge-read { background:rgba(255,230,109,0.15); border-color:var(--reading); color:var(--reading); }
+  .badge-target { background:rgba(42,157,78,0.1); border-color:var(--pass); color:var(--pass); }
+  .badge-grammar { background:rgba(201,74,21,0.08); border-color:var(--grammar); color:var(--grammar); }
+  .badge-listen { background:rgba(11,138,130,0.08); border-color:var(--listening); color:var(--listening); }
+  .badge-read { background:rgba(184,122,0,0.08); border-color:var(--reading); color:var(--reading); }
 
   /* STRUCTURE CARD */
   .structure-grid {
@@ -66,7 +66,7 @@
   }
   .struct-card {
     padding:1.5rem; border-radius:12px; border:1px solid var(--border);
-    background:var(--surface); text-align:center;
+    background:#ffffff; box-shadow:0 1px 4px rgba(0,0,0,0.06); text-align:center;
   }
   .struct-label { font-size:0.75rem; color:var(--text-dim); margin-bottom:0.4rem; letter-spacing:0.1em; }
   .struct-num { font-size:2rem; font-weight:800; }
@@ -86,10 +86,10 @@
   .tabs { display:flex; gap:0.5rem; margin-bottom:2rem; flex-wrap:wrap; }
   .tab-btn {
     padding:0.5rem 1.2rem; border-radius:2rem; border:1px solid var(--border);
-    background:transparent; color:var(--text-dim); cursor:pointer; font-size:0.85rem;
+    background:#ffffff; color:var(--text-dim); cursor:pointer; font-size:0.85rem;
     transition:all 0.2s;
   }
-  .tab-btn.active, .tab-btn:hover { background:var(--surface2); color:var(--text); border-color:var(--text-dim); }
+  .tab-btn.active, .tab-btn:hover { background:#f0f1f8; color:var(--text); border-color:var(--text-dim); }
   .tab-btn.t-grammar.active { border-color:var(--grammar); color:var(--grammar); background:rgba(255,107,53,0.1); }
   .tab-btn.t-listen.active { border-color:var(--listening); color:var(--listening); background:rgba(78,205,196,0.1); }
   .tab-btn.t-read.active { border-color:var(--reading); color:var(--reading); background:rgba(255,230,109,0.1); }
@@ -98,7 +98,7 @@
 
   /* THEORY CARD */
   .theory-block {
-    background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    background:#ffffff; border:1px solid var(--border); border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,0.05);
     padding:1.8rem; margin-bottom:1.2rem;
   }
   .theory-block h3 { font-size:1.05rem; font-weight:700; margin-bottom:0.8rem; display:flex; align-items:center; gap:0.5rem; }
@@ -106,12 +106,12 @@
     font-size:0.7rem; padding:0.15rem 0.6rem; border-radius:1rem;
     font-weight:600; letter-spacing:0.05em;
   }
-  .tag-high { background:rgba(255,107,53,0.2); color:var(--accent); }
-  .tag-mid { background:rgba(255,230,109,0.2); color:var(--accent3); }
-  .tag-low { background:rgba(78,205,196,0.2); color:var(--accent2); }
+  .tag-high { background:rgba(201,74,21,0.1); color:var(--accent); }
+  .tag-mid { background:rgba(184,122,0,0.1); color:var(--accent3); }
+  .tag-low { background:rgba(11,138,130,0.1); color:var(--accent2); }
   .theory-block p { color:var(--text-dim); font-size:0.9rem; margin-bottom:0.8rem; }
   .example-box {
-    background:var(--bg); border:1px solid var(--border); border-radius:8px;
+    background:#f8f9fe; border:1px solid var(--border); border-radius:8px;
     padding:1rem 1.2rem; font-size:0.88rem; margin-top:0.8rem;
   }
   .ex-q { color:var(--text); margin-bottom:0.5rem; }
@@ -120,7 +120,7 @@
 
   /* QUIZ */
   .quiz-card {
-    background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    background:#ffffff; border:1px solid var(--border); border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,0.05);
     padding:1.8rem; margin-bottom:1.2rem;
   }
   .quiz-q { font-size:0.95rem; margin-bottom:1.2rem; line-height:1.8; }
@@ -128,15 +128,15 @@
   .quiz-options { display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.2rem; }
   .quiz-opt {
     padding:0.7rem 1rem; border-radius:8px; border:1px solid var(--border);
-    background:var(--surface2); cursor:pointer; font-size:0.92rem;
+    background:#f5f6fa; cursor:pointer; font-size:0.92rem;
     transition:all 0.2s; text-align:left; color:var(--text); font-weight:500;
     letter-spacing:0.01em;
   }
-  .quiz-opt:hover { border-color:var(--accent); background:#2a2f48; color:#fff; }
+  .quiz-opt:hover { border-color:var(--accent); background:#fff3f0; color:var(--accent); }
   .quiz-opt.correct { border-color:var(--pass); background:rgba(107,203,119,0.1); color:var(--pass); }
   .quiz-opt.wrong { border-color:#e05555; background:rgba(224,85,85,0.1); color:#e05555; }
   .quiz-exp {
-    display:none; margin-top:1rem; padding:1rem; background:var(--bg);
+    display:none; margin-top:1rem; padding:1rem; background:#f0faf9;
     border-radius:8px; font-size:0.85rem; color:var(--text-dim); border-left:3px solid var(--accent2);
   }
   .quiz-exp.show { display:block; }
@@ -147,34 +147,34 @@
   /* STRATEGY */
   .strategy-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
   .strat-card {
-    background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    background:#ffffff; border:1px solid var(--border); border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,0.05);
     padding:1.5rem;
   }
   .strat-card h4 { font-size:0.95rem; font-weight:700; margin-bottom:0.8rem; }
   .strat-list { list-style:none; }
-  .strat-list li { font-size:0.85rem; color:var(--text-dim); padding:0.35rem 0; border-bottom:1px solid var(--border); }
+  .strat-list li { font-size:0.85rem; color:#4a4e6a; padding:0.35rem 0; border-bottom:1px solid var(--border); }
   .strat-list li:last-child { border:none; }
   .strat-list li::before { content:"→ "; color:var(--accent); }
 
   /* SCORE PLAN */
   .score-plan {
-    background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    background:#ffffff; border:1px solid var(--border); border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,0.05);
     padding:2rem; margin-bottom:1.5rem;
   }
   .score-row { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; flex-wrap:wrap; }
   .score-label { width:120px; font-size:0.85rem; color:var(--text-dim); flex-shrink:0; }
-  .score-bar-wrap { flex:1; background:var(--bg); border-radius:4px; height:10px; min-width:100px; }
+  .score-bar-wrap { flex:1; background:#e8eaf0; border-radius:4px; height:10px; min-width:100px; }
   .score-bar-fill { height:100%; border-radius:4px; }
   .score-val { font-size:0.85rem; font-weight:700; width:80px; text-align:right; flex-shrink:0; }
 
   /* MOCKTEST */
   .mock-header {
-    background:linear-gradient(135deg, rgba(255,107,53,0.15), rgba(78,205,196,0.1));
-    border:1px solid var(--border); border-radius:12px;
+    background:linear-gradient(135deg, rgba(201,74,21,0.07), rgba(11,138,130,0.06));
+    border:1px solid var(--border); border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,0.05);
     padding:1.5rem 2rem; margin-bottom:2rem;
     display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
   }
-  .mock-timer { font-size:2rem; font-weight:800; font-family:monospace; color:var(--accent3); }
+  .mock-timer { font-size:2rem; font-weight:800; font-family:monospace; color:var(--accent); }
   .mock-progress { font-size:0.85rem; color:var(--text-dim); }
   .btn {
     padding:0.6rem 1.4rem; border-radius:8px; border:none; cursor:pointer;
@@ -200,13 +200,13 @@
   /* FOOTER */
   footer {
     text-align:center; padding:2rem; border-top:1px solid var(--border);
-    font-size:0.8rem; color:var(--text-dim);
+    font-size:0.8rem; color:#888aaa; background:#ffffff;
   }
 
 
   /* TTS PLAYER */
   .tts-player {
-    background: linear-gradient(135deg, rgba(78,205,196,0.08), rgba(78,205,196,0.03));
+    background: linear-gradient(135deg, rgba(11,138,130,0.06), rgba(11,138,130,0.02));
     border: 1px solid rgba(78,205,196,0.3);
     border-radius: 12px;
     padding: 1rem 1.2rem;
@@ -228,7 +228,7 @@
     padding: 0.45rem 1rem; border-radius: 6px; border: none; cursor: pointer;
     font-size: 0.82rem; font-weight: 600; transition: all 0.2s;
   }
-  .tts-play  { background: var(--listening); color: #0f1117; }
+  .tts-play  { background: var(--listening); color: #ffffff; }
   .tts-play:hover  { opacity: 0.85; }
   .tts-play:disabled { opacity: 0.4; cursor: not-allowed; }
   .tts-repeat { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
@@ -258,7 +258,7 @@
   .tts-mode-btn.active { background: rgba(78,205,196,0.15); border-color: var(--listening); color: var(--listening); }
   .tts-script {
     display: none; width: 100%; margin-top: 0.8rem;
-    background: var(--bg); border-radius: 8px; padding: 0.8rem 1rem;
+    background: #f0faf9; border-radius: 8px; padding: 0.8rem 1rem;
     font-size: 0.82rem; line-height: 1.8; border-left: 3px solid var(--listening);
   }
   .tts-script .male   { color: #7eb8ff; font-weight: 600; }
@@ -278,7 +278,7 @@
   .bottom-nav {
     display: none;
     position: fixed; bottom: 0; left: 0; width: 100%; z-index: 200;
-    background: rgba(15,17,23,0.97); backdrop-filter: blur(16px);
+    background: rgba(255,255,255,0.97); backdrop-filter: blur(16px); box-shadow:0 -1px 0 #dde0ef;
     border-top: 1px solid var(--border);
     padding: 0.4rem 0 env(safe-area-inset-bottom, 0.4rem);
   }
@@ -691,15 +691,15 @@
     <div class="theory-block">
       <h3>자주 나오는 표현 & 함정</h3>
       <div style="font-size:0.85rem;margin-top:0.8rem;">
-        <div style="margin-bottom:0.8rem;padding:0.8rem;background:var(--bg);border-radius:8px;">
+        <div style="margin-bottom:0.8rem;padding:0.8rem;background:#f5f6fa;border-radius:8px;">
           <div style="color:var(--accent3);font-weight:600;margin-bottom:0.4rem;">긍정→부정 전환 함정</div>
           <div style="color:var(--text-dim);">"I thought I could come, but I can't make it." → 못 온다는 의미. but 이후가 핵심</div>
         </div>
-        <div style="margin-bottom:0.8rem;padding:0.8rem;background:var(--bg);border-radius:8px;">
+        <div style="margin-bottom:0.8rem;padding:0.8rem;background:#f5f6fa;border-radius:8px;">
           <div style="color:var(--accent3);font-weight:600;margin-bottom:0.4rem;">목적·이유 질문</div>
           <div style="color:var(--text-dim);">Why / What is the purpose of → 대화 초반 또는 중간의 because/so that 표현 집중</div>
         </div>
-        <div style="padding:0.8rem;background:var(--bg);border-radius:8px;">
+        <div style="padding:0.8rem;background:#f5f6fa;border-radius:8px;">
           <div style="color:var(--accent3);font-weight:600;margin-bottom:0.4rem;">화자 태도 문제</div>
           <div style="color:var(--text-dim);">감탄사·억양·어조를 통해 긍정(positive)/부정(negative)/중립 파악</div>
         </div>
@@ -760,16 +760,16 @@
     <div class="theory-block">
       <h3>문제 유형별 풀이 전략 <span class="tag tag-high">필수</span></h3>
       <div style="font-size:0.85rem;margin-top:0.8rem;">
-        <div style="padding:0.8rem;background:var(--bg);border-radius:8px;margin-bottom:0.6rem;">
+        <div style="padding:0.8rem;background:#f5f6fa;border-radius:8px;margin-bottom:0.6rem;">
           <span style="color:var(--reading);font-weight:600;">주제·목적 문제</span><span style="color:var(--text-dim);margin-left:0.8rem;">첫 문단 집중 → 보기와 대조</span>
         </div>
-        <div style="padding:0.8rem;background:var(--bg);border-radius:8px;margin-bottom:0.6rem;">
+        <div style="padding:0.8rem;background:#f5f6fa;border-radius:8px;margin-bottom:0.6rem;">
           <span style="color:var(--reading);font-weight:600;">세부 정보 문제</span><span style="color:var(--text-dim);margin-left:0.8rem;">키워드 스캔 → 해당 위치만 집중 읽기</span>
         </div>
-        <div style="padding:0.8rem;background:var(--bg);border-radius:8px;margin-bottom:0.6rem;">
+        <div style="padding:0.8rem;background:#f5f6fa;border-radius:8px;margin-bottom:0.6rem;">
           <span style="color:var(--reading);font-weight:600;">추론 문제</span><span style="color:var(--text-dim);margin-left:0.8rem;">지문에 근거 있는 선택지만 → 너무 극단적인 보기 제거</span>
         </div>
-        <div style="padding:0.8rem;background:var(--bg);border-radius:8px;">
+        <div style="padding:0.8rem;background:#f5f6fa;border-radius:8px;">
           <span style="color:var(--reading);font-weight:600;">어휘 문제</span><span style="color:var(--text-dim);margin-left:0.8rem;">문맥 속 뜻 파악 → 문장 대입 후 자연스러운 보기 선택</span>
         </div>
       </div>
@@ -778,26 +778,26 @@
     <div class="theory-block">
       <h3>고빈도 어휘 TOP 20 <span class="tag tag-mid">암기 권장</span></h3>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.5rem;margin-top:0.8rem;font-size:0.83rem;">
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">advocate</span><span style="color:var(--text-dim)">지지하다, 옹호자</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">substantial</span><span style="color:var(--text-dim)">상당한, 실질적인</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">implement</span><span style="color:var(--text-dim)">시행하다, 실행하다</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">subsequent</span><span style="color:var(--text-dim)">그 다음의, 후속의</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">facilitate</span><span style="color:var(--text-dim)">촉진하다, 용이하게 하다</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">regardless</span><span style="color:var(--text-dim)">~에 상관없이</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">inevitable</span><span style="color:var(--text-dim)">불가피한</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">controversial</span><span style="color:var(--text-dim)">논란의 여지가 있는</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">diminish</span><span style="color:var(--text-dim)">줄어들다, 약화시키다</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">assess</span><span style="color:var(--text-dim)">평가하다, 사정하다</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">perspective</span><span style="color:var(--text-dim)">관점, 시각</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">emphasis</span><span style="color:var(--text-dim)">강조</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">consistent</span><span style="color:var(--text-dim)">일관된, 지속적인</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">adequate</span><span style="color:var(--text-dim)">적절한, 충분한</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">elaborate</span><span style="color:var(--text-dim)">정교한, 자세히 설명하다</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">prior</span><span style="color:var(--text-dim)">이전의, 앞선</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">demonstrate</span><span style="color:var(--text-dim)">입증하다, 시연하다</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">obtain</span><span style="color:var(--text-dim)">얻다, 획득하다</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">retain</span><span style="color:var(--text-dim)">유지하다, 보유하다</span></div>
-        <div style="padding:0.4rem 0.8rem;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">anticipate</span><span style="color:var(--text-dim)">예상하다, 기대하다</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">advocate</span><span style="color:var(--text-dim)">지지하다, 옹호자</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">substantial</span><span style="color:var(--text-dim)">상당한, 실질적인</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">implement</span><span style="color:var(--text-dim)">시행하다, 실행하다</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">subsequent</span><span style="color:var(--text-dim)">그 다음의, 후속의</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">facilitate</span><span style="color:var(--text-dim)">촉진하다, 용이하게 하다</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">regardless</span><span style="color:var(--text-dim)">~에 상관없이</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">inevitable</span><span style="color:var(--text-dim)">불가피한</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">controversial</span><span style="color:var(--text-dim)">논란의 여지가 있는</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">diminish</span><span style="color:var(--text-dim)">줄어들다, 약화시키다</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">assess</span><span style="color:var(--text-dim)">평가하다, 사정하다</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">perspective</span><span style="color:var(--text-dim)">관점, 시각</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">emphasis</span><span style="color:var(--text-dim)">강조</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">consistent</span><span style="color:var(--text-dim)">일관된, 지속적인</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">adequate</span><span style="color:var(--text-dim)">적절한, 충분한</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">elaborate</span><span style="color:var(--text-dim)">정교한, 자세히 설명하다</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">prior</span><span style="color:var(--text-dim)">이전의, 앞선</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">demonstrate</span><span style="color:var(--text-dim)">입증하다, 시연하다</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">obtain</span><span style="color:var(--text-dim)">얻다, 획득하다</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">retain</span><span style="color:var(--text-dim)">유지하다, 보유하다</span></div>
+        <div style="padding:0.4rem 0.8rem;background:#f5f6fa;border-radius:6px;display:flex;justify-content:space-between;"><span style="color:var(--reading)">anticipate</span><span style="color:var(--text-dim)">예상하다, 기대하다</span></div>
       </div>
     </div>
 
@@ -1464,7 +1464,7 @@ function buildRoundGrid() {
     const pass = done && score >= 15;
     return `<button onclick="selectRound(${i})" style="
       padding:0.7rem 0; border-radius:10px; border:1px solid ${done?(pass?'var(--pass)':'var(--accent)'):'var(--border)'};
-      background:${done?(pass?'rgba(107,203,119,0.15)':'rgba(255,107,53,0.12)'):'var(--surface)'};
+      background:${done?(pass?'rgba(42,157,78,0.08)':'rgba(201,74,21,0.07)'):'var(--surface)'};
       color:${done?(pass?'var(--pass)':'var(--accent)'):'var(--text)'};
       cursor:pointer; font-size:0.85rem; font-weight:600; transition:all 0.2s;
     ">
@@ -1803,7 +1803,7 @@ function buildPastRoundTabs() {
     const pass = done && sc >= Math.round(exam.qs.length * 0.75);
     return `<button onclick="selectPastRound(${i})" style="
       padding:0.5rem 1.1rem; border-radius:2rem; border:1px solid ${done?(pass?'var(--pass)':'var(--accent)'):'var(--border)'};
-      background:${done?(pass?'rgba(107,203,119,0.15)':'rgba(255,107,53,0.12)'):'var(--surface)'};
+      background:${done?(pass?'rgba(42,157,78,0.08)':'rgba(201,74,21,0.07)'):'var(--surface)'};
       color:${done?(pass?'var(--pass)':'var(--accent)'):'var(--text)'};
       cursor:pointer; font-size:0.83rem; font-weight:600; transition:all 0.2s;
       display:inline-flex; align-items:center; gap:0.4rem;
