@@ -179,6 +179,8 @@
   .btn {
     padding:0.6rem 1.4rem; border-radius:8px; border:none; cursor:pointer;
     font-size:0.85rem; font-weight:600; transition:all 0.2s;
+    min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+    -webkit-tap-highlight-color: transparent;
   }
   .btn-primary { background:var(--accent); color:#fff; }
   .btn-primary:hover { opacity:0.85; }
@@ -267,10 +269,147 @@
   html { scroll-behavior:smooth; }
   .scroll-mt { scroll-margin-top:70px; }
 
-  @media(max-width:640px) {
-    .structure-grid { grid-template-columns:1fr; }
-    .strategy-grid { grid-template-columns:1fr; }
-    .score-label { width:80px; }
+
+  /* ══════════════════════════════════
+     MOBILE FIRST — 전면 반응형
+  ══════════════════════════════════ */
+
+  /* 하단 고정 바텀 네비 (모바일 전용) */
+  .bottom-nav {
+    display: none;
+    position: fixed; bottom: 0; left: 0; width: 100%; z-index: 200;
+    background: rgba(15,17,23,0.97); backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border);
+    padding: 0.4rem 0 env(safe-area-inset-bottom, 0.4rem);
+  }
+  .bottom-nav-inner {
+    display: flex; justify-content: space-around; align-items: center;
+  }
+  .bottom-nav-item {
+    display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+    padding: 0.35rem 0.5rem; cursor: pointer; border: none; background: none;
+    color: var(--text-dim); font-size: 0.62rem; letter-spacing: 0.02em;
+    transition: color 0.2s; -webkit-tap-highlight-color: transparent;
+  }
+  .bottom-nav-item .bnav-icon { font-size: 1.2rem; line-height: 1; }
+  .bottom-nav-item.active { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    /* ── NAV ── */
+    nav { padding: 0 1rem; height: 48px; }
+    .nav-links { display: none; }  /* 상단 링크 숨김 → 하단 네비로 */
+    .bottom-nav { display: block; }
+    body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+
+    /* ── HERO ── */
+    .hero { padding: 4rem 1.2rem 2.5rem; min-height: auto; }
+    .hero-title { font-size: clamp(1.8rem, 8vw, 2.6rem); }
+    .hero-sub { font-size: 0.9rem; }
+    .score-bar { gap: 0.5rem; }
+    .score-badge { font-size: 0.78rem; padding: 0.4rem 0.9rem; }
+    .structure-grid { grid-template-columns: repeat(3,1fr); gap: 0.5rem; }
+    .struct-card { padding: 1rem 0.5rem; }
+    .struct-num { font-size: 1.6rem; }
+    .struct-desc { font-size: 0.72rem; }
+
+    /* ── SECTION ── */
+    .section { padding: 3rem 1.2rem 2rem; }
+    .section-title { font-size: 1.3rem; }
+    .scroll-mt { scroll-margin-top: 56px; }
+
+    /* ── TABS ── */
+    .tabs { gap: 0.4rem; }
+    .tab-btn { padding: 0.45rem 1rem; font-size: 0.8rem; }
+
+    /* ── THEORY ── */
+    .theory-block { padding: 1.2rem; }
+    .theory-block h3 { font-size: 0.95rem; flex-wrap: wrap; }
+    .example-box { padding: 0.8rem; font-size: 0.82rem; }
+
+    /* ── QUIZ CARD ── */
+    .quiz-card { padding: 1.2rem; }
+    .quiz-q { font-size: 0.88rem; }
+    .quiz-opt {
+      padding: 0.8rem 0.9rem; font-size: 0.88rem;
+      min-height: 44px; /* 터치 타겟 */
+    }
+    .quiz-exp { font-size: 0.82rem; padding: 0.8rem; }
+
+    /* ── TTS PLAYER ── */
+    .tts-player {
+      flex-direction: column; align-items: flex-start; gap: 0.6rem;
+      padding: 0.9rem 1rem;
+    }
+    .tts-player-row1 { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; width: 100%; }
+    .tts-mode-toggle { margin-left: 0; }
+    .tts-btn { min-height: 40px; padding: 0.5rem 1rem; font-size: 0.85rem; }
+
+    /* ── SCORE PLAN ── */
+    .score-plan { padding: 1.2rem; }
+    .score-row { gap: 0.5rem; }
+    .score-label { width: 60px; font-size: 0.8rem; }
+    .score-val { font-size: 0.8rem; width: 70px; }
+
+    /* ── MOCK HEADER ── */
+    .mock-header {
+      flex-direction: column; align-items: flex-start; gap: 0.8rem;
+      padding: 1rem;
+    }
+    .mock-timer { font-size: 1.6rem; }
+    .mock-header > div:last-child { width: 100%; display: flex; gap: 0.5rem; }
+    .mock-header .btn { flex: 1; justify-content: center; min-height: 44px; }
+
+    /* ── MOCK ROUND GRID ── */
+    #mock-round-grid { grid-template-columns: repeat(4,1fr) !important; gap: 0.5rem !important; max-width: 100% !important; }
+
+    /* ── STRATEGY ── */
+    .strategy-grid { grid-template-columns: 1fr; }
+    .strat-card { padding: 1.2rem; }
+
+    /* ── RESULT ── */
+    .result-box { padding: 1.5rem; }
+    .result-score { font-size: 2.4rem; }
+
+    /* ── DIVIDER ── */
+    .divider { margin: 2rem 0; }
+
+    /* ── FOOTER ── */
+    footer { padding: 1.5rem 1rem; font-size: 0.75rem; }
+  }
+
+  @media (max-width: 480px) {
+    .structure-grid { grid-template-columns: 1fr; gap: 0.6rem; }
+    #mock-round-grid { grid-template-columns: repeat(4,1fr) !important; }
+    .hero-title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+
+    /* 어휘 테이블 */
+    div[style*="grid-template-columns:repeat(2,1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* 청취 전략 카드 */
+    div[style*="grid-template-columns:1fr 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* 이론 예시 2열 */
+    div[style*="grid-template-columns:1fr 1fr;gap:0.8rem"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* 파트 구성 4열 */
+    div[style*="grid-template-columns:repeat(4,1fr)"] {
+      grid-template-columns: repeat(2,1fr) !important;
+    }
+
+    /* 독해 파트 3열 */
+    div[style*="grid-template-columns:repeat(3,1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    .nav-logo { font-size: 0.9rem; }
+    .bottom-nav-item .bnav-icon { font-size: 1.1rem; }
+    .bottom-nav-item { font-size: 0.58rem; }
   }
 </style>
 </head>
@@ -287,6 +426,30 @@
     <a onclick="navTo('strategy')">전략</a>
   </div>
 </nav>
+
+<!-- 모바일 하단 네비 -->
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="bottom-nav-item" onclick="navTo('overview')" id="bnav-overview">
+      <span class="bnav-icon">📊</span>개요
+    </button>
+    <button class="bottom-nav-item" onclick="navTo('grammar')" id="bnav-grammar">
+      <span class="bnav-icon">📝</span>문법
+    </button>
+    <button class="bottom-nav-item" onclick="navTo('listening')" id="bnav-listening">
+      <span class="bnav-icon">🎧</span>청취
+    </button>
+    <button class="bottom-nav-item" onclick="navTo('reading')" id="bnav-reading">
+      <span class="bnav-icon">📖</span>독해
+    </button>
+    <button class="bottom-nav-item" onclick="navTo('mock')" id="bnav-mock">
+      <span class="bnav-icon">🎯</span>모의고사
+    </button>
+    <button class="bottom-nav-item" onclick="navTo('strategy')" id="bnav-strategy">
+      <span class="bnav-icon">📌</span>전략
+    </button>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1140,25 +1303,27 @@ function renderQuiz(type, container, data) {
 
         ttsHtml = `
         <div class="tts-player" id="tts-${cardId}">
-          <span class="tts-label">🎧 음원</span>
-          <button class="tts-btn tts-play" id="play-${cardId}"
-            onclick="playTTS('${cardId}', ttsLinesCache['${cardId}'], (ttsState['${cardId}']||{mode:'exam'}).mode)">
-            ▶ 듣기
-          </button>
-          <button class="tts-btn tts-repeat" id="rep-${cardId}" disabled
-            onclick="playTTS('${cardId}', ttsLinesCache['${cardId}'], 'study')">
-            🔁 반복
-          </button>
-          <div class="tts-status">
-            <div class="tts-dot" id="dot-${cardId}"></div>
-            <span id="stat-${cardId}">1회 재생 (실전)</span>
-          </div>
-          <div class="tts-mode-toggle">
-            <span>모드:</span>
-            <button class="tts-mode-btn active" id="mode-exam-${cardId}"
-              onclick="setTTSMode('${cardId}', 'exam', ttsLinesCache['${cardId}'])">실전</button>
-            <button class="tts-mode-btn" id="mode-study-${cardId}"
-              onclick="setTTSMode('${cardId}', 'study', ttsLinesCache['${cardId}'])">학습</button>
+          <div class="tts-player-row1">
+            <span class="tts-label">🎧 음원</span>
+            <button class="tts-btn tts-play" id="play-${cardId}"
+              onclick="playTTS('${cardId}', ttsLinesCache['${cardId}'], (ttsState['${cardId}']||{mode:'exam'}).mode)">
+              ▶ 듣기
+            </button>
+            <button class="tts-btn tts-repeat" id="rep-${cardId}" disabled
+              onclick="playTTS('${cardId}', ttsLinesCache['${cardId}'], 'study')">
+              🔁 반복
+            </button>
+            <div class="tts-status">
+              <div class="tts-dot" id="dot-${cardId}"></div>
+              <span id="stat-${cardId}">1회 재생 (실전)</span>
+            </div>
+            <div class="tts-mode-toggle">
+              <span>모드:</span>
+              <button class="tts-mode-btn active" id="mode-exam-${cardId}"
+                onclick="setTTSMode('${cardId}', 'exam', ttsLinesCache['${cardId}'])">실전</button>
+              <button class="tts-mode-btn" id="mode-study-${cardId}"
+                onclick="setTTSMode('${cardId}', 'study', ttsLinesCache['${cardId}'])">학습</button>
+            </div>
           </div>
           <div class="tts-script" id="script-${cardId}">${scriptHtml}</div>
         </div>`;
@@ -1335,11 +1500,36 @@ function resetMock() {
 function navTo(id) {
   const el = document.getElementById(id);
   if(el) el.scrollIntoView({behavior:'smooth'});
+  setActiveNav(id);
+}
+
+function setActiveNav(id) {
+  // 상단 nav
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
   const map = {overview:0,grammar:1,listening:2,reading:3,mock:4,strategy:5};
   const links = document.querySelectorAll('.nav-links a');
   if(links[map[id]]) links[map[id]].classList.add('active');
+  // 하단 바텀 nav
+  document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
+  const bnav = document.getElementById('bnav-'+id);
+  if(bnav) bnav.classList.add('active');
 }
+
+// 스크롤 시 현재 섹션 자동 감지
+(function() {
+  const sections = ['overview','grammar','listening','reading','mock','strategy'];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) setActiveNav(e.target.id);
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  document.addEventListener('DOMContentLoaded', () => {
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if(el) observer.observe(el);
+    });
+  });
+})();
 
 // ===== INIT =====
 window.ttsLinesCache = {};
