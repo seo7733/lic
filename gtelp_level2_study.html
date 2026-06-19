@@ -412,6 +412,8 @@
     .bottom-nav-item { font-size: 0.58rem; }
   }
 </style>
+<script src="mock_data.js"></script>
+<script src="past_data.js"></script>
 </head>
 <body>
 
@@ -822,7 +824,7 @@
 <div id="mock" class="scroll-mt"></div>
 <div class="section">
   <div class="section-title">🎯 종합 모의고사</div>
-  <div class="section-sub">20회 × 20문항 — 문법·청취·독해 혼합 / 회당 25분 / 15문항 이상 정답 시 75점 목표 달성</div>
+  <div class="section-sub">20회 × 80문항 (문법 26 + 청취 26 + 독해 28) — 실제 시험과 동일 구성 / 회당 90분 / 60문항 이상 정답 시 75점 목표</div>
 
   <!-- 회차 선택 그리드 -->
   <div id="mock-select-area">
@@ -835,7 +837,7 @@
     <div class="mock-header">
       <div>
         <div class="mock-progress" id="mock-progress">문제 0 / 20</div>
-        <div style="font-size:0.8rem;color:var(--text-dim);margin-top:0.2rem;" id="mock-round-label"></div>
+        <div style="font-size:0.8rem;color:var(--text-dim);margin-top:0.2rem;" id="mock-round-label">회차를 선택하고 시험 시작을 누르세요</div>
       </div>
       <div class="mock-timer" id="mock-timer">25:00</div>
       <div style="display:flex;gap:0.5rem;">
@@ -862,7 +864,7 @@
 <div id="past" class="scroll-mt"></div>
 <div class="section">
   <div class="section-title">📋 기출 유형 문제</div>
-  <div class="section-sub">실제 출제 패턴·표현·난이도를 그대로 재현 — 유형 분석 포함 / 회차별 구성</div>
+  <div class="section-sub">5회 × 80문항 (문법 26 + 청취 26 + 독해 28) — 실제 시험 동일 구성 / 유형 분석 포함 / 90분</div>
 
   <!-- 회차 탭 -->
   <div style="margin-bottom:1.5rem;">
@@ -1480,9 +1482,9 @@ function selectRound(idx) {
   currentRound = idx;
   document.getElementById('mock-select-area').style.display = 'none';
   document.getElementById('mock-test-area').style.display = 'block';
-  document.getElementById('mock-round-label').textContent = `제${idx+1}회 모의고사 · 목표: 15문항 이상 정답`;
+  document.getElementById('mock-round-label').textContent = `제${idx+1}회 모의고사 · 문법26+청취26+독해28=80문항 · 90분`;
   document.getElementById('mock-progress').textContent = `문제 20 / 20`;
-  document.getElementById('mock-timer').textContent = '25:00';
+  document.getElementById('mock-timer').textContent = '90:00';
   document.getElementById('mock-start-btn').disabled = false;
   document.getElementById('mock-start-btn').textContent = '시험 시작';
   document.getElementById('mock-quiz-container').innerHTML = '';
@@ -1499,7 +1501,7 @@ function startMock() {
   document.getElementById('mock-start-btn').textContent = '진행 중...';
   renderQuiz('mock', 'mock-quiz-container', mockSets[currentRound]);
   document.getElementById('mock-submit-area').style.display = 'block';
-  let secs = 25*60;
+  let secs = 90*60;
   mockTimer = setInterval(() => {
     secs--;
     const m = String(Math.floor(secs/60)).padStart(2,'0');
@@ -1518,12 +1520,12 @@ function gradeMock() {
   });
   const total = mockSets[currentRound].length;
   const pct = Math.round(correct/total*100);
-  const pass = correct >= 15;
+  const pass = correct >= 60;
   roundScores[currentRound] = correct;
   document.getElementById('mock-score').textContent = `${correct} / ${total}`;
   document.getElementById('mock-score').style.color = pass ? 'var(--pass)' : 'var(--accent)';
   document.getElementById('mock-result-label').textContent = pass ? '✅ 75점 달성 가능! 0.3점 취득 궤도' : '⚠️ 추가 학습 필요 — 오답 영역 집중 보완';
-  document.getElementById('mock-result-detail').textContent = `정답률 ${pct}% · 제${currentRound+1}회 모의고사`;
+  const mockG=mockSets[currentRound].filter(q=>q.section==='문법').length, mockL=mockSets[currentRound].filter(q=>q.section==='청취').length, mockR=mockSets[currentRound].filter(q=>q.section==='독해').length; document.getElementById('mock-result-detail').textContent = `정답률 ${pct}% · 문법${mockSets[currentRound].filter((q,i)=>{const c=document.getElementById('mock-q'+i); return q.section==='문법'&&c&&c.querySelector('.quiz-opt.correct')}).length}/${mockG} · 청취${mockSets[currentRound].filter((q,i)=>{const c=document.getElementById('mock-q'+i); return q.section==='청취'&&c&&c.querySelector('.quiz-opt.correct')}).length}/${mockL} · 독해${mockSets[currentRound].filter((q,i)=>{const c=document.getElementById('mock-q'+i); return q.section==='독해'&&c&&c.querySelector('.quiz-opt.correct')}).length}/${mockR}`;
   document.getElementById('mock-result').classList.add('show');
 }
 
@@ -1571,223 +1573,7 @@ function setActiveNav(id) {
 })();
 
 
-// ════════════════════════════════════════════════
-// 기출 유형 문제 데이터 (10회차 × 15문항)
-// 실제 출제 패턴·표현 완벽 재현 / 저작권 독립 제작
-// ════════════════════════════════════════════════
-const pastExams = [
-
-// ── 1회 ──────────────────────────────────────────
-{
-  round: 1,
-  title: "제1회 기출 유형",
-  analysis: {
-    summary: "시제(현재완료·과거완료) 4문항, 가정법 3문항, 준동사 3문항, 관계사 2문항, 조동사 2문항, 청취 대화·담화 각 1문항, 독해 지문 2세트",
-    tips: ["현재완료는 since/for/already/yet/ever 키워드로 판별", "가정법은 if절 시제를 먼저 확인 → 귀결절 형태 결정", "준동사는 앞 동사가 to부정사/동명사 중 무엇을 받는지 암기가 관건"]
-  },
-  qs: [
-    // 문법 8문항
-    {section:"문법", type:"현재완료", q:"The firefighter _____ his gear three times already this morning.", opts:["checks","checked","has checked","had checked"], ans:2, exp:"already → 현재완료 신호어. '오늘 아침 벌써 세 번 점검했다'는 현재완료(has p.p.)"},
-    {section:"문법", type:"과거완료", q:"The team _____ the building when the second alarm sounded.", opts:["already left","has already left","had already left","was already leaving"], ans:2, exp:"when+과거(sounded) 이전 완료 → 과거완료(had p.p.)"},
-    {section:"문법", type:"가정법 과거", q:"If more water _____ available, we could control the fire faster.", opts:["is","was","were","has been"], ans:2, exp:"가정법 과거: If+were(주어 무관), would+동사원형 → 현재 사실 반대"},
-    {section:"문법", type:"가정법 과거완료", q:"If the sprinklers _____ activated, the damage would have been minimal.", opts:["are","were","had been","have been"], ans:2, exp:"If+had been p.p. → 가정법 과거완료 수동 / 과거 사실 반대"},
-    {section:"문법", type:"준동사-동명사", q:"The safety officer recommended _____ all exits before the drill.", opts:["to check","check","checking","checked"], ans:2, exp:"recommend → 동명사(V-ing)만 목적어로 취하는 동사"},
-    {section:"문법", type:"준동사-to부정사", q:"The department plans _____ new thermal imaging cameras next quarter.", opts:["purchase","purchasing","to purchase","purchased"], ans:2, exp:"plan → to부정사만 목적어로 취하는 동사"},
-    {section:"문법", type:"관계사", q:"The protocol _____ was revised last year has significantly reduced injuries.", opts:["who","which","whose","whom"], ans:1, exp:"사물 선행사(protocol)+주어역할 → which. that도 가능하지만 선택지에 없음"},
-    {section:"문법", type:"조동사", q:"The crew ought _____ established a perimeter before entering.", opts:["have","to have","having","to having"], ans:1, exp:"ought to have p.p. = ~했어야 했는데(유감) / ought 뒤 반드시 'to'"},
-
-    // 청취 4문항
-    {section:"청취", type:"대화-이유", q:"[대화] 두 동료 소방관이 대화합니다.\n\n\"Did you hear about the station upgrade?\"\n\"Yes, they're adding a new training simulator. Chief Min said it'll be operational by March.\"\n\"That's later than I expected. Why the delay?\"\n\"Budget approvals took longer than planned.\"\n\nQ: 훈련 시뮬레이터 도입이 지연된 이유는?",
-      opts:["장비 수입 지연","예산 승인이 예상보다 오래 걸림","시공 업체 문제","설계 변경"], ans:1,
-      exp:"'Budget approvals took longer than planned' → 예산 승인 지연"},
-    {section:"청취", type:"담화-세부정보", q:"[담화] 소방청 공지사항.\n\n\"Attention all personnel. Beginning next Monday, the parking lot on the east side of the building will be closed for resurfacing. All vehicles must use the north entrance. The work is expected to be completed within two weeks.\"\n\nQ: 주차장이 폐쇄되는 기간은?",
-      opts:["1주","2주","3주","4주"], ans:1,
-      exp:"'expected to be completed within two weeks' → 2주"},
-    {section:"청취", type:"대화-내용파악", q:"[대화] 구조 작전 후 대화.\n\n\"How many people were rescued from the third floor?\"\n\"We got four out safely, but two more are still unaccounted for.\"\n\"Copy. We're sending another team in now.\"\n\nQ: 현재 상황은?",
-      opts:["6명 전원 구조","4명 구조, 2명 행방불명","2명 구조, 4명 실종","전원 미구조"], ans:1,
-      exp:"'four out safely, but two more still unaccounted for'"},
-    {section:"청취", type:"담화-목적", q:"[담화] 브리핑 내용.\n\n\"Today's incident involved a three-story commercial building. The origin of the fire was traced to the kitchen on the first floor. All occupants were evacuated successfully, and there were no civilian casualties. One firefighter sustained a minor injury during overhaul.\"\n\nQ: 이 브리핑의 목적은?",
-      opts:["출동 명령","현장 상황 보고","장비 점검 지시","언론 브리핑"], ans:1,
-      exp:"사건 경과·결과를 요약 보고 → 현장 상황 보고"},
-
-    // 독해 3문항
-    {section:"독해", type:"주제", q:"[지문] \"Incident command training has evolved significantly over the past two decades. Modern programs emphasize not only technical firefighting skills but also leadership, communication, and decision-making under pressure. Research has shown that non-technical skills account for a significant proportion of critical errors on the fireground.\"\n\nQ: What is the main topic of this passage?",
-      opts:["History of fire departments","Evolution of incident command training","Technical firefighting equipment","Government funding for fire services"],
-      ans:1, exp:"'evolved ... programs emphasize ... non-technical skills' → 사고지휘 훈련의 발전"},
-    {section:"독해", type:"어휘", q:"[지문] \"Firefighters operating in a confined space must be acutely aware of their air supply levels. The rapid depletion of oxygen can render a firefighter incapacitated within minutes if the situation is not closely monitored.\"\n\nQ: The word 'depletion' in the passage is closest in meaning to:",
-      opts:["increase","exhaustion","replacement","circulation"],
-      ans:1, exp:"depletion = 고갈·소진(exhaustion)"},
-    {section:"독해", type:"세부정보", q:"[지문] \"The two-in, two-out rule is a mandatory safety regulation in structural firefighting. It requires that whenever two firefighters enter an immediately dangerous to life or health (IDLH) atmosphere, at least two firefighters must remain outside in a ready-to-rescue standby position.\"\n\nQ: According to the passage, what must the two outside firefighters be prepared to do?",
-      opts:["Document the incident","Operate the pump","Rescue the interior team","Contact the media"],
-      ans:2, exp:"'ready-to-rescue standby position' → 내부 팀 구조 대기"},
-  ]
-},
-
-// ── 2회 ──────────────────────────────────────────
-{
-  round: 2,
-  title: "제2회 기출 유형",
-  analysis: {
-    summary: "시제(미래완료·과거진행) 3문항, 가정법(도치형 포함) 3문항, 수동태 2문항, 관계사 2문항, 준동사 2문항, 청취 4문항, 독해 3문항",
-    tips: ["미래완료 by+미래시점 → will have p.p.", "가정법 도치: Had+주어+p.p. = If+주어+had p.p.", "수동태: be+p.p. / 시제 확인 필수"]
-  },
-  qs: [
-    {section:"문법", type:"미래완료", q:"By the time the new recruits finish their probation, they _____ over 500 hours of training.", opts:["complete","completed","will complete","will have completed"], ans:3, exp:"by the time+미래 → 미래완료(will have p.p.)"},
-    {section:"문법", type:"과거진행", q:"The rescue team _____ the third floor when the roof started to show signs of collapse.", opts:["searches","searched","was searching","has searched"], ans:2, exp:"when+과거 → 당시 진행 중이었음 = 과거진행(was V-ing)"},
-    {section:"문법", type:"가정법 도치", q:"_____ the incident commander received the updated weather report earlier, the evacuation could have begun sooner.", opts:["If","Had","Should","Were"], ans:1, exp:"Had+주어+p.p. = If+주어+had p.p. (가정법 과거완료 도치)"},
-    {section:"문법", type:"가정법 과거", q:"If every station _____ equipped with this technology, response times would improve significantly.", opts:["is","was","were","has been"], ans:2, exp:"가정법 과거: If+were → 현재 사실 반대"},
-    {section:"문법", type:"수동태", q:"The damaged hose line _____ replaced before the next shift began.", opts:["was","had","has","is"], ans:0, exp:"과거 수동태: was replaced / before+과거 → 과거 시점"},
-    {section:"문법", type:"수동태-완료", q:"The incident report _____ submitted to headquarters by the time the chief arrived.", opts:["had been","was","has been","is"], ans:0, exp:"by the time+과거 → 과거완료 수동(had been p.p.)"},
-    {section:"문법", type:"관계사-계속적", q:"The battalion chief, _____ had over 25 years of experience, remained calm throughout the crisis.", opts:["who","which","whose","whom"], ans:0, exp:"콤마+사람 선행사 → 계속적 용법 who"},
-    {section:"문법", type:"준동사-동명사", q:"The lieutenant denied _____ the safety briefing before the operation.", opts:["to skip","skip","skipping","skipped"], ans:2, exp:"deny → 동명사(V-ing)만 목적어"},
-    {section:"청취", type:"대화-이유", q:"[대화] 두 소방관이 장비에 대해 이야기합니다.\n\n\"I noticed Engine 4 wasn't at the last call.\"\n\"It's been pulled from service. One of the pump valves failed inspection this morning.\"\n\"Any idea when it'll be back?\"\n\"The mechanic said two days, maybe three.\"\n\nQ: Engine 4가 운용되지 않는 이유는?",
-      opts:["연료 부족","펌프 밸브 검사 불합격","인원 부족","예산 삭감"], ans:1,
-      exp:"'pump valve failed inspection' → 밸브 검사 불합격"},
-    {section:"청취", type:"담화-지시사항", q:"[담화] 훈련 안내.\n\n\"All participants in tomorrow's live fire exercise must arrive at the training facility by 0700. Full turnout gear is required. Anyone not in full gear will not be permitted to enter the burn building. Breakfast will be provided in the main classroom.\"\n\nQ: 참가자들이 반드시 해야 하는 것은?",
-      opts:["0600까지 도착","완전한 방화복 착용","장비 직접 지참","아침 식사 준비"], ans:1,
-      exp:"'Full turnout gear is required ... not in full gear will not be permitted'"},
-    {section:"청취", type:"대화-세부정보", q:"[대화] 사고 후 보고.\n\n\"Were there any injuries at today's call?\"\n\"Two firefighters were treated for heat exhaustion. Both have been cleared to return to duty.\"\n\"And the civilian?\"\n\"She was taken to City General with minor smoke inhalation. Stable condition.\"\n\nQ: 부상자 현황은?",
-      opts:["소방관 1명 중상","소방관 2명 열탈진 치료·복귀, 민간인 1명 병원 이송","전원 부상 없음","민간인 1명 중태"], ans:1,
-      exp:"'Two firefighters treated ... cleared. Civilian at City General ... minor ... stable'"},
-    {section:"청취", type:"담화-추론", q:"[담화] 소방대장 브리핑.\n\n\"I want to remind everyone that accountability is not optional. Before you go interior, your tag goes on the board. Before you leave the scene, your tag comes off. No exceptions. This isn't bureaucracy — it's what keeps you alive.\"\n\nQ: 소방대장이 강조하는 것은?",
-      opts:["서류 작업 간소화","예외 없는 책임 추적 시스템 준수","새 장비 사용법","빠른 내부 진입"], ans:1,
-      exp:"'accountability is not optional ... No exceptions' → 책임 추적 준수 강조"},
-    {section:"독해", type:"주제", q:"[지문] \"The use of drones in firefighting has expanded rapidly in recent years. Fire departments now deploy unmanned aerial vehicles to conduct reconnaissance, map fire perimeters, and assess structural damage from a safe distance. This technology has reduced the need to put personnel in unnecessary danger during the initial assessment phase.\"\n\nQ: What is the main idea of this passage?",
-      opts:["Drones are replacing firefighters","Drones help reduce risk during initial assessment","Drones are too expensive for most departments","Drone regulations are too strict"],
-      ans:1, exp:"'reduced the need to put personnel in unnecessary danger' → 위험 감소가 핵심"},
-    {section:"독해", type:"어휘", q:"[지문] \"During a wildfire, erratic wind patterns can cause a fire to behave in unpredictable ways, making it extremely hazardous for crews operating along the fire's edge.\"\n\nQ: The word 'erratic' is closest in meaning to:",
-      opts:["consistent","unpredictable","powerful","seasonal"],
-      ans:1, exp:"erratic = 불규칙한, 예측 불가능한(unpredictable)"},
-    {section:"독해", type:"추론", q:"[지문] \"Many line-of-duty deaths occur not from the fire itself, but from cardiac events, vehicle accidents, and structural collapse. This suggests that a purely technical approach to firefighter safety is insufficient, and that programs must also address physical fitness, driver training, and structural awareness.\"\n\nQ: What can be inferred from the passage?",
-      opts:["Fire is the only cause of firefighter deaths","A comprehensive approach to safety is needed","Vehicle accidents are not preventable","Physical fitness programs are too costly"],
-      ans:1, exp:"'purely technical approach is insufficient' → 다각적 접근 필요 추론"},
-  ]
-},
-
-// ── 3회 ──────────────────────────────────────────
-{
-  round: 3,
-  title: "제3회 기출 유형",
-  analysis: {
-    summary: "조동사 완료형 3문항, 시제 3문항, 가정법 2문항, 관계사 2문항, 수동태 2문항, 청취 4문항, 독해 3문항",
-    tips: ["must have p.p.(강한 과거 추측) vs should have p.p.(유감) vs could have p.p.(가능성) 구분 필수", "관계사 whose = 소유격, whom = 목적격", "독해 지문: 첫 문장과 마지막 문장에 핵심 답이 있는 경우 多"]
-  },
-  qs: [
-    {section:"문법", type:"조동사-must", q:"The vehicle must _____ serviced before the inspection — all readings were perfect.", opts:["be","have been","has been","being"], ans:1, exp:"must have been p.p. = 분명히 ~됐을 것이다(과거 강한 추측)"},
-    {section:"문법", type:"조동사-should", q:"The driver should _____ the fuel gauge before leaving the station.", opts:["check","have checked","checking","checked"], ans:1, exp:"should have p.p. = 했어야 했는데 하지 않음(유감·비판)"},
-    {section:"문법", type:"조동사-could", q:"With better communication, the team could _____ avoided the miscommunication entirely.", opts:["have","be","having","had"], ans:0, exp:"could have p.p. = ~할 수 있었을 텐데(과거 가능성)"},
-    {section:"문법", type:"현재완료진행", q:"The negotiations over the new contract _____ for three months without resolution.", opts:["continue","continued","have been continuing","had continued"], ans:2, exp:"for+기간, 현재까지 진행 → 현재완료진행(have been V-ing)"},
-    {section:"문법", type:"과거완료", q:"The injured firefighter _____ the area by the time the collapse occurred.", opts:["leaves","left","has left","had left"], ans:3, exp:"collapse occurred 이전 완료 → 과거완료(had p.p.)"},
-    {section:"문법", type:"시제-단순과거", q:"The department _____ its response time record last Tuesday with a 3-minute arrival.", opts:["breaks","has broken","broke","had broken"], ans:2, exp:"last Tuesday = 명확한 과거 시점 → 단순과거(broke)"},
-    {section:"문법", type:"가정법 과거", q:"If the ladder company _____ positioned correctly, the rescue would be easier.", opts:["is","were","had been","has been"], ans:1, exp:"가정법 과거: If+were → 현재 사실 반대(currently not positioned correctly)"},
-    {section:"문법", type:"관계사-whose", q:"The officer _____ rapid decision-making prevented a secondary explosion received commendation.", opts:["who","which","whose","whom"], ans:2, exp:"officer의 소유 → whose rapid decision-making"},
-    {section:"청취", type:"대화-이유", q:"[대화] 두 소방관이 인사 문제를 논의합니다.\n\n\"Did you hear that Captain Lee is transferring to Station 7?\"\n\"Yeah. His wife got a promotion that requires them to relocate to the north side.\"\n\"That's a big change. When does he leave?\"\n\"End of next month.\"\n\nQ: Lee 대위가 Station 7으로 이동하는 이유는?",
-      opts:["승진","아내의 직장 문제로 이사","본인 요청","규정에 따른 순환 근무"], ans:1,
-      exp:"'His wife got a promotion that requires them to relocate'"},
-    {section:"청취", type:"담화-세부정보", q:"[담화] 안전 교육 공지.\n\n\"This quarter's mandatory safety training will cover three topics: respiratory protection, electrical hazard awareness, and vehicle extraction techniques. The training will be split into two sessions — the first on the 10th, and the second on the 17th. Attendance at both sessions is required for certification.\"\n\nQ: 인증을 받으려면 몇 개 세션에 참석해야 하는가?",
-      opts:["1개","2개","3개","4개"], ans:1,
-      exp:"'Attendance at both sessions is required for certification' → 2개 세션 모두 필수"},
-    {section:"청취", type:"대화-내용파악", q:"[대화] 화재 조사관과의 대화.\n\n\"Have you identified the point of origin yet?\"\n\"We've narrowed it to the southwest corner of the warehouse, near the electrical panel.\"\n\"Any indication of arson?\"\n\"Too early to say. We're still waiting on the lab analysis.\"\n\nQ: 화재 원인에 대해 현재 알려진 것은?",
-      opts:["방화로 확정","원인 불명","창고 남서쪽 모서리가 발화점으로 추정","전기 패널 결함 확인"], ans:2,
-      exp:"'narrowed it to the southwest corner ... near electrical panel'"},
-    {section:"청취", type:"담화-목적", q:"[담화] 지휘관 훈시.\n\n\"Before we get into today's drill, I want to take a moment to recognize Firefighter Jung for her performance at last week's industrial fire. She maintained composure under extreme conditions and made decisions that directly contributed to keeping her crew safe. That kind of professionalism is what this department is built on.\"\n\nQ: 이 담화의 목적은?",
-      opts:["훈련 일정 공지","대원 표창","화재 원인 설명","안전 지침 전달"], ans:1,
-      exp:"'recognize Firefighter Jung ... decisions that kept crew safe' → 표창"},
-    {section:"독해", type:"세부정보", q:"[지문] \"Flashover, the nearly simultaneous ignition of all combustible materials in a room, typically occurs when ceiling temperatures approach 600 degrees Celsius. Warning signs include a dense, darkening smoke layer at ceiling level and sudden, intense heat radiating downward. Firefighters trained to recognize these signs have a critical window of approximately 10 to 20 seconds to exit before flashover occurs.\"\n\nQ: According to the passage, what is the warning window before flashover?",
-      opts:["5 to 10 seconds","10 to 20 seconds","30 to 60 seconds","2 to 5 minutes"],
-      ans:1, exp:"'critical window of approximately 10 to 20 seconds'"},
-    {section:"독해", type:"어휘", q:"[지문] \"Thermal layering in a structure fire creates distinct zones of temperature and visibility. Maintaining a low profile allows firefighters to navigate through the cooler, more breathable air near the floor, while the intense heat and toxic gases accumulate near the ceiling.\"\n\nQ: The word 'accumulate' is closest in meaning to:",
-      opts:["disperse","build up","cool down","circulate"],
-      ans:1, exp:"accumulate = 쌓이다, 축적되다(build up)"},
-    {section:"독해", type:"추론", q:"[지문] \"The transition from offensive to defensive operations is one of the most critical decisions an incident commander must make. Delays in recognizing when conditions have deteriorated beyond safe interior operations have contributed to numerous firefighter fatalities. Effective commanders must continuously reassess risk and be willing to withdraw crews when the risk-benefit ratio shifts unfavorably.\"\n\nQ: What can be inferred about incident commanders?",
-      opts:["They should always maintain offensive operations","Timely risk reassessment is essential to their role","Defensive operations are always safer than offensive","They delegate all safety decisions to safety officers"],
-      ans:1, exp:"'continuously reassess risk ... withdraw crews' → 지속적 위험 재평가가 핵심 역할"},
-  ]
-},
-
-// ── 4회 ──────────────────────────────────────────
-{
-  round: 4,
-  title: "제4회 기출 유형",
-  analysis: {
-    summary: "시제 종합 3문항, 가정법 2문항, 관계사 2문항, 준동사 3문항, 수동태·조동사 2문항, 청취 4문항, 독해 3문항",
-    tips: ["준동사 암기: avoid/finish/deny/mind/consider/suggest/recommend = 동명사 / want/plan/decide/expect/hope/refuse = to부정사", "독해 어휘 문제는 앞뒤 문장 문맥이 결정적 단서"]
-  },
-  qs: [
-    {section:"문법", type:"시제-현재완료", q:"The department _____ its incident response protocol three times since the new chief took office.", opts:["revised","has revised","had revised","revises"], ans:1, exp:"since+과거 시점 → 현재완료(has p.p.)"},
-    {section:"문법", type:"시제-과거완료진행", q:"The rescue team _____ the rubble for two hours before they located the survivor.", opts:["searched","was searching","has been searching","had been searching"], ans:3, exp:"before+과거 → 그 이전부터 계속 진행 = 과거완료진행(had been V-ing)"},
-    {section:"문법", type:"시제-미래진행", q:"By noon tomorrow, the investigation team _____ evidence at the scene.", opts:["collects","collected","will be collecting","has collected"], ans:2, exp:"by noon tomorrow = 미래 특정 시점에 진행 중 → 미래진행(will be V-ing)"},
-    {section:"문법", type:"가정법 과거완료", q:"The firefighter might not have been injured if the floor _____ properly reinforced.", opts:["is","were","had been","has been"], ans:2, exp:"If+had been p.p. → 가정법 과거완료 수동"},
-    {section:"문법", type:"관계사-which", q:"The new training facility, _____ cost over two million dollars to build, opened last spring.", opts:["who","which","whose","whom"], ans:1, exp:"콤마+사물 선행사(facility) → 계속적 용법 which"},
-    {section:"문법", type:"준동사-to부정사", q:"The emergency management office has decided _____ all communication channels within the next six months.", opts:["upgrade","upgrading","to upgrade","upgraded"], ans:2, exp:"decide → to부정사 목적어"},
-    {section:"문법", type:"준동사-동명사", q:"The senior officer considered _____ the operation given the worsening weather conditions.", opts:["to suspend","suspending","suspend","suspended"], ans:1, exp:"consider → 동명사(V-ing) 목적어"},
-    {section:"문법", type:"수동태", q:"All personnel _____ notified of the schedule change via the department communication system.", opts:["were","had","have","are being"], ans:0, exp:"과거 수동태: were notified / 일괄 통보된 시점이 과거"},
-    {section:"청취", type:"대화-이유", q:"[대화] 두 소방관이 출동 기록에 대해 대화합니다.\n\n\"I saw that our station had 47 calls last month. That's a new record, isn't it?\"\n\"It is. A lot of it was due to the heat wave — heat-related medical emergencies spiked.\"\n\"I hope we get some relief soon. The overtime is wearing everyone out.\"\n\nQ: 지난달 출동 건수가 많았던 주된 이유는?",
-      opts:["대형 화재 다수 발생","폭염으로 인한 의료응급 증가","신규 관할 구역 추가","장비 결함으로 재출동"], ans:1,
-      exp:"'heat wave — heat-related medical emergencies spiked'"},
-    {section:"청취", type:"담화-절차", q:"[담화] 절차 안내.\n\n\"When responding to a reported gas leak, the first arriving unit must set up a 300-foot perimeter and prevent all ignition sources in the area. Contact the utility company immediately, and do not enter the structure until the gas company representative confirms it is safe to do so.\"\n\nQ: 가스 누출 현장에서 구조물 진입 가능한 조건은?",
-      opts:["경찰 도착 후","소방서장 허가 후","가스회사 직원의 안전 확인 후","300피트 경계선 설치 후"], ans:2,
-      exp:"'do not enter until gas company representative confirms it is safe'"},
-    {section:"청취", type:"대화-내용파악", q:"[대화] 훈련 평가에 대한 대화.\n\n\"How did your crew do on the hose advancement drill?\"\n\"Pretty well overall. The timing was good, but we had some issues with water flow coordination.\"\n\"Was it a communication problem?\"\n\"Mostly, yes. We're going to run an extra radio drill to address that.\"\n\nQ: 훈련에서 개선이 필요한 부분은?",
-      opts:["호스 전개 속도","물 흐름 조율 및 통신","안전 장비 착용","진입 시간"], ans:1,
-      exp:"'issues with water flow coordination ... communication problem'"},
-    {section:"청취", type:"담화-추론", q:"[담화] 지휘관 지시.\n\n\"Listen up. We have reports of a person trapped on the fourth floor. Engine 2, you're on water supply. Truck 1, raise the aerial to the northeast corner — that's going to be our primary access. Rescue 1, stand by for extrication. All units, maintain radio discipline. Questions?\"\n\nQ: 이 지시에서 추론할 수 있는 것은?",
-      opts:["구조 작전이 이미 완료됨","여러 부대가 각각 다른 임무를 부여받음","모든 부대가 동시에 진입함","언론에 브리핑 예정"], ans:1,
-      exp:"Engine 2·Truck 1·Rescue 1에 각각 다른 임무 배정 → 역할 분담"},
-    {section:"독해", type:"주제", q:"[지문] \"Crew resource management (CRM) originated in the aviation industry after a series of accidents attributed not to mechanical failure but to human error in the cockpit. Airlines recognized that most errors stemmed from poor communication, leadership failures, and breakdowns in situational awareness. Fire services have since adopted CRM principles, adapting them to the dynamic and high-risk environment of incident command.\"\n\nQ: What is the main idea of this passage?",
-      opts:["Aviation accidents caused by mechanical failures","CRM was developed in fire services","Fire services adopted aviation-based CRM to reduce human error","CRM eliminates all errors in emergency operations"],
-      ans:2, exp:"'originated in aviation ... fire services adopted CRM principles' → 항공 기원 CRM의 소방 적용"},
-    {section:"독해", type:"어휘", q:"[지문] \"Situational awareness deteriorates when individuals become fixated on a single task and lose the broader perspective of the evolving incident. This phenomenon, sometimes referred to as 'tunnel vision,' can lead to catastrophic decision-making errors.\"\n\nQ: The word 'fixated' is closest in meaning to:",
-      opts:["distracted","overly focused","relaxed","informed"],
-      ans:1, exp:"fixated on = ~에 고착된, 지나치게 집중한(overly focused)"},
-    {section:"독해", type:"세부정보", q:"[지문] \"The National Incident Management System (NIMS) provides a consistent nationwide framework that enables government, private sector, and nongovernmental organizations to work together effectively during emergencies. NIMS is applicable to all hazards and all levels of incidents, regardless of size or complexity.\"\n\nQ: According to the passage, what type of incidents does NIMS apply to?",
-      opts:["Only large-scale national disasters","Only government-managed incidents","All hazards at all levels of incidents","Only fire-related incidents"],
-      ans:2, exp:"'All hazards and all levels of incidents, regardless of size or complexity'"},
-  ]
-},
-
-// ── 5회 ──────────────────────────────────────────
-{
-  round: 5,
-  title: "제5회 기출 유형",
-  analysis: {
-    summary: "관계사 심화 3문항, 가정법 3문항, 준동사 2문항, 조동사 2문항, 청취 4문항, 독해 3문항",
-    tips: ["관계사 what = 선행사 포함 (~하는 것) / 선행사 없는 자리에 what", "가정법 미래: If+should+V = 혹시라도 ~한다면", "청취 함정: 처음 말한 내용이 이후 수정되는 경우 多"]
-  },
-  qs: [
-    {section:"문법", type:"관계사-what", q:"_____ impressed the evaluators most was the team's ability to communicate under extreme stress.", opts:["That","Which","What","Who"], ans:2, exp:"선행사 없는 명사절 주어 자리 → What(~하는 것이)"},
-    {section:"문법", type:"관계사-전치사+whom", q:"The officer to _____ the report was submitted immediately forwarded it to headquarters.", opts:["who","which","whom","whose"], ans:2, exp:"전치사(to) + 목적격 관계사 → whom"},
-    {section:"문법", type:"관계사-where", q:"The training facility _____ we conducted the drill has been significantly upgraded.", opts:["where","which","that","in which"], ans:0, exp:"장소 선행사+장소 부사 역할 → where (= in which)"},
-    {section:"문법", type:"가정법-미래", q:"Should you encounter any difficulties during the operation, _____ this emergency frequency immediately.", opts:["use","to use","using","used"], ans:0, exp:"Should+S+V = If+S+should+V (가정법 미래 도치) → 귀결절 명령문"},
-    {section:"문법", type:"가정법 과거완료", q:"The outcome would have been very different had the incident commander _____ the updated weather data.", opts:["received","receive","receiving","has received"], ans:0, exp:"Had+S+p.p. 도치 → 가정법 과거완료 / 귀결절: would have p.p."},
-    {section:"문법", type:"가정법 과거", q:"If this equipment _____ lighter, firefighters could carry it for longer periods without fatigue.", opts:["is","were","had been","has been"], ans:1, exp:"가정법 과거: If+were → 현재 사실 반대"},
-    {section:"문법", type:"준동사-지각동사", q:"The chief watched the new recruits _____ the hose line for the first time.", opts:["advance","advancing","to advance","advanced"], ans:0, exp:"지각동사(watch)+목적어+동사원형(또는 V-ing) → 원형부정사"},
-    {section:"문법", type:"조동사-needn't", q:"You needn't _____ brought all that extra equipment — we already had everything on site.", opts:["have","had","be","to have"], ans:0, exp:"needn't have p.p. = 할 필요가 없었는데 했다(불필요한 행동 후회)"},
-    {section:"청취", type:"대화-이유", q:"[대화] 두 대원이 나눈 대화.\n\n\"Is Lieutenant Park leading the morning briefing today?\"\n\"No, she had a doctor's appointment. Captain Choi is covering for her.\"\n\"I hope everything is okay with her.\"\n\"She mentioned it was just a routine checkup.\"\n\nQ: 오늘 아침 Park 중위가 브리핑을 이끌지 않는 이유는?",
-      opts:["휴가 중","병원 예약 있음","다른 현장 출동","업무 변경"], ans:1,
-      exp:"'doctor's appointment' → 병원 예약"},
-    {section:"청취", type:"담화-지시사항", q:"[담화] 훈련 지시.\n\n\"For this afternoon's multi-company drill, each company will rotate through four stations: hose evolution, forcible entry, search and rescue, and patient assessment. You have 20 minutes per station. Timekeeping will be handled by the training officers. Do not move to the next station until you are signaled.\"\n\nQ: 각 스테이션에서 소요되는 시간은?",
-      opts:["10분","15분","20분","30분"], ans:2,
-      exp:"'20 minutes per station'"},
-    {section:"청취", type:"대화-내용파악", q:"[대화] 현장 지휘관과 대원의 통신.\n\n\"Command, this is Rescue 1. We have located the victim. She is conscious and breathing, but her right leg appears fractured.\"\n\"Copy, Rescue 1. What's your current position?\"\n\"Northwest stairwell, third floor landing.\"\n\"Understood. Medical is standing by at the south entrance. Can you mobilize for extrication?\"\n\"Affirmative. We'll need a Sked stretcher.\"\n\nQ: 구조 대원이 요청한 것은?",
-      opts:["들것(Sked stretcher)","추가 대원 2명","의료 지원","소방 호스"], ans:0,
-      exp:"'We'll need a Sked stretcher'"},
-    {section:"청취", type:"담화-추론", q:"[담화] 서비스 공지.\n\n\"As part of the department's wellness initiative, all personnel are now eligible for up to six free counseling sessions per year through the Employee Assistance Program. Sessions are completely confidential and can be scheduled through the department's health portal. We encourage anyone dealing with work-related stress, trauma, or personal difficulties to take advantage of this resource.\"\n\nQ: 이 공지로부터 추론할 수 있는 것은?",
-      opts:["모든 상담은 의무적","상담 내용은 감독관에게 보고됨","소방관의 정신건강 지원을 중요시하고 있음","상담 프로그램이 이번에 폐지됨"], ans:2,
-      exp:"'wellness initiative ... free counseling ... confidential ... work-related stress, trauma' → 정신건강 지원 강조"},
-    {section:"독해", type:"주제", q:"[지문] \"The integration of artificial intelligence into fire prediction has enabled agencies to analyze historical fire data, weather patterns, and topographic information to forecast where fires are most likely to ignite and spread. These predictive models allow for proactive resource deployment, potentially allowing crews to be positioned before a fire starts rather than responding reactively.\"\n\nQ: What is the main benefit of AI in fire prediction described in the passage?",
-      opts:["It replaces firefighters entirely","It enables proactive rather than reactive resource deployment","It reduces the cost of fire equipment","It automates incident command decisions"],
-      ans:1, exp:"'proactive resource deployment ... before a fire starts rather than reactively'"},
-    {section:"독해", type:"어휘", q:"[지문] \"The incident commander must constantly balance the imperative to protect life with the need to preserve property and minimize environmental damage. This balancing act becomes particularly acute during large-scale incidents where resources are scarce and decisions must be made with incomplete information.\"\n\nQ: The word 'acute' in the passage is closest in meaning to:",
-      opts:["gradual","dangerous","intense","manageable"],
-      ans:2, exp:"acute = 심각한, 예리한, 극심한(intense). 여기서는 '더욱 심각해진다'는 뜻"},
-    {section:"독해", type:"세부정보", q:"[지문] \"Positive pressure attack (PPA) is a ventilation-integrated fire attack method that uses fans to push fresh air into a structure while a fire attack team simultaneously advances a hose line. Studies indicate that when properly coordinated, PPA can reduce fire room temperatures by up to 50 percent within the first two minutes of application.\"\n\nQ: According to the passage, what can PPA reduce by up to 50 percent?",
-      opts:["Water consumption","Firefighter exposure time","Fire room temperatures","Response time"],
-      ans:2, exp:"'reduce fire room temperatures by up to 50 percent'"},
-  ]
-},
-];
-
+// 기출문제 데이터: past_data.js 외부 파일 로드
 // ════════════════════════════════════════════════
 // 기출문제 UI 로직
 // ════════════════════════════════════════════════
@@ -1929,7 +1715,7 @@ function gradePast() {
   });
   const total = exam.qs.length;
   const pct = Math.round(correct/total*100);
-  const pass = correct >= Math.round(total*0.75);
+  const pass = correct >= 60;
   pastScores[currentPastRound] = correct;
   document.getElementById('past-score').textContent = `${correct} / ${total}`;
   document.getElementById('past-score').style.color = pass?'var(--pass)':'var(--accent)';
